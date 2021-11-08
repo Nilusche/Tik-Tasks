@@ -59,13 +59,8 @@
                     <div class="form-group">
                     <label for="visibility" class="">Sichtbarkeit</label>
                         <select class="form-select" id="visibility" name="visibility" value="{{old('visibility')}}" aria-label="Default select example">
-                            @if(old('visibility')==1)
-                                <option value="0" selected>privat</option>
-                                <option value="1">öffentlich</option>
-                            @else
-                                <option value="0">privat</option>
-                                <option value="1" selected>öffentlich</option>
-                            @endif
+                            <option value="0" selected>privat</option>
+                            <option value="1">öffentlich</option>
                         </select>
                     </div>
                     <div class="form-group">

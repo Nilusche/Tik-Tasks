@@ -17,6 +17,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/Startseite">Zuweisen</a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" href="/Startseite">Einstellungen</a>
                 </li>
@@ -69,11 +70,11 @@
                         <label for="visibility" class="">Sichtbarkeit</label>
                         <select class="form-select" id="visibility" name="visibility" value="{{$task->visibility}}" aria-label="Default select example">
                             @if($task->visibility==1)
-                                <option value="0" selected>privat</option>
-                                <option value="1">öffentlich</option>
+                                <option value="0" >privat</option>
+                                <option value="1"selected>öffentlich</option>
                             @else
-                                <option value="0">privat</option>
-                                <option value="1" selected>öffentlich</option>
+                                <option value="0" selected>privat</option>
+                                <option value="1" >öffentlich</option>
                             @endif
                         </select>
                     </div>
