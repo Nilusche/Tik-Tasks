@@ -13,6 +13,10 @@
                     <a class="nav-link" href="/Startseite">Systemverwaltung</a>
                 </li>
                 @endif
+                @if(auth()->user()->isManager())
+                <li class="nav-item">
+                    <a class="nav-link" href="/Startseite">Zuweisen</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/Startseite">Einstellungen</a>
                 </li>
