@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,7 +37,10 @@ Route::get('Startseite/{task}/edit',[TaskController::class, 'edit'])->middleware
 
 Route::get('Startseite/{task}/complete',[TaskController::class, 'complete'])->middleware('auth');
 
-Auth::routes();
+Route::get('Archive',[TaskController::class, 'showarchive'])->middleware('auth');
+Route::get('deleteArchive', [TaskController::class, 'delArchive'])->middleware('auth');
 
+Auth::routes();
+Route::get('logout', [LoginController::class, 'logout']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('Startseite');
 

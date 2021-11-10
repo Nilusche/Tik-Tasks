@@ -60,7 +60,7 @@ nav{
     color:#EDEDED;
   }
   .tabsize{
-    height:37em;
+    height:40em;
   }
   .priority1{
     background-color: #4E9F3D;
@@ -256,6 +256,30 @@ nav{
     box-sizing: border-box;
     border-radius: 5px;
   }
+
+  #leere{
+    display: inline-flex;
+    height: 55px;
+    width: 180px;
+    perspective: 1000px;
+    padding-left:0em;
+    animation:none;
+  }
+
+  span #leeren:before,
+  span #leeren:after{
+    position: absolute;
+    content: "ARCHIV LEEREN";
+    height: 55px;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393E46;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
+  
   
   /**Erstellen einer Aufgabe**/
 

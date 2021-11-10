@@ -19,13 +19,13 @@
                 </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link" href="/Startseite">Einstellungen</a>
+                    <a class="nav-link" href="/Archive">Einstellungen</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/Startseite">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Startseite">Ausloggen</a>
+                    <a class="nav-link" href="/logout">Ausloggen</a>
                 </li>
                 </ul>
             </div>
@@ -44,12 +44,16 @@
                         <div class="col-lg-11 col-md-11 col-sm-11">
                         <div class="card tabsize">
                             <div class="card-header text-center aufgabenwrapper">
-                            <h4 class="card-title">{{$date = date("d-m-Y", strtotime($task->deadline));}} </h4>
+                            <h4 class="card-title">
+                                @if(!empty($task->deadline))
+                                    {{$date = date("d-m-Y", strtotime($task->deadline));}} 
+                                @endif
+                            </h4>
                             </ul>
                             </div>
                             <div class="card-body">
                             <p class="text">Erstellt am: {{$date = date("d-m-Y H:i", strtotime($task->created_at));}}<br><br></p>
-                            <h4 class="card-title">{{$task->title}}</h4><br>
+                            <h4 class="card-title text-center">{{$task->title}}</h4><br>
                             <p class="text"><h5 class="card-title">Beschreibung</h5>{{$task->description}}</p>
                             <p class="text"><h5 class="card-title">Kommentare</h5>{{$task->comment}}<br><br></p>
                             <a class="btn btn-dark" type="button" name="button" href="/Startseite/{{$task->id}}/edit"><i class="fas fa-edit">Bearbeiten</i></a>

@@ -17,7 +17,6 @@ class TaskController extends Controller
     public function update(Task $task){
         $data = request()->all();
         if(empty($data['deadline'])){
-            $task->deadline=DB::raw('CURRENT_TIMESTAMP');
             $this->validate(request(), [
                 'title'=>'required',
                 'estimatedEffort' =>'numeric',
@@ -53,7 +52,7 @@ class TaskController extends Controller
         $data = request()->all();
         $task = new Task();
         if(empty($data['deadline'])){
-            $task->deadline=DB::raw('CURRENT_TIMESTAMP');
+            $task->deadline=null;
             $this->validate(request(), [
                 'title'=>'required',
                 'estimatedEffort' =>'numeric',
@@ -101,5 +100,14 @@ class TaskController extends Controller
         $task->save();
         session()->flash('success', 'Aufgabe abgeschlossen');
         return redirect('/Startseite');
+    }
+
+    public function showarchive(){
+        return view('Main.archive')->with('tasks', Task::all());
+    }
+
+    public function delArchive(){
+        Task::where('completed',true)->delete();
+        return view('Main.archive')->with('tasks', Task::all());
     }
 }

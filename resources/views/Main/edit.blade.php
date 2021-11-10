@@ -25,7 +25,7 @@
                     <a class="nav-link" href="/Startseite">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Startseite">Ausloggen</a>
+                    <a class="nav-link" href="/ogout">Ausloggen</a>
                 </li>
                 </ul>
             </div>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="form-group">
                         <label for="effort2" class="form-label">Tatsächlicher aufwand (in Stunden)</label>
-                        <input type="number" class="form-control" id="effort2" name="effort2" min="0" placeholder="3.5">
+                        <input type="number" class="form-control" id="effort2" name="effort2" min="0" value="{{$task->totalEffort}}" placeholder="3.5">
                     </div>
                     <div class="form-group"></div>
                     <div class="form-group">

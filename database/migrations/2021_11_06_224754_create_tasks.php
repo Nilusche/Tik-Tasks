@@ -27,7 +27,7 @@ class CreateTasks extends Migration
             $table->date('deadline')->default(DB::raw('CURRENT_TIMESTAMP'))->nullable();
             $table->foreignId('users_id')->constrained()->default(0);
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.

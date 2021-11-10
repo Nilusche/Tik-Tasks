@@ -15,13 +15,23 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         //
-        $user=User::where('email', 'normalworker@gmail.com')->first();
-
+        $user=User::where('email', 'admin@gmail.com')->first();
+        $user1= User::where('email', 'manager@gmail.com')->first();
         if(!$user){
             User::create([
-                'name' =>'testworker',
+                'name' =>'testadmin',
                 'email' => 'admin@gmail.com',
                 'role' => 'admin',
+                'password' =>Hash::make('password')
+                
+            ]);
+        }
+
+        if(!$user1){
+            User::create([
+                'name' =>'testmanager',
+                'email' => 'manager@gmail.com',
+                'role' => 'manager',
                 'password' =>Hash::make('password')
                 
             ]);
