@@ -24,8 +24,9 @@ class CreateTasks extends Migration
             $table->boolean('completed')->default(false);
             $table->boolean('visibility')->default(true);
             $table->timestamps();
-            $table->date('deadline')->default(DB::raw('CURRENT_TIMESTAMP'))->nullable();
+            $table->dateTime('deadline')->default(DB::raw('CURRENT_TIMESTAMP'))->nullable();
             $table->foreignId('users_id')->constrained()->default(0);
+            $table->dateTime('alarmdate')->default(DB::raw('CURRENT_TIMESTAMP'))->nullable();
         });
     } 
 

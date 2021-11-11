@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use DB;
+use Carbon\Carbon;
 class TaskController extends Controller
 {
     public function startseite(){
@@ -32,6 +33,31 @@ class TaskController extends Controller
             ]);
         }
 
+        if(!empty($data['deadline'])){
+            if($data['alarm']==0){
+                $date = Carbon::parse($data['deadline']);
+                $task->alarmdate=$date;
+            }
+            else if($data['alarm']==1){
+                $date = Carbon::parse($data['deadline'])->subHours(1);
+                $task->alarmdate=$date;
+            }
+            else if($data['alarm']==2){
+                $date = Carbon::parse($data['deadline'])->subDays(1);
+                $task->alarmdate=$date;
+            }
+            else if($data['alarm']==3){
+                $this->validate(request(), [
+                    'effort'=>'required'
+                ]);
+                $hours = (int) $data['effort'];
+                $date = Carbon::parse($data['deadline'])->subHours($hours);
+                $task->alarmdate=$date;
+
+            }else if($data['alarm']==4){
+                $task->alarmdate=null;
+            }
+        }
         
         $task->title =$data['title'];
         $task->description =$data['description'];
@@ -63,10 +89,38 @@ class TaskController extends Controller
             $this->validate(request(), [
                 'title'=>'required',
                 'estimatedEffort' =>'numeric',
-                'deadline' => 'date_format:Y-m-d|after_or_equal:today',
+                'deadline' => '|after_or_equal:today',
                 'visibility'=> 'required'
             ]);
         }
+
+        if(!empty($data['deadline'])){
+            if($data['alarm']==0){
+                $date = Carbon::parse($data['deadline']);
+                $task->alarmdate=$date;
+            }
+            else if($data['alarm']==1){
+                $date = Carbon::parse($data['deadline'])->subHours(1);
+                $task->alarmdate=$date;
+            }
+            else if($data['alarm']==2){
+                $date = Carbon::parse($data['deadline'])->subDays(1);
+                $task->alarmdate=$date;
+            }
+            else if($data['alarm']==3){
+                $this->validate(request(), [
+                    'effort'=>'required'
+                ]);
+                $hours = (int) $data['effort'];
+                $date = Carbon::parse($data['deadline'])->subHours($hours);
+                $task->alarmdate=$date;
+            }else if($data['alarm']==4){
+                $task->alarmdate=null;
+            }
+        }
+        
+
+
 
         $task->title =$data['title'];
         $task->description =$data['description'];

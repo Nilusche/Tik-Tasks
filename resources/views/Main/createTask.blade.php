@@ -44,23 +44,28 @@
                     </div>
                     <div class="form-group">
                         <label for="deadline">Deadline</label>
-                        <input type="date" class="form-control" id="deadline" name="deadline" value="{{old('deadline')}}">
+                        <input type="datetime-local" class="form-control" id="deadline" name="deadline" value="{{old('deadline')}}">
                     </div>
                     <div class="form-group">
                         <label for="description">Beschreibung</label>
                         <textarea class="form-control" name="description" id="description" cols="30" rows="9">{{old('description')}}</textarea>
                     </div>
-                </div>
-                <div class="createform col-lg-4 col-md-4 col-sm-4">
                     <div class="form-group">
                         <label for="comment">Kommentar</label>
                         <input type="text" class="form-control" id="comment" name="comment" value="{{old('comment')}}" placeholder="Kommentar">
                     </div>
+                </div>
+                <div class="createform col-lg-4 col-md-4 col-sm-4">
                     <div class="form-group">
-                    <label for="visibility" class="">Sichtbarkeit</label>
+                        <label for="visibility" class="">Sichtbarkeit</label>
                         <select class="form-select" id="visibility" name="visibility" value="{{old('visibility')}}" aria-label="Default select example">
-                            <option value="0" selected>privat</option>
-                            <option value="1">öffentlich</option>
+                            @if($task->visibility==1)
+                                <option value="0" >privat</option>
+                                <option value="1"selected>öffentlich</option>
+                            @else
+                                <option value="0" selected>privat</option>
+                                <option value="1" >öffentlich</option>
+                            @endif
                         </select>
                     </div>
                     <div class="form-group">
@@ -69,10 +74,20 @@
                         <output><b>{{old('priority')}}</b></output>
                     </div>
                     <div class="form-group">
+                        <label for="alarm" class="">Erinnerungsalarm</label>
+                        <select class="form-select" id="alarm" name="alarm" value="{{old('alarm')}}" aria-label="Default select example">
+                            <option value="0" selected>Wenn abgelaufen</option>
+                            <option value="1">1 Stunde vorher</option>
+                            <option value="2">1 Tag vorher</option>
+                            <option value="3">Deadline minus aufwand</option>
+                            <option value="4">Niemals</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="effort" class="form-label">Geschätzter aufwand (in Stunden)</label>
                         <input type="number" class="form-control" id="effort" name="effort" min="0" value="{{old('effort')}}"placeholder="3.5">
                     </div>
-                    <div class="form-group"></div>
+                    <div class="form-group"></div><br>
                     <div class="form-group">
                         <p>Die mit * markierten Felder sind Pflichteingaben</p>
                     </div>

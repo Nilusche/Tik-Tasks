@@ -46,7 +46,7 @@
                             <div class="card-header text-center aufgabenwrapper">
                             <h4 class="card-title">
                                 @if(!empty($task->deadline))
-                                    {{$date = date("d-m-Y", strtotime($task->deadline));}} 
+                                {{$date = date("d-m-Y H:i", strtotime($task->deadline));}}
                                 @endif
                             </h4>
                             </ul>

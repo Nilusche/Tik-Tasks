@@ -84,6 +84,16 @@
                         <output><b>{{$task->priority}}</b></output>
                     </div>
                     <div class="form-group">
+                        <label for="alarm" class="">Erinnerungsalarm</label>
+                        <select class="form-select" id="alarm" name="alarm" value="{{old('alarm')}}" aria-label="Default select example">
+                            <option value="0" selected>Wenn abgelaufen</option>
+                            <option value="1">1 Stunde vorher</option>
+                            <option value="2">1 Tag vorher</option>
+                            <option value="3">Deadline minus aufwand</option>
+                            <option value="4">Niemals</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="effort" class="form-label">Geschätzter aufwand (in Stunden)</label>
                         <input type="number" class="form-control" id="effort" name="effort" min="0" value="{{$task->estimatedEffort}}"placeholder="3.5" readonly>
                     </div>
@@ -91,7 +101,7 @@
                         <label for="effort2" class="form-label">Tatsächlicher aufwand (in Stunden)</label>
                         <input type="number" class="form-control" id="effort2" name="effort2" min="0" value="{{$task->totalEffort}}" placeholder="3.5">
                     </div>
-                    <div class="form-group"></div>
+                    <div class="form-group"></div><br>
                     <div class="form-group">
                         <p>Die mit * markierten Felder sind Pflichteingaben</p>
                     </div>
