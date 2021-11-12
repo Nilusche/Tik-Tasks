@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Spatie\CalendarLinks\Link;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Tag;
@@ -10,7 +10,8 @@ use Carbon\Carbon;
 class TaskController extends Controller
 {
     public function startseite(){
-        return view('Main.index')->with('tasks', Task::all());
+        
+        return view('Main.index')->with('tasks', Task::SimplePaginate(3));
     }
 
     public function create(){
@@ -118,7 +119,15 @@ class TaskController extends Controller
             }else if($data['alarm']==4){
                 $task->alarmdate=null;
             }
+            if($data['description'])
+                $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline))->description($data['description']);
+            else
+                $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline));
+            $task->calendarICS=$link->ics();
+            $task->calendarGoogle=$link->google();
+            $task->calendarWebOutlook=$link->webOutlook();
         }
+        
         
 
         $task->title =$data['title'];
@@ -130,9 +139,12 @@ class TaskController extends Controller
         $task->visibility=$data['visibility'];
         $task->completed =false;
         $task->users_id = auth()->user()->id;
+        
         $task->save();
+
         
         session()->flash('success', 'Aufgabe erfolgreich erstellt');
+       
         return redirect('/Startseite');
     }
 

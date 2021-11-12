@@ -23,10 +23,16 @@ class CreateTasks extends Migration
             $table->decimal('totalEffort')->nullable();
             $table->boolean('completed')->default(false);
             $table->boolean('visibility')->default(true);
+
             $table->timestamps();
             $table->dateTime('deadline')->default(DB::raw('CURRENT_TIMESTAMP'))->nullable();
-            $table->foreignId('users_id')->constrained()->default(0);
             $table->dateTime('alarmdate')->default(DB::raw('CURRENT_TIMESTAMP'))->nullable();
+            $table->foreignId('users_id')->constrained()->default(0);
+            
+
+            $table->text('calendarICS')->default('#')->nullable();
+            $table->text('calendarGoogle')->default('#')->nullable();
+            $table->text('calendarWebOutlook')->default('#')->nullable();
 
         });
     } 

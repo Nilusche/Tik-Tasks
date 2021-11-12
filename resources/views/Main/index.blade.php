@@ -1,3 +1,4 @@
+
  @extends('layouts.app')
  @section('navbar')
     <div class="container-fluid navcontainer">
@@ -60,8 +61,15 @@
                             <a class="btn btn-dark" type="button" name="button" href="/Startseite/{{$task->id}}/edit"><i class="fas fa-edit">Bearbeiten</i></a>
                             <a class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#finish{{$task->id}}"><i class="fas fa-trash-alt"> Beenden</i></a>
                             <a class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteTask{{$task->id}}"><i class="fas fa-trash-alt"> Löschen</i></a>
-                            <a class="btn btn-primary" type="button" name="button"><i class="fas fa-sync"> Aktualisieren</i></a>
+                            <a class="btn btn-primary" type="button" name="button" href="/Startseite"><i class="fas fa-sync"> Aktualisieren</i></a>
                             </div>
+                            @if(!empty($task->deadline))
+                            <div class="container-fluid">
+                                <a class="badge rounded-pill bg-info" href="{{$task->calendarICS}}">Ics Datei</a>
+                                <a class="badge rounded-pill bg-info" href="{{$task->calendarGoogle}}">Google Calendar</a>
+                                <a class="badge rounded-pill bg-info" href="{{$task->calendarWebOutlook}}">WebOutlook Calendar</a>
+                            </div>
+                            @endif
                             <div class="card-footer text-muted text-center">
                             {{$totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline);}}
                             </div>
@@ -123,9 +131,13 @@
 
             @endif
         @endforeach
+        
         @else
         <div class="container">
             <h1>Keine Aufgaben vorhanden</h1>
         </div>
         @endif
+        <div class="container">
+            {!! $tasks->links() !!}
+        </div>
  @endsection
