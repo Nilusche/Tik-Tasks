@@ -59,7 +59,7 @@
                     <div class="form-group">
                         <label for="visibility" class="">Sichtbarkeit</label>
                         <select class="form-select" id="visibility" name="visibility" value="{{old('visibility')}}" aria-label="Default select example">
-                            @if($task->visibility==1)
+                            @if(old('visibility')==1)
                                 <option value="0" >privat</option>
                                 <option value="1"selected>öffentlich</option>
                             @else

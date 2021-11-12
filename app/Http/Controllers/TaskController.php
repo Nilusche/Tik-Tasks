@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\Tag;
 use DB;
 use Carbon\Carbon;
 class TaskController extends Controller
@@ -120,8 +121,6 @@ class TaskController extends Controller
         }
         
 
-
-
         $task->title =$data['title'];
         $task->description =$data['description'];
         $task->comment =$data['comment'];
@@ -159,9 +158,35 @@ class TaskController extends Controller
     public function showarchive(){
         return view('Main.archive')->with('tasks', Task::all());
     }
-
+    
     public function delArchive(){
         Task::where('completed',true)->delete();
         return view('Main.archive')->with('tasks', Task::all());
     }
+
+    public function showtasks(){
+        return view('Main.group')->with('tasks', Task::all())->with('tags', Tag::all())->with('selectedtags', DB::table('tag_task')->select('task_id','tag_id')->get());
+    }
+
+    public function assignTag(Request $request){
+        $tasks = $request->tasks;
+        $tags = $request->tags;
+        if(!$tasks){
+            session()->flash('error', 'Zu gruppierenden Aufgaben nicht ausgewählt');
+            return view('Main.group')->with('tasks', Task::all())->with('tags', Tag::all());
+        }
+        if(!$tags){
+            session()->flash('error', 'Keine Gruppe ausgewählt');
+            return view('Main.group')->with('tasks', Task::all())->with('tags', Tag::all());
+        }
+
+        foreach($tasks as $taskid){
+            $task = Task::find($taskid);
+            $task->tags()->sync($request->tags);
+        }
+
+        session()->flash('success', 'Aufgaben erfolgreich gruppiert');
+        return redirect('/Group');
+    }
+    
 }

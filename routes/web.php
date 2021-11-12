@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TagsController;
 use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,11 @@ Route::get('Startseite/{task}/complete',[TaskController::class, 'complete'])->mi
 
 Route::get('Archive',[TaskController::class, 'showarchive'])->middleware('auth');
 Route::get('deleteArchive', [TaskController::class, 'delArchive'])->middleware('auth');
+
+Route::get('Group', [TaskController::class,'showtasks'])->middleware('auth');
+
+Route::get('storeTags', [TagsController::class,'store'])->middleware('auth');
+Route::POST('assignTags', [TaskController::class,'assignTag'])->middleware('auth');
 
 Auth::routes();
 Route::get('logout', [LoginController::class, 'logout']);

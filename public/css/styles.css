@@ -171,7 +171,7 @@ nav{
     width: 180px;
     perspective: 1000px;
     padding-left:3em;
-    animation: slideIn 2.5s ease-in-out forwards;
+    animation: slideIn 2s ease-in-out forwards;
   }
   
 
@@ -270,6 +270,29 @@ nav{
   span #leeren:after{
     position: absolute;
     content: "ARCHIV LEEREN";
+    height: 55px;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393E46;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
+
+  #gruppe{
+    display: inline-flex;
+    height: 55px;
+    width: 180px;
+    perspective: 1000px;
+    padding-left:0em;
+    animation:none;
+  }
+
+  span #gruppieren:before,
+  span #gruppieren:after{
+    position: absolute;
+    content: "GRUPPIEREN";
     height: 55px;
     width: 180px;
     display: flex;

@@ -34,9 +34,10 @@
  @endsection
  @section('content')
         <div class="container">
-        <span class="erstellen" id=erstell ><a id=erstellen href="/Create-task" ></a></span>
+        <span id=erstell ><a id=erstellen href="/Create-task" ></a></span>
+        <span id=gruppe ><a id=gruppieren href="/Group" ></a></span>
         </div>
-        @if($tasks->count()!=0)
+        @if($tasks->first(function($task){return $task->users_id == auth()->user()->id;}))
         @foreach($tasks as $task)
             @if($task->completed==false && auth()->user()->id == $task->users_id)
                 <div class="container">
