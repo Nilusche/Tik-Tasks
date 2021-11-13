@@ -74,14 +74,24 @@
                 @if($task->completed==false && auth()->user()->id == $task->users_id)
                     <li class="list-group-item">
                         <input class="form-check-input me-1" name="tasks[]" type="checkbox" value="{{$task->id}}" aria-label="...">
-                        {{$task->title}}{{$task->description}}{{$task->deadline}}
-                        @foreach($tags as $tag)
-                            @if($tag->users_id == auth()->user()->id)
-                                @if($task->hasTag($tag->id))
-                                    {{$tag->name}}
-                               @endif
-                            @endif
-                        @endforeach
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h5>Titel: </h5>{{$task->title}}
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>Deadline: </h5>{{$task->deadline}}
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>Gruppen: </h5>
+                                @foreach($tags as $tag)
+                                @if($tag->users_id == auth()->user()->id)
+                                    @if($task->hasTag($tag->id))
+                                        [{{$tag->name }}]
+                                @endif
+                                @endif
+                                @endforeach
+                            </div>
+                        </div>
                     </li>
                 @endif
             @endforeach

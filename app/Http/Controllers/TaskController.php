@@ -11,7 +11,7 @@ class TaskController extends Controller
 {
     public function startseite(){
         
-        return view('Main.index')->with('tasks', Task::SimplePaginate(3));
+        return view('Main.index')->with('tasks', Task::all());
     }
 
     public function create(){
@@ -168,7 +168,7 @@ class TaskController extends Controller
     }
 
     public function showarchive(){
-        return view('Main.archive')->with('tasks', Task::all());
+        return view('Main.archive')->with('tasks', Task::SimplePaginate(3));
     }
     
     public function delArchive(){

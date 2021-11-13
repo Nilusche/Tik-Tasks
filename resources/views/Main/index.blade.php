@@ -39,105 +39,100 @@
         <span id=gruppe ><a id=gruppieren href="/Group" ></a></span>
         </div>
         @if($tasks->first(function($task){return $task->users_id == auth()->user()->id;}))
-        @foreach($tasks as $task)
-            @if($task->completed==false && auth()->user()->id == $task->users_id)
-                <div class="container">
-                    <div class="row task">
-                        <div class="col-lg-11 col-md-11 col-sm-11">
-                        <div class="card tabsize">
-                            <div class="card-header text-center aufgabenwrapper">
-                            <h4 class="card-title">
+            @foreach($tasks as $task)
+                @if($task->completed==false && auth()->user()->id == $task->users_id)
+                    <div class="container">
+                        <div class="row task">
+                            <div class="col-lg-11 col-md-11 col-sm-11">
+                            <div class="card tabsize">
+                                <div class="card-header text-center aufgabenwrapper">
+                                <h4 class="card-title">
+                                    @if(!empty($task->deadline))
+                                    {{$date = date("d-m-Y H:i", strtotime($task->deadline));}}
+                                    @endif
+                                </h4>
+                                </ul>
+                                </div>
+                                <div class="card-body">
+                                <p class="text">Erstellt am: {{$date = date("d-m-Y H:i", strtotime($task->created_at));}}<br><br></p>
+                                <h4 class="card-title text-center">{{$task->title}}</h4><br>
+                                <p class="text"><h5 class="card-title">Beschreibung</h5>{{$task->description}}</p>
+                                <p class="text"><h5 class="card-title">Kommentare</h5>{{$task->comment}}<br><br></p>
+                                <a class="btn btn-dark" type="button" name="button" href="/Startseite/{{$task->id}}/edit"><i class="fas fa-edit">Bearbeiten</i></a>
+                                <a class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#finish{{$task->id}}"><i class="fas fa-trash-alt"> Beenden</i></a>
+                                <a class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteTask{{$task->id}}"><i class="fas fa-trash-alt"> Löschen</i></a>
+                                <a class="btn btn-primary" type="button" name="button" href="/Startseite"><i class="fas fa-sync"> Aktualisieren</i></a>
+                                </div>
                                 @if(!empty($task->deadline))
-                                {{$date = date("d-m-Y H:i", strtotime($task->deadline));}}
+                                <div class="container-fluid">
+                                    <a class="badge rounded-pill bg-info" href="{{$task->calendarICS}}">Ics Datei</a>
+                                    <a class="badge rounded-pill bg-info" href="{{$task->calendarGoogle}}">Google Calendar</a>
+                                    <a class="badge rounded-pill bg-info" href="{{$task->calendarWebOutlook}}">WebOutlook Calendar</a>
+                                </div>
                                 @endif
-                            </h4>
-                            </ul>
+                                <div class="card-footer text-muted text-center">
+                                {{$totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline);}}
+                                </div>
                             </div>
-                            <div class="card-body">
-                            <p class="text">Erstellt am: {{$date = date("d-m-Y H:i", strtotime($task->created_at));}}<br><br></p>
-                            <h4 class="card-title text-center">{{$task->title}}</h4><br>
-                            <p class="text"><h5 class="card-title">Beschreibung</h5>{{$task->description}}</p>
-                            <p class="text"><h5 class="card-title">Kommentare</h5>{{$task->comment}}<br><br></p>
-                            <a class="btn btn-dark" type="button" name="button" href="/Startseite/{{$task->id}}/edit"><i class="fas fa-edit">Bearbeiten</i></a>
-                            <a class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#finish{{$task->id}}"><i class="fas fa-trash-alt"> Beenden</i></a>
-                            <a class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteTask{{$task->id}}"><i class="fas fa-trash-alt"> Löschen</i></a>
-                            <a class="btn btn-primary" type="button" name="button" href="/Startseite"><i class="fas fa-sync"> Aktualisieren</i></a>
+                            
+                            
                             </div>
-                            @if(!empty($task->deadline))
-                            <div class="container-fluid">
-                                <a class="badge rounded-pill bg-info" href="{{$task->calendarICS}}">Ics Datei</a>
-                                <a class="badge rounded-pill bg-info" href="{{$task->calendarGoogle}}">Google Calendar</a>
-                                <a class="badge rounded-pill bg-info" href="{{$task->calendarWebOutlook}}">WebOutlook Calendar</a>
-                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1">
+                            @if($task->priority==1)
+                                <div class="card priority1 tabsize"></div>
+                            @elseif($task->priority==2)
+                                <div class="card priority2 tabsize"></div>
+                            @elseif($task->priority==3)
+                                <div class="card priority3 tabsize"></div> 
+                            @elseif($task->priority==4)
+                                <div class="card priority4 tabsize"></div> 
+                            @else
+                                <div class="card priority5 tabsize"></div> 
                             @endif
-                            <div class="card-footer text-muted text-center">
-                            {{$totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline);}}
                             </div>
                         </div>
-                        
-                        
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1">
-                        @if($task->priority==1)
-                            <div class="card priority1 tabsize"></div>
-                        @elseif($task->priority==2)
-                            <div class="card priority2 tabsize"></div>
-                        @elseif($task->priority==3)
-                            <div class="card priority3 tabsize"></div> 
-                        @elseif($task->priority==4)
-                            <div class="card priority4 tabsize"></div> 
-                        @else
-                            <div class="card priority5 tabsize"></div> 
-                        @endif
+                    </div>
+                <!-- Modal Delete Task-->
+                    <div class="modal fade" id="deleteTask{{$task->id}}" tabindex="-1" aria-labelledby="deleteTaskLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteTaskLabel">Aufgabe löschen</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Möchten sie die Aufgabe wirklich löschen?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                                <a type="button" class="btn btn-danger" href="/Startseite/{{$task->id}}/delete" >Löschen</a>
+                            </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <!-- Modal Delete Task-->
-                <div class="modal fade" id="deleteTask{{$task->id}}" tabindex="-1" aria-labelledby="deleteTaskLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteTaskLabel">Aufgabe löschen</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Möchten sie die Aufgabe wirklich löschen?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
-                            <a type="button" class="btn btn-danger" href="/Startseite/{{$task->id}}/delete" >Löschen</a>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            <!-- Modal finish Task-->
-            <div class="modal fade" id="finish{{$task->id}}" tabindex="-1" aria-labelledby="finishLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="finishLabel">Aufgabe beenden</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Möchten sie die Aufgabe abschliessen?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
-                            <a type="button" class="btn btn-danger" href="/Startseite/{{$task->id}}/complete" >Beenden</a>
-                        </div>
+                <!-- Modal finish Task-->
+                <div class="modal fade" id="finish{{$task->id}}" tabindex="-1" aria-labelledby="finishLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="finishLabel">Aufgabe beenden</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Möchten sie die Aufgabe abschliessen?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                                <a type="button" class="btn btn-danger" href="/Startseite/{{$task->id}}/complete" >Beenden</a>
+                            </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-            @endif
-        @endforeach
-        
+                @endif
+            @endforeach
         @else
         <div class="container">
             <h1>Keine Aufgaben vorhanden</h1>
         </div>
         @endif
-        <div class="container">
-            {!! $tasks->links() !!}
-        </div>
  @endsection
