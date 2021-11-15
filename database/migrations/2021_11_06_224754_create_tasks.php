@@ -21,8 +21,8 @@ class CreateTasks extends Migration
             $table->integer('priority')->default(1);
             $table->decimal('estimatedEffort')->nullable();
             $table->decimal('totalEffort')->nullable();
-            $table->boolean('completed')->default(false);
-            $table->boolean('visibility')->default(true);
+            $table->boolean('completed')->default(false)->nullable();
+            $table->boolean('visibility')->default(true)->nullable();
 
             $table->timestamps();
             $table->dateTime('deadline')->nullable();

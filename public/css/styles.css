@@ -303,6 +303,28 @@ nav{
     border-radius: 5px;
   }
   
+  #deleteAll{
+    display: inline-flex;
+    height: 55px;
+    width: 180px;
+    perspective: 1000px;
+    padding-left:0em;
+    animation:none;
+  }
+
+  span #deleteAlls:before,
+  span #deleteAlls:after{
+    position: absolute;
+    content: "ALLE LÖSCHEN";
+    height: 55px;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393E46;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
   
   /**Erstellen einer Aufgabe**/
 
@@ -333,4 +355,36 @@ nav{
     height: 16.8em !important;
 		max-height: 16.8em !important;
 	  overflow-y: auto !important;
+  }
+  /* sort and filter styling*/
+  .Sortbtn{
+    position:relative;
+    bottom:24px;
+    height:55px;
+    background-color:#393E46;
+    color:white;
+    margin-top:0;
+  }
+  .Sortbtn:hover{
+    color:#EEEEEE;
+  }
+
+  .filter{
+    margin-left:2em;
+    width:15em;
+    position:relative;
+    bottom:4.9em;
+    left:44.5em;
+  }
+
+  .searchbutton{
+    display: inline-block;
+    position:relative;
+    left:15em;
+    height:55px;
+    width:55px;
+    bottom:3.45em;
+  }
+  .filterinput{
+    height:55px;
   }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TagsController;
+use App\Http\Controllers\CSVController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\Task;
 /*
@@ -41,9 +42,8 @@ Route::get('Startseite/{task}/complete',[TaskController::class, 'complete'])->mi
 
 Route::get('Archive',[TaskController::class, 'showarchive'])->middleware('auth');
 Route::get('deleteArchive', [TaskController::class, 'delArchive'])->middleware('auth');
-
 Route::get('Group', [TaskController::class,'showtasks'])->middleware('auth');
-
+Route::get('deleteAll', [TaskController::class,'deleteAllTasks'])->middleware('auth');
 Route::get('storeTags', [TagsController::class,'store'])->middleware('auth');
 Route::post('assignTags', [TaskController::class,'assignTag'])->middleware('auth');
 
@@ -61,3 +61,6 @@ Auth::routes();
 Route::get('logout', [LoginController::class, 'logout']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('Startseite');
 
+Route::post('CSVAdminImport',[CSVController::class,'import'] )->middleware('auth');
+Route::get('CSVAdminExport',[CSVController::class, 'export'])->middleware('auth');
+Route::get('AdminExportImport', function(){return view('Main.AdminExportImport');});

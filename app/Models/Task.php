@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
+    protected $fillable = ['title', 'description', 
+    'comment', 'priority', 'estimatedEffort', 
+    'totalEffort','completed', 'visibility', 'created_at',
+     'updated_at', 'deadline', 'alarmdate','users_id','calendarICS',
+     'calendarGoogle','calendarWebOutlook'];
+
     public function tags(){
         return $this->belongsToMany(Tag::class);
     }

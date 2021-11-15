@@ -11,7 +11,7 @@
                 <ul class="navbar-nav ms-auto">
                 @if(auth()->user()->isAdmin())
                 <li class="nav-item">
-                    <a class="nav-link" href="/Startseite">Systemverwaltung</a>
+                    <a class="nav-link" href="/AdminExportImport">Systemverwaltung</a>
                 </li>
                 @endif
                 @if(auth()->user()->isManager())
@@ -36,9 +36,10 @@
  @section('content')
         <div class="container">
         <span id=erstell ><a id=erstellen href="/Create-task" ></a></span>
+        <span id=deleteAll ><a id=deleteAlls data-bs-toggle="modal" data-bs-target="#delAll" ></a></span>
         <span id=gruppe ><a id=gruppieren href="/Group" ></a></span>
         <div class="btn-group">
-            <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-lg dropdown-toggle Sortbtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Sortieren nach
             </button>
             <ul class="dropdown-menu">
@@ -52,12 +53,12 @@
                 <li><a class="dropdown-item" href="/SortbyPriorityDesc">Priorität absteigend</a></li>
             </ul>
         </div>
-        <form class="form-inline" method="get" action="/search">
+        <form class="form-inline filter" method="get" action="/search">
             @csrf
-            <input class="form-control mr-sm-2" type="search" name="search" placeholder="filtern nach" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2 filterinput" type="search" name="search" placeholder="Filtern nach" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 searchbutton" type="submit"><i class="fas fa-search"></i></button>
         </form>
-        </div>
+
         @if($tasks->first(function($task){return $task->users_id == auth()->user()->id &&$task->completed==false;}))
             @foreach($tasks as $task)
                 @if($task->completed==false && auth()->user()->id == $task->users_id)
@@ -76,8 +77,8 @@
                                 <div class="card-body overflow-auto">
                                 <p class="text">Erstellt am: {{$date = date("d-m-Y H:i", strtotime($task->created_at));}}<br><br></p>
                                 <h4 class="card-title text-center">{{$task->title}}</h4><br>
-                                <p class="text "><h5 class="card-title">Beschreibung</h5>{{$task->description}}</p>
-                                <p class="text"><h5 class="card-title">Kommentare</h5>{{$task->comment}}<br><br></p>
+                                <p class="text "><h5 class="card-title">Beschreibung</h5>{!!$task->description!!}</p>
+                                <p class="text"><h5 class="card-title">Kommentare</h5>{!!$task->comment!!}<br><br></p>
                                 <a class="btn btn-dark" type="button" name="button" href="/Startseite/{{$task->id}}/edit"><i class="fas fa-edit">Bearbeiten</i></a>
                                 <a class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#finish{{$task->id}}"><i class="fas fa-trash-alt"> Beenden</i></a>
                                 <a class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteTask{{$task->id}}"><i class="fas fa-trash-alt"> Löschen</i></a>
@@ -145,6 +146,24 @@
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
                                 <a type="button" class="btn btn-danger" href="/Startseite/{{$task->id}}/complete" >Beenden</a>
                             </div>
+                            </div>
+                        </div>
+                </div>
+                <!--Modal delete every Task-->
+                <div class="modal fade" id="delAll" tabindex="-1" aria-labelledby="delAllLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="delAllLabel">Aufgabe löschen</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                    <div class="modal-body">
+                                    Möchten sie sämtliche Aufgaben wirklich löschen?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                                    <a type="button" class="btn btn-danger" href="/deleteAll" >Löschen</a>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -156,6 +156,11 @@ class TaskController extends Controller
         return redirect('/Startseite');
     }
 
+    public function deleteAllTasks(){
+        Task::where('users_id',auth()->user()->id)->delete();
+        return view('Main.index')->with('tasks', Task::all());
+    }
+
     public function edit(Task $task){
         
         return view('Main.edit')->with('task', $task);
@@ -170,7 +175,7 @@ class TaskController extends Controller
     }
 
     public function showarchive(){
-        return view('Main.archive')->with('tasks', Task::SimplePaginate(3));
+        return view('Main.archive')->with('tasks', Task::all());
     }
     
     public function delArchive(){
@@ -205,12 +210,19 @@ class TaskController extends Controller
 
     public function searchfilter(Request $request){
         $search = $request->input('search');
-
+        if($search==""){
+            return view('Main.index')->with('tasks', Task::all());
+            exit();
+        }
         $tasks = Task::query()
             ->where('title', 'LIKE', "%{$search}%")
             ->orWhere('description', 'LIKE', "%{$search}%")
             ->orWhere('comment', 'LIKE', "%{$search}%")
-            ->get();
+            ->get()
+            ->map(function($row) use ($search){
+                $row->description=preg_replace('/('.$search.')/', "<b>$1</b>",$row->description);
+                return $row;
+            });
 
         
         return view('Main.index')->with('tasks',$tasks);
