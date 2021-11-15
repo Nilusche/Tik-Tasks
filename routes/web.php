@@ -56,6 +56,7 @@ Route::get('SortbyDateDesc', function(){return view('Main.index')->with('tasks',
 Route::get('SortbyPriorityAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('priority')->get());})->middleware('auth');
 Route::get('SortbyPriorityDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('priority', 'DESC')->get());})->middleware('auth');
 
+Route::get("search", [TaskController::class, 'searchfilter'])->middleware('auth');
 Auth::routes();
 Route::get('logout', [LoginController::class, 'logout']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('Startseite');

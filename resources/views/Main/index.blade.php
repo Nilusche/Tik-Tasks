@@ -52,6 +52,11 @@
                 <li><a class="dropdown-item" href="/SortbyPriorityDesc">Priorität absteigend</a></li>
             </ul>
         </div>
+        <form class="form-inline" method="get" action="/search">
+            @csrf
+            <input class="form-control mr-sm-2" type="search" name="search" placeholder="filtern nach" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
         </div>
         @if($tasks->first(function($task){return $task->users_id == auth()->user()->id &&$task->completed==false;}))
             @foreach($tasks as $task)

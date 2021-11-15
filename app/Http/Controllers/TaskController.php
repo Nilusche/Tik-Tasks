@@ -202,5 +202,18 @@ class TaskController extends Controller
         session()->flash('success', 'Aufgaben erfolgreich gruppiert');
         return redirect('/Group');
     }
+
+    public function searchfilter(Request $request){
+        $search = $request->input('search');
+
+        $tasks = Task::query()
+            ->where('title', 'LIKE', "%{$search}%")
+            ->orWhere('description', 'LIKE', "%{$search}%")
+            ->orWhere('comment', 'LIKE', "%{$search}%")
+            ->get();
+
+        
+        return view('Main.index')->with('tasks',$tasks);
+    }
     
 }
