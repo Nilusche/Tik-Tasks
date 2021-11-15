@@ -37,6 +37,21 @@
         <div class="container">
         <span id=erstell ><a id=erstellen href="/Create-task" ></a></span>
         <span id=gruppe ><a id=gruppieren href="/Group" ></a></span>
+        <div class="btn-group">
+            <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Sortieren nach
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/SortbyNameAsc">Titel aufsteigend</a></li>
+                <li><a class="dropdown-item" href="/SortbyNameDesc">Titel absteigend</a></li>
+                <li><a class="dropdown-item" href="/SortbyDeadlineAsc">Deadline aufsteigend</a></li>
+                <li><a class="dropdown-item" href="/SortbyDeadlineDesc">Deadline absteigend</a></li>
+                <li><a class="dropdown-item" href="/SortbyDateAsc">Erstellungdatum aufsteigend</a></li>
+                <li><a class="dropdown-item" href="/SortbyDateDesc">Erstellungdatum absteigend</a></li>
+                <li><a class="dropdown-item" href="/SortbyPriorityAsc">Priorität aufsteigend</a></li>
+                <li><a class="dropdown-item" href="/SortbyPriorityDesc">Priorität absteigend</a></li>
+            </ul>
+        </div>
         </div>
         @if($tasks->first(function($task){return $task->users_id == auth()->user()->id;}))
             @foreach($tasks as $task)
@@ -53,7 +68,7 @@
                                 </h4>
                                 </ul>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body overflow-auto">
                                 <p class="text">Erstellt am: {{$date = date("d-m-Y H:i", strtotime($task->created_at));}}<br><br></p>
                                 <h4 class="card-title text-center">{{$task->title}}</h4><br>
                                 <p class="text"><h5 class="card-title">Beschreibung</h5>{{$task->description}}</p>

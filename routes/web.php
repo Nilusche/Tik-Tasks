@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\Task;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,7 +45,16 @@ Route::get('deleteArchive', [TaskController::class, 'delArchive'])->middleware('
 Route::get('Group', [TaskController::class,'showtasks'])->middleware('auth');
 
 Route::get('storeTags', [TagsController::class,'store'])->middleware('auth');
-Route::POST('assignTags', [TaskController::class,'assignTag'])->middleware('auth');
+Route::post('assignTags', [TaskController::class,'assignTag'])->middleware('auth');
+
+Route::get('SortbyNameAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('title')->get());})->middleware('auth');
+Route::get('SortbyNameDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('title', 'DESC')->get());})->middleware('auth');
+Route::get('SortbyDeadlineAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('deadline')->get());})->middleware('auth');
+Route::get('SortbyDeadlineDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('deadline', 'DESC')->get());})->middleware('auth');
+Route::get('SortbyDateAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('created_at')->get());})->middleware('auth');
+Route::get('SortbyDateDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('created_at', 'DESC')->get());})->middleware('auth');
+Route::get('SortbyPriorityAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('priority')->get());})->middleware('auth');
+Route::get('SortbyPriorityDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('priority', 'DESC')->get());})->middleware('auth');
 
 Auth::routes();
 Route::get('logout', [LoginController::class, 'logout']);
