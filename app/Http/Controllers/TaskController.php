@@ -59,6 +59,8 @@ class TaskController extends Controller
             }else if($data['alarm']==4){
                 $task->alarmdate=null;
             }
+        }else{
+            $task->alarmdate=null;
         }
         
         $task->title =$data['title'];

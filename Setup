@@ -1,0 +1,29 @@
+Install latest version of laragon (Php version >= 7.4)
+
+Open the Terminal in Laragon and type
+```
+cd /c/laragon/www
+git clone https://github.com/Nilusche/Tik-Tasks.git
+cd Tik-Tasks
+composer install
+
+```
+Open the project with a text editor and identify the file ".env.example" on the root directory and rename it to ".env".
+
+Change the following field in the .env according to your dbms.
+
+DB_DATABASE=dbname
+DB_USERNAME=dbuser
+DB_PASSWORD=dbpassword
+
+
+From the Terminal again run 
+
+```
+php artisan key:generate
+php artisan config:clear
+
+```
+
+
+from here on you can start running the server with `php artisan serve`.

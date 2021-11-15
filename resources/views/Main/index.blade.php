@@ -53,7 +53,7 @@
             </ul>
         </div>
         </div>
-        @if($tasks->first(function($task){return $task->users_id == auth()->user()->id;}))
+        @if($tasks->first(function($task){return $task->users_id == auth()->user()->id &&$task->completed==false;}))
             @foreach($tasks as $task)
                 @if($task->completed==false && auth()->user()->id == $task->users_id)
                     <div class="container">
@@ -71,7 +71,7 @@
                                 <div class="card-body overflow-auto">
                                 <p class="text">Erstellt am: {{$date = date("d-m-Y H:i", strtotime($task->created_at));}}<br><br></p>
                                 <h4 class="card-title text-center">{{$task->title}}</h4><br>
-                                <p class="text"><h5 class="card-title">Beschreibung</h5>{{$task->description}}</p>
+                                <p class="text "><h5 class="card-title">Beschreibung</h5>{{$task->description}}</p>
                                 <p class="text"><h5 class="card-title">Kommentare</h5>{{$task->comment}}<br><br></p>
                                 <a class="btn btn-dark" type="button" name="button" href="/Startseite/{{$task->id}}/edit"><i class="fas fa-edit">Bearbeiten</i></a>
                                 <a class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#finish{{$task->id}}"><i class="fas fa-trash-alt"> Beenden</i></a>

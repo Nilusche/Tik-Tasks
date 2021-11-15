@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('navbar')
-<div class="container-fluid navcontainer">
+    <div class="container-fluid navcontainer">
         <nav class="navbar navbar-expand-lg navbar-dark back">
         <a class="navbar-brand" href="/Startseite">Tiktasks</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,19 +19,19 @@
                 </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link" href="/Startseite">Einstellungen</a>
+                    <a class="nav-link" href="/Archive">Einstellungen</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/Startseite">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/ogout">Ausloggen</a>
+                    <a class="nav-link" href="/logout">Ausloggen</a>
                 </li>
                 </ul>
             </div>
         </nav>
     </div>
-@endsection
+ @endsection
 
 @section('content')
 <div class="container">
