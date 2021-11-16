@@ -181,13 +181,13 @@ class TaskController extends Controller
 
         $allTasks = DB::table('user_has_task')->get();
         foreach($allTasks as $singleTask){
-            if($task->id == $singleTask->tasks_id){
-                if($singleTask->isOwner==true){
-                    DB::table('user_has_task')->delete($singleTask->id);
-                    $task->delete();
-                    session()->flash('success', 'Aufgabe erfolgreich gelöscht');
-                    return redirect('/Startseite');
-                }
+            if($task->id == $singleTask->tasks_id && $singleTask->isOwner==true && $singleTask->users_id == auth()->user()->id){
+                
+                DB::table('user_has_task')->where('tasks_id',$task->id)->delete();
+                $task->delete();
+                session()->flash('success', 'Aufgabe erfolgreich gelöscht');
+                return redirect('/Startseite');
+                
             }
         }
         session()->flash('error', 'Aufgabe kann nicht gelöscht werden da sie nicht selbst erstellt wurde');
@@ -318,7 +318,7 @@ class TaskController extends Controller
             ->orWhere('comment', 'LIKE', "%{$search}%")
             ->get()
             ->map(function($row) use ($search){
-                $row->description=preg_replace('/('.$search.')/', "<b>$1</b>",$row->description);
+                $row->description=preg_replace('/('.$search.')/', "<b class=bg-warning>$1</b>",$row->description);
                 return $row;
             });
 

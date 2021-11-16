@@ -35,7 +35,7 @@ Route::post('Save-tasks',[TaskController::class,'save'])->middleware('auth');
 Route::get('Startseite/{task}/delete',[TaskController::class, 'destroy'])->middleware('auth');
 
 Route::post('Startseite/{task}/Update-tasks',[TaskController::class, 'update'])->middleware('auth');
-Route::post('Startseite/{task}/Update-tasks-limited',[TaskController::class, 'updateLimited']);/// middleware noch hinzufügens
+Route::post('Startseite/{task}/Update-tasks-limited',[TaskController::class, 'updateLimited'])->middleware('auth');/// middleware noch hinzufügens
 Route::get('Startseite/{task}/edit',[TaskController::class, 'edit'])->middleware('auth');;
 
 Route::get('Startseite/{task}/complete',[TaskController::class, 'complete'])->middleware('auth');
@@ -50,14 +50,14 @@ Route::post('assignTags', [TaskController::class,'assignTag'])->middleware('auth
 Route::get('Assign',[TaskController::class,'showtasksAssign'])->middleware('auth');
 Route::POST('assignTasks',[TaskController::class,'assignTasks'])->middleware('auth');
 
-Route::get('SortbyNameAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('title')->get());})->middleware('auth');
-Route::get('SortbyNameDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('title', 'DESC')->get());})->middleware('auth');
-Route::get('SortbyDeadlineAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('deadline')->get());})->middleware('auth');
-Route::get('SortbyDeadlineDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('deadline', 'DESC')->get());})->middleware('auth');
-Route::get('SortbyDateAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('created_at')->get());})->middleware('auth');
-Route::get('SortbyDateDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('created_at', 'DESC')->get());})->middleware('auth');
-Route::get('SortbyPriorityAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('priority')->get());})->middleware('auth');
-Route::get('SortbyPriorityDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('priority', 'DESC')->get());})->middleware('auth');
+Route::get('SortbyNameAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('title')->get())->with('TaskUserPairs',DB::table('user_has_task')->get());})->middleware('auth');
+Route::get('SortbyNameDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('title', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get());})->middleware('auth');
+Route::get('SortbyDeadlineAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('deadline')->get())->with('TaskUserPairs',DB::table('user_has_task')->get());})->middleware('auth');
+Route::get('SortbyDeadlineDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('deadline', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get());})->middleware('auth');
+Route::get('SortbyDateAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('created_at')->get())->with('TaskUserPairs',DB::table('user_has_task')->get());})->middleware('auth');
+Route::get('SortbyDateDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('created_at', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get());})->middleware('auth');
+Route::get('SortbyPriorityAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('priority')->get())->with('TaskUserPairs',DB::table('user_has_task')->get());})->middleware('auth');
+Route::get('SortbyPriorityDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('priority', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get());})->middleware('auth');
 
 Route::get("search", [TaskController::class, 'searchfilter'])->middleware('auth');
 Auth::routes();
