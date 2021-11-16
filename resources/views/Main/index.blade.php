@@ -61,16 +61,36 @@
 
         <!-- gibt es Gruppen für den User? -->
         @foreach($tags as $tag)
-            <p>{{$tag->name}}</p>
+                <a href="Startseite/{{$tag->id}}/view">
+                    <div class ="container">
+                        <div class ="row task">
+                            <div class="card">
+                                <div class="card-body overflow-auto">
+                                    <h1>{{$tag->name}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
         @endforeach
 
-                            <!-- Objekte die in einer Gruppierung sind, werden nicht angezeigt. -->
+
         <!-- gibt es Aufgaben für den User?-->
             @foreach($TaskUserPairs as $TaskUserPair)
                 @if($TaskUserPair->users_id == auth()->user()->id)
                     @foreach($tasks as $task)
                         @if($task->completed==false && $task->id == $TaskUserPair->tasks_id)
-                            @if(DB::table('tag_task')->where('task_id', '=',$task->id)->get()->count() > 0)
+                            <?php
+                                $result = DB::select('select t.id, t.title, tag.name, tag.users_id
+                                                        from tasks t
+                                                        left join tag_task tt
+                                                        on tt.task_id = t.id
+                                                        left join tags tag
+                                                        on tag.id = tt.tag_id
+                                                        where users_id = :id
+                                                        and t.id = :taskID',['id'=> auth()->user()->id, 'taskID' => $task->id]);
+                            ?>
+                            @if($result)
                                 <!-- Objekte die in einer Gruppierung sind, werden nicht angezeigt. -->
                             @else
                                 <div class="container">
@@ -160,9 +180,8 @@
                                         </div>
                                     </div>
                                 </div>
-        @endif
+                            @endif
                         @endif
-
                     @endforeach
                 @endif
             @endforeach
