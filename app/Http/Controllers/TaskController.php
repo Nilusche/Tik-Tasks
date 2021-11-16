@@ -275,6 +275,7 @@ class TaskController extends Controller
                 )
             );
         }
+        session()->flash('success', 'Aufgaben erfolgreich zugewiesen');
         return redirect ('/Startseite');
     }
 
