@@ -24,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
+        return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());
+    }
+    public function startseite(){
+        return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());
     }
 }

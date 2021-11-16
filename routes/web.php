@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TagsController;
@@ -26,7 +27,7 @@ Route::get('welcome',function(){
     return view('welcome');
 });
 
-Route::get('Startseite',[TaskController::class, 'startseite'])->middleware('auth');
+Route::get('Startseite',[HomeController::class, 'startseite'])->middleware('auth');
 
 Route::get('Create-task', [TaskController::class,'create'])->middleware('auth');
 
