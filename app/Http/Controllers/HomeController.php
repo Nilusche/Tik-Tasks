@@ -26,4 +26,13 @@ class HomeController extends Controller
     {
         return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
     }
+
+
+    public function settings(){
+        return view('Main.settings');
+    }
+
+    public function NonAdminExportImport(){
+        return view('Main.NonAdminExportImport');
+    }
 }

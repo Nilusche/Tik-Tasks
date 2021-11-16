@@ -66,4 +66,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('CSVAdminImport',[CSVController::class,'import'] )->middleware('auth');
 Route::get('CSVAdminExport',[CSVController::class, 'export'])->middleware('auth');
+
+Route::post('CSVNonAdminImport',[CSVController::class,'NonAdminimport'] )->middleware('auth');
+Route::get('CSVNonAdminExport',[CSVController::class, 'NonAdminexport'])->middleware('auth');
+
 Route::get('AdminExportImport', function(){return view('Main.AdminExportImport');});
+
+Route::get('Settings', [App\Http\Controllers\HomeController::class, 'settings'])->middleware('auth');
+
+Route::get('NonAdminExportImport', [App\Http\Controllers\HomeController::class, 'NonAdminExportImport'])->middleware('auth');

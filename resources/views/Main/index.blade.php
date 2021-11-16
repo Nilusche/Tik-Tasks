@@ -20,7 +20,7 @@
                 </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link" href="/Archive">Einstellungen</a>
+                    <a class="nav-link" href="/Settings">Einstellungen</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/Startseite">Profil</a>

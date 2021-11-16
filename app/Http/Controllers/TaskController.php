@@ -184,6 +184,7 @@ class TaskController extends Controller
             if($task->id == $singleTask->tasks_id && $singleTask->isOwner==true && $singleTask->users_id == auth()->user()->id){
                 
                 DB::table('user_has_task')->where('tasks_id',$task->id)->delete();
+                
                 $task->delete();
                 session()->flash('success', 'Aufgabe erfolgreich gelöscht');
                 return redirect('/Startseite');
@@ -224,6 +225,7 @@ class TaskController extends Controller
             if($task->completed == 1){
                 foreach($allTasks as $singleTask){
                     if($task->id == $singleTask->tasks_id && auth()->user()->id==$singleTask->users_id){
+                        DB::table('tag_task')->where('tasks_id',$task->id)->delete();
                         DB::table('user_has_task')->delete($singleTask->id);
                         $task->delete();                     
                     }
@@ -299,7 +301,7 @@ class TaskController extends Controller
 
         foreach($tasks as $taskid){
             $task = Task::find($taskid);
-            $task->tags()->sync($request->tags);
+            $task->tags()->attach($request->tags);
         }
 
         session()->flash('success', 'Aufgaben erfolgreich gruppiert');

@@ -1,4 +1,5 @@
-@extends('layouts.app')
+
+ @extends('layouts.app')
  @section('navbar')
     <div class="container-fluid navcontainer">
         <nav class="navbar navbar-expand-lg navbar-dark back">
@@ -10,12 +11,12 @@
                 <ul class="navbar-nav ms-auto">
                 @if(auth()->user()->isAdmin())
                 <li class="nav-item">
-                    <a class="nav-link" href="/Startseite">Systemverwaltung</a>
+                    <a class="nav-link" href="/AdminExportImport">Systemverwaltung</a>
                 </li>
                 @endif
                 @if(auth()->user()->isManager())
                 <li class="nav-item">
-                    <a class="nav-link" href="/Startseite">Zuweisen</a>
+                    <a class="nav-link" href="/Assign">Zuweisen</a>
                 </li>
                 @endif
                 <li class="nav-item">
@@ -34,25 +35,11 @@
  @endsection
 
  @section('content')
- <div class="container">
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="list-group">
-            @foreach ($errors->all() as $error)
-                <li class="list-group-item">{{ $error }}</li>
-            @endforeach
-            </ul>
-        </div>
-    @endif
-    <form action="/CSVAdminImport"enctype="multipart/form-data" method="POST">
-            @csrf
-            <div>
-                <input name="file" class="form-control form-control-lg" type="file">
-                <button type="submit" class="btn btn-success">Alle Aufgaben importieren</button>
-            </div>
-            <a href="/CSVAdminExport" class="btn btn-warning">Alle Aufgaben exportieren</a>
-    </form>
 
- </div>
+<div class="container">
+    <a href="/Archive" class="btn btn-primary">Archiv</a>
+    <a href="/NonAdminExportImport" class="btn btn-danger">Aufgaben exportieren und importieren</a>
+    <a href="" class="btn btn-warning">Nicht belegt</a>
+</div>
 
  @endsection

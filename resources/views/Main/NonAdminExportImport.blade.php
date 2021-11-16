@@ -44,13 +44,13 @@
             </ul>
         </div>
     @endif
-    <form action="/CSVAdminImport"enctype="multipart/form-data" method="POST">
+    <form action="/CSVNonAdminImport"enctype="multipart/form-data" method="POST">
             @csrf
             <div>
                 <input name="file" class="form-control form-control-lg" type="file">
                 <button type="submit" class="btn btn-success">Alle Aufgaben importieren</button>
             </div>
-            <a href="/CSVAdminExport" class="btn btn-warning">Alle Aufgaben exportieren</a>
+            <a href="/CSVNonAdminExport" class="btn btn-warning">Alle Aufgaben exportieren</a>
     </form>
 
  </div>
