@@ -296,7 +296,8 @@ class TaskController extends Controller
 
         foreach($tasks as $taskid){
             $task = Task::find($taskid);
-            $task->tags()->attach($request->tags);
+            if(!$task->hasTag($request->tags))
+                $task->tags()->attach($request->tags);
         }
 
         session()->flash('success', 'Aufgaben erfolgreich gruppiert');

@@ -4,7 +4,7 @@ namespace App\Imports;
 
 use App\Models\Task;
 use Maatwebsite\Excel\Concerns\ToModel;
-
+use DB;
 class CSVNonAdminImport implements ToModel
 {
     
@@ -14,7 +14,14 @@ class CSVNonAdminImport implements ToModel
         if($row[0]==null){
             session()->flash('error', 'Datei leer oder invalide (z.B. Titel nicht gesetzt)');
         }
-            
+        
+        DB::table('user_has_task')->insert(
+            array(
+                'users_id'=> $row[16],
+                'tasks_id'=> $row[17],
+                'isOwner'=>$row[18]
+            )
+        );   
         return new Task([
             
             'title' => $row[1] ?? null,
