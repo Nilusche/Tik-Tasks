@@ -10,11 +10,6 @@ use Carbon\Carbon;
 use App\Models\User;
 class TaskController extends Controller
 {
-    public function startseite(){
-
-        return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
-    }
-
     public function create(){
         return view('Main.createTask');
     }
@@ -91,7 +86,7 @@ class TaskController extends Controller
         $task->totalEffort=$data['effort2'];
         $task->save();
 
-        
+
         session()->flash('success', 'Änderungen erfolgreich übernommen');
         return redirect('/Startseite');
 
@@ -225,9 +220,9 @@ class TaskController extends Controller
                 foreach($allTasks as $singleTask){
                     if($task->id == $singleTask->tasks_id && auth()->user()->id==$singleTask->users_id){
                         DB::table('user_has_task')->delete($singleTask->id);
-                        $task->delete();                     
+                        $task->delete();
                     }
-                } 
+                }
             }
         }
 
@@ -299,7 +294,7 @@ class TaskController extends Controller
 
         foreach($tasks as $taskid){
             $task = Task::find($taskid);
-            $task->tags()->sync($request->tags);
+            $task->tags()->attach($request->tags);
         }
 
         session()->flash('success', 'Aufgaben erfolgreich gruppiert');

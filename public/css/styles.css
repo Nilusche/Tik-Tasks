@@ -19,11 +19,11 @@ nav{
   .nav-item{
     padding-left:2em;
   }
-  
+
   /*footer styling*/
 
   .foot{
-  
+
     background-color: #393E46;
     color:#EDEDED;
   }
@@ -83,7 +83,7 @@ nav{
     width:5em;
   }
   /**Landing page styling*/
-  
+
   .landingpage{
     padding-top:5em;
     padding-bottom:3em;
@@ -94,9 +94,9 @@ nav{
     height: auto;
     padding-bottom:5em;
     animation: slideIn 1.5s ease-in-out forwards;
-  
+
   }
-  
+
   .transition1{
     position: absolute;
      top: 0;
@@ -163,8 +163,8 @@ nav{
     padding-left:3em;
     animation: slideIn 2s ease-in-out forwards;
   }
-  
-  
+
+
   #einloggen{
     display: inline-flex;
     height: 55px;
@@ -173,7 +173,7 @@ nav{
     padding-left:3em;
     animation: slideIn 2s ease-in-out forwards;
   }
-  
+
 
   span a{
     font-size: 19px;
@@ -182,7 +182,7 @@ nav{
     transform: translateZ(-25px);
     transition: transform .25s;
   }
-  
+
   span a:before,
   span a:after{
     position: absolute;
@@ -196,7 +196,7 @@ nav{
     box-sizing: border-box;
     border-radius: 5px;
   }
-  
+
   span a:before{
     color: white;
     background: #393E46;
@@ -302,7 +302,7 @@ nav{
     box-sizing: border-box;
     border-radius: 5px;
   }
-  
+
   #deleteAll{
     display: inline-flex;
     height: 55px;
@@ -325,7 +325,7 @@ nav{
     box-sizing: border-box;
     border-radius: 5px;
   }
-  
+
   /**Erstellen einer Aufgabe**/
 
   .form-group{
@@ -334,7 +334,7 @@ nav{
   .createform{
     height:20em;
   }
-  
+
   .createTaskpic{
     height:40em;
     width:auto;
