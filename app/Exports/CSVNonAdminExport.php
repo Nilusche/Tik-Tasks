@@ -20,7 +20,7 @@ class CSVNonAdminExport implements FromCollection
             left join users
             on uht.users_id = users.id
             where uht.users_id = :id;',['id'=>auth()->User()->id]);
-         dd(collect($tasks)) ; 
+        
         return  collect($tasks);
         
     }

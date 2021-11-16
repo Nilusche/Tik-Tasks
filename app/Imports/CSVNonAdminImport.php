@@ -15,15 +15,10 @@ class CSVNonAdminImport implements ToModel
             session()->flash('error', 'Datei leer oder invalide (z.B. Titel nicht gesetzt)');
         }
         
-        DB::table('user_has_task')->insert(
-            array(
-                'users_id'=> $row[16],
-                'tasks_id'=> $row[17],
-                'isOwner'=>$row[18]
-            )
-        );   
-        return new Task([
-            
+        $statement = DB::select("SHOW TABLE STATUS LIKE 'tasks'");
+        $nextId = $statement[0]->Auto_increment;
+        $task= new Task([
+            'id' =>$nextId,
             'title' => $row[1] ?? null,
             'description' => $row[2] ?? null,
             'comment'=>$row[3]?? null,
@@ -38,5 +33,15 @@ class CSVNonAdminImport implements ToModel
             'calendarGoogle' =>$row[14] ??null, 
             'calendarWebOutlook' =>$row[15] ??null
         ]);
+        
+        DB::table('user_has_task')->insert(
+            array(
+                'users_id'=> $row[17],
+                'tasks_id'=>$nextId,
+                'isOwner'=>$row[18]
+            )
+        );  
+
+        return $task;
     }
 }
