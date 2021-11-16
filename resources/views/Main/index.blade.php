@@ -103,7 +103,6 @@
                                                             {{$date = date("d-m-Y H:i", strtotime($task->deadline));}}
                                                         @endif
                                                     </h4>
-                                                    </ul>
                                                 </div>
                                                 <div class="card-body overflow-auto">
                                                     <p class="text">Erstellt am: {{$date = date("d-m-Y H:i", strtotime($task->created_at));}}<br><br></p>
