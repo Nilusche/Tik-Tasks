@@ -80,6 +80,22 @@ class TaskController extends Controller
 
     }
 
+    public function updateLimited(){
+        $data = request()->all();
+
+        $task->title =$data['title'];
+        $task->description =$data['description'];
+        $task->comment =$data['comment'];
+        $task->estimatedEffort=$data['effort'];
+        $task->totalEffort=$data['effort2'];
+        $task->save();
+
+        
+        session()->flash('success', 'Änderungen erfolgreich übernommen');
+        return redirect('/Startseite');
+
+    }
+
     public function save(){
         $data = request()->all();
         $task = new Task();
@@ -179,7 +195,12 @@ class TaskController extends Controller
 
 
     public function edit(Task $task){
-        
+        $allTasks = DB::table('user_has_task')->get();
+        foreach($allTasks as $singleTask){
+            if($singleTask->users_id==auth()->user()->id && $singleTask->tasks_id==$task->id && $singleTask->isOwner==0){
+                return view('Main.editLimited')->with('task', $task);
+            }
+        }
         return view('Main.edit')->with('task', $task);
     }
 
@@ -195,24 +216,27 @@ class TaskController extends Controller
     }
     
     public function delArchive(){
-        $tasks = Task::where('completed',true);
+        $tasks = Task::all();
         $allTasks = DB::table('user_has_task')->get();
         
         foreach($tasks as $task){
-            
-            foreach($allTasks as $singleTask){
-                if($task->id == $singleTask->tasks_id){
-                    DB::table('user_has_task')->delete($singleTask->id);
-                    $task->delete();                     
-                }
-            } 
+            if($task->completed == 1){
+                foreach($allTasks as $singleTask){
+                    if($task->id == $singleTask->tasks_id && auth()->user()->id==$singleTask->users_id){
+                        DB::table('user_has_task')->delete($singleTask->id);
+                        $task->delete();                     
+                    }
+                } 
+            }
         }
         
         return view('Main.archive')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
     }
 
     public function showtasks(){
-        return view('Main.group')->with('tasks', Task::all())->with('tags', Tag::all())->with('selectedtags', DB::table('tag_task')->select('task_id','tag_id')->get());
+        return view('Main.group')->with('tasks', Task::all())->with('tags', Tag::all())
+        ->with('selectedtags', DB::table('tag_task')->select('task_id','tag_id')->get())
+        ->with('TaskUserPairs', DB::table('user_has_task')->get());
     }
 
     public function assignTag(Request $request){
@@ -220,11 +244,11 @@ class TaskController extends Controller
         $tags = $request->tags;
         if(!$tasks){
             session()->flash('error', 'Zu gruppierenden Aufgaben nicht ausgewählt');
-            return view('Main.group')->with('tasks', Task::all())->with('tags', Tag::all());
+            return view('Main.group')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
         }
         if(!$tags){
             session()->flash('error', 'Keine Gruppe ausgewählt');
-            return view('Main.group')->with('tasks', Task::all())->with('tags', Tag::all());
+            return view('Main.group')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
         }
 
         foreach($tasks as $taskid){

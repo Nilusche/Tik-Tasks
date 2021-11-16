@@ -35,7 +35,7 @@ Route::post('Save-tasks',[TaskController::class,'save'])->middleware('auth');
 Route::get('Startseite/{task}/delete',[TaskController::class, 'destroy'])->middleware('auth');
 
 Route::post('Startseite/{task}/Update-tasks',[TaskController::class, 'update'])->middleware('auth');
-
+Route::post('Startseite/{task}/Update-tasks-limited',[TaskController::class, 'updateLimited']);/// middleware noch hinzufügens
 Route::get('Startseite/{task}/edit',[TaskController::class, 'edit'])->middleware('auth');;
 
 Route::get('Startseite/{task}/complete',[TaskController::class, 'complete'])->middleware('auth');

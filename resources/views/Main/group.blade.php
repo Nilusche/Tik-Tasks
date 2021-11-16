@@ -67,46 +67,38 @@
                 </select>
 
         </div>
-        @if($tasks->first(function($task){return $task->users_id == auth()->user()->id;}))
         <ul class="list-group">
-            @if($tasks->count()>0)
-            @foreach($tasks as $task)
-                @if($task->completed==false && auth()->user()->id == $task->users_id)
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" name="tasks[]" type="checkbox" value="{{$task->id}}" aria-label="...">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <h5>Titel: </h5>{{$task->title}}
+        @foreach($TaskUserPairs as $TaskUserPair)
+            @if($TaskUserPair->users_id == auth()->user()->id)
+                @foreach($tasks as $task)
+                    @if($task->completed==false && $task->id == $TaskUserPair->tasks_id)
+                        <li class="list-group-item">
+                            <input class="form-check-input me-1" name="tasks[]" type="checkbox" value="{{$task->id}}" aria-label="...">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5>Titel: </h5>{{$task->title}}
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>Deadline: </h5>{{$task->deadline}}
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>Gruppen: </h5>
+                                    @foreach($tags as $tag)
+                                    @if($tag->users_id == auth()->user()->id)
+                                        @if($task->hasTag($tag->id))
+                                            [{{$tag->name }}]
+                                    @endif
+                                    @endif
+                                    @endforeach
+                                </div>
                             </div>
-                            <div class="col-lg-4">
-                                <h5>Deadline: </h5>{{$task->deadline}}
-                            </div>
-                            <div class="col-lg-4">
-                                <h5>Gruppen: </h5>
-                                @foreach($tags as $tag)
-                                @if($tag->users_id == auth()->user()->id)
-                                    @if($task->hasTag($tag->id))
-                                        [{{$tag->name }}]
-                                @endif
-                                @endif
-                                @endforeach
-                            </div>
-                        </div>
-                    </li>
-                @endif
-            @endforeach
-            @else
-            <div class="container">
-                    <h1>Keine Aufgaben vorhanden</h1>
-            </div>
+                        </li>
+                    @endif
+                @endforeach
             @endif
+        @endforeach
         </ul>
         <button type="submit" class="btn btn-primary">Gruppieren</button>
-        @else
-        <div class="container">
-            <h1>Keine Aufgaben vorhanden</h1>
-        </div>
-        @endif
     </form>
         
     
