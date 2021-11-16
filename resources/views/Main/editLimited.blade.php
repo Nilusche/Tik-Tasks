@@ -50,7 +50,7 @@
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
                     <div class="form-group">
                         <label for="title">Titel *</label>
-                        <input type="text" class="form-control" id="title" name="title" value="{{$task->title}}"placeholder="Titel der Aufgabe">
+                        <input type="text" class="form-control" id="title" name="title" value="{{$task->title}}"placeholder="Titel der Aufgabe" readonly>
                     </div>
                     <div class="form-group">
                         <label for="description">Beschreibung</label>
