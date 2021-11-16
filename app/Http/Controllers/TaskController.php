@@ -195,7 +195,19 @@ class TaskController extends Controller
     }
     
     public function delArchive(){
-        Task::where('completed',true)->delete();
+        $tasks = Task::where('completed',true);
+        $allTasks = DB::table('user_has_task')->get();
+        
+        foreach($tasks as $task){
+            
+            foreach($allTasks as $singleTask){
+                if($task->id == $singleTask->tasks_id){
+                    DB::table('user_has_task')->delete($singleTask->id);
+                    $task->delete();                     
+                }
+            } 
+        }
+        
         return view('Main.archive')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
     }
 
