@@ -27,7 +27,7 @@ class CreateTasks extends Migration
             $table->timestamps();
             $table->dateTime('deadline')->nullable();
             $table->dateTime('alarmdate')->nullable();
-            $table->foreignId('users_id')->constrained()->default(0);
+
             
 
             $table->text('calendarICS')->default('#')->nullable();

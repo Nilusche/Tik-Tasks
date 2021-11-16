@@ -11,7 +11,7 @@ class TaskController extends Controller
 {
     public function startseite(){
         
-        return view('Main.index')->with('tasks', Task::all());
+        return view('Main.index')->with('tasks', Task::all())->with('TaskUserPair', DB::table('user_has_task'));
     }
 
     public function create(){
@@ -63,6 +63,7 @@ class TaskController extends Controller
             $task->alarmdate=null;
         }
         
+
         $task->title =$data['title'];
         $task->description =$data['description'];
         $task->comment =$data['comment'];
@@ -73,6 +74,7 @@ class TaskController extends Controller
         $task->completed =false;
         $task->save();
 
+        
         session()->flash('success', 'Änderungen erfolgreich übernommen');
         return redirect('/Startseite');
 
@@ -97,7 +99,7 @@ class TaskController extends Controller
                 'visibility'=> 'required'
             ]);
         }
-
+        
         if(!empty($data['deadline'])){
             if($data['alarm']==0){
                 $date = Carbon::parse($data['deadline']);
@@ -121,6 +123,7 @@ class TaskController extends Controller
             }else if($data['alarm']==4){
                 $task->alarmdate=null;
             }
+
             if($data['description'])
                 $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline))->description($data['description']);
             else
@@ -140,10 +143,17 @@ class TaskController extends Controller
         $task->totalEffort=$data['effort'];
         $task->visibility=$data['visibility'];
         $task->completed =false;
-        $task->users_id = auth()->user()->id;
+        
         
         $task->save();
-
+        
+        DB::table('user_has_task')->insert(
+            array(
+                'users_id'=> auth()->user()->id,
+                'tasks_id'=>$task->id,
+                'isOwner'=>false
+            )
+        );
         
         session()->flash('success', 'Aufgabe erfolgreich erstellt');
        
