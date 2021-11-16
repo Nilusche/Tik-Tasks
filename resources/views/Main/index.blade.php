@@ -61,17 +61,35 @@
 
         <!-- gibt es Gruppen für den User? -->
         @foreach($tags as $tag)
-                <a href="Startseite/{{$tag->id}}/view">
-                    <div class ="container">
-                        <div class ="row task">
-                            <div class="card">
-                                <div class="card-body overflow-auto">
-                                    <h1>{{$tag->name}}</h1>
+                <?php
+                $amountOfTasks = DB::select('select *
+                                            from tag_task tt
+                                            left join user_has_task uht
+                                            on tt.task_id = uht.tasks_id
+                                            left join tasks t
+                                            on t.id = tt.task_id
+                                            where t.completed = 0
+                                            and uht.users_id = :uid
+                                            and tt.tag_id = :tid',['uid'=>auth()->user()->id,'tid'=>$tag->id]);
+
+                $groupVisible = DB::select('select *
+                                            from tags
+                                            where users_id = :uid
+                                            and id = :tid',['uid'=>auth()->user()->id,'tid'=>$tag->id]);
+                ?>
+                @if($amountOfTasks && $groupVisible)
+                    <a href="Startseite/{{$tag->id}}/view">
+                        <div class ="container">
+                            <div class ="row task">
+                                <div class="card">
+                                    <div class="card-body overflow-auto">
+                                        <h4>{{$tag->name}}</h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                    @endif
         @endforeach
 
 
@@ -100,12 +118,12 @@
                                                 <div class="card-header text-center aufgabenwrapper">
                                                     <h4 class="card-title">
                                                         @if(!empty($task->deadline))
-                                                            {{$date = date("d-m-Y H:i", strtotime($task->deadline));}}
+                                                            {{$date = date("d-m-Y H:i", strtotime($task->deadline))}}
                                                         @endif
                                                     </h4>
                                                 </div>
                                                 <div class="card-body overflow-auto">
-                                                    <p class="text">Erstellt am: {{$date = date("d-m-Y H:i", strtotime($task->created_at));}}<br><br></p>
+                                                    <p class="text">Erstellt am: {{$date = date("d-m-Y H:i", strtotime($task->created_at))}}<br><br></p>
                                                     <h4 class="card-title text-center">{{$task->title}}</h4><br>
                                                     <p class="text "><h5 class="card-title">Beschreibung</h5>{!!$task->description!!}</p>
                                                     <p class="text"><h5 class="card-title">Kommentare</h5>{!!$task->comment!!}<br><br></p>
@@ -122,7 +140,7 @@
                                                     </div>
                                                 @endif
                                                 <div class="card-footer text-muted text-center">
-                                                    {{$totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline);}}
+                                                    {{$totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline)}}
                                                 </div>
                                             </div>
 
