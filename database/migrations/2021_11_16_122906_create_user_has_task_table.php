@@ -14,6 +14,7 @@ class CreateUserHasTaskTable extends Migration
     public function up()
     {
         Schema::create('user_has_task', function (Blueprint $table) {
+            $table->id();
             $table->integer('tasks_id');
             $table->integer('users_id');
             $table->boolean('isOwner');

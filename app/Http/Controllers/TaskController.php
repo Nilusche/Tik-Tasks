@@ -11,7 +11,7 @@ class TaskController extends Controller
 {
     public function startseite(){
         
-        return view('Main.index')->with('tasks', Task::all())->with('TaskUserPair', DB::table('user_has_task'));
+        return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
     }
 
     public function create(){
@@ -146,12 +146,12 @@ class TaskController extends Controller
         
         
         $task->save();
-        
+
         DB::table('user_has_task')->insert(
             array(
                 'users_id'=> auth()->user()->id,
                 'tasks_id'=>$task->id,
-                'isOwner'=>false
+                'isOwner'=>true
             )
         );
         
@@ -161,15 +161,22 @@ class TaskController extends Controller
     }
 
     public function destroy(Task $task){
-        $task->delete();
-        session()->flash('success', 'Aufgabe erfolgreich gelöscht');
+        
+        $allTasks = DB::table('user_has_task')->get();
+        foreach($allTasks as $singleTask){
+            if($task->id == $singleTask->tasks_id){
+                if($singleTask->isOwner==true){
+                    DB::table('user_has_task')->delete($singleTask->id);
+                    $task->delete();
+                    session()->flash('success', 'Aufgabe erfolgreich gelöscht');
+                    return redirect('/Startseite');
+                }
+            }
+        }
+        session()->flash('error', 'Aufgabe kann nicht gelöscht werden da sie nicht selbst erstellt wurde');
         return redirect('/Startseite');
     }
 
-    public function deleteAllTasks(){
-        Task::where('users_id',auth()->user()->id)->delete();
-        return view('Main.index')->with('tasks', Task::all());
-    }
 
     public function edit(Task $task){
         
@@ -178,19 +185,18 @@ class TaskController extends Controller
 
     public function complete(Task $task){
         $task->completed=true;
-
         $task->save();
         session()->flash('success', 'Aufgabe abgeschlossen');
         return redirect('/Startseite');
     }
 
     public function showarchive(){
-        return view('Main.archive')->with('tasks', Task::all());
+        return view('Main.archive')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
     }
     
     public function delArchive(){
         Task::where('completed',true)->delete();
-        return view('Main.archive')->with('tasks', Task::all());
+        return view('Main.archive')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
     }
 
     public function showtasks(){
@@ -221,7 +227,7 @@ class TaskController extends Controller
     public function searchfilter(Request $request){
         $search = $request->input('search');
         if($search==""){
-            return view('Main.index')->with('tasks', Task::all());
+            return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
             exit();
         }
         $tasks = Task::query()
@@ -235,7 +241,7 @@ class TaskController extends Controller
             });
 
         
-        return view('Main.index')->with('tasks',$tasks);
+        return view('Main.index')->with('tasks',$tasks)->with('TaskUserPairs', DB::table('user_has_task')->get());
     }
     
 }

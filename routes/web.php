@@ -43,7 +43,6 @@ Route::get('Startseite/{task}/complete',[TaskController::class, 'complete'])->mi
 Route::get('Archive',[TaskController::class, 'showarchive'])->middleware('auth');
 Route::get('deleteArchive', [TaskController::class, 'delArchive'])->middleware('auth');
 Route::get('Group', [TaskController::class,'showtasks'])->middleware('auth');
-Route::get('deleteAll', [TaskController::class,'deleteAllTasks'])->middleware('auth');
 Route::get('storeTags', [TagsController::class,'store'])->middleware('auth');
 Route::post('assignTags', [TaskController::class,'assignTag'])->middleware('auth');
 
