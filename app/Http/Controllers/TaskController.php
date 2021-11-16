@@ -7,10 +7,11 @@ use App\Models\Task;
 use App\Models\Tag;
 use DB;
 use Carbon\Carbon;
+use App\Models\User;
 class TaskController extends Controller
 {
     public function startseite(){
-        
+
         return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
     }
 
@@ -62,7 +63,7 @@ class TaskController extends Controller
         }else{
             $task->alarmdate=null;
         }
-        
+
 
         $task->title =$data['title'];
         $task->description =$data['description'];
@@ -74,7 +75,7 @@ class TaskController extends Controller
         $task->completed =false;
         $task->save();
 
-        
+
         session()->flash('success', 'Änderungen erfolgreich übernommen');
         return redirect('/Startseite');
 
@@ -115,7 +116,7 @@ class TaskController extends Controller
                 'visibility'=> 'required'
             ]);
         }
-        
+
         if(!empty($data['deadline'])){
             if($data['alarm']==0){
                 $date = Carbon::parse($data['deadline']);
@@ -148,8 +149,8 @@ class TaskController extends Controller
             $task->calendarGoogle=$link->google();
             $task->calendarWebOutlook=$link->webOutlook();
         }
-        
-        
+
+
 
         $task->title =$data['title'];
         $task->description =$data['description'];
@@ -159,8 +160,8 @@ class TaskController extends Controller
         $task->totalEffort=$data['effort'];
         $task->visibility=$data['visibility'];
         $task->completed =false;
-        
-        
+
+
         $task->save();
 
         DB::table('user_has_task')->insert(
@@ -170,14 +171,14 @@ class TaskController extends Controller
                 'isOwner'=>true
             )
         );
-        
+
         session()->flash('success', 'Aufgabe erfolgreich erstellt');
-       
+
         return redirect('/Startseite');
     }
 
     public function destroy(Task $task){
-        
+
         $allTasks = DB::table('user_has_task')->get();
         foreach($allTasks as $singleTask){
             if($task->id == $singleTask->tasks_id){
@@ -214,11 +215,11 @@ class TaskController extends Controller
     public function showarchive(){
         return view('Main.archive')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
     }
-    
+
     public function delArchive(){
         $tasks = Task::all();
         $allTasks = DB::table('user_has_task')->get();
-        
+
         foreach($tasks as $task){
             if($task->completed == 1){
                 foreach($allTasks as $singleTask){
@@ -229,8 +230,52 @@ class TaskController extends Controller
                 } 
             }
         }
-        
+
         return view('Main.archive')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
+    }
+
+    //Aufrufen der Assign Seite
+    //Es werden alle Aufgaben die zugewiesen werden können angezeigt werden können
+    public function showtasksAssign(){
+        return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
+    }
+    //Verarbeitung der Daten
+    public function assignTasks(Request $request){
+        $tasks = $request->tasks;
+        $operator = $request->operator;
+
+        //Zeige Fehlermeldung, wenn kein Operator angegeben wurde
+        if(!$operator){
+            session()->flash('error','Keinen Mitarbeiter ausgewählt');
+            return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
+        }
+
+        //Kontrolle ob $operator gültig ist
+        $operatorID = User::where('email', $operator)->first();
+        if($operatorID->id == auth()->User()->id){
+            session()->flash('error','Sie können keine Aufgaben an sich selber verteilen');
+            return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
+        }
+            //DB::select('select id from users where email = :operator',['operator' => $operator]);
+        if(!$operatorID){
+            session()->flash('error','Ungültige Email-Adresse');
+            return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
+        }
+        //Zeige Fehlermeldung wenn kein Task angegeben wurde
+        if(!$tasks){
+            session()->flash('error','Keine Aufgaben ausgewählt');
+            return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
+        }
+        foreach($tasks as $task_id){
+            DB::table('user_has_task')->insert(
+                array(
+                    'users_id'=> $operatorID->id,
+                    'tasks_id'=> (int)$task_id,
+                    'isOwner'=>false
+                )
+            );
+        }
+        return redirect ('/Startseite');
     }
 
     public function showtasks(){
@@ -276,8 +321,8 @@ class TaskController extends Controller
                 return $row;
             });
 
-        
+
         return view('Main.index')->with('tasks',$tasks)->with('TaskUserPairs', DB::table('user_has_task')->get());
     }
-    
+
 }

@@ -46,6 +46,10 @@ Route::get('Group', [TaskController::class,'showtasks'])->middleware('auth');
 Route::get('storeTags', [TagsController::class,'store'])->middleware('auth');
 Route::post('assignTags', [TaskController::class,'assignTag'])->middleware('auth');
 
+//Zuweisung Routen
+Route::get('Assign',[TaskController::class,'showtasksAssign'])->middleware('auth');
+Route::POST('assignTasks',[TaskController::class,'assignTasks'])->middleware('auth');
+
 Route::get('SortbyNameAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('title')->get());})->middleware('auth');
 Route::get('SortbyNameDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('title', 'DESC')->get());})->middleware('auth');
 Route::get('SortbyDeadlineAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('deadline')->get());})->middleware('auth');

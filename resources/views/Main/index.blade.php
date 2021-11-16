@@ -16,7 +16,7 @@
                 @endif
                 @if(auth()->user()->isManager())
                 <li class="nav-item">
-                    <a class="nav-link" href="/Startseite">Zuweisen</a>
+                    <a class="nav-link" href="/Assign">Zuweisen</a>
                 </li>
                 @endif
                 <li class="nav-item">
@@ -36,6 +36,7 @@
  @section('content')
         <div class="container">
         <span id=erstell ><a id=erstellen href="/Create-task" ></a></span>
+        <span id=deleteAll ><a id=deleteAlls data-bs-toggle="modal" data-bs-target="#delAll" ></a></span>
         <span id=gruppe ><a id=gruppieren href="/Group" ></a></span>
         <div class="btn-group">
             <button class="btn btn-lg dropdown-toggle Sortbtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -96,8 +97,8 @@
                                         {{$totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline);}}
                                         </div>
                                     </div>
-                                    
-                                    
+
+
                                     </div>
                                     <div class="col-lg-1 col-md-1 col-sm-1">
                                     @if($task->priority==1)
@@ -105,11 +106,11 @@
                                     @elseif($task->priority==2)
                                         <div class="card priority2 tabsize"></div>
                                     @elseif($task->priority==3)
-                                        <div class="card priority3 tabsize"></div> 
+                                        <div class="card priority3 tabsize"></div>
                                     @elseif($task->priority==4)
-                                        <div class="card priority4 tabsize"></div> 
+                                        <div class="card priority4 tabsize"></div>
                                     @else
-                                        <div class="card priority5 tabsize"></div> 
+                                        <div class="card priority5 tabsize"></div>
                                     @endif
                                     </div>
                                 </div>
@@ -154,5 +155,5 @@
                     @endforeach
                 @endif
             @endforeach
-       
+
  @endsection
