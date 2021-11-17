@@ -36,7 +36,6 @@
  @section('content')
         <div class="container">
         <span id=erstell ><a id=erstellen href="/Create-task" ></a></span>
-        <span id=deleteAll ><a id=deleteAlls data-bs-toggle="modal" data-bs-target="#delAll" ></a></span>
         <span id=gruppe ><a id=gruppieren href="/Group" ></a></span>
         <div class="btn-group">
             <button class="btn btn-lg dropdown-toggle Sortbtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
