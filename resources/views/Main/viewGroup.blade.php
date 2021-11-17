@@ -45,14 +45,14 @@
                     Sortieren nach
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/SortbyNameAscGROUP">Titel aufsteigend</a></li>
-                    <li><a class="dropdown-item" href="/SortbyNameDescGROUP">Titel absteigend</a></li>
-                    <li><a class="dropdown-item" href="/SortbyDeadlineAscGROUP">Deadline aufsteigend</a></li>
-                    <li><a class="dropdown-item" href="/SortbyDeadlineDescGROUP">Deadline absteigend</a></li>
-                    <li><a class="dropdown-item" href="/SortbyDateAscGROUP">Erstellungdatum aufsteigend</a></li>
-                    <li><a class="dropdown-item" href="/SortbyDateDescGROUP">Erstellungdatum absteigend</a></li>
-                    <li><a class="dropdown-item" href="/SortbyPriorityAscGROUP">Priorität aufsteigend</a></li>
-                    <li><a class="dropdown-item" href="/SortbyPriorityDescGROUP">Priorität absteigend</a></li>
+                    <li><a class="dropdown-item" href="/Startseite/{{$tag_id}}/view/SortbyNameAscGroup">Titel aufsteigend</a></li>
+                    <li><a class="dropdown-item" href="/Startseite/{{$tag_id}}/view/SortbyNameDescGroup">Titel absteigend</a></li>
+                    <li><a class="dropdown-item" href="/Startseite/{{$tag_id}}/view/SortbyDeadlineAscGroup">Deadline aufsteigend</a></li>
+                    <li><a class="dropdown-item" href="/Startseite/{{$tag_id}}/view/SortbyDeadlineDescGroup">Deadline absteigend</a></li>
+                    <li><a class="dropdown-item" href="/Startseite/{{$tag_id}}/view/SortbyDateOfCreationAscGroup">Erstellungdatum aufsteigend</a></li>
+                    <li><a class="dropdown-item" href="/Startseite/{{$tag_id}}/view/SortbyDateOfCreationDescGroup">Erstellungdatum absteigend</a></li>
+                    <li><a class="dropdown-item" href="/Startseite/{{$tag_id}}/view/SortbyPriorityAscGroup">Priorität aufsteigend</a></li>
+                    <li><a class="dropdown-item" href="/Startseite/{{$tag_id}}/view/SortbyPriorityDescGroup">Priorität absteigend</a></li>
                 </ul>
             </div>
             <form class="form-inline filter" method="get" action="/searchGROUP">
