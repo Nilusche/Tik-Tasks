@@ -55,6 +55,14 @@ class TaskController extends Controller
             }else if($data['alarm']==4){
                 $task->alarmdate=null;
             }
+            
+            if($data['description'])
+                $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline))->description($data['description']);
+            else
+                $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline));
+            $task->calendarICS=$link->ics();
+            $task->calendarGoogle=$link->google();
+            $task->calendarWebOutlook=$link->webOutlook();
         }else{
             $task->alarmdate=null;
         }
