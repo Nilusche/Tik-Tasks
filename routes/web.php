@@ -78,7 +78,7 @@ Route::get('SortbyPriorityDesc', function(){return view('Main.index')->with('tas
 
 //Filter Routen
 Route::get("search", [TaskController::class, 'searchfilter'])->middleware('auth');
-Route::get("searchGROUP", [TagsController::class, 'searchfilter'])->middleware('auth');
+Route::get("Startseite/{tag}/view/searchGroup", [TagsController::class, 'searchfilter'])->middleware('auth');
 
 Auth::routes();
 Route::get('logout', [LoginController::class, 'logout']);

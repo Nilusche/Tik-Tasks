@@ -23,7 +23,8 @@ class TagsController extends Controller
         return redirect('/Group');
     }
 
-    public function searchfilter(Request $request){
+    public function searchfilter(Request $request, Tag $tag_id){
+
         $search = $request->input('search');
         if($search==""){
             return view('Main.viewGroup')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',Tag::all());
@@ -40,6 +41,6 @@ class TagsController extends Controller
             });
 
 
-        return view('Main.viewGroup')->with('tasks',$tasks)->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',Tag::all());
+        return view('Main.viewGroup')->with('tasks',$tasks)->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',Tag::all())->with('tag_id',$tag_id);
     }
 }

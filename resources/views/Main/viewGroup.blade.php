@@ -55,7 +55,7 @@
                     <li><a class="dropdown-item" href="/Startseite/{{$tag_id}}/view/SortbyPriorityDescGroup">Priorität absteigend</a></li>
                 </ul>
             </div>
-            <form class="form-inline filter" method="get" action="/searchGROUP">
+            <form class="form-inline filter" method="get" action="/Startseite/{{$tag_id}}/view/searchGroup">
                 @csrf
                 <input class="form-control mr-sm-2 filterinput" type="search" name="search" placeholder="Filtern nach"
                     aria-label="Search">
