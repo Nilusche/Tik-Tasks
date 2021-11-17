@@ -55,6 +55,24 @@ class HomeController extends Controller
         return view('Main.viewGroup')->with('tasks',$results);
     }
 
+    public function startseite_publictask(){
+        //Alle Aufgaben, die nicht vom Manager erstellt wurden und öffentlich sind, werden hier abgefragt
+        $publicTasks = DB::select(
+                                    'select *
+                                    from tasks t
+                                    left join user_has_task uht
+                                    on uht.tasks_id = t.id
+                                    left join users u
+                                    on uht.users_id = u.id
+                                    where uht.users_id <> :uid
+                                    and uht.isOwner <> 0
+                                    and t.visibility = 1',
+            ['uid' => auth()->user()->id],
+        );
+
+        return view('Main.viewPublicTasks')->with('publicTasks',$publicTasks);
+    }
+
 
     public function settings(){
         return view('Main.settings');
