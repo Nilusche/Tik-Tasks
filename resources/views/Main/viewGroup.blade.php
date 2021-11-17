@@ -38,6 +38,28 @@
                 @foreach($tasks as $task)
                     @if($task->completed == false)
                 <div class="container">
+                    <span id=erstell ><a id=erstellen href="/Create-task" ></a></span>
+                    <span id=gruppe ><a id=gruppieren href="/Group" ></a></span>
+                    <div class="btn-group">
+                        <button class="btn btn-lg dropdown-toggle Sortbtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sortieren nach
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/SortbyNameAscGROUP">Titel aufsteigend</a></li>
+                            <li><a class="dropdown-item" href="/SortbyNameDescGROUP">Titel absteigend</a></li>
+                            <li><a class="dropdown-item" href="/SortbyDeadlineAscGROUP">Deadline aufsteigend</a></li>
+                            <li><a class="dropdown-item" href="/SortbyDeadlineDescGROUP">Deadline absteigend</a></li>
+                            <li><a class="dropdown-item" href="/SortbyDateAscGROUP">Erstellungdatum aufsteigend</a></li>
+                            <li><a class="dropdown-item" href="/SortbyDateDescGROUP">Erstellungdatum absteigend</a></li>
+                            <li><a class="dropdown-item" href="/SortbyPriorityAscGROUP">Priorität aufsteigend</a></li>
+                            <li><a class="dropdown-item" href="/SortbyPriorityDescGROUP">Priorität absteigend</a></li>
+                        </ul>
+                    </div>
+                    <form class="form-inline filter" method="get" action="/searchGROUP">
+                        @csrf
+                            <input class="form-control mr-sm-2 filterinput" type="search" name="search" placeholder="Filtern nach" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0 searchbutton" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
                     <div class="row task">
                         <div class="col-lg-11 col-md-11 col-sm-11">
                             <div class="card tabsize">

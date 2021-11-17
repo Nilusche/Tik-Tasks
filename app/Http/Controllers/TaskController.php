@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Tag;
 use DB;
+use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use App\Models\User;
+
 class TaskController extends Controller
 {
     public function create(){
@@ -79,7 +81,8 @@ class TaskController extends Controller
         $task->save();
 
 
-        session()->flash('success', 'Änderungen erfolgreich übernommen');
+        //session()->flash('success', 'Änderungen erfolgreich übernommen');
+        Alert::success('Erfolg', 'Aufgabe wurde erfolgreich bearbeitet');
         return redirect('/Startseite');
 
     }
@@ -95,7 +98,8 @@ class TaskController extends Controller
         $task->save();
 
 
-        session()->flash('success', 'Änderungen erfolgreich übernommen');
+        //session()->flash('success', 'Änderungen erfolgreich übernommen');
+        Alert::success('Erfolg', 'Aufgabe wurde erfolgreich bearbeitet');
         return redirect('/Startseite');
 
     }
@@ -175,7 +179,8 @@ class TaskController extends Controller
             )
         );
 
-        session()->flash('success', 'Aufgabe erfolgreich erstellt');
+        //session()->flash('success', 'Aufgabe erfolgreich erstellt');
+        Alert::success('Fertig', 'Aufgabe wurde erfolgreich erstellt');
 
         return redirect('/Startseite');
     }
@@ -189,12 +194,14 @@ class TaskController extends Controller
                 DB::table('user_has_task')->where('tasks_id',$task->id)->delete();
                 
                 $task->delete();
-                session()->flash('success', 'Aufgabe erfolgreich gelöscht');
+                //session()->flash('success', 'Aufgabe erfolgreich gelöscht');
+                Alert::success('Erfolg', 'Aufgabe erfolgreich gelöscht');
                 return redirect('/Startseite');
                 
             }
         }
-        session()->flash('error', 'Aufgabe kann nicht gelöscht werden da sie nicht selbst erstellt wurde');
+        //session()->flash('error', 'Aufgabe kann nicht gelöscht werden da sie nicht selbst erstellt wurde');
+        Alert::error('Fehler', 'Aufgabe kann nicht gelöscht werden da sie nicht selbst erstellt wurde');
         return redirect('/Startseite');
     }
 
@@ -212,7 +219,8 @@ class TaskController extends Controller
     public function complete(Task $task){
         $task->completed=true;
         $task->save();
-        session()->flash('success', 'Aufgabe abgeschlossen');
+        //session()->flash('success', 'Aufgabe abgeschlossen');
+        Alert::success('Erfolg', 'Aufgabe abgeschlossen');
         return redirect('/Startseite');
     }
 
@@ -251,24 +259,28 @@ class TaskController extends Controller
 
         //Zeige Fehlermeldung, wenn kein Operator angegeben wurde
         if(!$operator){
-            session()->flash('error','Keinen Mitarbeiter ausgewählt');
+            //session()->flash('error','Keinen Mitarbeiter ausgewählt');
+            Alert::error('Fehler', 'Keinen Mitarbeiter ausgewählt');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
         }
 
         //Kontrolle ob $operator gültig ist
         $operatorID = User::where('email', $operator)->first();
         if($operatorID->id == auth()->User()->id){
-            session()->flash('error','Sie können keine Aufgaben an sich selber verteilen');
+            //session()->flash('error','Sie können keine Aufgaben an sich selber verteilen');
+            Alert::error('Fehler', 'Sie können keine Aufgaben an sich selber verteilen');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
         }
             //DB::select('select id from users where email = :operator',['operator' => $operator]);
         if(!$operatorID){
-            session()->flash('error','Ungültige Email-Adresse');
+            //session()->flash('error','Ungültige Email-Adresse');
+            Alert::error('Fehler', 'Ungültige Email-Adresse');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
         }
         //Zeige Fehlermeldung wenn kein Task angegeben wurde
         if(!$tasks){
-            session()->flash('error','Keine Aufgaben ausgewählt');
+            //session()->flash('error','Keine Aufgaben ausgewählt');
+            Alert::error('Fehler', 'Keine Aufgaben ausgewählt');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
         }
         foreach($tasks as $task_id){
@@ -280,7 +292,8 @@ class TaskController extends Controller
                 )
             );
         }
-        session()->flash('success', 'Aufgaben erfolgreich zugewiesen');
+        //session()->flash('success', 'Aufgaben erfolgreich zugewiesen');
+        Alert::success('Erfolg', 'Aufgaben erfolgreich zugewiesen');
         return redirect ('/Startseite');
     }
 
@@ -294,11 +307,13 @@ class TaskController extends Controller
         $tasks = $request->tasks;
         $tags = $request->tags;
         if(!$tasks){
-            session()->flash('error', 'Zu gruppierenden Aufgaben nicht ausgewählt');
+            //session()->flash('error', 'Zu gruppierenden Aufgaben nicht ausgewählt');
+            Alert::error('Fehler', 'Zu gruppierenden Aufgaben nicht ausgewählt');
             return view('Main.group')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
         }
         if(!$tags){
-            session()->flash('error', 'Keine Gruppe ausgewählt');
+            //session()->flash('error', 'Keine Gruppe ausgewählt');
+            Alert::error('Fehler', 'Keine Gruppe ausgewählt');
             return view('Main.group')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
         }
         $already_grouped=false;
@@ -313,9 +328,11 @@ class TaskController extends Controller
            
         }
         if($already_grouped){
-            session()->flash('success', 'Einige der bereits gruppierten Aufgaben wurden nicht erneut hinzugefügt');
+            //session()->flash('success', 'Einige der bereits gruppierten Aufgaben wurden nicht erneut hinzugefügt');
+            Alert::warning('Erfolg aber ...', '... Einige der bereits gruppierten Aufgaben wurden nicht erneut hinzugefügt');
         }else{
-            session()->flash('success', 'Aufgaben erfolgreich gruppiert');
+            //session()->flash('success', 'Aufgaben erfolgreich gruppiert');
+            Alert::success('Erfolg', 'Aufgaben erfolgreich gruppiert');
         }
         
         return redirect('/Group');

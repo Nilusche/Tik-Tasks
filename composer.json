@@ -13,7 +13,9 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "maatwebsite/excel": "^3.1",
-        "spatie/calendar-links": "^1.6"
+        "realrashid/sweet-alert": "^4.1",
+        "spatie/calendar-links": "^1.6",
+        "uxweb/sweet-alert": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

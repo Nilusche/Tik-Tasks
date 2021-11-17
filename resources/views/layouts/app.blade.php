@@ -14,11 +14,14 @@
     <script src="https://kit.fontawesome.com/b90fa0e727.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+    
     <title>Document</title>
     @yield('css')
     @yield('scripts')
+    
 </head>
 <body>
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
     @yield('navbar')
     @if(session()->has('success'))
     <div class=" container alert alert-success">
