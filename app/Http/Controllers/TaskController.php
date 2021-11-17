@@ -234,7 +234,7 @@ class TaskController extends Controller
     //Aufrufen der Assign Seite
     //Es werden alle Aufgaben die zugewiesen werden können angezeigt werden können
     public function showtasksAssign(){
-        return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
+        return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',Tag::all());
     }
     //Verarbeitung der Daten
     public function assignTasks(Request $request){
@@ -293,21 +293,30 @@ class TaskController extends Controller
             session()->flash('error', 'Keine Gruppe ausgewählt');
             return view('Main.group')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
         }
-
+        $already_grouped=false;
         foreach($tasks as $taskid){
             $task = Task::find($taskid);
-            if(!$task->hasTag($request->tags))
-                $task->tags()->attach($request->tags);
+            foreach($request->tags as $tag){
+                if(!$task->hasTag($tag))
+                    $task->tags()->attach($tag);
+                else
+                    $already_grouped =true;
+            }
+           
         }
-
-        session()->flash('success', 'Aufgaben erfolgreich gruppiert');
+        if($already_grouped){
+            session()->flash('success', 'Einige der bereits gruppierten Aufgaben wurden nicht erneut hinzugefügt');
+        }else{
+            session()->flash('success', 'Aufgaben erfolgreich gruppiert');
+        }
+        
         return redirect('/Group');
     }
 
     public function searchfilter(Request $request){
         $search = $request->input('search');
         if($search==""){
-            return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
+            return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',Tag::all());
             exit();
         }
         $tasks = Task::query()
@@ -321,7 +330,7 @@ class TaskController extends Controller
             });
 
 
-        return view('Main.index')->with('tasks',$tasks)->with('TaskUserPairs', DB::table('user_has_task')->get());
+        return view('Main.index')->with('tasks',$tasks)->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',Tag::all());
     }
 
 }
