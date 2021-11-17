@@ -28,7 +28,9 @@ Route::get('welcome',function(){
 });
 
 Route::get('Startseite',[HomeController::class, 'startseite'])->middleware('auth');
+
 Route::get('Startseite/{tag}/view',[HomeController::class, 'startseite_tag'])->middleware('auth');
+Route::get('Startseite/PublicTasks',[HomeController::class, 'startseite_publictask'])->middleware('auth');
 
 Route::get('Create-task', [TaskController::class,'create'])->middleware('auth');
 
