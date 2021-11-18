@@ -56,17 +56,20 @@ Route::get('Startseite/{task}/edit',[TaskController::class, 'edit'])->middleware
 
 Route::get('Startseite/{task}/complete',[TaskController::class, 'complete'])->middleware('auth');
 
+//tags
 Route::get('Archive',[TaskController::class, 'showarchive'])->middleware('auth');
 Route::get('deleteArchive', [TaskController::class, 'delArchive'])->middleware('auth');
 Route::get('Group', [TaskController::class,'showtasks'])->middleware('auth');
 Route::get('storeTags', [TagsController::class,'store'])->middleware('auth');
 Route::post('assignTags', [TaskController::class,'assignTag'])->middleware('auth');
+Route::get('Startseite/{tagid}/deleteGroup',[TagsController::class, 'deleteGroup'])->middleware('auth');
 
-//Zuweisung Routen
+//Tasks
 Route::get('Assign',[TaskController::class,'showtasksAssign'])->middleware('auth');
 Route::POST('assignTasks',[TaskController::class,'assignTasks'])->middleware('auth');
 
-//Sortierung Routen
+
+//Sortierung Aufgaben
 Route::get('SortbyNameAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('title')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
 Route::get('SortbyNameDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('title', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
 Route::get('SortbyDeadlineAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('deadline')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
@@ -76,7 +79,7 @@ Route::get('SortbyDateDesc', function(){return view('Main.index')->with('tasks',
 Route::get('SortbyPriorityAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('priority')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
 Route::get('SortbyPriorityDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('priority', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
 
-//Filter Routen
+//Filter Aufgaben
 Route::get("search", [TaskController::class, 'searchfilter'])->middleware('auth');
 Route::get("Startseite/{tag}/view/searchGroup", [TagsController::class, 'searchfilter'])->middleware('auth');
 

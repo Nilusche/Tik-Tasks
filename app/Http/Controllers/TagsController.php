@@ -7,6 +7,8 @@ use App\Models\Tag;
 use App\Models\User;
 use App\Models\Task;
 use DB;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class TagsController extends Controller
 {
     public function store(Request $request){
@@ -42,5 +44,21 @@ class TagsController extends Controller
 
 
         return view('Main.viewGroup')->with('tasks',$tasks)->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',Tag::all())->with('tag_task',DB::table('tag_task')->get())->with('tag_id',$tag_id);
+    }
+
+    public function deleteGroup(Request $request){
+        $tagid = $request->tagid;
+        //Löschen von tag_task
+
+        //Delete all where tag_id = $tag_id
+        DB::table('tag_task')->where('tag_id','=',$tagid)->delete();
+        //Löschen von Tag eintrag
+        DB::table('tags')->where('id','=',$tagid)->delete();
+        
+        
+        
+        
+        Alert::success('Erfolg', 'Gruppe wurde erfolgreich gelöscht');
+        return redirect('/Startseite');
     }
 }

@@ -14,3 +14,4 @@ yarn-error.log
 /.idea
 /.vscode
 .env_backup.txt
+databse.session.sql
