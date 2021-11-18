@@ -93,17 +93,13 @@ Auth::routes();
 Route::get('logout', [LoginController::class, 'logout']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('Startseite');
 
+//Import Export Routen
 Route::post('CSVAdminImport',[CSVController::class,'import'] )->middleware('auth');
 Route::get('CSVAdminExport',[CSVController::class, 'export'])->middleware('auth');
-
 Route::post('CSVNonAdminImport',[CSVController::class,'NonAdminimport'] )->middleware('auth');
 Route::get('CSVNonAdminExport',[CSVController::class, 'NonAdminexport'])->middleware('auth');
-
 Route::get('AdminExportImport', function(){return view('Main.AdminExportImport');});
+Route::get('NonAdminExportImport', [App\Http\Controllers\HomeController::class, 'NonAdminExportImport'])->middleware('auth');
 
 Route::get('Settings', [App\Http\Controllers\HomeController::class, 'settings'])->middleware('auth');
-
-Route::get('NonAdminExportImport', [App\Http\Controllers\HomeController::class, 'NonAdminExportImport'])->middleware('auth');
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

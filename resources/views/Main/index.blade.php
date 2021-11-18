@@ -80,12 +80,30 @@
                     </div>
                     <div class="col-sm">
                         <div class="form-group">
-                            <a type="button" class="btn btn-danger" href="/Startseite/{{ $task->tag_id }}/deleteGroup">
-                                Löschen
-                            </a>
+                        <a class="btn btn-danger" type="button" data-bs-toggle="modal"  data-bs-target="#deleteGroup{{ $task->tag_id  }}"><i class="fas fa-trash-alt"> Löschen</i></a>
                         </div>
                     </div>
                 </div>
+                <!-- Modal delete Group-->
+             <div class="modal fade" id="deleteGroup{{ $task->tag_id  }}" tabindex="-1" aria-labelledby="deleteGroup" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteGroup">Gruppierung löschen</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Möchten sie wirklich die Gruppierung löschen? Die enthaltenen Aufgaben werden nicht gelöscht.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Abbrechen</button>
+                                <a type="button" class="btn btn-danger" href="/Startseite/{{ $task->tag_id }}/deleteGroup">löschen</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             @endif
         @endforeach
 
@@ -218,6 +236,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            
                         @endif
                     @endif
                 @endif
