@@ -7,6 +7,8 @@ use App\Http\Controllers\TagsController;
 use App\Http\Controllers\CSVController;
 use App\Http\Controllers\viewGroupController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UserChangePasswordController;
 use App\Models\Task;
 /*
 |--------------------------------------------------------------------------
@@ -101,5 +103,13 @@ Route::get('CSVNonAdminExport',[CSVController::class, 'NonAdminexport'])->middle
 Route::get('AdminExportImport', function(){return view('Main.AdminExportImport');});
 Route::get('NonAdminExportImport', [App\Http\Controllers\HomeController::class, 'NonAdminExportImport'])->middleware('auth');
 
+//Settings Route
 Route::get('Settings', [App\Http\Controllers\HomeController::class, 'settings'])->middleware('auth');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//User Routes
+//Profile Routes
+Route::get('Profile', [UsersController::class, 'index'])->middleware('auth');
+Route::get('Profile/edit', [UsersController::class, 'edit'])->middleware('auth');
+Route::put('Profile/update', [UsersController::class, 'update'])->name('users.update-profile')->middleware('auth');
+Route::get('Profile/change-password', [UserChangePasswordController::class, 'index'])->middleware('auth');
+Route::post('Profile/update-password', [UserChangePasswordController::class, 'store'])->middleware('auth');
