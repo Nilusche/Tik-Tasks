@@ -309,12 +309,12 @@ class TaskController extends Controller
         if(!$tasks){
             //session()->flash('error', 'Zu gruppierenden Aufgaben nicht ausgewählt');
             Alert::error('Fehler', 'Zu gruppierenden Aufgaben nicht ausgewählt');
-            return view('Main.group')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
+            return redirect('/Group');
         }
         if(!$tags){
             //session()->flash('error', 'Keine Gruppe ausgewählt');
             Alert::error('Fehler', 'Keine Gruppe ausgewählt');
-            return view('Main.group')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get());
+            return redirect('/Group');
         }
         $already_grouped=false;
         foreach($tasks as $taskid){
