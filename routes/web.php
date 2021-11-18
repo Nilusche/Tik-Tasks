@@ -68,16 +68,22 @@ Route::get('Startseite/{tagid}/deleteGroup',[TagsController::class, 'deleteGroup
 Route::get('Assign',[TaskController::class,'showtasksAssign'])->middleware('auth');
 Route::POST('assignTasks',[TaskController::class,'assignTasks'])->middleware('auth');
 
+DB::table('tasks')
+        ->join('tag_task','tasks.id','=','tag_task.task_id')
+        ->join('tags','tags.id','=','tag_task.tag_id')
+        ->groupBy('tag_task.tag_id')
+        ->get();
+
 
 //Sortierung Aufgaben
-Route::get('SortbyNameAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('title')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyNameDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('title', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyDeadlineAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('deadline')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyDeadlineDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('deadline', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyDateAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('created_at')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyDateDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('created_at', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyPriorityAsc', function(){return view('Main.index')->with('tasks', Task::orderBy('priority')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyPriorityDesc', function(){return view('Main.index')->with('tasks', Task::orderBy('priority', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
+Route::get('SortbyNameAsc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('title','ASC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
+Route::get('SortbyNameDesc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('title', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
+Route::get('SortbyDeadlineAsc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('deadline')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
+Route::get('SortbyDeadlineDesc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('deadline', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
+Route::get('SortbyDateAsc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('created_at')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
+Route::get('SortbyDateDesc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('created_at', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
+Route::get('SortbyPriorityAsc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('priority')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
+Route::get('SortbyPriorityDesc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('priority', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
 
 //Filter Aufgaben
 Route::get("search", [TaskController::class, 'searchfilter'])->middleware('auth');

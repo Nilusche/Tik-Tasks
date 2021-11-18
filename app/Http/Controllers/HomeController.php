@@ -24,37 +24,46 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $viewableTags = DB::select('
-            SELECT *
-            from tags
-            where users_id = :uid',['uid' => auth()->user()->id]);
+        $viewableTags = DB::table('tags')
+        ->where('users_id','=',auth()->user()->id)
+        ->get();
 
         return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());
     }
     public function startseite(){
 
-        $viewableTags = DB::select('
-            SELECT *
-            from tags
-            where users_id = :uid',['uid' => auth()->user()->id]);
+        $allTasks = DB::table('tasks')
+        ->join('tag_task','tasks.id','=','tag_task.task_id')
+        ->join('tags','tags.id','=','tag_task.tag_id')
+        ->groupBy('tag_task.tag_id')
+        ->get();
 
-        return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',$viewableTags);
+        $tasksWithTags = DB::table('tasks')
+        ->leftjoin('tag_task','tasks.id','=','tag_task.task_id')
+        ->leftjoin('tags','tags.id','=','tag_task.tag_id')
+        ->where('tag_task.tag_id','is not','null')
+        ->get();
+
+        $viewableTags = DB::table('tags')
+        ->where('users_id','=',auth()->user()->id)
+        ->get();
+
+        return view('Main.index')->with('tasks', Task::all())
+        ->with('TaskUserPairs', DB::table('user_has_task')->get())
+        ->with('tags',$viewableTags)
+        ->with('allTasks',$allTasks)
+        ->with('tasksWithTags',$tasksWithTags);
     }
 
     public function startseite_publictask(){
         //Alle Aufgaben, die nicht vom Manager erstellt wurden und öffentlich sind, werden hier abgefragt
-        $publicTasks = DB::select(
-                                    'select *
-                                    from tasks t
-                                    left join user_has_task uht
-                                    on uht.tasks_id = t.id
-                                    left join users u
-                                    on uht.users_id = u.id
-                                    where uht.users_id <> :uid
-                                    and uht.isOwner <> 0
-                                    and t.visibility = 1',
-            ['uid' => auth()->user()->id],
-        );
+        $publicTasks = DB::table('tasks')
+        ->leftjoin('user_has_task','user_has_task.tasks_id','=','tasks.id')
+        ->leftjoin('users','user_has_task.users_id','=','users.id')
+        ->where('user_has_task.users_id','<>',auth()->user()->id)
+        ->where('user_has_task.isOwner','<>',0)
+        ->where('tasks.visibility','=',1)
+        ->get();
 
         return view('Main.viewPublicTasks')->with('publicTasks',$publicTasks);
     }
