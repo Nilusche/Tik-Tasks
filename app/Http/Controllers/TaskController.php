@@ -350,6 +350,7 @@ class TaskController extends Controller
             ->orWhere('comment', 'LIKE', "%{$search}%")
             ->get()
             ->map(function($row) use ($search){
+                $row->comment=preg_replace('/('.$search.')/', "<b class=bg-warning>$1</b>",$row->comment);
                 $row->description=preg_replace('/('.$search.')/', "<b class=bg-warning>$1</b>",$row->description);
                 return $row;
             });
