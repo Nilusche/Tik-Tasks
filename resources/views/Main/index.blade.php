@@ -102,10 +102,11 @@
 
 
         <!-- gibt es Aufgaben für den User?-->
-        @foreach ($TaskUserPairs as $TaskUserPair)
-            @if ($TaskUserPair->users_id == auth()->user()->id)
-                @foreach ($tasks as $task)
+        @foreach ($tasks as $task)
+            @foreach ($TaskUserPairs as $TaskUserPair)
+                @if ($TaskUserPair->users_id == auth()->user()->id)
                     @if ($task->completed == false && $task->id == $TaskUserPair->tasks_id)
+                    
                         <?php
                         $result = DB::select(
                             'select t.id, t.title, tag.name, tag.users_id
@@ -233,8 +234,8 @@
                             </div>
                         @endif
                     @endif
-                @endforeach
-            @endif
+                @endif
+            @endforeach
         @endforeach
         @if (auth()->user()->isManager())
             <a href="Startseite/PublicTasks">
