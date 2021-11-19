@@ -118,3 +118,7 @@ Route::post('Profile/update-password', [UserChangePasswordController::class, 'st
 Route::get('Systempanel', function(){return view('Admins.AdminSystempanel');})->middleware('auth');
 Route::get('AdminExportImport', function(){return view('Admins.AdminExportImport');})->middleware('auth');
 Route::get('DeleteUser', [AdminController::class, 'deleteForm'])->middleware('auth');
+Route::get('EditUser',function(){return view('Admins.AdminEditUser');})->middleware('auth');
+Route::post('FindUser', [AdminController::class, 'findUser'])->middleware('auth');
+Route::get('User/{user}/edit',[AdminController::class, 'edit'])->middleware('auth');
+Route::post('User/{user}/update',[AdminController::class, 'updateUser'])->middleware('auth');
