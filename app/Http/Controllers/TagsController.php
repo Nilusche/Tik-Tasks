@@ -21,7 +21,7 @@ class TagsController extends Controller
         $tag->users_id =$request->userid;
         $tag->save();
 
-        session()->flash('success', 'Neue Gruppe erfolgreich erstellt');
+        Alert::success('Erfolg', 'Neue Gruppe erfolgreich erstellt');
         return redirect('/Group');
     }
 
