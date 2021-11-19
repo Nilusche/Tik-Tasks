@@ -1,5 +1,4 @@
-
- @extends('layouts.app')
+@extends('layouts.app')
  @section('navbar')
     <div class="container-fluid navcontainer">
         <nav class="navbar navbar-expand-lg navbar-dark back">
@@ -11,12 +10,12 @@
                 <ul class="navbar-nav ms-auto">
                 @if(auth()->user()->isAdmin())
                 <li class="nav-item">
-                    <a class="nav-link" href="/Systempanel">Systemverwaltung</a>
+                    <a class="nav-link" href="/Startseite">Systemverwaltung</a>
                 </li>
                 @endif
                 @if(auth()->user()->isManager())
                 <li class="nav-item">
-                    <a class="nav-link" href="/Assign">Zuweisen</a>
+                    <a class="nav-link" href="/Startseite">Zuweisen</a>
                 </li>
                 @endif
                 <li class="nav-item">
@@ -35,11 +34,13 @@
  @endsection
 
  @section('content')
-
-<div class="container">
-    <a href="/Archive" class="btn btn-primary">Archiv</a>
-    <a href="/NonAdminExportImport" class="btn btn-danger">Aufgaben exportieren und importieren</a>
-    <a href="" class="btn btn-warning">Nicht belegt</a>
+ @if(auth()->user()->isAdmin())
+ <div class="container">
+    <a href="" class="btn btn-primary">Benutzer bearbeiten</a>
+    <a href="{{route('register')}}" class="btn btn-warning">Benutzer registrieren</a>
+    <a href="/DeleteUser" class="btn btn-warning">Benutzer löschen</a>
+    <a href="/AdminExportImport" class="btn btn-danger">Sämtliche Aufgaben exportieren und importieren</a>
+    
 </div>
-
+ @endif
  @endsection

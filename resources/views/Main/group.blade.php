@@ -10,7 +10,7 @@
                 <ul class="navbar-nav ms-auto">
                 @if(auth()->user()->isAdmin())
                 <li class="nav-item">
-                    <a class="nav-link" href="/Startseite">Systemverwaltung</a>
+                    <a class="nav-link" href="/Systempanel">Systemverwaltung</a>
                 </li>
                 @endif
                 @if(auth()->user()->isManager())

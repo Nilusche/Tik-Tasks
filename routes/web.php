@@ -9,6 +9,7 @@ use App\Http\Controllers\viewGroupController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UserChangePasswordController;
+use App\Http\Controllers\AdminController;
 use App\Models\Task;
 /*
 |--------------------------------------------------------------------------
@@ -100,7 +101,6 @@ Route::post('CSVAdminImport',[CSVController::class,'import'] )->middleware('auth
 Route::get('CSVAdminExport',[CSVController::class, 'export'])->middleware('auth');
 Route::post('CSVNonAdminImport',[CSVController::class,'NonAdminimport'] )->middleware('auth');
 Route::get('CSVNonAdminExport',[CSVController::class, 'NonAdminexport'])->middleware('auth');
-Route::get('AdminExportImport', function(){return view('Main.AdminExportImport');});
 Route::get('NonAdminExportImport', [App\Http\Controllers\HomeController::class, 'NonAdminExportImport'])->middleware('auth');
 
 //Settings Route
@@ -115,4 +115,6 @@ Route::get('Profile/change-password', [UserChangePasswordController::class, 'ind
 Route::post('Profile/update-password', [UserChangePasswordController::class, 'store'])->middleware('auth');
 
 //Admin Routes
-Route::get('Systempanel', function(){return view('Main.AdminSystempanel');})->middleware('auth');
+Route::get('Systempanel', function(){return view('Admins.AdminSystempanel');})->middleware('auth');
+Route::get('AdminExportImport', function(){return view('Admins.AdminExportImport');})->middleware('auth');
+Route::get('DeleteUser', [AdminController::class, 'deleteForm'])->middleware('auth');
