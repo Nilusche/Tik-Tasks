@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Users\AdminUserupdateRequest;
 use DB;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     public function deleteForm(){
@@ -39,7 +39,7 @@ class AdminController extends Controller
                 'confirmpassword'=>'required|same:password'
             ]);
             $user->update([
-                'password' =>$request->password,
+                'password' =>Hash::make($request->password),
             ]);
         }
         
