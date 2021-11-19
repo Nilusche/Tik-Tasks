@@ -6,12 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Users\AdminUserupdateRequest;
 use DB;
 use RealRashid\SweetAlert\Facades\Alert;
-<<<<<<< HEAD
+
 use Illuminate\Support\Facades\Hash;
-=======
 
 
->>>>>>> 2008944a831189a3acc0c171f621aab1e3d858b0
 class AdminController extends Controller
 {
     public function deleteUser(){
