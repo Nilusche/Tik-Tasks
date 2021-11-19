@@ -59,7 +59,7 @@
                 @endforeach
             </div>
             <div>
-                <input type ="submit" name = "send">
+                <input id="zuweisenbutton" class="btn btn-info" type ="submit" name = "send">
             </div>
         </form>
     </div>

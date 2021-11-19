@@ -34,6 +34,9 @@ class TaskController extends Controller
         }
 
         if(!empty($data['deadline'])){
+            $this->validate(request(),[
+                'alarm' =>'min:0'
+            ]);
             if($data['alarm']==0){
                 $date = Carbon::parse($data['deadline']);
                 $task->alarmdate=$date;
@@ -87,14 +90,51 @@ class TaskController extends Controller
 
     }
 
-    public function updateLimited(){
+    public function updateLimited(Task $task){
         $data = request()->all();
 
-        $task->title =$data['title'];
+        $this->validate(request(),[
+            'alarm' =>'required'
+        ]);    
+        if(!empty($data['alarm'])){
+            if($data['alarm']==0){
+                $date = Carbon::parse($task->deadline);
+                $task->alarmdate=$date;
+            }
+            else if($data['alarm']==1){
+                $date = Carbon::parse($task->deadline)->subHours(1);
+                $task->alarmdate=$date;
+            }
+            else if($data['alarm']==2){
+                $date = Carbon::parse($task->deadline)->subDays(1);
+                $task->alarmdate=$date;
+            }
+            else if($data['alarm']==3){
+                $this->validate(request(), [
+                    'effort'=>'required'
+                ]);
+                $hours = (double) $data['effort'];
+                $date = Carbon::parse($task->deadline)->subHours($hours);
+                $task->alarmdate=$date;
+
+            }else if($data['alarm']==4){
+                $task->alarmdate=null;
+            }
+            
+            if($data['description'])
+                $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline))->description($data['description']);
+            else
+                $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline));
+            $task->calendarICS=$link->ics();
+            $task->calendarGoogle=$link->google();
+            $task->calendarWebOutlook=$link->webOutlook();
+        }else{
+            $task->alarmdate=null;
+        }
+
         $task->description =$data['description'];
         $task->comment =$data['comment'];
         $task->estimatedEffort=$data['effort'];
-        $task->totalEffort=$data['effort2'];
         $task->save();
 
 

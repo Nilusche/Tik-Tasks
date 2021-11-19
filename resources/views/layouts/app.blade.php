@@ -86,6 +86,15 @@
 				duration: 700
 			});
 	</script>
+    <script>
+        $('#zuweisenbutton').click(function() {
+            var zuweisenbutton =  $(this);
+            zuweisenbutton.prop('disabled', true);
+            setTimeout(function() {
+            zuweisenbutton.prop('disabled', false);
+        }, 1500);
+});
+    </script>
    
 </body>
 </html>
