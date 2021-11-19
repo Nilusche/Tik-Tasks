@@ -33,13 +33,10 @@
         </nav>
     </div>
 @endsection
-
 @section('content')
     @if (auth()->user()->isAdmin())
         <div class="container">
             <h1>Delete User</h1>
-
-
             <form action="/DeleteUser/action" method="POST">
                 @csrf
                 <div class="mb-3">

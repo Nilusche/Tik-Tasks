@@ -34,13 +34,27 @@
  @endsection
 
  @section('content')
+
  @if(auth()->user()->isAdmin())
  <div class="container">
-    <a href="/EditUser" class="btn btn-primary">Benutzer bearbeiten</a>
-    <a href="{{route('register')}}" class="btn btn-warning">Benutzer registrieren</a>
-    <a href="/DeleteUser" class="btn btn-warning">Benutzer löschen</a>
-    <a href="/AdminExportImport" class="btn btn-danger">Sämtliche Aufgaben exportieren und importieren</a>
-    
-</div>
+    <h1>Edit User</h1>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="list-group">
+            @foreach ($errors->all() as $error)
+                <li class="list-group-item">{{ $error }}</li>
+            @endforeach
+            </ul>
+        </div>
+    @endif
+    <form action="/FindUser" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="email">Input Usermail</label>
+            <input type="text" name="email" id="email" class="form-control">
+            <button type="submit" class="btn btn-warning">Edit User</button>
+        </div>
+    </form>
+ </div>
  @endif
  @endsection
