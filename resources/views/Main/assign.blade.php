@@ -34,6 +34,7 @@
 @endsection
 
 @section('content')
+@if(auth()->user()->isManager())
     <div>
         <h1>Zuweisung</h1>
         <form action="/assignTasks" method ="POST">
@@ -62,4 +63,5 @@
             </div>
         </form>
     </div>
+@endif    
 @endsection

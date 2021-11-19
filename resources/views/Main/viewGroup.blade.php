@@ -67,7 +67,7 @@
             @if ($task->completed == false )
                 @foreach($tag_task as $tag)
                     @if($tag->tag_id==$tag_id && $task->id == $tag->task_id)
-                        <div class="container">
+                        <div class="container" data-aos="zoom-in-down">
                             <div class="row task">
                                 <div class="col-lg-11 col-md-11 col-sm-11">
                                     <div class="card tabsize">

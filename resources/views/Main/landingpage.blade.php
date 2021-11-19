@@ -21,4 +21,5 @@
     Tik Tasks 2021: This app is designed only for educational purposes
   </div>
 </footer>
+
 @endsection

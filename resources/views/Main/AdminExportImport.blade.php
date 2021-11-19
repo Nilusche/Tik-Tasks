@@ -34,6 +34,7 @@
  @endsection
 
  @section('content')
+ @if(auth()->user()->isAdmin())
  <div class="container">
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -54,5 +55,5 @@
     </form>
 
  </div>
-
+ @endif
  @endsection

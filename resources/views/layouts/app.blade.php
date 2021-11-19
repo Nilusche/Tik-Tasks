@@ -15,6 +15,7 @@
     <script src="https://kit.fontawesome.com/b90fa0e727.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     
     <title>TikTasks</title>
     @yield('css')
@@ -76,5 +77,15 @@
             $(".loader-wrapper").fadeOut("slow");
         })
     </script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+			AOS.init({
+				easing: 'ease-out-back',
+				duration: 700
+			});
+	</script>
+   
 </body>
 </html>

@@ -113,3 +113,6 @@ Route::get('Profile/edit', [UsersController::class, 'edit'])->middleware('auth')
 Route::put('Profile/update', [UsersController::class, 'update'])->name('users.update-profile')->middleware('auth');
 Route::get('Profile/change-password', [UserChangePasswordController::class, 'index'])->middleware('auth');
 Route::post('Profile/update-password', [UserChangePasswordController::class, 'store'])->middleware('auth');
+
+//Admin Routes
+Route::get('Systempanel', function(){return view('Main.AdminSystempanel');})->middleware('auth');
