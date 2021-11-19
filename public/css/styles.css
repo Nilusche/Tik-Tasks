@@ -121,10 +121,10 @@ nav{
   }
   @keyframes expand {
     0% {
-      transform: scale(0.1);
+      transform: translateY(-1400px);
     }
     100% {
-      transform: scale(1);
+      transform: translateY(0px);
     }
   }
   @keyframes slideZoom {
@@ -153,7 +153,7 @@ nav{
     animation: slideZoom 1.5s ease-in-out forwards;
   }
   .wrapper{
-    animation: expand 1s ease-in-out forwards;
+    animation: expand .8s ease forwards;
     z-index: 10;
     background-color: white;
     margin-top:7em;
@@ -161,9 +161,8 @@ nav{
   .introduction{
     animation-delay:3s;
     padding-left:3em;
-    animation: slideIn 2s ease-in-out forwards;
+    animation: slideIn 1.7s ease-in-out forwards;
   }
-
 
   #einloggen{
     display: inline-flex;
@@ -171,7 +170,7 @@ nav{
     width: 180px;
     perspective: 1000px;
     padding-left:3em;
-    animation: slideIn 2s ease-in-out forwards;
+    animation: slideIn 1.9s ease-in-out forwards;
   }
 
 

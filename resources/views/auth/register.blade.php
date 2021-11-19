@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if(auth()->user()->isAdmin())
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -61,6 +62,16 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group row">
+                            <label for="roleSelect" class="col-md-4 col-form-label text-md-right">Choose a Role</label>
+                            <select class="form-select" id="roleSelect" name="roleSelect" aria-label="Default select example">
+                                <option selected value="1">Worker</option>
+                                <option value="2">Manager</option>
+                                <option value="3">Admin</option>
+                            </select>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -74,4 +85,9 @@
         </div>
     </div>
 </div>
+@else
+    <div class="container">
+        <h1>Something went wrong ...</h1>
+    </div>
+@endif
 @endsection

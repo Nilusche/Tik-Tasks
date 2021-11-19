@@ -34,6 +34,7 @@
     </div>
 @endsection
 @section('content')
+    
     <div class="container">
         <span id=erstell><a id=erstellen href="/Create-task"></a></span>
         <span id=gruppe><a id=gruppieren href="/Group"></a></span>
@@ -129,7 +130,8 @@
                         @if ($result)
                             <!-- Objekte die in einer Gruppierung sind, werden nicht angezeigt. -->
                         @else
-                            <div class="container">
+
+                            <div class="container"  data-aos="zoom-in-down">
                                 <div class="row task">
                                     <div class="col-lg-11 col-md-11 col-sm-11">
                                         <div class="card tabsize">
