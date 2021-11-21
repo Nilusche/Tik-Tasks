@@ -25,7 +25,7 @@
                         <a class="nav-link" href="/Startseite">Profil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/ogout">Ausloggen</a>
+                        <a class="nav-link" href="/logout">Ausloggen</a>
                     </li>
                 </ul>
             </div>
