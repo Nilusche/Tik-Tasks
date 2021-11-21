@@ -304,25 +304,28 @@ class TaskController extends Controller
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
         }
 
-        //Kontrolle ob $operator gültig ist
-        $operatorID = User::where('email', $operator)->first();
-        if($operatorID->id == auth()->User()->id){
-            //session()->flash('error','Sie können keine Aufgaben an sich selber verteilen');
-            Alert::error('Fehler', 'Sie können keine Aufgaben an sich selber verteilen');
+        if(!$tasks){
+            //session()->flash('error','Keinen Mitarbeiter ausgewählt');
+            Alert::error('Fehler', 'Keine Aufgabe ausgewählt');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
         }
-            //DB::select('select id from users where email = :operator',['operator' => $operator]);
+
+        //Kontrolle ob $operator gültig ist
+        $operatorID = User::where('email', $operator)->first();
+        //DB::select('select id from users where email = :operator',['operator' => $operator]);
         if(!$operatorID){
             //session()->flash('error','Ungültige Email-Adresse');
             Alert::error('Fehler', 'Ungültige Email-Adresse');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
         }
-        //Zeige Fehlermeldung wenn kein Task angegeben wurde
-        if(!$tasks){
-            //session()->flash('error','Keine Aufgaben ausgewählt');
-            Alert::error('Fehler', 'Keine Aufgaben ausgewählt');
+        
+        if($operatorID->id == auth()->User()->id){
+            //session()->flash('error','Sie können keine Aufgaben an sich selber verteilen');
+            Alert::error('Fehler', 'Sie können keine Aufgaben an sich selber verteilen');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
         }
+        
+
         foreach($tasks as $task_id){
             DB::table('user_has_task')->insert(
                 array(
