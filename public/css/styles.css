@@ -2,6 +2,9 @@
 body{
   padding-bottom:10em;
 }
+#landingpagebody{
+  padding-bottom: 0px;
+}
 
 nav{
     font-size: 1.5em;

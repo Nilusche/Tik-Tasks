@@ -14,7 +14,7 @@
     <script src="https://kit.fontawesome.com/b90fa0e727.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
-<body>
+<body id=landingpagebody>
     @yield('content');
 </body>
 </html>
