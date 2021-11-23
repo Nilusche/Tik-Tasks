@@ -3,7 +3,7 @@
     <div class="container-fluid navcontainer">
         <nav class="navbar navbar-expand-lg navbar-dark back">
             <a class="navbar-brand" href="/Startseite">
-                <img class="TikTaskPicture" src="sources/TikTasks.png" alt="TikTasksPicture" width="150" height="150">
+                <img class="TikTaskPicture" src="sources/logo_white.png" alt="TikTasksPicture" width=auto height="150">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
                 aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@
     </div>
 @endsection
 @section('content')
-    
+
     <div class="container">
         <span id=erstell><a id=erstellen href="/Create-task"></a></span>
         <span id=gruppe><a id=gruppieren href="/Group"></a></span>

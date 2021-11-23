@@ -2,24 +2,28 @@
 body{
   padding-bottom:10em;
 }
+
 nav{
     font-size: 1.5em;
-  }
-  .navcontainer{
+}
+
+.navcontainer{
     padding:2% 15%;
     padding-bottom:0;
     background-color: #393E46;
-  }
-  .navbar{
-    padding-bottom:1em;
-  }
-  .navbar-brand{
-    font-size: 1.5em;
-  }
-  .nav-item{
-    padding-left:2em;
-  }
+}
 
+.navbar{
+    padding-bottom:0em;
+}
+
+.navbar-brand{
+    font-size: 2em;
+}
+
+.nav-item{
+    padding-left:2em;
+}
   /*footer styling*/
 
   .foot{
@@ -105,7 +109,7 @@ nav{
      bottom: 0;
      height:100%;
      z-index: -10;
-     background-color:#FF5151;
+     background-color:#E62755;
      padding-bottom:25em;
   }
   .transition2{
@@ -116,7 +120,7 @@ nav{
      bottom: 0;
      height: 50%;
      z-index: 0;
-     background-color: #08D9D6;
+     background-color: #6FC5CD;
      padding-top:5em;
   }
   @keyframes expand {
