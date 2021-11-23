@@ -8,7 +8,7 @@ nav{
 }
 
 .navcontainer{
-    padding:2% 15%;
+    padding:1% 15%;
     padding-bottom:0;
     background-color: #393E46;
 }
@@ -23,6 +23,7 @@ nav{
 
 .nav-item{
     padding-left:2em;
+    margin-bottom: -2em;
 }
   /*footer styling*/
 
@@ -89,8 +90,8 @@ nav{
   /**Landing page styling*/
 
   .landingpage{
-    padding-top:5em;
-    padding-bottom:3em;
+    padding-top:2em;
+    padding-bottom:2em;
   }
   .logo{
     outline-style: none;
@@ -107,11 +108,12 @@ nav{
      left: 0;
      right: 0;
      bottom: 0;
-     height:100%;
+     height: 100%;
      z-index: -10;
      background-color:#E62755;
-     padding-bottom:25em;
+     padding-bottom:0;
   }
+
   .transition2{
     position: absolute;
      top: 0;
