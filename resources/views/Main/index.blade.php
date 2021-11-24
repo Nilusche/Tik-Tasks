@@ -73,8 +73,10 @@
                             <a href="/Startseite/{{ $task->tag_id }}/view">
                                 <div class="row task">
                                     <div class="badge bg-primary">
+                                        <img src="sources/Ordner.png" alt="" style="max-height: 60px; float: left; padding-top: 9px; padding-left: 10px">
                                         <div class="card-body overflow-auto">
-                                            <h4>{{ $task->name }}</h4>
+
+                                            <h4>Gruppe: {{ $task->name }}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -84,20 +86,20 @@
                     <div class="col-sm">
                         <div class="form-group">
                             <a class="btn btn-danger" type="button" data-bs-toggle="modal"
-                                data-bs-target="#deleteGroup{{ $task->tag_id }}"><i class="fas fa-trash-alt">
-                                    Löschen</i></a>
+                               data-bs-target="#deleteGroup{{ $task->tag_id }}"><i class="fas fa-trash-alt fa-3x" style="font-size: 62px">
+                                </i></a>
                         </div>
                     </div>
                 </div>
                 <!-- Modal delete Group-->
                 <div class="modal fade" id="deleteGroup{{ $task->tag_id }}" tabindex="-1"
-                    aria-labelledby="deleteGroup" aria-hidden="true">
+                     aria-labelledby="deleteGroup" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="deleteGroup">Gruppierung löschen</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                        aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 Möchten sie wirklich die Gruppierung löschen? Die enthaltenen Aufgaben werden nicht
@@ -106,7 +108,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
                                 <a type="button" class="btn btn-danger"
-                                    href="/Startseite/{{ $task->tag_id }}/deleteGroup">löschen</a>
+                                   href="/Startseite/{{ $task->tag_id }}/deleteGroup">löschen</a>
                             </div>
                         </div>
                     </div>
