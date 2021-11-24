@@ -60,7 +60,7 @@ class TaskController extends Controller
             }else if($data['alarm']==4){
                 $task->alarmdate=null;
             }
-            
+
             if($data['description'])
                 $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline))->description($data['description']);
             else
@@ -95,7 +95,7 @@ class TaskController extends Controller
 
         $this->validate(request(),[
             'alarm' =>'required'
-        ]);    
+        ]);
         if(!empty($data['alarm'])){
             if($data['alarm']==0){
                 $date = Carbon::parse($task->deadline);
@@ -120,7 +120,7 @@ class TaskController extends Controller
             }else if($data['alarm']==4){
                 $task->alarmdate=null;
             }
-            
+
             if($data['description'])
                 $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline))->description($data['description']);
             else
@@ -230,14 +230,14 @@ class TaskController extends Controller
         $allTasks = DB::table('user_has_task')->get();
         foreach($allTasks as $singleTask){
             if($task->id == $singleTask->tasks_id && $singleTask->isOwner==true && $singleTask->users_id == auth()->user()->id){
-                
+
                 DB::table('user_has_task')->where('tasks_id',$task->id)->delete();
-                
+
                 $task->delete();
                 //session()->flash('success', 'Aufgabe erfolgreich gelöscht');
                 Alert::success('Erfolg', 'Aufgabe erfolgreich gelöscht');
                 return redirect('/Startseite');
-                
+
             }
         }
         //session()->flash('error', 'Aufgabe kann nicht gelöscht werden da sie nicht selbst erstellt wurde');
@@ -276,7 +276,7 @@ class TaskController extends Controller
             if($task->completed == 1){
                 foreach($allTasks as $singleTask){
                     if($task->id == $singleTask->tasks_id && auth()->user()->id==$singleTask->users_id){
-                        DB::table('tag_task')->where('tasks_id',$task->id)->delete();
+                        DB::table('tag_task')->where('task_id',$task->id)->delete();
                         DB::table('user_has_task')->delete($singleTask->id);
                         $task->delete();
                     }
@@ -318,13 +318,13 @@ class TaskController extends Controller
             Alert::error('Fehler', 'Ungültige Email-Adresse');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
         }
-        
+
         if($operatorID->id == auth()->User()->id){
             //session()->flash('error','Sie können keine Aufgaben an sich selber verteilen');
             Alert::error('Fehler', 'Sie können keine Aufgaben an sich selber verteilen');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
         }
-        
+
 
         foreach($tasks as $task_id){
             DB::table('user_has_task')->insert(
@@ -368,7 +368,7 @@ class TaskController extends Controller
                 else
                     $already_grouped =true;
             }
-           
+
         }
         if($already_grouped){
             //session()->flash('success', 'Einige der bereits gruppierten Aufgaben wurden nicht erneut hinzugefügt');
@@ -377,7 +377,7 @@ class TaskController extends Controller
             //session()->flash('success', 'Aufgaben erfolgreich gruppiert');
             Alert::success('Erfolg', 'Aufgaben erfolgreich gruppiert');
         }
-        
+
         return redirect('/Group');
     }
 
