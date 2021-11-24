@@ -28,6 +28,14 @@ nav{
     padding-left:2em;
     margin-bottom: -2em;
 }
+
+.grow {
+    transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+    transform: scale(1.1);
+}
   /*footer styling*/
 
   .foot{

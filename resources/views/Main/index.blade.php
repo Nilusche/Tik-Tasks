@@ -13,21 +13,21 @@
                 <ul class="navbar-nav ms-auto">
                     @if (auth()->user()->isAdmin())
                         <li class="nav-item">
-                            <a class="nav-link" href="/Systempanel">Systemverwaltung</a>
+                            <a class="nav-link grow" href="/Systempanel">Systemverwaltung</a>
                         </li>
                     @endif
                     @if (auth()->user()->isManager())
                         <li class="nav-item">
-                            <a class="nav-link" href="/Assign">Zuweisen</a>
+                            <a class="nav-link grow" href="/Assign">Zuweisen</a>
                         </li>
                     @endif
-                    <li class="nav-item">
+                    <li class="nav-item grow">
                         <a class="nav-link" href="/Settings">Einstellungen</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item grow">
                         <a class="nav-link" href="/Profile">Profil</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item grow">
                         <a class="nav-link" href="/logout">Ausloggen</a>
                     </li>
                 </ul>
