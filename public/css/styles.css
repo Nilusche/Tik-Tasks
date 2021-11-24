@@ -396,3 +396,31 @@ nav{
   .filterinput{
     height:55px;
   }
+  
+  #zuweisen-header{
+    margin-left: 43.5%;
+    margin-top: 1%;
+  }
+
+  #zuweisen{
+    margin-left: 40%;
+    margin-top: 8%;
+  }
+
+  #zuweisen-item{
+    width: 30%;
+  }
+
+  #zuweisenbutton{
+    width: 30%;
+    margin-top: 2%;
+  }
+
+  #zuweisen-list{
+    margin-top: 2%;
+  }
+
+  #zuweisen-input{
+    width: 30%;
+    height: 50%;
+  }
