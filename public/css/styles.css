@@ -1,13 +1,18 @@
 /*Navbar styling*/
+* {
+    font-family: 'Chakra Petch', sans-serif;
+}
+
 body{
   padding-bottom:10em;
 }
+
 #landingpagebody{
   padding-bottom: 0px;
 }
 
 nav{
-    font-size: 1.5em;
+    font-size: 1.75em;
 }
 
 .navcontainer{
@@ -18,15 +23,18 @@ nav{
 
 .navbar{
     padding-bottom:0em;
+    text-align: center;
 }
 
 .navbar-brand{
     font-size: 2em;
+    position: relative;
+    bottom: 15px;
 }
 
 .nav-item{
-    padding-left:2em;
-    margin-bottom: -2em;
+    margin-left:2em;
+
 }
 
 .grow {
@@ -404,7 +412,7 @@ nav{
   .filterinput{
     height:55px;
   }
-  
+
   #zuweisen-header{
     margin-left: 43.5%;
     margin-top: 1%;

@@ -12,13 +12,13 @@
             <div class="collapse navbar-collapse" id="navbarToggler">
                 <ul class="navbar-nav ms-auto">
                     @if (auth()->user()->isAdmin())
-                        <li class="nav-item">
-                            <a class="nav-link grow" href="/Systempanel">Systemverwaltung</a>
+                        <li class="nav-item grow">
+                            <a class="nav-link" href="/Systempanel">Systemverwaltung</a>
                         </li>
                     @endif
                     @if (auth()->user()->isManager())
-                        <li class="nav-item">
-                            <a class="nav-link grow" href="/Assign">Zuweisen</a>
+                        <li class="nav-item grow">
+                            <a class="nav-link" href="/Assign">Zuweisen</a>
                         </li>
                     @endif
                     <li class="nav-item grow">
