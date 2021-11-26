@@ -4,7 +4,7 @@ namespace App\Imports;
 
 use App\Models\Task;
 use Maatwebsite\Excel\Concerns\ToModel;
-
+use DB;
 class CSVAdminImportTasks implements ToModel
 {
     /**
@@ -18,9 +18,11 @@ class CSVAdminImportTasks implements ToModel
         if($row[0]==null){
             session()->flash('error', 'Datei leer oder invalide (z.B. Titel nicht gesetzt)');
         }
-            
-        return new Task([
-            
+        
+        $statement = DB::select("SHOW TABLE STATUS LIKE 'tasks'");
+        $nextId = $statement[0]->Auto_increment;
+        $task= new Task([
+            'id' =>$nextId,
             'title' => $row[1] ?? null,
             'description' => $row[2] ?? null,
             'comment'=>$row[3]?? null,
@@ -35,5 +37,15 @@ class CSVAdminImportTasks implements ToModel
             'calendarGoogle' =>$row[14] ??null, 
             'calendarWebOutlook' =>$row[15] ??null
         ]);
+        
+        DB::table('user_has_task')->insert(
+            array(
+                'users_id'=> $row[17],
+                'tasks_id'=>$nextId,
+                'isOwner'=>$row[18]
+            )
+        );  
+
+        return $task;
     }
 }
