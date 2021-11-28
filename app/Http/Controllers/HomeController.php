@@ -70,7 +70,15 @@ class HomeController extends Controller
 
 
     public function settings(){
-        return view('Main.settings');
+        $notfications = DB::table('notifications')->get();
+        $authNotis=[];
+        foreach($notfications as $notfication){
+            $data = json_decode($notfication->data);
+            if($data->userid ===auth()->user()->id){
+                array_push($authNotis,$data);
+            }
+        }
+        return view('Main.settings')->with('notis',count($authNotis));
     }
 
     public function NonAdminExportImport(){
