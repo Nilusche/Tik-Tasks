@@ -124,3 +124,8 @@ Route::get('EditUser',function(){return view('Admins.AdminEditUser');})->middlew
 Route::post('FindUser', [AdminController::class, 'findUser'])->middleware('auth');
 Route::get('User/{user}/edit',[AdminController::class, 'edit'])->middleware('auth');
 Route::post('User/{user}/update',[AdminController::class, 'updateUser'])->middleware('auth');
+
+//Notification
+
+Route::get('UserNotifications',[UsersController::class, 'showNotifications'])->middleware('auth');
+Route::get('readNotifications',[UsersController::class, 'read'])->middleware('auth');

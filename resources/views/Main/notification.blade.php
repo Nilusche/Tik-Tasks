@@ -1,5 +1,4 @@
-
- @extends('layouts.app')
+@extends('layouts.app')
  @section('navbar')
     <div class="container-fluid navcontainer">
         <nav class="navbar navbar-expand-lg navbar-dark back">
@@ -16,7 +15,7 @@
                 @endif
                 @if(auth()->user()->isManager())
                 <li class="nav-item">
-                    <a class="nav-link" href="/Assign">Zuweisen</a>
+                    <a class="nav-link" href="/Startseite">Zuweisen</a>
                 </li>
                 @endif
                 <li class="nav-item">
@@ -35,11 +34,19 @@
  @endsection
 
  @section('content')
-
-<div class="container">
-    <a href="/Archive" class="btn btn-primary">Archiv</a>
-    <a href="/NonAdminExportImport" class="btn btn-danger">Aufgaben exportieren und importieren</a>
-    <a href="/UserNotifications" class="btn btn-warning">Benachrichtigungen</a>
-</div>
-
+ <div class="container">
+     <h1>Benachrichtigungen</h1>
+ </div>
+ <div class="container">
+    <div class="row">
+           <div class="col-lg-6">Aufgaben name</div>
+           <div class="col-lg-6">Verbleibende Zeit</div>
+    </div>
+    @foreach($notifications as $notification)
+        <div class="row">
+           <div class="col-lg-6"> {{$notification->taskname}}</div>
+           <div class="col-lg-6"> {{$notification->diffinSeconds}}</div>
+        </div>
+    @endforeach
+ </div>
  @endsection

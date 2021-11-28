@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\Users\UpdateProfileRequest;
 use RealRashid\SweetAlert\Facades\Alert;
+use DB;
 class UsersController extends Controller
 {
     public function index(){
@@ -34,6 +35,24 @@ class UsersController extends Controller
         
         Alert::info('Erfolg','Änderungen erfolgreich übernommen');
         return redirect()->back();
+
+    }
+
+    public function showNotifications(){
+        $notfications = DB::table('notifications')->get();
+        $authNotis=[];
+       foreach($notfications as $notfication){
+            $data = json_decode($notfication->data);
+            if($data->userid ===auth()->user()->id){
+                array_push($authNotis,$data);
+            }
+       }
+
+    
+        return view('Main.notification')->with('notifications', $authNotis);
+    }
+
+    public function readNotifications(){
 
     }
 }
