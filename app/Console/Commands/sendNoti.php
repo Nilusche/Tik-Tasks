@@ -9,6 +9,7 @@ use App\Models\Task;
 use DB;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Events\MessageNotification;
 class sendNoti extends Command
 {
     /**
@@ -56,8 +57,8 @@ class sendNoti extends Command
                                     $diff = Carbon::now()->diffForHumans(Carbon::parse($task->alarmdate));
                                     $task->alarmdate=null;
                                     $task->save();
-                                    Notification::send($user,new NotifyUser($task->title, $diff, $task->id, $user->id) ); 
-                                    
+                                    Notification::send($user,new NotifyUser($task->title, $diff, $task->id, $user->id)); 
+                                    event(new MessageNotification('Neue Benachrichtigung erhalten','1'));
                                 }
                             }
                         }

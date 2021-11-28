@@ -29,4 +29,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    created(){
+        Echo.channel('notification')
+            .listen('MessageNotification',(e)=>{
+                alert('Neue Benachrichtigung erhalten');
+            });
+    }
 });

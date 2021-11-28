@@ -11,6 +11,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UserChangePasswordController;
 use App\Http\Controllers\AdminController;
 use App\Models\Task;
+use App\Events\MessageNotification;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -130,3 +131,9 @@ Route::post('User/{user}/update',[AdminController::class, 'updateUser'])->middle
 Route::get('UserNotifications',[UsersController::class, 'showNotifications'])->middleware('auth');
 Route::get('readNotifications',[UsersController::class, 'readNotifications'])->middleware('auth');
 Route::get('deleteNotifications', [UsersController::class, 'deleteNotifications'])->middleware('auth');
+
+
+Route::get('event',function(){
+    event(new MessageNotification('Neue Benachrichtigung erhalten',auth()->user()->id));
+    redirect()->back();
+});
