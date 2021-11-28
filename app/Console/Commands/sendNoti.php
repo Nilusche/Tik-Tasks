@@ -54,7 +54,7 @@ class sendNoti extends Command
                         if($assoc->tasks_id == $task->id){
                             if($task->alarmdate!=null){
                                 if(Carbon::now()->gte(Carbon::parse($task->alarmdate))){
-                                    $diff = Carbon::now()->diffForHumans(Carbon::parse($task->alarmdate));
+                                    $diff = Carbon::now()->diffForHumans(Carbon::parse($task->deadline));
                                     $task->alarmdate=null;
                                     $task->save();
                                     Notification::send($user,new NotifyUser($task->title, $diff, $task->id, $user->id)); 
