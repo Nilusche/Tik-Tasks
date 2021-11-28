@@ -16,10 +16,10 @@ class NotifyUser extends Notification
      *
      * @return void
      */
-    public function __construct($taskname, $diffinSeconds, $taskid,$userid)
+    public function __construct($taskname, $diff, $taskid,$userid)
     {
         $this->taskname = $taskname;
-        $this->diffinSeconds = $diffinSeconds;
+        $this->diff = $diff;
         $this->taskid = $taskid;
         $this->userid = $userid;
     }
@@ -59,7 +59,7 @@ class NotifyUser extends Notification
     {
         return [
             'taskname' =>$this->taskname,
-            'diffinSeconds' => $this->diffinSeconds,
+            'diff' => $this->diff,
             'taskid' => $this->taskid,
             'userid' =>$this->userid,
         ];
