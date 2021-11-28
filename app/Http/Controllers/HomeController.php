@@ -70,7 +70,7 @@ class HomeController extends Controller
 
 
     public function settings(){
-        $notfications = DB::table('notifications')->get();
+        $notfications = DB::table('notifications')->orderBy('read_at','desc')->get();
         $authNotis=[];
         foreach($notfications as $notfication){
             if($notfication->read_at==null){

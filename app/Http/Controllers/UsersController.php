@@ -39,7 +39,7 @@ class UsersController extends Controller
     }
 
     public function showNotifications(){
-        $notfications = DB::table('notifications')->get();
+        $notfications = DB::table('notifications')->orderBy('read_at','desc')->get();
         $authNotis=[];
        foreach($notfications as $notfication){
             $data = json_decode($notfication->data);
@@ -55,7 +55,7 @@ class UsersController extends Controller
 
     public function readNotifications(){
         auth()->user()->unreadNotifications->markAsRead();
-        $notfications = DB::table('notifications')->get();
+        $notfications = DB::table('notifications')->orderBy('read_at','desc')->get();
         $authNotis=[];
         foreach($notfications as $notfication){
             $data = json_decode($notfication->data);
