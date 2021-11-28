@@ -43,16 +43,32 @@ class UsersController extends Controller
         $authNotis=[];
        foreach($notfications as $notfication){
             $data = json_decode($notfication->data);
-            if($data->userid ===auth()->user()->id){
+            $readat=array('read_at'=>$notfication->read_at);
+            $data = array_merge((array)$data, $readat);
+            if($data['userid'] ===auth()->user()->id){
                 array_push($authNotis,$data);
             }
        }
-
-    
+       
         return view('Main.notification')->with('notifications', $authNotis);
     }
 
     public function readNotifications(){
+        auth()->user()->unreadNotifications->markAsRead();
+        $notfications = DB::table('notifications')->get();
+        $authNotis=[];
+        foreach($notfications as $notfication){
+            $data = json_decode($notfication->data);
+            $readat=array('read_at'=>$notfication->read_at);
+            $data = array_merge((array)$data, $readat);
+            if($data['userid'] ===auth()->user()->id){
+                array_push($authNotis,$data);
+            }  
+        }
+        return view('Main.notification')->with('notifications', $authNotis);
+    }
 
+    public function deleteNotifications(){
+        
     }
 }

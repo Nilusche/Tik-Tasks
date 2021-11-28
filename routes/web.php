@@ -128,4 +128,5 @@ Route::post('User/{user}/update',[AdminController::class, 'updateUser'])->middle
 //Notification
 
 Route::get('UserNotifications',[UsersController::class, 'showNotifications'])->middleware('auth');
-Route::get('readNotifications',[UsersController::class, 'read'])->middleware('auth');
+Route::get('readNotifications',[UsersController::class, 'readNotifications'])->middleware('auth');
+Route::get('deleteNotifications', [UsersController::class, 'deleteNotifications'])->middleware('auth');

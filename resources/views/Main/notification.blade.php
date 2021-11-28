@@ -40,13 +40,25 @@
  <div class="container">
     <div class="row">
            <div class="col-lg-6">Aufgaben name</div>
-           <div class="col-lg-6">Verbleibende Zeit</div>
+           <div class="col-lg-6">Verbliebene Zeit</div>
     </div>
     @foreach($notifications as $notification)
+        @if($notification['read_at']==null)
         <div class="row">
-           <div class="col-lg-6"> {{$notification->taskname}}</div>
-           <div class="col-lg-6"> {{$notification->diffinSeconds}}</div>
+           <div class="col-lg-6 text-danger"> {{$notification['taskname']}}</div>
+           <div class="col-lg-6 text-danger"> {{$notification['diff']}}</div>
         </div>
+        @endif
     @endforeach
+    @foreach($notifications as $notification)
+        @if($notification['read_at']!=null)
+        <div class="row">
+           <div class="col-lg-6 text-success"> {{$notification['taskname']}}</div>
+           <div class="col-lg-6 text-success"> {{$notification['diff']}}</div>
+        </div>
+        @endif
+    @endforeach
+    <a class="btn btn-primary" href="/readNotifications">Mark as Read</a>
+
  </div>
  @endsection
