@@ -2123,7 +2123,7 @@ Vue.component('example-component', (__webpack_require__(/*! ./components/Example
 var app = new Vue({
   el: '#app',
   created: function created() {
-    Echo.channel('notification').listen('MessageNotification', function (e) {
+    window.Echo["private"]('notification.' + window.Laravel.user).listen('MessageNotification', function (e) {
       alert('Neue Benachrichtigung erhalten');
     });
   }

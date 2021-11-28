@@ -21,6 +21,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap" rel="stylesheet">
 
+    <script>
+        window.Laravel = {!! json_encode([
+            'user' => auth()->check() ? auth()->user()->id : null,
+        ]) !!};
+    </script>
     <title>TikTasks</title>
     @yield('css')
     @yield('scripts')
@@ -61,7 +66,7 @@
     })
     </script>
 
-
+    
 
     <!-- loader-->
     <div class="loader-wrapper">

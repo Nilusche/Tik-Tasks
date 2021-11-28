@@ -30,7 +30,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
     created(){
-        Echo.channel('notification')
+        window.Echo.private('notification.'+window.Laravel.user)
             .listen('MessageNotification',(e)=>{
                 alert('Neue Benachrichtigung erhalten');
             });

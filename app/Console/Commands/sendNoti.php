@@ -58,7 +58,7 @@ class sendNoti extends Command
                                     $task->alarmdate=null;
                                     $task->save();
                                     Notification::send($user,new NotifyUser($task->title, $diff, $task->id, $user->id)); 
-                                    event(new MessageNotification('Neue Benachrichtigung erhalten','1'));
+                                    event(new MessageNotification('Neue Benachrichtigung erhalten', $user->id));
                                 }
                             }
                         }
