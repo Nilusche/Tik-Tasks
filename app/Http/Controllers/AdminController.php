@@ -106,7 +106,7 @@ class AdminController extends Controller
             ->where('id','=',$userid)
             ->delete();
 
-        Alert::success('Erfolg', 'Button wird erfolgreich weitergeleitet');
+        Alert::success('Erfolg', 'Der Benutzer und seine zugehörigen Aufgaben wurden erfolgreich gelöscht');
         return redirect("/DeleteUser");
     }
   
