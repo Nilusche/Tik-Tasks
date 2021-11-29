@@ -1,6 +1,6 @@
 Install latest version of laragon (Php version >= 7.4)
 
-Open the Terminal in Laragon and type
+Open the Terminal in Laragon and type each line one by one
 ```
 cd /c/laragon/www
 git clone https://github.com/Nilusche/Tik-Tasks.git
