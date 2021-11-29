@@ -72,11 +72,7 @@ Route::get('Startseite/{tagid}/deleteGroup',[TagsController::class, 'deleteGroup
 Route::get('Assign',[TaskController::class,'showtasksAssign'])->middleware('auth');
 Route::POST('assignTasks',[TaskController::class,'assignTasks'])->middleware('auth');
 
-DB::table('tasks')
-        ->join('tag_task','tasks.id','=','tag_task.task_id')
-        ->join('tags','tags.id','=','tag_task.tag_id')
-        ->groupBy('tag_task.tag_id')
-        ->get();
+
 
 
 //Sortierung Aufgaben
