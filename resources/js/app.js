@@ -32,7 +32,8 @@ const app = new Vue({
     created(){
         window.Echo.private('notification.'+window.Laravel.user)
             .listen('MessageNotification',(e)=>{
-                alert('Neue Benachrichtigung erhalten');
+                console.log('message');
+                
             });
     }
 });

@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <script>
         window.Laravel = {!! json_encode([
             'user' => auth()->check() ? auth()->user()->id : null,
@@ -104,6 +104,25 @@
 				duration: 700
 			});
 	</script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script>
+        (function(){
+
+        var originallog = console.log;
+
+        console.log = function(txt) {
+            // Do really interesting stuff
+            //alert("Neue Benachrichtigung, Aufgabe abgelaufen");
+            alertify
+            .alert("Sie haben gerade eine neue Benachrichtigung erhalten. Eine Aufgabe nähert sich der Deadline.", function(){
+                alertify.message('OK');
+            }).set({title:"Benachrichtigung"});
+
+            originallog.apply(console, arguments);
+        }
+
+        })();
+    </script>
 
 
 </body>

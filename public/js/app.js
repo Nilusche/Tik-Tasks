@@ -2124,7 +2124,7 @@ var app = new Vue({
   el: '#app',
   created: function created() {
     window.Echo["private"]('notification.' + window.Laravel.user).listen('MessageNotification', function (e) {
-      alert('Neue Benachrichtigung erhalten');
+      console.log('message');
     });
   }
 });
