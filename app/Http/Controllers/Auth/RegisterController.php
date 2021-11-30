@@ -75,6 +75,7 @@ class RegisterController extends Controller
         }else{
             $role= "worker";
         }
+ 
 
         return User::create([
             'name' => $data['name'],
