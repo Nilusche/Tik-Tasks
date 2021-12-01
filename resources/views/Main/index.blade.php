@@ -156,7 +156,7 @@
                                                 Erstellt am: 
                                                 {{ $date = date('d-m-Y H:i', strtotime($task->created_at)) }} 
                                             </h7>
-                                            <h4 class="card-title text-center">Platzhalter Titel {{ $task->title }}</h4>
+                                            <h4 class="card-title text-center">Titel {{ $task->title }}</h4>
                                         </div>
                                         <h5 class="card-body card-title pb-0">Beschreibung: </h5>
                                         <p class="card-body card-text overflow-auto text-muted pt-0">
