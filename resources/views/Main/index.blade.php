@@ -160,11 +160,11 @@
                                         </div>
                                         <h5 class="card-body card-title pb-0">Beschreibung: </h5>
                                         <p class="card-body card-text overflow-auto text-muted pt-0">
-                                        {{$task->description}}
+                                        {!!$task->description!!}
                                         </p>
                                         <h5 class="card-body card-title pb-0">Kommentare: </h5>
                                         <p class="card-body card-text overflow-auto text-muted pt-0">
-                                        {{$task->comment}}
+                                        {!!$task->comment!!}
                                         <div class="card-body">
                                             <div class="container-fluid">
                                                 <a class="btn btn-dark" type="button" name="button" href="/Startseite/{{ $task->id }}/edit">
