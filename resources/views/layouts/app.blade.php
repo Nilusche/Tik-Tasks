@@ -50,7 +50,7 @@
     @yield('content')
     <footer class="text-center text-lg-start">
       <div class="text-center p-3 foot">
-          Tik Tasks 2021: This app is designed only for educational purposes
+          Tik Tasks 2021: This is a simple To-do-list Tool and designed for educational purposes only
       </div>
     </footer>
 
