@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap" rel="stylesheet">
     <title>Login</title>
 
     <style media="screen">
@@ -10,6 +11,7 @@
             padding: 0;
             margin: 0;
             box-sizing: border-box;
+            font-family: 'Chakra Petch', sans-serif;
         }
 
         .background{
