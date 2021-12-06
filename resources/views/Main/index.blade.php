@@ -181,11 +181,13 @@
                                                     <i class="fas fa-sync"> Aktualisieren</i>
                                                 </a>
                                             </div>
+                                            @if($task->deadline!=null)
                                             <div class="container-fluid pt-2">
                                                 <a class="badge rounded-pill bg-info" href="{{ $task->calendarICS }}">Ics Datei</a>
                                                 <a class="badge rounded-pill bg-info" href="{{ $task->calendarGoogle }}">Google Calendar</a>
                                                 <a class="badge rounded-pill bg-info" href="{{ $task->calendarWebOutlook }}">WebOutlook Calendar</a>
                                             </div>
+                                            @endif
                                         </div>
                                         <div class="card-footer text-muted text-center"> 
                                             {{ $totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline) }}
