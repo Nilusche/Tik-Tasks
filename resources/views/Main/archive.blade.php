@@ -40,4 +40,6 @@
                     @endforeach
                 @endif
             @endforeach
+    </div>
  @endsection
+

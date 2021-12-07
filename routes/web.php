@@ -11,6 +11,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UserChangePasswordController;
 use App\Http\Controllers\AdminController;
 use App\Models\Task;
+use App\Events\MessageNotification;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,11 +72,7 @@ Route::get('Startseite/{tagid}/deleteGroup',[TagsController::class, 'deleteGroup
 Route::get('Assign',[TaskController::class,'showtasksAssign'])->middleware('auth');
 Route::POST('assignTasks',[TaskController::class,'assignTasks'])->middleware('auth');
 
-DB::table('tasks')
-        ->join('tag_task','tasks.id','=','tag_task.task_id')
-        ->join('tags','tags.id','=','tag_task.tag_id')
-        ->groupBy('tag_task.tag_id')
-        ->get();
+
 
 
 //Sortierung Aufgaben
@@ -124,3 +121,15 @@ Route::get('EditUser',function(){return view('Admins.AdminEditUser');})->middlew
 Route::post('FindUser', [AdminController::class, 'findUser'])->middleware('auth');
 Route::get('User/{user}/edit',[AdminController::class, 'edit'])->middleware('auth');
 Route::post('User/{user}/update',[AdminController::class, 'updateUser'])->middleware('auth');
+
+//Notification
+
+Route::get('UserNotifications',[UsersController::class, 'showNotifications'])->middleware('auth');
+Route::get('readNotifications',[UsersController::class, 'readNotifications'])->middleware('auth');
+Route::get('deleteNotifications', [UsersController::class, 'deleteNotifications'])->middleware('auth');
+
+
+Route::get('event',function(){
+    event(new MessageNotification('Neue Benachrichtigung erhalten',auth()->user()->id));
+    redirect()->back();
+});

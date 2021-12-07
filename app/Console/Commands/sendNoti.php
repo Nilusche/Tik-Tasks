@@ -9,6 +9,7 @@ use App\Models\Task;
 use DB;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Events\MessageNotification;
 class sendNoti extends Command
 {
     /**
@@ -51,11 +52,14 @@ class sendNoti extends Command
                 if($assoc->users_id == $user->id){
                     foreach($tasks as $task){
                         if($assoc->tasks_id == $task->id){
-                            if(Carbon::parse($task->alarmdate)>= Carbon::now()){
-                                $diffInSeconds = Carbon::parse($task->deadline)->diffInSeconds(Carbon::now());
-                                Notification::send($user,new NotifyUser($task->title, $diffInSeconds, $task->id) ); // use gmdate('H:i:s', $diffInSeconds) for conversion
-                                $task->alarmdate=null;
-                                $task->save();
+                            if($task->alarmdate!=null){
+                                if(Carbon::now()->gte(Carbon::parse($task->alarmdate))){
+                                    $diff = Carbon::now()->diffForHumans(Carbon::parse($task->deadline));
+                                    $task->alarmdate=null;
+                                    $task->save();
+                                    Notification::send($user,new NotifyUser($task->title, $diff, $task->id, $user->id)); 
+                                    event(new MessageNotification('Neue Benachrichtigung erhalten', $user->id));
+                                }
                             }
                         }
                     }

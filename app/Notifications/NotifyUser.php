@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-
+use App\Events\MessageNotification;
 class NotifyUser extends Notification
 {
     use Queueable;
@@ -16,11 +16,13 @@ class NotifyUser extends Notification
      *
      * @return void
      */
-    public function __construct($taskname, $diffinSeconds, $taskid)
+    public function __construct($taskname, $diff, $taskid,$userid)
     {
         $this->taskname = $taskname;
-        $this->diffinSeconds = $diffinSeconds;
+        $this->diff = $diff;
         $this->taskid = $taskid;
+        $this->userid = $userid;
+        
     }
 
     /**
@@ -31,7 +33,7 @@ class NotifyUser extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -56,10 +58,12 @@ class NotifyUser extends Notification
      */
     public function toArray($notifiable)
     {
+        
         return [
             'taskname' =>$this->taskname,
-            'diffinSeconds' => $this->diffinSeconds,
-            'taskid' => $this->taskid
+            'diff' => $this->diff,
+            'taskid' => $this->taskid,
+            'userid' =>$this->userid,
         ];
     }
 }

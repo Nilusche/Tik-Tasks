@@ -4,7 +4,7 @@ namespace App\Exports;
 
 use App\Models\Task;
 use Maatwebsite\Excel\Concerns\FromCollection;
-
+use DB;
 class CSVAdminExportTasks implements FromCollection
 {
     /**
@@ -12,6 +12,13 @@ class CSVAdminExportTasks implements FromCollection
     */
     public function collection()
     {
-        return Task::all();
+        $tasks= DB::select(
+            'select *
+            from tasks t
+            left join user_has_task uht
+            on uht.tasks_id = t.id');
+
+        
+        return collect($tasks);
     }
 }
