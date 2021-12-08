@@ -1,89 +1,114 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="list-group">
-            @foreach ($errors->all() as $error)
-                <li class="list-group-item">{{ $error }}</li>
-            @endforeach
-            </ul>
-        </div>
-    @endif
-    <form action="/Save-tasks" method="POST">
-        @csrf
-        <div class="row">
-                <div class="createform col-lg-4 col-md-4 col-sm-4">
-                    <div class="form-group">
-                        <label for="title">Titel *</label>
-                        <input type="text" class="form-control" id="title" name="title" value="{{old('title')}}"placeholder="Titel der Aufgabe">
-                    </div>
-                    <div class="form-group">
-                        <label for="deadline">Deadline</label>
-                        <input type="datetime-local" class="form-control" id="deadline" name="deadline" value="{{old('deadline')}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Beschreibung</label>
-                        <textarea class="form-control" name="description" id="description" cols="30" rows="9">{{old('description')}}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="comment">Kommentar</label>
-                        <input type="text" class="form-control" id="comment" name="comment" value="{{old('comment')}}" placeholder="Kommentar">
-                    </div>
-                </div>
-                <div class="createform col-lg-4 col-md-4 col-sm-4">
-                    <div class="form-group">
-                        <label for="visibility" class="">Sichtbarkeit</label>
-                        <select class="form-select" id="visibility" name="visibility" value="{{old('visibility')}}" aria-label="Default select example">
-                            @if(old('visibility')==1)
-                                <option value="0" >privat</option>
-                                <option value="1"selected>öffentlich</option>
-                            @else
-                                <option value="0" selected>privat</option>
-                                <option value="1" >öffentlich</option>
-                            @endif
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="priority" class="">Priorität (1-5 zunehmend wichtiger)</label>
-                        <input type="range" class="form-range" id="priority" name="priority" min="1" max="5" step="1" oninput="this.nextElementSibling.value = this.value" value="{{old('effort')}}">
-                        <output><b>{{old('priority')}}</b></output>
-                    </div>
-                    <div class="form-group">
-                        <label for="alarm" class="">Erinnerungsalarm</label>
-                        <select class="form-select" id="alarm" name="alarm" value="{{old('alarm')}}" aria-label="Default select example">
-                            <option value="0" selected>Wenn abgelaufen</option>
-                            <option value="1">1 Stunde vorher</option>
-                            <option value="2">1 Tag vorher</option>
-                            <option value="3">Deadline minus aufwand</option>
-                            <option value="4">Niemals</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="effort" class="form-label">Geschätzter aufwand (in Stunden)</label>
-                        <input type="number" class="form-control" id="effort" name="effort" min="0" value="{{old('effort')}}"placeholder="3.5">
-                    </div>
-                    <div class="form-group"></div><br>
-                    <div class="form-group">
-                        <p>Die mit * markierten Felder sind Pflichteingaben</p>
-                    </div>
-                    <div class="form-group">
-                    <span id=speicher ><a id=speichern href="/Create-task" onclick="this.closest('form').submit();return false;"></a></span>
-                    </div>
-                </div>
-                <div class="createform col-lg-4 col-md-4 col-sm-4">
-                    <img class="createTaskpic" src="sources/createTask.png" alt="taskpicture">
-                </div>
+    <div class="container">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="list-group">
+                    @foreach ($errors->all() as $error)
+                        <li class="list-group-item">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <style>*,
+            *:before,
+            *:after{
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+            input::placeholder{color: black;}
+            textarea::placeholder{color: black;}
+            input[type=number]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            } </style>
+        <head>
+            <title>Aufgabe erstellen/ändern</title>
 
+
+        </head>
+    </div><body id="grad_a_e">
+
+    <div class="grid_a_e" >
+
+
+        <div class="background_a_e">
+            <div id="bluesphere_a_e" class="sphere_g" ></div>
+            <div id="redsphere_a_e" class="sphere_g"></div>
         </div>
-    </form>
-</div>
+        <form  class="form_a_e"  action="/Save-tasks" method="POST">
+            @csrf
+            <div>
+                <h3   class="text_tiktok" style="color:white;">Aufgabe erstellen</h3>
+            </div>
+            <div class="teil_a_e">
+                <div class="neuer_abschnitt">
+                    <label class="labelinput_a_e" for="title">Titel *</label>
+                    <input class="input_a_e" type="text"  id="title" name="title"  value="{{old('title')}}"placeholder="Titel der Aufgabe" required>
+
+
+                    <label class="labelinput_a_e" for="deadline">Deadline</label>
+                    <input class="input_a_e" type="datetime-local" id="deadline" name="deadline" value="{{old('deadline')}}">
+
+
+                    <label class="labelinput_a_e" for="description">Beschreibung</label>
+                    <textarea class="inputtext_a_e"  class="form-control" name="description" placeholder="Beschreibung" id="description" cols="50" rows="9">{{old('description')}}</textarea>
+
+                    <label class="labelinput_a_e" for="comment">Kommentar</label>
+                    <input class="input_a_e" type="text"  id="comment" name="comment" value="{{old('comment')}}" placeholder="Kommentar">
+                </div><div>
+                    <label class="labelinput_a_e" for="visibility" >Sichtbarkeit</label>
+                    <select class="boxs" id="visibility" name="visibility" value="{{old('visibility')}}" aria-label="Default select example">
+                        @if(old('visibility')==1)
+                            <option value="0" >privat</option>
+                            <option value="1"selected>öffentlich</option>
+                        @else
+                            <option value="0" selected>privat</option>
+                            <option value="1" >öffentlich</option>
+                        @endif
+                    </select>
+
+                    <label class="labelinput_a_e" for="priority" >Priorität (1-5 zunehmend wichtiger)</label>
+                    <input class="input_a_e" type="range"  id="priority" name="priority" min="1" max="5" step="1" oninput="this.nextElementSibling.value = this.value" value="{{old('effort')}}">
+                    <output><b>{{old('priority')}}</b></output>
+
+                    <label class="labelinput_a_e" for="alarm" >Erinnerungsalarm</label>
+                    <select class="boxs"  id="alarm" name="alarm" value="{{old('alarm')}}" aria-label="Default select example">
+                        <option value="0" selected>Wenn abgelaufen</option>
+                        <option value="1">1 Stunde vorher</option>
+                        <option value="2">1 Tag vorher</option>
+                        <option value="3">Deadline minus aufwand</option>
+                        <option value="4">Niemals</option>
+                    </select>
+
+                    <label class="labelinput_a_e" for="effort" >Geschätzter aufwand (in Stunden)</label>
+                    <input class="input_a_e" type="number" id="effort" name="effort" min="0" value="{{old('effort')}}" placeholder="3.5">
+
+                    <p>Die mit * markierten Felder sind Pflichteingaben</p>
+                </div>
+            </div>
+            <div>
+
+                <button type="submit" class="btn btn-success" id="button_a_e">Speichern</button>
+
+            </div>
+
+
+        </form>
+
+
+
+
+    </div>
+    </body>
+    </html>
+
 @endsection
 @section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"></script>
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css">
 @endsection
