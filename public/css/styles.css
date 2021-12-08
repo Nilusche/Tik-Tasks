@@ -454,3 +454,85 @@ nav{
     width: 15%;
     margin: 20px 20px;
   }
+
+/**Systemverwaltung**/
+.systempanel {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 5px;
+}
+
+.systempanel > div {
+    padding-top: 60px;
+    display: grid;
+    grid-template-rows: repeat(4,1fr);
+}
+
+.systempanel > img {
+    width: 80%;
+}
+
+#systempanelbutton{
+    display: inline-flex;
+    height: 55px;
+    width: 520px;
+    perspective: 1000px;
+    padding-left:0em;
+    animation:none;
+}
+
+span #edituser:before,
+span #edituser:after{
+    position: absolute;
+    content: "BENUTZER BEARBEITEN";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393E46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #registuser:before,
+span #registuser:after{
+    position: absolute;
+    content: "BENUTZER REGISTRIEREN";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393E46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #deleteuser:before,
+span #deleteuser:after{
+    position: absolute;
+    content: "BENUTZER LÖSCHEN";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393E46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #importexport:before,
+span #importexport:after{
+    position: absolute;
+    content: "SÄMTLICHE AUFGABEN EXPORTIEREN/IMPORTIEREN";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393E46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
