@@ -571,7 +571,7 @@ span #importexport:after{
 
 @media screen and (max-width: 1000px) {
     .form_a_e {
-        height: 1500px;
+        height: 1800px;
         width: 600px;
         transform: translate(-50%, -0%);
         top: 40%;
@@ -669,7 +669,6 @@ span #importexport:after{
 
 
     position: absolute;
-
     display:grid;
     grid-auto-rows: auto auto auto;
 
@@ -679,7 +678,8 @@ span #importexport:after{
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     background-color: rgba(57%,62%,70%, 0.1);
 
-    padding: 50px 35px;
+    padding: 50px 50px;
+    padding-bottom: 50em;;
 }
 .form_a_e *{
     color: #000000;
@@ -889,7 +889,7 @@ span #importexport:after{
 
 
 @media screen and (max-width: 1000px){
-    .form_a_u{height: 800px;
+    .form_a_u{height: 900px;
         width: 600px;
         transform: translate(-50%,-0%);
         top: 30%;
