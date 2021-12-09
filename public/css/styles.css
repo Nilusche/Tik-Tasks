@@ -439,3 +439,572 @@ nav{
     width: 30%;
     height: 50%;
   }
+
+  .p-1 {
+    margin-top: 1%;
+    margin-left: 28%;
+  }
+
+  .cardList {
+    padding: 10px;
+  }
+
+  .cardBtn{
+    padding: 10px;
+    width: 15%;
+    margin: 20px 20px;
+  }
+
+/**Systemverwaltung**/
+.systempanel {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 5px;
+}
+
+.systempanel > div {
+    padding-top: 60px;
+    display: grid;
+    grid-template-rows: repeat(4,1fr);
+}
+
+.systempanel > img {
+    width: 80%;
+}
+
+#systempanelbutton{
+    display: inline-flex;
+    height: 55px;
+    width: 520px;
+    perspective: 1000px;
+    padding-left:0em;
+    animation:none;
+}
+
+span #edituser:before,
+span #edituser:after{
+    position: absolute;
+    content: "BENUTZER BEARBEITEN";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393E46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #registuser:before,
+span #registuser:after{
+    position: absolute;
+    content: "BENUTZER REGISTRIEREN";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393E46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #deleteuser:before,
+span #deleteuser:after{
+    position: absolute;
+    content: "BENUTZER LÖSCHEN";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393E46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #importexport:before,
+span #importexport:after{
+    position: absolute;
+    content: "SÄMTLICHE AUFGABEN EXPORTIEREN/IMPORTIEREN";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393E46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+/** Aufgabe erstellen, Edit/Delete/Update User**/
+
+
+.background_a_e{
+    width: 700px;
+    height: 1000px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 100%;
+}
+
+.sphere_g {
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    border-radius: 50%;
+}
+.spherem {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+.spherek {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .form_a_e {
+        height: 1500px;
+        width: 600px;
+        transform: translate(-50%, -0%);
+        top: 40%;
+        left: 40%;
+    }
+
+    .grid_a_e {
+        position: absolute;
+        height: 520px;
+        width: 500px;
+        display: grid;
+        grid-template-rows: 66.6% auto;
+        top: 15%;
+        left: 27%;
+
+    }
+
+    #bluesphere_a_e{
+
+        left: 400px; bottom: -850px;
+    }
+    #redsphere_a_e{
+
+        left: -150px;top: 80px;
+    }
+
+}
+
+
+@media screen and (min-width: 1000px){
+    .form_a_e{height: 800px;
+        width: 800px;
+        transform: translate(-60%,-50%);
+        top: 120%;
+        left: 35%;}
+    .grid_a_e {
+        position: absolute;
+        height: 520px;
+        width: 600px;
+        display: grid;
+        grid-template-columns: 66.6% auto;
+        top: 15%;
+        left: 40%;
+
+    }
+
+
+    .teil_a_e{display: grid; grid-template-columns: auto auto;
+        grid-column-gap: 30px}
+
+    #bluesphere_a_e{
+
+        left: 400px; bottom: -150px;
+    }
+    #redsphere_a_e{
+
+        left: -400px;top: 80px;
+    }
+
+}
+
+#redsphere_a_e{background: linear-gradient(
+    to right,
+    #E62755,
+    #a20043
+);}
+#bluesphere_a_e{background: linear-gradient(
+    #6FC5CD,
+    #00666d
+);
+}
+#bluesphere_a_eu{
+    background: linear-gradient(
+        #6FC5CD,
+        #00666d
+    );
+
+}
+#redsphere_a_eu{
+    background: linear-gradient(
+        to right,
+        #E62755,
+        #a20043
+    );
+
+}
+.text_tiktok{
+    text-align: center;
+    font-weight: bold;
+    font-size: 50px;
+
+    filter:drop-shadow(0px 0px 1px black) drop-shadow(4px 0px 0px #FF5151) drop-shadow(-4px -4px 0px #08D9D6);}
+
+.form_a_e{
+
+
+    position: absolute;
+
+    display:grid;
+    grid-auto-rows: auto auto auto;
+
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(90,90,90,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    background-color: rgba(57%,62%,70%, 0.1);
+
+    padding: 50px 35px;
+}
+.form_a_e *{
+    color: #000000;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+
+
+}
+.text_a_e{
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+
+
+}
+
+.labelinput_a_e{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+
+
+}
+
+.input_a_e{
+    color:black;
+    display: block;
+    height: 50px;
+    width: 100%;
+
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    border: 1px solid #393E46;
+
+}
+
+
+.inputtext_a_e{
+    display: block;
+    height: 150px;
+    width: 100%;
+
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+
+    border: 1px solid #393E46;
+    resize: none;
+    border-radius: 5px;
+}
+
+
+#button_a_e{
+    margin-top: 50px;
+    width: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#button_a_e:hover {
+    background-color: rgba(0, 0, 0, 0.07);
+    color: black;
+}
+
+.boxs {
+    width: 200px;
+    height: 30px;
+    border: 1px solid #393E46;
+    font-size: 18px;
+
+
+    border-radius: 10px;
+    box-shadow: 2px 2px #ccc;
+
+}
+
+.background_b_bearb{
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+.sphere_sg {
+    height: 500px;
+    width: 500px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+
+.form_b_b{
+    height: 400px;
+    width: 450px;
+    background-color: rgba(205,205,205,0.13);
+    position: absolute;
+    transform: translate(-70%,-80%);
+    top: 110%;
+    left: 80%;
+
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(90,90,90,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+}
+.form_b_b *{
+    color: #000000;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+
+}
+
+.labelinput_b{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.input_b{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+#passwort_button_b{
+    margin-top: 50px;
+    width: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#passwort_button_b:hover {
+    background-color: rgba(0, 0, 0, 0.07);
+    color: black;
+}
+.grid_b {
+    position: absolute;
+    height: 520px;
+    width: 600px;
+    display: grid;
+    grid-template-columns: 66.6% auto;
+    top: 12%;
+    left: 27%;
+
+}
+
+
+.background_user_änd{
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+.sphere_g {
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+#bluesphere_a_u{
+    background: linear-gradient(
+        #6FC5CD,
+        #00666d
+    );
+
+}
+#redsphere_a_u{
+    background: linear-gradient(
+        to right,
+        #E62755,
+        #a20043
+    );
+
+}
+
+
+
+@media screen and (max-width: 1000px){
+    .form_a_u{height: 800px;
+        width: 600px;
+        transform: translate(-50%,-0%);
+        top: 30%;
+        left: 40%;}
+    #bluesphere_a_u{
+        background: linear-gradient(
+            #6FC5CD,
+            #00666d
+        );
+        left: 350px;
+        top: 40px;
+    }
+    #redsphere_a_u{
+        background: linear-gradient(
+            to right,
+            #E62755,
+            #a20043
+        );
+        left: -300px;
+        bottom: -600px;
+    }}
+@media screen and (min-width: 1000px){
+    .form_a_u{height: 550px;
+        width: 800px;
+        transform: translate(-60%,-50%);
+        top: 80%;
+        left: 60%;}
+    #bluesphere_a_u{
+        background: linear-gradient(
+            #6FC5CD,
+            #00666d
+        );
+        left: 450px;
+        top: 30px;
+    }
+    #redsphere_a_u{
+        background: linear-gradient(
+            to right,
+            #E62755,
+            #a20043
+        );
+        left: -350px;
+        bottom: -300px;
+    }}
+
+.form_a_u{
+
+    background-color: rgba(205,205,205,0.13);
+    position: absolute;
+    display:grid;
+    grid-auto-rows: auto auto auto;
+
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(90,90,90,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+}
+.form_a_u *{
+    color: #000000;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+
+}
+
+
+
+@media screen and (min-width: 1000px){
+    .teil_a_u{display: grid; grid-template-columns: auto auto;
+        grid-column-gap: 20px}}
+.background_a_del{
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+.sphere_g {
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+
+
+.form_a_d{
+    height: 600px;
+    width: 450px;
+    background-color: rgba(205,205,205,0.13);
+    position: absolute;
+    transform: translate(-70%,-60%);
+    top: 110%;
+    left: 60%;
+
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(90,90,90,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+}
+.form_a_d *{
+    color: #000000;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+
+}
+.loginuber_b{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+

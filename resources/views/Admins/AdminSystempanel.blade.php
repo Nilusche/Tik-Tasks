@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
- @section('content')
- @if(auth()->user()->isAdmin())
- <div class="container">
-    <a href="/EditUser" class="btn btn-primary">Benutzer bearbeiten</a>
-    <a href="{{route('register')}}" class="btn btn-warning">Benutzer registrieren</a>
-    <a href="/DeleteUser" class="btn btn-warning">Benutzer löschen</a>
-    <a href="/AdminExportImport" class="btn btn-danger">Sämtliche Aufgaben exportieren und importieren</a>
-
-</div>
- @endif
- @endsection
+@section('content')
+    @if(auth()->user()->isAdmin())
+        <div class="container">
+            <div class="systempanel">
+                <img src="sources/Systempanel.png" alt="Systempanel.png">
+                <div>
+                    <span id=systempanelbutton><a id=edituser href="/EditUser"></a></span>
+                    <span id=systempanelbutton><a id=registuser href="{{route('register')}}"></a></span>
+                    <span id=systempanelbutton><a id=deleteuser href="/DeleteUser"></a></span>
+                    <span id=systempanelbutton><a id=importexport href="/AdminExportImport"></a></span>
+                </div>
+            </div>
+        </div>
+    @endif
+@endsection
