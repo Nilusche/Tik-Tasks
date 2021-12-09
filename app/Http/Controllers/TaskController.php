@@ -19,17 +19,19 @@ class TaskController extends Controller
         $data = request()->all();
         if(empty($data['deadline'])){
             $this->validate(request(), [
-                'title'=>'required',
+                'title'=>'required|max:50',
                 'estimatedEffort' =>'numeric',
-                'visibility'=> 'required'
+                'visibility'=> 'required',
+                'description'=>'max:250'
             ]);
         }else{
             $task->deadline=$data['deadline'];
             $this->validate(request(), [
-                'title'=>'required',
+                'title'=>'required|max:50',
                 'estimatedEffort' =>'numeric',
                 'deadline' => 'date_format:Y-m-d|after_or_equal:today',
-                'visibility'=> 'required'
+                'visibility'=> 'required',
+                'description'=>'max:250'
             ]);
         }
 
@@ -150,17 +152,19 @@ class TaskController extends Controller
         if(empty($data['deadline'])){
             $task->deadline=null;
             $this->validate(request(), [
-                'title'=>'required',
+                'title'=>'required|max:50',
                 'estimatedEffort' =>'numeric',
-                'visibility'=> 'required'
+                'visibility'=> 'required',
+                'description'=>'max:250'
             ]);
         }else{
             $task->deadline=$data['deadline'];
             $this->validate(request(), [
-                'title'=>'required',
+                'title'=>'required|max:50',
                 'estimatedEffort' =>'numeric',
                 'deadline' => '|after_or_equal:today',
-                'visibility'=> 'required'
+                'visibility'=> 'required',
+                'description'=>'max:250'
             ]);
         }
 
