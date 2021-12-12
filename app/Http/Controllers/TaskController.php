@@ -22,7 +22,7 @@ class TaskController extends Controller
                 'title'=>'required|max:50',
                 'estimatedEffort' =>'numeric',
                 'visibility'=> 'required',
-                'description'=>'max:250'
+                'description'=>'max:500'
             ]);
         }else{
             $task->deadline=$data['deadline'];
@@ -31,7 +31,7 @@ class TaskController extends Controller
                 'estimatedEffort' =>'numeric',
                 'deadline' => 'date_format:Y-m-d|after_or_equal:today',
                 'visibility'=> 'required',
-                'description'=>'max:250'
+                'description'=>'max:500'
             ]);
         }
 
@@ -155,7 +155,7 @@ class TaskController extends Controller
                 'title'=>'required|max:50',
                 'estimatedEffort' =>'numeric',
                 'visibility'=> 'required',
-                'description'=>'max:250'
+                'description'=>'max:500'
             ]);
         }else{
             $task->deadline=$data['deadline'];
@@ -164,7 +164,7 @@ class TaskController extends Controller
                 'estimatedEffort' =>'numeric',
                 'deadline' => '|after_or_equal:today',
                 'visibility'=> 'required',
-                'description'=>'max:250'
+                'description'=>'max:500'
             ]);
         }
 
