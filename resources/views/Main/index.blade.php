@@ -150,7 +150,7 @@
                                 @endif
 
                                 <p class="read-more">                   
-                                    <a  type="button" data-toggle="collapse" id="open" data-target="#collapseExample{{$task->id}}" aria-expanded="false" aria-controls="collapseExample{{$task->id}}">Mehr anzeigen</a>
+                                    <a  type="button" data-toggle="collapse" id="open" data-target="#collapseExample{{$task->id}}" aria-expanded="false" aria-controls="collapseExample{{$task->id}}">auf-/zuklappen</a>
                                 </p>
                                 
                                 <div class="collapse" id="collapseExample{{$task->id}}">

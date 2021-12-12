@@ -158,18 +158,6 @@
         })();
     </script>
 
-    <script>
-        $(document).ready(function(){
-        $('#open').on('click', function () {
-        var text=$('#open').text();
-        if(text == "Mehr anzeigen"){
-            $(this).html('Weniger anzeigen');
-        } else{
-            $(this).text('Mehr anzeigen');
-        }
-        });
-        });
-    </script>
     
 </body>
 </html>

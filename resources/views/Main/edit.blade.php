@@ -27,6 +27,7 @@
                         <label for="description">Beschreibung</label>
                         <textarea class="form-control" name="description" id="description" cols="30" rows="9">{{$task->description}}</textarea>
                     </div>
+                    <div class="form-group"></div>
                     <div class="form-group">
                         <label for="comment">Kommentar</label>
                         <input type="text" class="form-control" id="comment" name="comment" value="{{$task->comment}}" placeholder="Kommentar">
@@ -69,12 +70,9 @@
                         <label for="effort2" class="form-label">Tatsächlicher aufwand (in Stunden)</label>
                         <input type="number" class="form-control" id="effort2" name="effort2" min="0" value="{{$task->totalEffort}}" placeholder="3.5">
                     </div>
-                    <div class="form-group"></div><br>
                     <div class="form-group">
                         <p>Die mit * markierten Felder sind Pflichteingaben</p>
-                    </div>
-                    <div class="form-group">
-                    <span id=speicher ><a id=speichern onclick="this.closest('form').submit();return false;"></a></span>
+                        <span id=speicher ><a id=speichern onclick="this.closest('form').submit();return false;"></a></span>
                     </div>
                 </div>
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
