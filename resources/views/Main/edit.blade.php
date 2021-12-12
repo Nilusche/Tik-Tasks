@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <label for="alarm" class="">Erinnerungsalarm</label>
                         <select class="form-select" id="alarm" name="alarm" value="{{old('alarm')}}" aria-label="Default select example" required>
-                            <option value="" selected>Auswählen</option>
+                            <option value="" selected required>Auswählen</option>
                             <option value="0">Wenn abgelaufen</option>
                             <option value="1">1 Stunde vorher</option>
                             <option value="2">1 Tag vorher</option>

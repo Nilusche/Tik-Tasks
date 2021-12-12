@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="description">
                                 @if($task->deadline)
-                                <h1 class="h1-color mb-4"><div class="Deadline-title"><i class="far fa-calendar-alt"></i>&nbsp;DEADLINE: {{ $task->deadline }}</div> </h1>
+                                <h1 class="h1-color mb-4"><div class="Deadline-title"><i class="far fa-calendar-alt"></i>&nbsp;DEADLINE: {{ $date = date('d-m-Y H:i', strtotime($task->deadline)) }}</div> </h1>
                                 @endif
                                 <h1 class="mb-4">AUFGABE: {{ $task->title }}</h1>
                                 <h2 class="mb-2">BESCHREIBUNG:</h2>
