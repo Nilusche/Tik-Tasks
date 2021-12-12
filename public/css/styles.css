@@ -21,6 +21,12 @@ nav {
     background-color: #393e46;
 }
 
+.Deadline-title{
+    background-color:#393e46 ;
+    color: white;
+    padding:5px;
+}
+
 .navbar {
     padding-bottom: 0em;
     text-align: center;
@@ -82,28 +88,67 @@ footer {
     background-color: #393e46;
     color: #ededed;
 }
-.tabsize {
-    height: 40em;
+
+.blog-card .priority1 {
+    margin-top: 1.25rem;
 }
-.priority1 {
-    background-color: #4e9f3d;
-    width: 5em;
+.blog-card .priority2 {
+    margin-top: 1.25rem;
 }
-.priority2 {
-    background-color: #fee440;
-    width: 5em;
+.blog-card .priority3 {
+    margin-top: 1.25rem;
 }
-.priority3 {
-    background-color: #ff9300;
-    width: 5em;
+.blog-card .priority4 {
+    margin-top: 1.25rem;
 }
-.priority4 {
-    background-color: #e02401;
-    width: 5em;
+.blog-card .priority5 {
+    margin-top: 1.25rem;
 }
-.priority5 {
-    background-color: #950101;
-    width: 5em;
+
+.blog-card .priority1:before{
+    background: #4e9f3d;
+    content: "";
+    position: absolute;
+    height: 5px;
+    width: 27em;
+    top: -0.75rem;
+    border-radius: 3px;
+}
+.blog-card .priority2:before {
+    background: #fee440;
+    content: "";
+    position: absolute;
+    height: 5px;
+    width: 27em;
+    top: -0.75rem;
+    border-radius: 3px;
+}
+.blog-card .priority3:before {
+    background: #ff9300;
+    content: "";
+    position: absolute;
+    height: 5px;
+    width: 27em;
+    top: -0.75rem;
+    border-radius: 3px;
+}
+.blog-card .priority4:before {
+    background: #e02401;
+    content: "";
+    position: absolute;
+    height: 5px;
+    width: 27em;
+    top: -0.75rem;
+    border-radius: 3px;
+}
+.blog-card .priority5:before {
+    background: #950101;
+    content: "";
+    position: absolute;
+    height: 5px;
+    width: 27em;
+    top: -0.75rem;
+    border-radius: 3px;
 }
 /**Landing page styling*/
 
@@ -118,7 +163,9 @@ footer {
     padding-bottom: 5em;
     animation: slideIn 1.5s ease-in-out forwards;
 }
-
+.h1-color{
+    color:#e62755;
+}
 .transition1 {
     position: absolute;
     top: 0;

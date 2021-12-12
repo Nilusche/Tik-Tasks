@@ -17,39 +17,19 @@
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
                     <div class="form-group">
                         <label for="title">Titel *</label>
-                        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{$task->title}}"placeholder="Titel der Aufgabe">
-                        @error('title')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="danger">{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input type="text" class="form-control" id="title" name="title" value="{{$task->title}}"placeholder="Titel der Aufgabe">
                     </div>
                     <div class="form-group">
                         <label for="deadline">Deadline</label>
-                        <input type="date" class="form-control  @error('deadline') is-invalid @enderror" id="deadline" name="deadline" value="{{$task->deadline}}">
-                        @error('deadline')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="danger">{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input type="date" class="form-control" id="deadline" name="deadline" value="{{$task->deadline}}">
                     </div>
                     <div class="form-group">
                         <label for="description">Beschreibung</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" cols="30" rows="9">{{$task->description}}</textarea>
-                        @error('description')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="danger">{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="9">{{$task->description}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="comment">Kommentar</label>
-                        <input type="text" class="form-control error('comment') is-invalid @enderror" id="comment" name="comment" value="{{$task->comment}}" placeholder="Kommentar">
-                        @error('comment')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="danger">{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input type="text" class="form-control" id="comment" name="comment" value="{{$task->comment}}" placeholder="Kommentar">
                     </div>
                 </div>
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
@@ -87,12 +67,7 @@
                     </div>
                     <div class="form-group">
                         <label for="effort2" class="form-label">Tatsächlicher aufwand (in Stunden)</label>
-                        <input type="number" class="form-control @error('effort2') is-invalid @enderror" id="effort2" name="effort2" min="0" value="{{$task->totalEffort}}" placeholder="3.5">
-                        @error('effort2')
-                        <span class="invalid-feedback" role="alert">
-                            <strong class="danger">{{ $message }}</strong>
-                        </span>
-                        @enderror
+                        <input type="number" class="form-control" id="effort2" name="effort2" min="0" value="{{$task->totalEffort}}" placeholder="3.5">
                     </div>
                     <div class="form-group"></div><br>
                     <div class="form-group">
