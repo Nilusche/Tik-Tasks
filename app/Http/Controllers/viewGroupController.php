@@ -20,7 +20,7 @@ class viewGroupController extends Controller
                                 where tag_task.tag_id = :t_id
                                 and user_has_task.users_id = :userid',['t_id'=>$tag_id, 'userid'=>auth()->user()->id]);
 
-        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get());
+        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get())->with('tags',DB::table('tags')->get())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get());;
     }
     //Sortieren nach Name aufsteigend
     public function viewGroupSortbyNameAscGroup(Request $request){
@@ -35,7 +35,7 @@ class viewGroupController extends Controller
                                 where tag_task.tag_id = :t_id
                                 and user_has_task.users_id = :userid
                                 order by tasks.title asc',['t_id'=>$tag_id, 'userid'=>auth()->user()->id]);
-        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get());
+        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get())->with('tags',DB::table('tags')->get())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get());;
     }
     //Sortieren nach Name absteigend
     public function viewGroupSortbyNameDescGroup(Request $request){
@@ -50,7 +50,7 @@ class viewGroupController extends Controller
                                 where tag_task.tag_id = :t_id
                                 and user_has_task.users_id = :userid
                                 order by tasks.title desc',['t_id'=>$tag_id, 'userid'=>auth()->user()->id]);
-        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get());
+        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get())->with('tags',DB::table('tags')->get())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get());;
     }
     //Sortieren nach Deadline aufsteigend
     public function viewGroupSortbyDeadlineAscGroup(Request $request){
@@ -65,7 +65,7 @@ class viewGroupController extends Controller
                                 where tag_task.tag_id = :t_id
                                 and user_has_task.users_id = :userid
                                 order by tasks.deadline asc',['t_id'=>$tag_id, 'userid'=>auth()->user()->id]);
-        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get());
+        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get())->with('tags',DB::table('tags')->get())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get());;
     }
     //Sortieren nach Deadline absteigend
     public function viewGroupSortbyDeadlineDescGroup(Request $request){
@@ -80,7 +80,7 @@ class viewGroupController extends Controller
                                 where tag_task.tag_id = :t_id
                                 and user_has_task.users_id = :userid
                                 order by tasks.deadline desc',['t_id'=>$tag_id, 'userid'=>auth()->user()->id]);
-        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get());
+        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get())->with('tags',DB::table('tags')->get())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get());;
     }
     //Sortieren nach DateOfCreation aufsteigend
     public function viewGroupSortbyDateOfCreationAscGroup(Request $request){
@@ -95,7 +95,7 @@ class viewGroupController extends Controller
                                 where tag_task.tag_id = :t_id
                                 and user_has_task.users_id = :userid
                                 order by tasks.created_at asc',['t_id'=>$tag_id, 'userid'=>auth()->user()->id]);
-        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get());
+        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get())->with('tags',DB::table('tags')->get())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get());;
     }
     //Sortieren nach DateOfCreation absteigend
     public function viewGroupSortbyDateOfCreationDescGroup(Request $request){
@@ -110,7 +110,7 @@ class viewGroupController extends Controller
                                 where tag_task.tag_id = :t_id
                                 and user_has_task.users_id = :userid
                                 order by tasks.created_at desc',['t_id'=>$tag_id, 'userid'=>auth()->user()->id]);
-        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get());
+        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get())->with('tags',DB::table('tags')->get())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get());;
     }
     //Sortieren nach Priorität aufsteigend
     public function viewGroupSortbyPriorityAscGroup(Request $request){
@@ -125,7 +125,7 @@ class viewGroupController extends Controller
                                 where tag_task.tag_id = :t_id
                                 and user_has_task.users_id = :userid
                                 order by tasks.priority asc',['t_id'=>$tag_id, 'userid'=>auth()->user()->id]);
-        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get());
+        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get())->with('tags',DB::table('tags')->get())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get());;
     }
     //Sortieren nach Priorität absteigend
     public function viewGroupSortbyPriorityDescGroup(Request $request){
@@ -140,6 +140,6 @@ class viewGroupController extends Controller
                                 where tag_task.tag_id = :t_id
                                 and user_has_task.users_id = :userid
                                 order by tasks.priority desc',['t_id'=>$tag_id, 'userid'=>auth()->user()->id]);
-        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get());
+        return view('Main.viewGroup')->with('tasks',$results)->with('tag_id',$tag_id)->with('tag_task',DB::table('tag_task')->get())->with('tags',DB::table('tags')->get())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get());;
     }
 }

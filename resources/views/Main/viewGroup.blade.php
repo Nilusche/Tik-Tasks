@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('css')
+    <link rel="stylesheet" href="/css/card.css">
+@endsection
 @section('content')
     <div>
         <div class="container">
@@ -43,69 +45,83 @@
         </div>
         @foreach ($tasks as $task)
             @if ($task->completed == false)
-                <div class="container" data-aos="zoom-in-down">
-                    <div class="row task">
-                        <div class="col-lg-11 col-md-11 col-sm-11">
-                            <div class="card tabsize">
-                                <div class="card-header text-center aufgabenwrapper">
-                                    <h4 class="card-title">
-                                        @if (!empty($task->deadline))
-                                            {{ $date = date('d-m-Y H:i', strtotime($task->deadline)) }}
+            <div class="container" data-aos="zoom-in-down">
+                            <div class="blog-card">
+                                    <div class="meta">
+                                    <div class="photo" style="background-image: url(/sources/task.svg)"></div>
+                                    <ul class="details">
+                                        <li class="date">Erstellt am: {{ $date = date('d-m-Y H:i', strtotime($task->created_at)) }}</li>
+                                        <li><i class="fas fa-exclamation-triangle"></i>  &nbsp;Priorität: {{$task->priority}}</li>
+                                        <li class="tags">
+                                        <ul>
+                                        @foreach ($allTasks as $task2)
+                                            <li>{{$task2->name}}</li>
+                                        @endforeach
+                                        </ul>
+                                        </li>
+                                        @if($task->deadline)
+                                            <li><i class="far fa-calendar-alt"></i> &nbsp;<a href="{{ $task->calendarICS }}">ICS Datei</a></li>
+                                            <li><i class="far fa-calendar-alt"></i> &nbsp;<a href="{{ $task->calendarGoogle }}">Google Calendar</a></li>
+                                            <li><i class="far fa-calendar-alt"></i> &nbsp;<a href="{{ $task->calendarWebOutlook }}"> WebOutlook Calendar</a></li>
                                         @endif
-                                    </h4>
-                                </div>
-                                <div class="card-body overflow-auto">
-                                    <p class="text">Erstellt am:
-                                        {{ $date = date('d-m-Y H:i', strtotime($task->created_at)) }}<br><br></p>
-                                    <h4 class="card-title text-center">{{ $task->title }}</h4><br>
-                                    <p class="text ">
-                                    <h5 class="card-title">Beschreibung</h5>{!! $task->description !!}</p>
-                                    <p class="text">
-                                    <h5 class="card-title">Kommentare</h5>{!! $task->comment !!}<br><br></p>
-                                    <a class="btn btn-dark" type="button" name="button"
-                                        href="/Startseite/{{ $task->tasks_id }}/edit"><i
-                                            class="fas fa-edit">Bearbeiten</i></a>
-                                    <a class="btn btn-warning" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#finish{{ $task->tasks_id }}"><i class="fas fa-trash-alt">
-                                            Beenden</i></a>
-                                    <a class="btn btn-danger" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#deleteTask{{ $task->tasks_id }}"><i class="fas fa-trash-alt">
-                                            Löschen</i></a>
-                                    <a class="btn btn-primary" type="button" name="button" href="/Startseite"><i
-                                            class="fas fa-sync"> Aktualisieren</i></a>
-                                </div>
-                                @if (!empty($task->deadline))
-                                    <div class="container-fluid">
-                                        <a class="badge rounded-pill bg-info" href="{{ $task->calendarICS }}">Ics
-                                            Datei</a>
-                                        <a class="badge rounded-pill bg-info" href="{{ $task->calendarGoogle }}">Google
-                                            Calendar</a>
-                                        <a class="badge rounded-pill bg-info"
-                                            href="{{ $task->calendarWebOutlook }}">WebOutlook Calendar</a>
+                                    </ul>
                                     </div>
-                                @endif
-                                <div class="card-footer text-muted text-center">
-                                    {{ $totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline) }}
+                                    <div class="description">
+                                    @if($task->deadline)
+                                    <h1 class="h1-color mb-4"><div class="Deadline-title"><i class="far fa-calendar-alt"></i>&nbsp;DEADLINE: {{ $task->deadline }}</div> </h1>
+                                    @endif
+                                    <h1 class="mb-4">AUFGABE: {{ $task->title }}</h1>
+                                    <h2 class="mb-2">BESCHREIBUNG:</h2>
+                                    @if ($task->priority == 1)
+                                    <p class="priority1">  {!!$task->description!!} </p>
+                                    @elseif($task->priority==2)
+                                    <p class="priority2">  {!!$task->description!!}</p>
+                                    @elseif($task->priority==3)
+                                    <p class="priority3">   {!!$task->description!!}</p>
+                                    @elseif($task->priority==4)
+                                    <p class="priority4"> {!!$task->description!!}</p>
+                                    @else
+                                    <p class="priority5">  {!!$task->description!!}</p>
+                                    @endif
+
+                                    <p class="read-more">                   
+                                        <a  type="button" data-toggle="collapse" id="open" data-target="#collapseExample{{$task->id}}" aria-expanded="false" aria-controls="collapseExample{{$task->id}}">Mehr anzeigen</a>
+                                    </p>
+                                    
+                                    <div class="collapse" id="collapseExample{{$task->id}}">
+                                        <h2 class="mt-4">Kommentar:</h2>
+                                        @if ($task->priority == 1)
+                                        <p class="priority1"> {!!$task->comment!!}</p>
+                                        @elseif($task->priority==2)
+                                        <p class="priority2"> {!!$task->comment!!}</p>
+                                        @elseif($task->priority==3)
+                                        <p class="priority3">  {!!$task->comment!!}</p>
+                                        @elseif($task->priority==4)
+                                        <p class="priority4">  {!!$task->comment!!}</p>
+                                        @else
+                                        <p class="priority5">  {!!$task->comment!!}</p>
+                                        @endif
+                                        <h2 class="mt-3">Verbleibende Zeit: <span class="h1-color" > {{ $totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline) }}</span></h2>
+                                        
+
+                                        <div class="mt-4">
+                                                <b class="mr-4">
+                                                    <button  class="btn btn-warning but " href="" data-bs-toggle="modal" data-bs-target="#finish{{ $task->id }}"><i class="fas fa-check-circle"></i>Beenden</button>
+                                                </b>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <b>
+                                                    <button class="btn btn-danger but" href="" data-bs-toggle="modal" data-bs-target="#deleteTask{{ $task->id }}"><i class="fas fa-trash-alt"></i>Löschen</button>
+                                                </b>
+                                        </div>
+                                        <p class="read-more">
+                                            <a href="/Startseite/{{ $task->id }}/edit">Bearbeiten</a>
+                                        </p>
+
+                                    </div>
+                                
                                 </div>
                             </div>
-
-
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1">
-                            @if ($task->priority == 1)
-                                <div class="card priority1 tabsize"></div>
-                            @elseif($task->priority==2)
-                                <div class="card priority2 tabsize"></div>
-                            @elseif($task->priority==3)
-                                <div class="card priority3 tabsize"></div>
-                            @elseif($task->priority==4)
-                                <div class="card priority4 tabsize"></div>
-                            @else
-                                <div class="card priority5 tabsize"></div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
+                         </div>
                 <!-- Modal Delete Task-->
                 <div class="modal fade" id="deleteTask{{ $task->tasks_id }}" tabindex="-1"
                     aria-labelledby="deleteTaskLabel" aria-hidden="true">
