@@ -1,10 +1,7 @@
 @extends('layouts.app')
-
-@section('scripts')
+@section('css')
     <link rel="stylesheet" href="css/card.css">
-
 @endsection
-
 
 @section('content')
 
@@ -122,8 +119,8 @@
                                     <li><i class="fas fa-exclamation-triangle"></i>  &nbsp;Priorität: {{$task->priority}}</li>
                                     <li class="tags">
                                     <ul>
-                                    @foreach ($allTasks as $task)
-                                        <li>{{$task->name}}</li>
+                                    @foreach ($allTasks as $task2)
+                                        <li>{{$task2->name}}</li>
                                     @endforeach
                                     </ul>
                                     </li>
@@ -151,10 +148,10 @@
                                 @endif
 
                                 <p class="read-more">                   
-                                    <a  type="button" data-toggle="collapse" id="open" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Mehr anzeigen</a>
+                                    <a  type="button" data-toggle="collapse" id="open" data-target="#collapseExample{{$task->id}}" aria-expanded="false" aria-controls="collapseExample{{$task->id}}">Mehr anzeigen</a>
                                 </p>
                                 
-                                <div class="collapse" id="collapseExample">
+                                <div class="collapse" id="collapseExample{{$task->id}}">
                                     <h2 class="mt-4">Kommentar:</h2>
                                     @if ($task->priority == 1)
                                     <p class="priority1"> {!!$task->comment!!}</p>
