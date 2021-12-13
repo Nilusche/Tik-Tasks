@@ -150,9 +150,11 @@
             alertify
             .alert("Sie haben gerade eine neue Benachrichtigung erhalten. Eine Aufgabe nähert sich der Deadline.", function(){
                 alertify.message('OK');
+                window.location.reload();
             }).set({title:"Benachrichtigung"});
 
             originallog.apply(console, arguments);
+            
         }
 
         })();
