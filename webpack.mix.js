@@ -13,5 +13,5 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .vue()
-    .sass('resources/sass/card2.scss', 'public/css')
+    .sass('resources/sass/select.scss', 'public/css')
     .sass('resources/sass/app.scss', 'public/css');

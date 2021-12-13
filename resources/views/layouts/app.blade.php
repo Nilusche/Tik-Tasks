@@ -158,6 +158,6 @@
         })();
     </script>
 
-    
+@yield('bottomscripts')
 </body>
 </html>
