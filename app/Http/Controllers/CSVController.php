@@ -8,6 +8,7 @@ use App\Exports\CSVAdminExportTasks;
 use App\Imports\CSVAdminImportTasks;
 use App\Exports\CSVNonAdminExport;
 use App\Imports\CSVNonAdminImport;
+use DB;
 class CSVController extends Controller
 {
     public function import(Request $request){
@@ -15,6 +16,8 @@ class CSVController extends Controller
             'file' => 'required'
         ]);
         try{
+            DB::table('tasks')->delete();
+            DB::table('user_has_task')->delete();
             Excel::import(new CSVAdminImportTasks, request()->file('file'));
             session()->flash('success', 'Aufgaben erfolgreich importiert');
             return back();
