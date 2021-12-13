@@ -287,6 +287,34 @@ span a:hover {
     animation: none;
 }
 
+span #profilbearbeiten:before,
+span #profilbearbeiten:after {
+    position: absolute;
+    content: "BEARBEITEN";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #profilpasswortändern:before,
+span #profilpasswortändern:after {
+    position: absolute;
+    content: "PASSWORT ÄNDERN";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
 span #usernotification:before,
 span #usernotification:after {
     position: absolute;
