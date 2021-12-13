@@ -125,9 +125,9 @@
                                     </ul>
                                     </li>
                                     @if($task->deadline)
-                                        <li><i class="far fa-calendar-alt"></i> &nbsp;<a href="{{ $task->calendarICS }}">ICS Datei</a></li>
-                                        <li><i class="far fa-calendar-alt"></i> &nbsp;<a href="{{ $task->calendarGoogle }}">Google Calendar</a></li>
-                                        <li><i class="far fa-calendar-alt"></i> &nbsp;<a href="{{ $task->calendarWebOutlook }}"> WebOutlook Calendar</a></li>
+                                        <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link href="{{ $task->calendarICS }}">ICS Datei</a></li>
+                                        <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link href="{{ $task->calendarGoogle }}">Google Calendar</a></li>
+                                        <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link href="{{ $task->calendarWebOutlook }}"> WebOutlook Calendar</a></li>
                                     @endif
                                 </ul>
                                 </div>
