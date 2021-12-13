@@ -21,10 +21,10 @@ nav {
     background-color: #393e46;
 }
 
-.Deadline-title{
-    background-color:#393e46 ;
+.Deadline-title {
+    background-color: #393e46;
     color: white;
-    padding:5px;
+    padding: 5px;
 }
 
 .navbar {
@@ -105,7 +105,7 @@ footer {
     margin-top: 1.25rem;
 }
 
-.blog-card .priority1:before{
+.blog-card .priority1:before {
     background: #4e9f3d;
     content: "";
     position: absolute;
@@ -163,8 +163,8 @@ footer {
     padding-bottom: 5em;
     animation: slideIn 1.5s ease-in-out forwards;
 }
-.h1-color{
-    color:#e62755;
+.h1-color {
+    color: #e62755;
 }
 .transition1 {
     position: absolute;
@@ -567,6 +567,25 @@ trix-editor {
     padding: 10px;
     width: 15%;
     margin: 20px 20px;
+}
+/*
+    Notification Bell
+ */
+.nav-item > i {
+    color: #c6c8ca;
+    padding-top: 0.6em;
+}
+.nav-item > i:hover {
+    color: #6fc5cd;
+    padding-top: 0.6em;
+}
+.nav-item > i > span {
+    background-color: #e62755;
+    border-radius: 15px;
+    font-size: 18px;
+    position: absolute;
+    top: 3.7em;
+    padding: 3px 7px;
 }
 
 /**Systemverwaltung**/
