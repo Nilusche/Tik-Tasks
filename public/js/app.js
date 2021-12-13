@@ -36234,23 +36234,10 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./resources/sass/card.scss":
-/*!**********************************!*\
-  !*** ./resources/sass/card.scss ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/sass/card2.scss":
-/*!***********************************!*\
-  !*** ./resources/sass/card2.scss ***!
-  \***********************************/
+/***/ "./resources/sass/select.scss":
+/*!************************************!*\
+  !*** ./resources/sass/select.scss ***!
+  \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -56080,8 +56067,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","D:\\\\laragon\\\\www\\\\
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
 /******/ 			"css/app": 0,
-/******/ 			"css/card2": 0,
-/******/ 			"css/card": 0
+/******/ 			"css/select": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -56131,10 +56117,9 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","D:\\\\laragon\\\\www\\\\
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/card2","css/card"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/card2","css/card"], () => (__webpack_require__("./resources/sass/card.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/card2","css/card"], () => (__webpack_require__("./resources/sass/card2.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/card2","css/card"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/select"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/select"], () => (__webpack_require__("./resources/sass/select.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/select"], () => (__webpack_require__("./resources/sass/app.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
