@@ -43,7 +43,6 @@
                                     <div class="badge bg-primary">
                                         <img src="sources/Ordner.png" alt="" style="max-height: 60px; float: left; padding-top: 9px; padding-left: 10px">
                                         <div class="card-body overflow-auto">
-
                                             <h4>Gruppe: {{ $task->name }}</h4>
                                         </div>
                                     </div>
@@ -107,7 +106,7 @@
                         @if ($result)
                             <!-- Objekte die in einer Gruppierung sind, werden nicht angezeigt. -->
                         @else
-                        
+
 
 
                         <div class="container" data-aos="zoom-in-down">
@@ -149,25 +148,32 @@
                                 <p class="priority5">  {!!$task->description!!}</p>
                                 @endif
 
-                                <p class="read-more">                   
-                                    <a  type="button" data-toggle="collapse" id="open" data-target="#collapseExample{{$task->id}}" aria-expanded="false" aria-controls="collapseExample{{$task->id}}">auf-/zuklappen</a>
-                                </p>
-                                
-                                <div class="collapse" id="collapseExample{{$task->id}}">
-                                    <h2 class="mt-4">Kommentar:</h2>
-                                    @if ($task->priority == 1)
-                                    <p class="priority1"> {!!$task->comment!!}</p>
-                                    @elseif($task->priority==2)
-                                    <p class="priority2"> {!!$task->comment!!}</p>
-                                    @elseif($task->priority==3)
-                                    <p class="priority3">  {!!$task->comment!!}</p>
-                                    @elseif($task->priority==4)
-                                    <p class="priority4">  {!!$task->comment!!}</p>
-                                    @else
-                                    <p class="priority5">  {!!$task->comment!!}</p>
-                                    @endif
-                                    <h2 class="mt-3">Verbleibende Zeit: <span class="h1-color" > {{ $totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline) }}</span></h2>
-                                    
+                                        <p class="read-more">
+                                            <a type="button" data-toggle="collapse" id="open"
+                                                data-target="#collapseExample{{ $task->id }}" aria-expanded="false"
+                                                aria-controls="collapseExample{{ $task->id }}">auf-/zuklappen</a>
+                                        </p>
+
+                                        <div class="collapse" id="collapseExample{{ $task->id }}">
+                                            <h2 class="mt-4">Kommentar:</h2>
+                                            @if ($task->priority == 1)
+                                                <p class="priority1"> {!! $task->comment !!}</p>
+                                            @elseif($task->priority==2)
+                                                <p class="priority2"> {!! $task->comment !!}</p>
+                                            @elseif($task->priority==3)
+                                                <p class="priority3"> {!! $task->comment !!}</p>
+                                            @elseif($task->priority==4)
+                                                <p class="priority4"> {!! $task->comment !!}</p>
+                                            @else
+                                                <p class="priority5"> {!! $task->comment !!}</p>
+                                            @endif
+                                            <!-- Verbleibende Zeit wird nur angezeigt wenn keine Deadline vorhanden ist -->
+                                            @if ($task->deadline)
+                                                <h2 class="mt-3">Verbleibende Zeit: <span class="h1-color">
+                                                        {{ $totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline) }}</span>
+                                                </h2>
+                                            @endif
+
 
                                     <div class="mt-4">
                                             <b class="mr-4">
@@ -183,7 +189,7 @@
                                     </p>
 
                                 </div>
-                                
+
                                 </div>
                             </div>
                          </div>
