@@ -37,10 +37,10 @@
                     <div class="form-group">
                         <label for="visibility" class="">Sichtbarkeit</label>
                         <select class="form-select" id="visibility" name="visibility" value="{{ old('visibility') }}" aria-label="Default select example">
-                            @if(Request::old('visibility')==1)
+                            @if(old('visibility')===1)
                                 <option value="0" >privat</option>
                                 <option value="1"selected>öffentlich</option>
-                            @elseif(Request::old('visibility')==0)
+                            @elseif(old('visibility')===0)
                                 <option value="0" selected>privat</option>
                                 <option value="1" >öffentlich</option>
                             @else
@@ -57,12 +57,11 @@
                     <div class="form-group">
                         <label for="alarm" class="">Erinnerungsalarm</label>
                         <select class="form-select" id="alarm" name="alarm" value="{{old('alarm')}}" aria-label="Default select example" required>
-                            <option value="" selected required>Auswählen</option>
                             <option value="0">Wenn abgelaufen</option>
                             <option value="1">1 Stunde vorher</option>
                             <option value="2">1 Tag vorher</option>
                             <option value="3">Deadline minus aufwand</option>
-                            <option value="4">Niemals</option>
+                            <option value="4"selected>Niemals</option>
                         </select>
                     </div>           
                     <div class="form-group">
