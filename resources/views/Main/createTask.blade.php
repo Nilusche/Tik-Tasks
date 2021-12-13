@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <label for="deadline">Deadline</label>
-                        <input type="date" class="form-control" id="deadline" name="deadline" value="{{ old('deadline') }}">
+                        <input type="datetime-local" class="form-control" id="deadline" name="deadline" value="{{ old('deadline') }}">
                     </div>
                     <div class="form-group">
                         <label for="description">Beschreibung</label>

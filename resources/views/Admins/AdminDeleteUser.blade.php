@@ -35,7 +35,7 @@
                     <input class="input_b"  type="email" class="form-control" name="femail" id="exampleInputEmail1" placeholder="Email Adresse eingeben"
                            aria-describedby="emailHelp" required>
                     <label for="exampleInputEmail2" class="labelinput_b">Email Addresse</label>
-                    <input class="input_b"  type="email" class="form-control" name="femail" id="exampleInputEmail2" placeholder="Email Adresse wiederholen"
+                    <input class="input_b"  type="email" class="form-control" name="semail" id="exampleInputEmail2" placeholder="Email Adresse wiederholen"
                            aria-describedby="emailHelp" required>
 
                     <div class="labelinput_b">
