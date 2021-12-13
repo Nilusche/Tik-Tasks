@@ -6,11 +6,11 @@
 @section('content')
 
     <div class="container">
-        <span id=erstell><a id=erstellen href="/Create-task"></a></span>
+
+        <span id=erstell><a id=erstellen href=" /Create-task"></a></span>
         <span id=gruppe><a id=gruppieren href="/Group"></a></span>
         <div class="btn-group">
-            <button class="btn btn-lg dropdown-toggle Sortbtn" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+            <button class="btn btn-lg dropdown-toggle Sortbtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Sortieren nach
             </button>
             <ul class="dropdown-menu">
@@ -32,6 +32,7 @@
                     class="fas fa-search"></i></button>
         </form>
 
+
         <!-- gibt es Gruppen für den User? -->
         @foreach ($allTasks as $task)
             @if ($task->users_id == auth()->user()->id)
@@ -41,7 +42,8 @@
                             <a href="/Startseite/{{ $task->tag_id }}/view">
                                 <div class="row task">
                                     <div class="badge bg-primary">
-                                        <img src="sources/Ordner.png" alt="" style="max-height: 60px; float: left; padding-top: 9px; padding-left: 10px">
+                                        <img src="sources/Ordner.png" alt=""
+                                            style="max-height: 60px; float: left; padding-top: 9px; padding-left: 10px">
                                         <div class="card-body overflow-auto">
                                             <h4>Gruppe: {{ $task->name }}</h4>
                                         </div>
@@ -53,20 +55,21 @@
                     <div class="col-sm">
                         <div class="form-group">
                             <a class="btn btn-danger" type="button" data-bs-toggle="modal"
-                               data-bs-target="#deleteGroup{{ $task->tag_id }}"><i class="fas fa-trash-alt fa-3x" style="font-size: 62px">
+                                data-bs-target="#deleteGroup{{ $task->tag_id }}"><i class="fas fa-trash-alt fa-3x"
+                                    style="font-size: 62px">
                                 </i></a>
                         </div>
                     </div>
                 </div>
                 <!-- Modal delete Group-->
                 <div class="modal fade" id="deleteGroup{{ $task->tag_id }}" tabindex="-1"
-                     aria-labelledby="deleteGroup" aria-hidden="true">
+                    aria-labelledby="deleteGroup" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="deleteGroup">Gruppierung löschen</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 Möchten sie wirklich die Gruppierung löschen? Die enthaltenen Aufgaben werden nicht
@@ -75,7 +78,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
                                 <a type="button" class="btn btn-danger"
-                                   href="/Startseite/{{ $task->tag_id }}/deleteGroup">löschen</a>
+                                    href="/Startseite/{{ $task->tag_id }}/deleteGroup">löschen</a>
                             </div>
                         </div>
                     </div>
@@ -93,13 +96,13 @@
                         <?php
                         $result = DB::select(
                             'select t.id, t.title, tag.name, tag.users_id
-                             from tasks t
-                             left join tag_task tt
-                             on tt.task_id = t.id
-                             left join tags tag
-                             on tag.id = tt.tag_id
-                             where users_id = :id
-                             and t.id = :taskID',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 from tasks t
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 left join tag_task tt
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 on tt.task_id = t.id
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 left join tags tag
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 on tag.id = tt.tag_id
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 where users_id = :id
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 and t.id = :taskID',
                             ['id' => auth()->user()->id, 'taskID' => $task->id],
                         );
                         ?>
@@ -109,45 +112,54 @@
 
 
 
-                        <div class="container" data-aos="zoom-in-down">
-                            <div class="blog-card">
-                                <div class="meta">
-                                <div class="photo" style="background-image: url(sources/task.svg)"></div>
-                                <ul class="details">
-                                    <li class="date">Erstellt am: {{ $date = date('d-m-Y H:i', strtotime($task->created_at)) }}</li>
-                                    <li><i class="fas fa-exclamation-triangle"></i>  &nbsp;Priorität: {{$task->priority}}</li>
-                                    <li class="tags">
-                                    <ul>
-                                    @foreach ($allTasks as $task2)
-                                        <li>{{$task2->name}}</li>
-                                    @endforeach
-                                    </ul>
-                                    </li>
-                                    @if($task->deadline)
-                                        <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link href="{{ $task->calendarICS }}">ICS Datei</a></li>
-                                        <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link href="{{ $task->calendarGoogle }}">Google Calendar</a></li>
-                                        <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link href="{{ $task->calendarWebOutlook }}"> WebOutlook Calendar</a></li>
-                                    @endif
-                                </ul>
-                                </div>
-                                <div class="description">
-                                @if($task->deadline)
-                                <h1 class="h1-color mb-4"><div class="Deadline-title"><i class="far fa-calendar-alt"></i>&nbsp;DEADLINE: {{ $date = date('d-m-Y H:i', strtotime($task->deadline)) }}</div> </h1>
-                                @endif
-                                <h1 class="mb-4">AUFGABE: {{ $task->title }}</h1>
-                                <h2 class="mb-2">BESCHREIBUNG:</h2>
-                                @if ($task->priority == 1)
-                                <p class="priority1">  {!!$task->description!!} </p>
-                                @elseif($task->priority==2)
-                                <p class="priority2">  {!!$task->description!!}</p>
-                                @elseif($task->priority==3)
-                                <p class="priority3">   {!!$task->description!!}</p>
-                                @elseif($task->priority==4)
-                                <p class="priority4"> {!!$task->description!!}</p>
-                                @else
-                                <p class="priority5">  {!!$task->description!!}</p>
-                                @endif
-
+                            <div class="container" data-aos="zoom-in-down">
+                                <div class="blog-card">
+                                    <div class="meta">
+                                        <div class="photo" style="background-image: url(sources/task.svg)"></div>
+                                        <ul class="details">
+                                            <li class="date">Erstellt am:
+                                                {{ $date = date('d-m-Y H:i', strtotime($task->created_at)) }}</li>
+                                            <li><i class="fas fa-exclamation-triangle"></i> &nbsp;Priorität:
+                                                {{ $task->priority }}</li>
+                                            <li class="tags">
+                                                <ul>
+                                                    @foreach ($allTasks as $task2)
+                                                        <li>{{ $task2->name }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                            @if ($task->deadline)
+                                                <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
+                                                        href="{{ $task->calendarICS }}">ICS Datei</a></li>
+                                                <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
+                                                        href="{{ $task->calendarGoogle }}">Google Calendar</a></li>
+                                                <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
+                                                        href="{{ $task->calendarWebOutlook }}"> WebOutlook Calendar</a>
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    </div>
+                                    <div class="description">
+                                        @if ($task->deadline)
+                                            <h1 class="h1-color mb-4">
+                                                <div class="Deadline-title"><i
+                                                        class="far fa-calendar-alt"></i>&nbsp;DEADLINE:
+                                                    {{ $date = date('d-m-Y H:i', strtotime($task->deadline)) }}</div>
+                                            </h1>
+                                        @endif
+                                        <h1 class="mb-4">AUFGABE: {{ $task->title }}</h1>
+                                        <h2 class="mb-2">BESCHREIBUNG:</h2>
+                                        @if ($task->priority == 1)
+                                            <p class="priority1"> {!! $task->description !!} </p>
+                                        @elseif($task->priority==2)
+                                            <p class="priority2"> {!! $task->description !!}</p>
+                                        @elseif($task->priority==3)
+                                            <p class="priority3"> {!! $task->description !!}</p>
+                                        @elseif($task->priority==4)
+                                            <p class="priority4"> {!! $task->description !!}</p>
+                                        @else
+                                            <p class="priority5"> {!! $task->description !!}</p>
+                                        @endif
                                         <p class="read-more">
                                             <a type="button" data-toggle="collapse" id="open"
                                                 data-target="#collapseExample{{ $task->id }}" aria-expanded="false"
@@ -175,24 +187,28 @@
                                             @endif
 
 
-                                    <div class="mt-4">
-                                            <b class="mr-4">
-                                                <button  class="btn btn-warning but " href="" data-bs-toggle="modal" data-bs-target="#finish{{ $task->id }}"><i class="fas fa-check-circle"></i>Beenden</button>
-                                            </b>
-                                            &nbsp;&nbsp;&nbsp;
-                                            <b>
-                                                <button class="btn btn-danger but" href="" data-bs-toggle="modal" data-bs-target="#deleteTask{{ $task->id }}"><i class="fas fa-trash-alt"></i>Löschen</button>
-                                            </b>
+                                            <div class="mt-4">
+                                                <b class="mr-4">
+                                                    <button class="btn btn-warning but " href="" data-bs-toggle="modal"
+                                                        data-bs-target="#finish{{ $task->id }}"><i
+                                                            class="fas fa-check-circle"></i>Beenden</button>
+                                                </b>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <b>
+                                                    <button class="btn btn-danger but" href="" data-bs-toggle="modal"
+                                                        data-bs-target="#deleteTask{{ $task->id }}"><i
+                                                            class="fas fa-trash-alt"></i>Löschen</button>
+                                                </b>
+                                            </div>
+                                            <p class="read-more">
+                                                <a href="/Startseite/{{ $task->id }}/edit">Bearbeiten</a>
+                                            </p>
+
+                                        </div>
+
                                     </div>
-                                    <p class="read-more">
-                                        <a href="/Startseite/{{ $task->id }}/edit">Bearbeiten</a>
-                                    </p>
-
-                                </div>
-
                                 </div>
                             </div>
-                         </div>
                             <!-- Modal Delete Task-->
                             <div class="modal fade" id="deleteTask{{ $task->id }}" tabindex="-1"
                                 aria-labelledby="deleteTaskLabel" aria-hidden="true">

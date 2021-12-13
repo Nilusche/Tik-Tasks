@@ -319,7 +319,7 @@ class TaskController extends Controller
         //DB::select('select id from users where email = :operator',['operator' => $operator]);
         if(!$operatorID){
             //session()->flash('error','Ungültige Email-Adresse');
-            Alert::error('Fehler', 'Ungültige Email-Adresse');
+            Alert::error('Fehler', 'Es wurde kein Mitarbeiter mit passender E-Mail gefunden');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
         }
 
@@ -339,7 +339,6 @@ class TaskController extends Controller
                 )
             );
         }
-        //session()->flash('success', 'Aufgaben erfolgreich zugewiesen');
         Alert::success('Erfolg', 'Aufgaben erfolgreich zugewiesen');
         return redirect ('/Startseite');
     }
