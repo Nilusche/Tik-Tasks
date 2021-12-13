@@ -1086,3 +1086,9 @@ span #importexport:after {
     line-height: 42px;
     text-align: center;
 }
+.EmptyWebsite {
+    margin-top: 5em;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
