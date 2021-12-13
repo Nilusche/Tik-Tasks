@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="systempanel">
-            <img src="sources/GearSettings.png" alt="Settings_Picture">
+        <img style="margin-top:3.8em; margin-left:3em;"src="sources/settings.svg" alt="Settings_Picture">
             <div>
                 <span id=systempanelbutton>
                     <a id=archiv href="/Archive"></a>

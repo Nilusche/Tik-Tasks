@@ -59,7 +59,7 @@
                             <i class="fas fa-bell icon">
                                 <!-- Nur wenn Notifications vorhanden sind -->
                                 <span class="notifactionBadge">
-                                    105
+                                    {{$data}}
                                 </span>
                                 <!-- Wenn keine Notifications vorhanden sind, nichts anzeigen -->
                             </i>
