@@ -43,7 +43,6 @@
                                     <div class="badge bg-primary">
                                         <img src="sources/Ordner.png" alt="" style="max-height: 60px; float: left; padding-top: 9px; padding-left: 10px">
                                         <div class="card-body overflow-auto">
-
                                             <h4>Gruppe: {{ $task->name }}</h4>
                                         </div>
                                     </div>
@@ -168,6 +167,7 @@
                                             @else
                                                 <p class="priority5"> {!! $task->comment !!}</p>
                                             @endif
+                                            <!-- Verbleibende Zeit wird nur angezeigt wenn keine Deadline vorhanden ist -->
                                             @if ($task->deadline)
                                                 <h2 class="mt-3">Verbleibende Zeit: <span class="h1-color">
                                                         {{ $totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline) }}</span>

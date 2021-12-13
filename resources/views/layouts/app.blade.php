@@ -52,17 +52,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarToggler">
                 <ul class="navbar-nav ms-auto">
+                    <!-- Notifaction Bell -->
                     <li class="nav-item">
                         <a class="nav-item" href="/UserNotifications" data-toggle="tooltip" data-placement="top"
                             title="Benachrichtigungen">
                             <i class="fas fa-bell icon">
+                                <!-- Nur wenn Notifications vorhanden sind -->
                                 <span class="notifactionBadge">
                                     105
                                 </span>
+                                <!-- Wenn keine Notifications vorhanden sind, nichts anzeigen -->
                             </i>
-
                         </a>
-
                     </li>
                     @if (auth()->user()->isAdmin())
                         <li class="nav-item">

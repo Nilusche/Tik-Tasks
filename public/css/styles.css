@@ -568,7 +568,9 @@ trix-editor {
     width: 15%;
     margin: 20px 20px;
 }
-
+/*
+    Notification Bell
+ */
 .nav-item > i {
     color: #c6c8ca;
     padding-top: 0.6em;
