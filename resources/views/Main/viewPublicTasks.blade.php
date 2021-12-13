@@ -5,14 +5,12 @@
 @endsection
 
 @section('content')
-
     <div class="container">
         <div class="btn btn-secondary position-relative">
             <h1>Alle öffentlichen Aufgaben</h1>
         </div>
     </div>
-
-
+    @if ($publicTasks->first())
     @foreach ($publicTasks as $ptask)
         <div class="container">
             <div class="blog-card">
@@ -31,8 +29,6 @@
                 <h1 class="mb-4">AUFGABE: {{ $ptask->title }}</h1>
                 <h2 class="mb-2">BESCHREIBUNG:</h2>
                 <p>  {!!$ptask->description!!} </p>
-
-
                         <p class="read-more">
                             <a type="button" data-toggle="collapse" id="open"
                                 data-target="#collapseExample{{ $ptask->id }}" aria-expanded="false"
@@ -48,11 +44,14 @@
                                         {{ $totalDuration = Carbon\Carbon::now()->diffForHumans($ptask->deadline) }}</span>
                                 </h2>
                             @endif
-
                         </div>
 
                 </div>
             </div>
+        @endforeach
+    @else
+        <div class="container">
+            <h4 class="EmptyWebsite">Keine öffentlichen Aufgaben vorhanden</p>
         </div>
-    @endforeach
+    @endif
 @endsection
