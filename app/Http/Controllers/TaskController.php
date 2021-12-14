@@ -30,7 +30,7 @@ class TaskController extends Controller
             $this->validate(request(), [
                 'title'=>'required|max:50',
                 'estimatedEffort' =>'numeric',
-                'deadline' => 'date_format:Y-m-d|after_or_equal:today',
+                'deadline' => 'after_or_equal:today',
                 'visibility'=> 'required',
                 'description'=>'max:500',
                 'alarm' => 'required|integer'
