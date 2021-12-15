@@ -18,6 +18,7 @@ class CreateUserHasTaskTable extends Migration
             $table->integer('tasks_id');
             $table->integer('users_id');
             $table->boolean('isOwner');
+            $table->boolean('notified_manager')->default(false);
             
         });
     }

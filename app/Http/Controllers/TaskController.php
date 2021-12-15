@@ -279,7 +279,7 @@ class TaskController extends Controller
         foreach($tasks as $task){
             if($task->completed == 1){
                 foreach($allTasks as $singleTask){
-                    if($task->id == $singleTask->tasks_id && auth()->user()->id==$singleTask->users_id){
+                    if($task->id == $singleTask->tasks_id && auth()->user()->id==$singleTask->users_id && $singleTask->isOwner==1){
                         DB::table('tag_task')->where('task_id',$task->id)->delete();
                         DB::table('user_has_task')->delete($singleTask->id);
                         $task->delete();
