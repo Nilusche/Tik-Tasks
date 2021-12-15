@@ -15,6 +15,7 @@ class TaskController extends Controller
     public function create(){
         return view('Main.createTask');
     }
+    
     public function update(Task $task){
         $data = request()->all();
         if(empty($data['deadline'])){
@@ -23,34 +24,33 @@ class TaskController extends Controller
                 'estimatedEffort' =>'numeric',
                 'visibility'=> 'required',
                 'description'=>'max:500',
-                'alarm' => 'required|integer'
             ]);
         }else{
-            $task->deadline=$data['deadline'];
+            if(empty($data['deadline'])){
+                $task->deadline=$data['deadline'];
+            }
+            
             $this->validate(request(), [
                 'title'=>'required|max:50',
                 'estimatedEffort' =>'numeric',
                 'deadline' => 'after_or_equal:today',
                 'visibility'=> 'required',
                 'description'=>'max:500',
-                'alarm' => 'required|integer'
             ]);
         }
 
-        if(!empty($data['deadline'])){
-            $this->validate(request(),[
-                'alarm' =>'min:0'
-            ]);
+        if(!empty($task->deadline)){
+            $task->alarmdateInteger=$data['alarm'];
             if($data['alarm']==0){
-                $date = Carbon::parse($data['deadline']);
+                $date = Carbon::parse($task->deadline);
                 $task->alarmdate=$date;
             }
             else if($data['alarm']==1){
-                $date = Carbon::parse($data['deadline'])->subHours(1);
+                $date = Carbon::parse($task->deadline)->subHours(1);
                 $task->alarmdate=$date;
             }
             else if($data['alarm']==2){
-                $date = Carbon::parse($data['deadline'])->subDays(1);
+                $date = Carbon::parse($task->deadline)->subDays(1);
                 $task->alarmdate=$date;
             }
             else if($data['alarm']==3){
@@ -58,7 +58,7 @@ class TaskController extends Controller
                     'effort'=>'required'
                 ]);
                 $hours = (int) $data['effort'];
-                $date = Carbon::parse($data['deadline'])->subHours($hours);
+                $date = Carbon::parse($task->deadline)->subHours($hours);
                 $task->alarmdate=$date;
 
             }else if($data['alarm']==4){
@@ -72,8 +72,6 @@ class TaskController extends Controller
             $task->calendarICS=$link->ics();
             $task->calendarGoogle=$link->google();
             $task->calendarWebOutlook=$link->webOutlook();
-        }else{
-            $task->alarmdate=null;
         }
 
 
@@ -101,6 +99,7 @@ class TaskController extends Controller
             'alarm' =>'required'
         ]);
         if(!empty($data['alarm'])){
+            $task->alarmdateInteger=$data['alarm'];
             if($data['alarm']==0){
                 $date = Carbon::parse($task->deadline);
                 $task->alarmdate=$date;
@@ -132,8 +131,6 @@ class TaskController extends Controller
             $task->calendarICS=$link->ics();
             $task->calendarGoogle=$link->google();
             $task->calendarWebOutlook=$link->webOutlook();
-        }else{
-            $task->alarmdate=null;
         }
 
         $task->description =$data['description'];
@@ -164,13 +161,14 @@ class TaskController extends Controller
             $this->validate(request(), [
                 'title'=>'required|max:50',
                 'estimatedEffort' =>'numeric',
-                'deadline' => '|after_or_equal:today',
+                'deadline' => 'after_or_equal:today',
                 'visibility'=> 'required',
                 'description'=>'max:500'
             ]);
         }
 
         if(!empty($data['deadline'])){
+            $task->alarmdateInteger=$data['alarm'];
             if($data['alarm']==0){
                 $date = Carbon::parse($data['deadline']);
                 $task->alarmdate=$date;

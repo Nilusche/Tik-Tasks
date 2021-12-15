@@ -11,7 +11,7 @@
                     <span id="einloggen"><a href="/login"></a></span>
                 </div>
                 <div class="col-lg-6">
-                    <img class="workpicture" src="sources/LandingPageIllustrations.jpg" alt="work">
+                    <img class="workpicture" src="sources/LandingPageIllustrationsScaledDown.jpg" alt="work">
                 </div>
             </div>
         </div>
