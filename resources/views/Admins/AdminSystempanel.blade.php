@@ -2,6 +2,11 @@
 
 @section('content')
     @if(auth()->user()->isAdmin())
+        <div class ="container">
+            <div class="btn btn-secondary position-relative">
+                <h1>Systemeinstellungen</h1>
+            </div>
+        </div>
         <div class="container">
             <div class="systempanel">
                 <img style="margin-top:3.8em;" src="sources/adminpanel.svg" alt="Systempanel.png">

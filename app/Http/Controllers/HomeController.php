@@ -48,6 +48,7 @@ class HomeController extends Controller
         ->where('users_id','=',auth()->user()->id)
         ->get();
 
+
         return view('Main.index')->with('tasks', Task::all())
         ->with('TaskUserPairs', DB::table('user_has_task')->get())
         ->with('tags',$viewableTags)
@@ -79,7 +80,7 @@ class HomeController extends Controller
                 $data = array_merge((array)$data, $readat);
                 if($data['userid'] ===auth()->user()->id){
                 array_push($authNotis,$data);
-                }  
+                }
             }
         }
         return view('Main.settings')->with('notis',count($authNotis));
