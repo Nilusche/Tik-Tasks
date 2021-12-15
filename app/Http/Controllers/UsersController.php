@@ -34,7 +34,7 @@ class UsersController extends Controller
         }
         
         Alert::info('Erfolg','Änderungen erfolgreich übernommen');
-        return redirect()->back();
+        return redirect('Profile');
 
     }
 
