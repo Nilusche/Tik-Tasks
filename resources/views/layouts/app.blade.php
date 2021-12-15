@@ -75,9 +75,9 @@
                         </li>
                     @endif
                     @if (auth()->user()->isManager())
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Assign">Zuweisen</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Assign">Zuweisen</a>
+                            </li>
                     @endif
                     <li class="nav-item">
                         <a class="nav-link" href="/Settings">Einstellungen</a>
