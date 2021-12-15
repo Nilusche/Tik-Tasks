@@ -20,8 +20,8 @@
                         <input type="text" class="form-control" id="title" name="title" value="{{$task->title}}"placeholder="Titel der Aufgabe">
                     </div>
                     <div class="form-group">
-                        <label for="deadline">Deadline</label>
-                        <input type="datetime-local" class="form-control" id="deadline" name="deadline" value="{{$task->deadline}}">
+                        <label for="deadline">Deadline (bisher: {{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $task->deadline)->format('d-m-Y H:i')}})</label>
+                        <input type="datetime-local" class="form-control datetimepicker" id="deadline" name="deadline" value="old('deadline')">
                     </div>
                     <div class="form-group">
                         <label for="description">Beschreibung</label>
