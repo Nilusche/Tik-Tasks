@@ -91,7 +91,7 @@ Route::get("Startseite/{tag}/view/searchGroup", [TagsController::class, 'searchf
 
 Auth::routes();
 Route::get('logout', [LoginController::class, 'logout']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('Startseite');
+Route::get('/home', [HomeController::class, 'startseite']);
 
 //Import Export Routen
 Route::post('CSVAdminImport',[CSVController::class,'import'] )->middleware('auth');

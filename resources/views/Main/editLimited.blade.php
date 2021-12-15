@@ -78,7 +78,7 @@
                     <div class="form-group">
                         <label for="effort" class="form-label">Geschätzter aufwand (in Stunden)</label>
                         <input type="number" class="form-control" id="effort" name="effort" min="0"
-                            value="{{ $task->estimatedEffort }}" placeholder="3.5">
+                            value="{{ $task->estimatedEffort }}" placeholder="3.5" readonly>
                     </div>
                     <div class="form-group">
                         <label for="effort2" class="form-label">Tatsächlicher aufwand (in Stunden)</label>
