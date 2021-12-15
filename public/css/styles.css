@@ -440,6 +440,29 @@ span #gruppieren:after {
     border-radius: 5px;
 }
 
+#gErstellen {
+    display: inline-flex;
+    height: 55px;
+    width: 180px;
+    perspective: 1000px;
+    padding-left: 0em;
+    animation: none;
+}
+
+span #gErstell:before,
+span #gErstell:after {
+    position: absolute;
+    content: "GRUPPE ERSTELLEN";
+    height: 55px;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
 #deleteAll {
     display: inline-flex;
     height: 55px;

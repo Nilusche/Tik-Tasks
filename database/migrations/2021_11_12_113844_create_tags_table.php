@@ -18,6 +18,11 @@ class CreateTagsTable extends Migration
             $table->timestamps();
             $table->integer('users_id');
             $table->string('name');
+            $table->unsignedBigInteger('parent_id')->nullable();
+        });
+
+        Schema::table('tags',function (Blueprint $table){
+            $table->foreign('parent_id')->references('id')->on('tags');
         });
     }
 

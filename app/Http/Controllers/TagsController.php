@@ -12,17 +12,19 @@ use RealRashid\SweetAlert\Facades\Alert;
 class TagsController extends Controller
 {
     public function store(Request $request){
-
+        
+        //Parent Reference muss gesetzt werden
         $this->validate(request(),[
             'tag' =>'required'
         ]);
         $tag = new Tag();
         $tag->name = $request->tag;
         $tag->users_id =$request->userid;
+        $tag->parent_id = $request->parent_id;
         $tag->save();
 
         Alert::success('Erfolg', 'Neue Gruppe erfolgreich erstellt');
-        return redirect('/Group');
+        return redirect()->back();
     }
 
     public function searchfilter(Request $request){
@@ -49,7 +51,11 @@ class TagsController extends Controller
     public function deleteGroup(Request $request){
         $tagid = $request->tagid;
         //Löschen von tag_task
-
+        $tag = Tag::find($tagid);
+        if(Tag::where('parent_id', $tagid)->get()->count()>0){
+            Alert::error('Fehler', 'Gruppe hat Teilgruppen');
+            return redirect('/Startseite');
+        }
         //Delete all where tag_id = $tag_id
         DB::table('tag_task')->where('tag_id','=',$tagid)->delete();
         //Löschen von Tag eintrag
@@ -59,6 +65,6 @@ class TagsController extends Controller
         
         
         Alert::success('Erfolg', 'Gruppe wurde erfolgreich gelöscht');
-        return redirect('/Startseite');
+        return redirect()->back();
     }
 }
