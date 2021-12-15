@@ -23,7 +23,6 @@ class TaskController extends Controller
                 'estimatedEffort' =>'numeric',
                 'visibility'=> 'required',
                 'description'=>'max:500',
-                'alarm' => 'required|integer'
             ]);
         }else{
             $task->deadline=$data['deadline'];
@@ -33,14 +32,11 @@ class TaskController extends Controller
                 'deadline' => 'after_or_equal:today',
                 'visibility'=> 'required',
                 'description'=>'max:500',
-                'alarm' => 'required|integer'
             ]);
         }
 
         if(!empty($data['deadline'])){
-            $this->validate(request(),[
-                'alarm' =>'min:0'
-            ]);
+            $task->alarmdateInteger=$data['alarm'];
             if($data['alarm']==0){
                 $date = Carbon::parse($data['deadline']);
                 $task->alarmdate=$date;
@@ -101,6 +97,7 @@ class TaskController extends Controller
             'alarm' =>'required'
         ]);
         if(!empty($data['alarm'])){
+            $task->alarmdateInteger=$data['alarm'];
             if($data['alarm']==0){
                 $date = Carbon::parse($task->deadline);
                 $task->alarmdate=$date;
@@ -171,6 +168,7 @@ class TaskController extends Controller
         }
 
         if(!empty($data['deadline'])){
+            $task->alarmdateInteger=$data['alarm'];
             if($data['alarm']==0){
                 $date = Carbon::parse($data['deadline']);
                 $task->alarmdate=$date;

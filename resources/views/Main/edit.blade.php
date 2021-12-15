@@ -54,12 +54,43 @@
                     <div class="form-group">
                         <label for="alarm" class="">Erinnerungsalarm</label>
                         <select class="form-select" id="alarm" name="alarm"  aria-label="Default select example" required>
-                            <option value="" selected>Auswählen</option>
-                            <option value="0">Wenn abgelaufen</option>
-                            <option value="1">1 Stunde vorher</option>
-                            <option value="2">1 Tag vorher</option>
-                            <option value="3">Deadline minus aufwand</option>
-                            <option value="4">Niemals</option>
+                            @if($task->alarmdateInteger==0)
+                                <option value="0" selected>Wenn abgelaufen</option>
+                                <option value="1">1 Stunde vorher</option>
+                                <option value="2">1 Tag vorher</option>
+                                <option value="3">Deadline minus aufwand</option>
+                                <option value="4">Niemals</option>
+                            @elseif($task->alarmdateInteger==1)
+                                <option value="0">Wenn abgelaufen</option>
+                                <option value="1" selected>1 Stunde vorher</option>
+                                <option value="2">1 Tag vorher</option>
+                                <option value="3">Deadline minus aufwand</option>
+                                <option value="4">Niemals</option>
+                            @elseif($task->alarmdateInteger==2)
+                                <option value="0">Wenn abgelaufen</option>
+                                <option value="1">1 Stunde vorher</option>
+                                <option value="2" selected>1 Tag vorher</option>
+                                <option value="3">Deadline minus aufwand</option>
+                                <option value="4">Niemals</option>
+                            @elseif($task->alarmdateInteger==3)
+                                <option value="0">Wenn abgelaufen</option>
+                                <option value="1">1 Stunde vorher</option>
+                                <option value="2">1 Tag vorher</option>
+                                <option value="3" selected>Deadline minus aufwand</option>
+                                <option value="4">Niemals</option>
+                            @elseif($task->alarmdateInteger==4)
+                                <option value="0">Wenn abgelaufen</option>
+                                <option value="1">1 Stunde vorher</option>
+                                <option value="2">1 Tag vorher</option>
+                                <option value="3">Deadline minus aufwand</option>
+                                <option value="4" selected>Niemals</option>
+                            @else
+                                <option value="0">Wenn abgelaufen</option>
+                                <option value="1">1 Stunde vorher</option>
+                                <option value="2">1 Tag vorher</option>
+                                <option value="3">Deadline minus aufwand</option>
+                                <option value="4">Niemals</option>
+                            @endif
                         </select>
                     </div>
                     <div class="form-group">
