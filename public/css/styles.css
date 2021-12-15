@@ -473,10 +473,10 @@ span #deleteAlls:after {
 }
 
 .createTaskpic {
-    height: 40em;
+    height: 28em;
     width: auto;
-    margin-left: -5em;
-    margin-top: -3em;
+    margin-left: -1em;
+    margin-top: 4.2em;
     z-index: -1;
 }
 .form-range {
