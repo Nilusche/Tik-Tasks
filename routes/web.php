@@ -9,6 +9,7 @@ use App\Http\Controllers\viewGroupController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UserChangePasswordController;
+use App\Http\Controllers\SortController;
 use App\Http\Controllers\AdminController;
 use App\Models\Task;
 use App\Events\MessageNotification;
@@ -74,16 +75,15 @@ Route::POST('assignTasks',[TaskController::class,'assignTasks'])->middleware('au
 
 
 
-
 //Sortierung Aufgaben
-Route::get('SortbyNameAsc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('title','ASC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyNameDesc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('title', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyDeadlineAsc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('deadline')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyDeadlineDesc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('deadline', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyDateAsc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('created_at')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyDateDesc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('created_at', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyPriorityAsc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('priority')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
-Route::get('SortbyPriorityDesc', function(){return view('Main.index')->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())->with('tasks', Task::orderBy('priority', 'DESC')->get())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',DB::table('tags')->get());})->middleware('auth');
+Route::get('SortbyNameAsc',[SortController::class, 'SortbyNameAsc'])->middleware('auth');
+Route::get('SortbyNameDesc', [SortController::class, 'SortbyNameDesc'])->middleware('auth');
+Route::get('SortbyDeadlineAsc', [SortController::class, 'SortbyDeadlineAsc'])->middleware('auth');
+Route::get('SortbyDeadlineDesc', [SortController::class, 'SortbyDeadlineDesc'])->middleware('auth');
+Route::get('SortbyDateAsc',[SortController::class, 'SortbyDateAsc'] )->middleware('auth');
+Route::get('SortbyDateDesc',[SortController::class, 'SortbyDateDesc'] )->middleware('auth');
+Route::get('SortbyPriorityAsc',[SortController::class, 'SortbyPriorityAsc'] )->middleware('auth');
+Route::get('SortbyPriorityDesc',[SortController::class, 'SortbyPriorityDesc'])->middleware('auth');
 
 //Filter Aufgaben
 Route::get("search", [TaskController::class, 'searchfilter'])->middleware('auth');

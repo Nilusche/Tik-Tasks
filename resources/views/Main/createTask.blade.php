@@ -56,7 +56,7 @@
                     </div>
                     <div class="form-group">
                         <label for="priority" class="">Priorität (1-5 zunehmend wichtiger)</label>
-                        <input type="range" class="form-range" id="priority" name="priority" min="1" max="5" step="1"
+                        <input type="range" class="form-range" id="priority" name="priority" min="1" max="5" step="1" value="1"
                             oninput="this.nextElementSibling.value = this.value" value="{{ old('priority') }}">
                         <output><b>{{ old('priority') }}</b></output>
                     </div>

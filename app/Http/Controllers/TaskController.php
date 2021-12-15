@@ -386,8 +386,18 @@ class TaskController extends Controller
 
     public function searchfilter(Request $request){
         $search = $request->input('search');
+        $TaskDependencyOwner = DB::table('users')
+        ->select('users.id','user_has_task.tasks_id','user_has_task.isOwner')
+        ->join('user_has_task','users.id','=','user_has_task.users_id')
+        ->join('tasks','tasks.id','=','user_has_task.tasks_id')
+        ->where('user_has_task.isOwner','=',1)
+        ->where('users.id','=',auth()->user()->id)
+        ->where('tasks.completed','=',0)
+        ->get();
+
         if($search==""){
-            return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',Tag::all())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get());
+            return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',Tag::all())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())
+            ->with('taskOwner',$TaskDependencyOwner);
             exit();
         }
         $tasks = Task::query()
@@ -402,7 +412,8 @@ class TaskController extends Controller
             });
 
 
-        return view('Main.index')->with('tasks',$tasks)->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',Tag::all())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get());
+        return view('Main.index')->with('tasks',$tasks)->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',Tag::all())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())
+        ->with('taskOwner',$TaskDependencyOwner);
     }
 
 }

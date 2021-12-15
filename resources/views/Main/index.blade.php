@@ -195,7 +195,7 @@
                                                 </b>
                                                 &nbsp;&nbsp;&nbsp;
                                                 @foreach ($taskOwner as $to)
-                                                    @if ($to->tasks_id == $task->task_id)
+                                                    @if ($to->tasks_id == $task->id)
                                                         <b>
                                                             <button class="btn btn-danger but" href=""
                                                                 data-bs-toggle="modal"
