@@ -125,9 +125,9 @@ class TaskController extends Controller
             }
 
             if($data['description'])
-                $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline))->description($data['description']);
+                $link = Link::create($data['title'], Carbon::parse($task->deadline), Carbon::parse($task->alarmdate))->description($data['description']);
             else
-                $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline));
+                $link = Link::create($data['title'], Carbon::parse($task->deadline), Carbon::parse($task->alarmdate));
             $task->calendarICS=$link->ics();
             $task->calendarGoogle=$link->google();
             $task->calendarWebOutlook=$link->webOutlook();
@@ -147,6 +147,8 @@ class TaskController extends Controller
 
     public function save(){
         $data = request()->all();
+        $deadlinecompare = Carbon::now();
+
         $task = new Task();
         if(empty($data['deadline'])){
             $task->deadline=null;
@@ -193,9 +195,9 @@ class TaskController extends Controller
             }
 
             if($data['description'])
-                $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline))->description($data['description']);
+                $link = Link::create($data['title'],Carbon::parse($task->deadline), Carbon::parse($task->alarmdate) )->description($data['description']);
             else
-                $link = Link::create($data['title'], Carbon::parse($task->alarmdate), Carbon::parse($task->deadline));
+                $link = Link::create($data['title'], Carbon::parse($task->deadline), Carbon::parse($task->alarmdate));
             $task->calendarICS=$link->ics();
             $task->calendarGoogle=$link->google();
             $task->calendarWebOutlook=$link->webOutlook();
