@@ -532,16 +532,16 @@ trix-editor {
 }
 
 #zuweisen {
-    margin-left: 40%;
+    margin-left: 0%;
     margin-top: 8%;
 }
 
 #zuweisen-item {
-    width: 30%;
+    width: 70%;
 }
 
 #zuweisenbutton {
-    width: 30%;
+    width: 70%;
     margin-top: 2%;
 }
 
@@ -550,8 +550,8 @@ trix-editor {
 }
 
 #zuweisen-input {
-    width: 30%;
-    height: 50%;
+    width: 70%;
+    height: 20%;
 }
 
 .p-1 {
@@ -606,6 +606,32 @@ trix-editor {
 }
 
 #systempanelbutton {
+    display: inline-flex;
+    height: 55px;
+    width: 520px;
+    perspective: 1000px;
+    padding-left: 0em;
+    animation: none;
+}
+
+/**Assign**/
+.assignpanel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+}
+
+.assignpanel > div {
+    padding-top: 60px;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.assignpanel > img {
+    width: 80%;
+}
+
+#assignbutton {
     display: inline-flex;
     height: 55px;
     width: 520px;

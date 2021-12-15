@@ -3,6 +3,9 @@
 @section('content')
 
     <div class="container">
+        <div class="btn btn-secondary position-relative">
+            <h1>Einstellungen</h1>
+        </div>
         <div class="systempanel">
         <img style="margin-top:3.8em; margin-left:3em;"src="sources/settings.svg" alt="Settings_Picture">
             <div>

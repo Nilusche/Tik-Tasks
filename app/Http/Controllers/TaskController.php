@@ -383,7 +383,7 @@ class TaskController extends Controller
             Alert::success('Erfolg', 'Aufgaben erfolgreich gruppiert');
         }
 
-        return redirect('/Group');
+        return redirect('/Startseite');
     }
 
     public function searchfilter(Request $request){
