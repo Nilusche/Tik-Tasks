@@ -3,46 +3,108 @@
     <link rel="stylesheet" href="/css/card.css">
 @endsection
 @section('content')
-    <div>
-        <div class="container">
-            <span id=erstell><a id=erstellen href="/Create-task"></a></span>
-            <span id=gruppe><a id=gruppieren href="/Group"></a></span>
-            <div class="btn-group">
-                <button class="btn btn-lg dropdown-toggle Sortbtn" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Sortieren nach
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/Startseite/{{ $tag_id }}/view/SortbyNameAscGroup">Titel
-                            aufsteigend</a></li>
-                    <li><a class="dropdown-item" href="/Startseite/{{ $tag_id }}/view/SortbyNameDescGroup">Titel
-                            absteigend</a></li>
-                    <li><a class="dropdown-item" href="/Startseite/{{ $tag_id }}/view/SortbyDeadlineAscGroup">Deadline
-                            aufsteigend</a></li>
-                    <li><a class="dropdown-item"
-                            href="/Startseite/{{ $tag_id }}/view/SortbyDeadlineDescGroup">Deadline absteigend</a></li>
-                    <li><a class="dropdown-item"
-                            href="/Startseite/{{ $tag_id }}/view/SortbyDateOfCreationAscGroup">Erstellungdatum
-                            aufsteigend</a></li>
-                    <li><a class="dropdown-item"
-                            href="/Startseite/{{ $tag_id }}/view/SortbyDateOfCreationDescGroup">Erstellungdatum
-                            absteigend</a></li>
-                    <li><a class="dropdown-item"
-                            href="/Startseite/{{ $tag_id }}/view/SortbyPriorityAscGroup">Priorität aufsteigend</a>
-                    </li>
-                    <li><a class="dropdown-item"
-                            href="/Startseite/{{ $tag_id }}/view/SortbyPriorityDescGroup">Priorität absteigend</a>
-                    </li>
-                </ul>
-            </div>
-            <form class="form-inline filter" method="get" action="/Startseite/{{ $tag_id }}/view/searchGroup">
-                @csrf
-                <input class="form-control mr-sm-2 filterinput" type="search" name="search" placeholder="Filtern nach"
-                    aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0 searchbutton" type="submit"><i
-                        class="fas fa-search"></i></button>
-            </form>
+    <div class="container">
+        <span id=erstell><a id=erstellen href="/Create-task"></a></span>
+        <span id=gruppe><a id=gruppieren href="/Group"></a></span>
+        <div class="btn-group">
+            <button class="btn btn-lg dropdown-toggle Sortbtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sortieren nach
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/Startseite/{{ $tag_id }}/view/SortbyNameAscGroup">Titel
+                        aufsteigend</a></li>
+                <li><a class="dropdown-item" href="/Startseite/{{ $tag_id }}/view/SortbyNameDescGroup">Titel
+                        absteigend</a></li>
+                <li><a class="dropdown-item" href="/Startseite/{{ $tag_id }}/view/SortbyDeadlineAscGroup">Deadline
+                        aufsteigend</a></li>
+                <li><a class="dropdown-item" href="/Startseite/{{ $tag_id }}/view/SortbyDeadlineDescGroup">Deadline
+                        absteigend</a></li>
+                <li><a class="dropdown-item"
+                        href="/Startseite/{{ $tag_id }}/view/SortbyDateOfCreationAscGroup">Erstellungdatum
+                        aufsteigend</a></li>
+                <li><a class="dropdown-item"
+                        href="/Startseite/{{ $tag_id }}/view/SortbyDateOfCreationDescGroup">Erstellungdatum
+                        absteigend</a></li>
+                <li><a class="dropdown-item" href="/Startseite/{{ $tag_id }}/view/SortbyPriorityAscGroup">Priorität
+                        aufsteigend</a>
+                </li>
+                <li><a class="dropdown-item" href="/Startseite/{{ $tag_id }}/view/SortbyPriorityDescGroup">Priorität
+                        absteigend</a>
+                </li>
+            </ul>
         </div>
+        <form class="form-inline filter" method="get" action="/Startseite/{{ $tag_id }}/view/searchGroup">
+            @csrf
+            <input class="form-control mr-sm-2 filterinput" type="search" name="search" placeholder="Filtern nach"
+                aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0 searchbutton" type="submit"><i
+                    class="fas fa-search"></i></button>
+        </form>
+    </div>
+
+    <div class="container">
+        <form class="form-inline" method="get" action="/storeTags">
+            @csrf
+            <input class="form-control" type="text" name="tag" placeholder="Gruppe erstellen">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">erstellen</button>
+            <input type="hidden" name="userid" value="{{ auth()->user()->id }}">
+            <input type="hidden" name="parent_id" value="{{ $parent_id }}">
+        </form>
+    </div>
+
+    <!-- Teilgruppen -->
+    <!-- gibt es Gruppen für den User? -->
+    <div class="container">
+        @foreach ($tags as $tag)
+            <div class="row">
+                <div class="col-lg-11 col-md-11 col-sm-11">
+                    <div class="form-group">
+                        <a href="/Startseite/{{ $tag->id }}/view">
+                            <div class="row task">
+                                <div class="badge bg-primary">
+                                    <img src="sources/Ordner.png" alt=""
+                                        style="max-height: 60px; float: left; padding-top: 9px; padding-left: 10px">
+                                    <div class="card-body overflow-auto">
+                                        <h4>Gruppe: {{ $tag->name }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-group">
+                        <a class="btn btn-danger" type="button" data-bs-toggle="modal"
+                            data-bs-target="#deleteGroup{{ $tag->id }}"><i class="fas fa-trash-alt fa-3x"
+                                style="font-size: 62px">
+                            </i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal delete Group-->
+            <div class="modal fade" id="deleteGroup{{ $tag->id }}" tabindex="-1" aria-labelledby="deleteGroup"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteGroup">Gruppierung löschen</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Möchten sie wirklich die Gruppierung löschen? Die enthaltenen Aufgaben werden nicht
+                            gelöscht.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                            <a type="button" class="btn btn-danger"
+                                href="/Startseite/{{ $tag->id }}/deleteGroup">löschen</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        <!-- Aufgaben für den User, in der Gruppe -->
         @foreach ($tasks as $task)
             @if ($task->completed == false)
                 <div class="container" data-aos="zoom-in-down">
@@ -67,7 +129,8 @@
                                     <li><i class="far fa-calendar-alt"></i> &nbsp;<a
                                             href="{{ $task->calendarGoogle }}">Google Calendar</a></li>
                                     <li><i class="far fa-calendar-alt"></i> &nbsp;<a
-                                            href="{{ $task->calendarWebOutlook }}"> WebOutlook Calendar</a></li>
+                                            href="{{ $task->calendarWebOutlook }}">
+                                            WebOutlook Calendar</a></li>
                                 @endif
                             </ul>
                         </div>

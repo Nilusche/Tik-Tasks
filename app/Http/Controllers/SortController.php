@@ -17,15 +17,19 @@ class SortController extends Controller
         ->where('tasks.completed','=',0)
         ->get();
 
+        $viewableTags = DB::table('tags')
+        ->where('users_id','=',auth()->user()->id)
+        ->whereNull('parent_id')
+        ->get();
 
         return view('Main.index')
+        ->with('tags',$viewableTags)
         ->with('allTasks',DB::table('tasks')
         ->join('tag_task','tasks.id','=','tag_task.task_id')
         ->join('tags','tags.id','=','tag_task.tag_id')
         ->groupBy('tag_task.tag_id')->get())
         ->with('tasks', Task::orderBy('title','ASC')->get())
         ->with('TaskUserPairs',DB::table('user_has_task')->get())
-        ->with('tags',DB::table('tags')->get())
         ->with('taskOwner',$TaskDependencyOwner);
     }
 
@@ -39,14 +43,19 @@ class SortController extends Controller
         ->where('tasks.completed','=',0)
         ->get();
         
+        $viewableTags = DB::table('tags')
+        ->where('users_id','=',auth()->user()->id)
+        ->whereNull('parent_id')
+        ->get();
+
         return view('Main.index')
+        ->with('tags',$viewableTags)
         ->with('allTasks',DB::table('tasks')
         ->join('tag_task','tasks.id','=','tag_task.task_id')
         ->join('tags','tags.id','=','tag_task.tag_id')
         ->groupBy('tag_task.tag_id')->get())
         ->with('tasks', Task::orderBy('title','DESC')->get())
         ->with('TaskUserPairs',DB::table('user_has_task')->get())
-        ->with('tags',DB::table('tags')->get())
         ->with('taskOwner',$TaskDependencyOwner);
     }
     public function SortbyDeadlineAsc(){
@@ -59,13 +68,18 @@ class SortController extends Controller
         ->where('tasks.completed','=',0)
         ->get();
 
-        return view('Main.index')->with('allTasks',DB::table('tasks')
+        $viewableTags = DB::table('tags')
+        ->where('users_id','=',auth()->user()->id)
+        ->whereNull('parent_id')
+        ->get();
+
+        return view('Main.index')->with('tags',$viewableTags)
+        ->with('allTasks',DB::table('tasks')
         ->join('tag_task','tasks.id','=','tag_task.task_id')
         ->join('tags','tags.id','=','tag_task.tag_id')
         ->groupBy('tag_task.tag_id')->get())
         ->with('tasks', Task::orderBy('deadline')->get())
         ->with('TaskUserPairs',DB::table('user_has_task')->get())
-        ->with('tags',DB::table('tags')->get())
         ->with('taskOwner',$TaskDependencyOwner);
     }
     public function SortbyDeadlineDesc(){
@@ -78,13 +92,18 @@ class SortController extends Controller
         ->where('tasks.completed','=',0)
         ->get();
 
-        return view('Main.index')->with('allTasks',DB::table('tasks')
+        $viewableTags = DB::table('tags')
+        ->where('users_id','=',auth()->user()->id)
+        ->whereNull('parent_id')
+        ->get();
+
+        return view('Main.index')->with('tags',$viewableTags)
+        ->with('allTasks',DB::table('tasks')
         ->join('tag_task','tasks.id','=','tag_task.task_id')
         ->join('tags','tags.id','=','tag_task.tag_id')
         ->groupBy('tag_task.tag_id')->get())
-        ->with('tasks', Task::orderBy('deadline', 'DESC')->get())
+        ->with('tasks', Task::orderBy('deadline','DESC')->get())
         ->with('TaskUserPairs',DB::table('user_has_task')->get())
-        ->with('tags',DB::table('tags')->get())
         ->with('taskOwner',$TaskDependencyOwner);
     }
 
@@ -98,15 +117,19 @@ class SortController extends Controller
         ->where('tasks.completed','=',0)
         ->get();
 
+        $viewableTags = DB::table('tags')
+        ->where('users_id','=',auth()->user()->id)
+        ->whereNull('parent_id')
+        ->get();
 
         return view('Main.index')
+        ->with('tags',$viewableTags)
         ->with('allTasks',DB::table('tasks')
         ->join('tag_task','tasks.id','=','tag_task.task_id')
         ->join('tags','tags.id','=','tag_task.tag_id')
         ->groupBy('tag_task.tag_id')->get())
         ->with('tasks', Task::orderBy('created_at')->get())
         ->with('TaskUserPairs',DB::table('user_has_task')->get())
-        ->with('tags',DB::table('tags')->get())
         ->with('taskOwner',$TaskDependencyOwner);
     }
 
@@ -120,14 +143,19 @@ class SortController extends Controller
         ->where('tasks.completed','=',0)
         ->get();
 
+        $viewableTags = DB::table('tags')
+        ->where('users_id','=',auth()->user()->id)
+        ->whereNull('parent_id')
+        ->get();
+
         return view('Main.index')
+        ->with('tags',$viewableTags)
         ->with('allTasks',DB::table('tasks')
         ->join('tag_task','tasks.id','=','tag_task.task_id')
         ->join('tags','tags.id','=','tag_task.tag_id')
         ->groupBy('tag_task.tag_id')->get())
         ->with('tasks', Task::orderBy('created_at', 'DESC')->get())
         ->with('TaskUserPairs',DB::table('user_has_task')->get())
-        ->with('tags',DB::table('tags')->get())
         ->with('taskOwner',$TaskDependencyOwner);
     }
     public function SortbyPriorityAsc(){
@@ -140,14 +168,20 @@ class SortController extends Controller
         ->where('tasks.completed','=',0)
         ->get();
 
+        $viewableTags = DB::table('tags')
+        ->where('users_id','=',auth()->user()->id)
+        ->whereNull('parent_id')
+        ->get();
+
         return view('Main.index')
+        ->with('tags',$viewableTags)
         ->with('allTasks',DB::table('tasks')
         ->join('tag_task','tasks.id','=','tag_task.task_id')
         ->join('tags','tags.id','=','tag_task.tag_id')
         ->groupBy('tag_task.tag_id')->get())
         ->with('tasks', Task::orderBy('priority')->get())
         ->with('TaskUserPairs',DB::table('user_has_task')->get())
-        ->with('tags',DB::table('tags')->get())
+
         ->with('taskOwner',$TaskDependencyOwner);
 
     }
@@ -160,17 +194,22 @@ class SortController extends Controller
         ->where('user_has_task.isOwner','=',1)
         ->where('users.id','=',auth()->user()->id)
         ->where('tasks.completed','=',0)
-        ->get();        
+        ->get();  
+        
+        $viewableTags = DB::table('tags')
+        ->where('users_id','=',auth()->user()->id)
+        ->whereNull('parent_id')
+        ->get();
 
 
         return view('Main.index')
+        ->with('tags',$viewableTags)
         ->with('allTasks',DB::table('tasks')
         ->join('tag_task','tasks.id','=','tag_task.task_id')
         ->join('tags','tags.id','=','tag_task.tag_id')
         ->groupBy('tag_task.tag_id')->get())
         ->with('tasks', Task::orderBy('priority','DESC')->get())
         ->with('TaskUserPairs',DB::table('user_has_task')->get())
-        ->with('tags',DB::table('tags')->get())
         ->with('taskOwner',$TaskDependencyOwner);
 
     }

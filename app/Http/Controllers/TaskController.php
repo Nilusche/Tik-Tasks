@@ -26,7 +26,7 @@ class TaskController extends Controller
                 'description'=>'max:500',
             ]);
         }else{
-            if(empty($data['deadline'])){
+            if(!empty($data['deadline'])){
                 $task->deadline=$data['deadline'];
             }
             
@@ -395,8 +395,24 @@ class TaskController extends Controller
         ->where('tasks.completed','=',0)
         ->get();
 
+        /*
+        $viewableTags = DB::table('tags')
+        ->where('users_id','=',auth()->user()->id)
+        ->whereNull('parent_id')
+        ->get();
+        */
+        $viewableTags = [];
+
+
         if($search==""){
-            return view('Main.index')->with('tasks', Task::all())->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',Tag::all())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())
+            return view('Main.index')
+            ->with('tags',$viewableTags)
+            ->with('tasks', Task::all())
+            ->with('TaskUserPairs', DB::table('user_has_task')->get())
+            ->with('allTasks',DB::table('tasks')
+            ->join('tag_task','tasks.id','=','tag_task.task_id')
+            ->join('tags','tags.id','=','tag_task.tag_id')
+            ->groupBy('tag_task.tag_id')->get())
             ->with('taskOwner',$TaskDependencyOwner);
             exit();
         }
@@ -412,7 +428,14 @@ class TaskController extends Controller
             });
 
 
-        return view('Main.index')->with('tasks',$tasks)->with('TaskUserPairs', DB::table('user_has_task')->get())->with('tags',Tag::all())->with('allTasks',DB::table('tasks')->join('tag_task','tasks.id','=','tag_task.task_id')->join('tags','tags.id','=','tag_task.tag_id')->groupBy('tag_task.tag_id')->get())
+        return view('Main.index')
+        ->with('tags',$viewableTags)
+        ->with('tasks',$tasks)
+        ->with('TaskUserPairs', DB::table('user_has_task')->get())
+        ->with('allTasks',DB::table('tasks')
+            ->join('tag_task','tasks.id','=','tag_task.task_id')
+            ->join('tags','tags.id','=','tag_task.tag_id')
+            ->groupBy('tag_task.tag_id')->get())
         ->with('taskOwner',$TaskDependencyOwner);
     }
 

@@ -46,7 +46,9 @@ class HomeController extends Controller
 
         $viewableTags = DB::table('tags')
         ->where('users_id','=',auth()->user()->id)
+        ->whereNull('parent_id')
         ->get();
+
 
         $TaskDependencyOwner = DB::table('users')
         ->select('users.id','user_has_task.tasks_id','user_has_task.isOwner')

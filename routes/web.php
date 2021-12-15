@@ -61,7 +61,7 @@ Route::get('Startseite/{task}/edit',[TaskController::class, 'edit'])->middleware
 
 Route::get('Startseite/{task}/complete',[TaskController::class, 'complete'])->middleware('auth');
 
-//tags
+//Tags
 Route::get('Archive',[TaskController::class, 'showarchive'])->middleware('auth');
 Route::get('deleteArchive', [TaskController::class, 'delArchive'])->middleware('auth');
 Route::get('Group', [TaskController::class,'showtasks'])->middleware('auth');

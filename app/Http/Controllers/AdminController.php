@@ -113,6 +113,7 @@ class AdminController extends Controller
     public function edit(User $user){
         return view('Admins.AdminUpdateUser')->with('user', $user);
     }
+    //Warum zum fick UpdateUser und nicht Create User @Nilusche :(
     public function updateUser(Request $request, User $user){
         
         if(!empty($request->name)){
@@ -140,9 +141,6 @@ class AdminController extends Controller
                 'password' =>Hash::make($request->password),
             ]);
         }
-        
-        
-        
         Alert::success('Erfolg','Benutzeränderungen erfolgreich übernommen');
         return redirect('/EditUser');
     }
@@ -154,7 +152,6 @@ class AdminController extends Controller
 
         $user = User::where('email', '=', $request->email)->first();
 
-        
         if($user!=null){
             if($user->id == auth()->user()->id){
                 Alert::error('Fehler','Um ihre eigenen Daten zu ändern, navigieren sie bitte zur Profilseite');
