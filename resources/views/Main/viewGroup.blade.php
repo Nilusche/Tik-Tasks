@@ -40,21 +40,18 @@
             <button class="btn btn-outline-success my-2 my-sm-0 searchbutton" type="submit"><i
                     class="fas fa-search"></i></button>
         </form>
-    </div>
 
-    <div class="container">
-        <form class="form-inline" method="get" action="/storeTags">
+        <form class="form-inline groupfield" method="get" action="/storeTags">
             @csrf
-            <input class="form-control" type="text" name="tag" placeholder="Gruppe erstellen">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">erstellen</button>
+            <input class="form-control filterinput" type="text" name="tag" placeholder="Gruppe erstellen">
+            <button class="btn btn-outline-primary my-2 my-sm-0 groupbutton" type="submit"><i
+                    class="fas fa-folder-plus"></i></button>
             <input type="hidden" name="userid" value="{{ auth()->user()->id }}">
             <input type="hidden" name="parent_id" value="{{ $parent_id }}">
         </form>
-    </div>
 
-    <!-- Teilgruppen -->
-    <!-- gibt es Gruppen für den User? -->
-    <div class="container">
+        <!-- Teilgruppen -->
+        <!-- gibt es Gruppen für den User? -->
         @foreach ($tags as $tag)
             <div class="row">
                 <div class="col-lg-11 col-md-11 col-sm-11">
