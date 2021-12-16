@@ -134,6 +134,10 @@
                                                     @endforeach
                                                 </ul>
                                             </li>
+                                            @if($task->estimatedEffort)<li><i class="fas fa-hourglass-half"></i>&nbsp; Geschätzter Aufwand: {{$task->estimatedEffort}}</li>
+                                            @endif
+                                            @if($task->totalEffort)<li><i class="fas fa-hourglass-half"></i>&nbsp; Tatsächlicher Aufwand: {{$task->totalEffort}}</li>
+                                            @endif
                                             @if ($task->deadline)
                                                 <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
                                                         href="{{ $task->calendarICS }}">ICS Datei</a></li>
