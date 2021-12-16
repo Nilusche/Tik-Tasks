@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label for="description">Beschreibung</label>
                         <textarea class="form-control" name="description" id="description" cols="30"
-                            rows="9">{{ $task->description }}</textarea>
+                            rows="9" readonly>{{ $task->description }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="comment">Kommentar</label>

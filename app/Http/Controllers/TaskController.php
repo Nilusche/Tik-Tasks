@@ -106,7 +106,8 @@ class TaskController extends Controller
         $data = request()->all();
 
         $this->validate(request(),[
-            'alarm' =>'required'
+            'alarm' =>'required',
+            'description'=>'max:500'
         ]);
         if(!empty($data['alarm'])){
             $task->alarmdateInteger=$data['alarm'];

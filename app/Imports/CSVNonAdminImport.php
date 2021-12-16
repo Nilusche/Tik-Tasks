@@ -14,6 +14,7 @@ class CSVNonAdminImport implements ToModel
         if($row[0]==null){
             session()->flash('error', 'Datei leer oder invalide (z.B. Titel nicht gesetzt)');
         }
+
         $statement = DB::select("SHOW TABLE STATUS LIKE 'tasks'");
         $nextId = $statement[0]->Auto_increment;
         $task= new Task([
