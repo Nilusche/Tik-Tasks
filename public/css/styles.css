@@ -537,6 +537,8 @@ trix-editor {
     left: 33em;
 }
 
+
+
 .searchbutton {
     display: inline-block;
     position: relative;
@@ -545,6 +547,23 @@ trix-editor {
     width: 55px;
     bottom: 3.45em;
 }
+
+.groupfield {
+    margin-left: 2em;
+    width: 15em;
+    position: relative;
+    bottom: 11.8em;
+    left: 52em;
+}
+.groupbutton {
+    display: inline-block;
+    position: relative;
+    left: 15em;
+    height: 55px;
+    width: 55px;
+    bottom: 3.45em;
+}
+
 .filterinput {
     height: 55px;
 }
