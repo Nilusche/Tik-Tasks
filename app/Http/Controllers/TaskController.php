@@ -318,7 +318,6 @@ class TaskController extends Controller
 
         //Kontrolle ob $operator gültig ist
         $operatorID = User::where('email', $operator)->first();
-        //DB::select('select id from users where email = :operator',['operator' => $operator]);
         if(!$operatorID){
             //session()->flash('error','Ungültige Email-Adresse');
             Alert::error('Fehler', 'Es wurde kein Mitarbeiter mit passender E-Mail gefunden');
@@ -333,13 +332,20 @@ class TaskController extends Controller
 
 
         foreach($tasks as $task_id){
-            DB::table('user_has_task')->insert(
-                array(
-                    'users_id'=> $operatorID->id,
-                    'tasks_id'=> (int)$task_id,
-                    'isOwner'=>false
-                )
-            );
+            //Ausführung wenn noch keine identischen Einträge gefunden wurden
+            if(DB::table('user_has_task')->where('users_id','=',$operatorID->id)->where('tasks_id','=',(int)$task_id)->get()->count() == 0){
+                DB::table('user_has_task')->insert(
+                    array(
+                        'users_id'=> $operatorID->id,
+                        'tasks_id'=> (int)$task_id,
+                        'isOwner'=>false
+                    )
+                );
+            }
+            else{
+                Alert::warning('Erfolg aber ...', '... Mindestens eine der Aufgaben wurde dem Benutzer bereits zugewiesen');
+                return redirect ('/Startseite');
+            }
         }
         Alert::success('Erfolg', 'Aufgaben erfolgreich zugewiesen');
         return redirect ('/Startseite');

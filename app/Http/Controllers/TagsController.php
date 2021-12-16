@@ -61,9 +61,6 @@ class TagsController extends Controller
         //Löschen von Tag eintrag
         DB::table('tags')->where('id','=',$tagid)->delete();
         
-        
-        
-        
         Alert::success('Erfolg', 'Gruppe wurde erfolgreich gelöscht');
         return redirect()->back();
     }
