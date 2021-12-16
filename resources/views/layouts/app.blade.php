@@ -55,13 +55,13 @@
             <div class="collapse navbar-collapse" id="navbarToggler">
                 <ul class="navbar-nav ms-auto">
                     <!-- Notifaction Bell -->
-                    <li class="nav-item">
+                    <li class="nav-item ">
                         <a class="nav-item" href="/UserNotifications" data-toggle="tooltip" data-placement="top"
                             title="Benachrichtigungen">
                             <i class="fas fa-bell icon">
                                 <!-- Nur wenn Notifications vorhanden sind -->
                                 @if ($data > 0)
-                                    <span class="notifactionBadge">
+                                    <span class="notifactionBadge ">
                                         {{ $data }}
                                     </span>
                                 @endif
@@ -70,22 +70,22 @@
                         </a>
                     </li>
                     @if (auth()->user()->isAdmin())
-                        <li class="nav-item grow">
+                        <li class="nav-item grow {{ request()->is('Systempanel') ? 'active' : ''}}">
                             <a class="nav-link" href="/Systempanel">Systemverwaltung</a>
                         </li>
                     @endif
                     @if (auth()->user()->isManager())
-                            <li class="nav-item grow">
+                            <li class="nav-item grow {{ request()->is('Assign') ? 'active' : ''}}">
                                 <a class="nav-link" href="/Assign">Zuweisen</a>
                             </li>
                     @endif
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('Settings') ? 'active' : ''}}">
                         <a class="nav-link grow" href="/Settings">Einstellungen</a>
                     </li>
-                    <li class="nav-item grow">
+                    <li class="nav-item grow {{ request()->is('Profile') ? 'active' : ''}}">
                         <a class="nav-link" href="/Profile">Profil</a>
                     </li>
-                    <li class="nav-item grow">
+                    <li class="nav-item grow {{ request()->is('logout') ? 'active' : ''}} ">
                         <a class="nav-link" href="/logout">Ausloggen</a>
                     </li>
                 </ul>
@@ -110,7 +110,7 @@
     </footer>
 
 
-
+    
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -184,7 +184,17 @@
 
         })();
     </script>
-
+    <script>
+        $(document).ready(function() {
+            $( ".ms-auto .nav-item" ).bind( "click", function(event) {
+                var clickedItem = $( this );
+                $( ".ms-auto .nav-item" ).each( function() {
+                    $( this ).removeClass( "active" );
+                });
+                clickedItem.addClass( "active" );
+            });
+        });
+    </script>
     @yield('bottomscripts')
 </body>
 

@@ -15,6 +15,8 @@ nav {
     font-size: 1.75em;
 }
 
+
+
 .navcontainer {
     padding: 1% 15%;
     padding-bottom: 0;
@@ -37,7 +39,9 @@ nav {
     position: relative;
     bottom: 15px;
 }
-
+.active{
+    box-shadow: 0 0 1em #6fc5cd;
+}
 .nav-item {
     margin-left: 2em;
 }
@@ -536,7 +540,6 @@ trix-editor {
     bottom: 4.9em;
     left: 33em;
 }
-
 
 
 .searchbutton {
