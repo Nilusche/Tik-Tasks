@@ -170,7 +170,7 @@
                 //alert("Neue Benachrichtigung, Aufgabe abgelaufen");
                 alertify
                     .alert(
-                        "Sie haben gerade eine neue Benachrichtigung erhalten. Eine Aufgabe nähert sich der Deadline.",
+                        "Sie haben gerade eine neue Benachrichtigung erhalten.",
                         function() {
                             alertify.message('OK');
                             window.location.reload();
