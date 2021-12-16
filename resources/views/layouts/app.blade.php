@@ -70,7 +70,7 @@
                         </a>
                     </li>
                     @if (auth()->user()->isAdmin())
-                        <li class="nav-item grow {{ request()->is('Systempanel') ? 'active' : ''}}">
+                        <li class="nav-item grow {{ request()->is('Systempanel','EditUser','FindUser','DeleteUser','DeleteUser/action','AdminExportImport','register') ? 'active' : ''}}">
                             <a class="nav-link" href="/Systempanel">Systemverwaltung</a>
                         </li>
                     @endif
@@ -79,10 +79,10 @@
                                 <a class="nav-link" href="/Assign">Zuweisen</a>
                             </li>
                     @endif
-                    <li class="nav-item {{ request()->is('Settings') ? 'active' : ''}}">
+                    <li class="nav-item {{ request()->is('Settings','Archive','NonAdminExportImport','UserNotifications') ? 'active' : ''}}">
                         <a class="nav-link grow" href="/Settings">Einstellungen</a>
                     </li>
-                    <li class="nav-item grow {{ request()->is('Profile') ? 'active' : ''}}">
+                    <li class="nav-item grow {{ request()->is('Profile', 'Profile/edit','Profile/change-password') ? 'active' : ''}}">
                         <a class="nav-link" href="/Profile">Profil</a>
                     </li>
                     <li class="nav-item grow {{ request()->is('logout') ? 'active' : ''}} ">
@@ -186,9 +186,9 @@
     </script>
     <script>
         $(document).ready(function() {
-            $( ".ms-auto .nav-item" ).bind( "click", function(event) {
+            $( ".ms-auto .grow" ).bind( "click", function(event) {
                 var clickedItem = $( this );
-                $( ".ms-auto .nav-item" ).each( function() {
+                $( ".ms-auto .grow" ).each( function() {
                     $( this ).removeClass( "active" );
                 });
                 clickedItem.addClass( "active" );
