@@ -141,6 +141,12 @@ class AdminController extends Controller
                 'password' =>Hash::make($request->password),
             ]);
         }
+
+        if(!empty($request->role)){
+            $user->update([
+                'role' => $request->role
+            ]);
+        }
         Alert::success('Erfolg','Benutzeränderungen erfolgreich übernommen');
         return redirect('/EditUser');
     }
