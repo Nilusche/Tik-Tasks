@@ -24,7 +24,7 @@
                 @foreach ($TaskUserPairs as $TaskUserPair)
                     @if ($TaskUserPair->users_id == auth()->user()->id)
                         @foreach ($tasks as $task)
-                            @if ($task->completed == false && $task->id == $TaskUserPair->tasks_id)
+                            @if ($task->completed == false && $task->id == $TaskUserPair->tasks_id && $TaskUserPair->isOwner!=0)
                                 <li class="list-group-item">
                                     <input class="form-check-input me-1" name="tasks[]" type="checkbox"
                                         value="{{ $task->id }}" aria-label="...">
