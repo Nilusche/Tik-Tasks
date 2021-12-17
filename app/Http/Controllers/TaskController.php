@@ -10,6 +10,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use App\Models\User;
 
+
 class TaskController extends Controller
 {
     public function create(){
@@ -94,14 +95,19 @@ class TaskController extends Controller
         $task->visibility=$data['visibility'];
         $task->completed =false;
 
-        if($data['links']){
-            $links = explode(",", $data['links']);
-            $task->tag($links);
-        }
-
+        
         $task->save();
         
-
+        if($data['links']){
+            $links = explode(",", $data['links']);
+            
+            foreach($links as $link){
+                $Linktag = new \App\Models\Link();
+                $Linktag->name = $link;
+                $Linktag->save();
+                $task->links()->attach($Linktag);
+            }
+        }
 
         //session()->flash('success', 'Änderungen erfolgreich übernommen');
         Alert::success('Erfolg', 'Aufgabe wurde erfolgreich bearbeitet');
@@ -251,13 +257,22 @@ class TaskController extends Controller
         $task->estimatedEffort=$data['effort'];
         $task->visibility=$data['visibility'];
         $task->completed =false;
+        $task->save();
 
         if($data['links']){
             $links = explode(",", $data['links']);
-            $task->tag($links);
+            
+            foreach($links as $link){
+                $Linktag = new \App\Models\Link();
+                $Linktag->name = $link;
+                $Linktag->save();
+                $task->links()->attach($Linktag);
+            }
         }
 
-        $task->save();
+        
+        
+        
 
         
         

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\models\Link;
 class Task extends Model
 {
     
@@ -21,5 +21,9 @@ class Task extends Model
   
     public function hasTag($tagId){
         return in_array($tagId, $this->tags->pluck('id')->toArray());
+    }
+
+    public function links(){
+        return $this->belongsToMany(Link::class, 'task_link');
     }
 }

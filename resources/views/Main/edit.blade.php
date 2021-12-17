@@ -161,8 +161,8 @@
                         <div class="form-group">
                             <label for="links" class="form-label">Vorhandene Links</label>
                             <div class="form-item" id="links">
-                                @foreach($task->tags as $tag)
-                                    <a class=" btn btn-outline-danger"href="https://{{ $tag->name }}">{{ $tag->name }}</a>
+                                @foreach($task->links as $link)
+                                    <a class=" btn btn-outline-danger"href="https://{{ $link->name }}">{{ $link->name }}</a>
                                 @endforeach
                             </div>
                         </div>
