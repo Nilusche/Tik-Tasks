@@ -162,7 +162,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-        \Conner\Tagging\Providers\TaggingServiceProvider::class,
         /*
          * Package Service Providers...
          */
