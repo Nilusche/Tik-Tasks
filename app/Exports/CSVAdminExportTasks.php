@@ -17,7 +17,7 @@ class CSVAdminExportTasks implements FromCollection,WithMapping
             'select *
             from tasks t
             left join user_has_task uht
-            on uht.tasks_id = t.id');
+            on uht.tasks_id = t.id where uht.isOwner = true');
 
         
         return collect($tasks);

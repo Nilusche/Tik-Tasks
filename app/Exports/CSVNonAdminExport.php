@@ -20,7 +20,7 @@ class CSVNonAdminExport implements FromCollection, WithMapping
             on uht.tasks_id = t.id
             left join users
             on uht.users_id = users.id
-            where uht.users_id = :id;',['id'=>auth()->User()->id]);
+            where uht.isOwner=true and uht.users_id = :id;',['id'=>auth()->User()->id]);
         
             
         return  collect($tasks);

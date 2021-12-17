@@ -299,7 +299,6 @@ class TaskController extends Controller
 
                 DB::table('user_has_task')->where('tasks_id',$task->id)->delete();
 
-                $task->untag();
                 $task->delete();
                 //session()->flash('success', 'Aufgabe erfolgreich gelöscht');
                 Alert::success('Erfolg', 'Aufgabe erfolgreich gelöscht');
