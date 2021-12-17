@@ -97,6 +97,7 @@
                             oninput="this.nextElementSibling.value = this.value" value="{{ old('effort') }}">
                         <output><b>{{ $task->priority }}</b></output>
                     </div>
+                    <div class="form-group"></div>
                     <div class="form-group">
                         <label for="alarm" class="">Erinnerungsalarm</label>
                         <select class="form-select" id="alarm" name="alarm" aria-label="Default select example" required>
