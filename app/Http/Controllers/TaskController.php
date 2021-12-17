@@ -299,6 +299,10 @@ class TaskController extends Controller
 
                 DB::table('user_has_task')->where('tasks_id',$task->id)->delete();
 
+                $links = $task->links;
+                foreach($links as $link){
+                    $link->delete();
+                }
                 $task->delete();
                 //session()->flash('success', 'Aufgabe erfolgreich gelöscht');
                 Alert::success('Erfolg', 'Aufgabe erfolgreich gelöscht');
@@ -344,6 +348,10 @@ class TaskController extends Controller
                     if($task->id == $singleTask->tasks_id && auth()->user()->id==$singleTask->users_id && $singleTask->isOwner==1){
                         DB::table('tag_task')->where('task_id',$task->id)->delete();
                         DB::table('user_has_task')->delete($singleTask->id);
+                        $links = $task->links;
+                        foreach($links as $link){
+                            $link->delete();
+                        }
                         $task->delete();
                     }
                 }
