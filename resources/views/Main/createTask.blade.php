@@ -1,5 +1,32 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
+    <style>
+        .bootstrap-tagsinput .tag {
+            margin-right: 2px;
+            color: #ffffff;
+            background: #e62755;
+            padding: 3px 7px;
+            border-radius: 3px;
+        }
+
+        .bootstrap-tagsinput {
+            width: 100%;
+        }
+        .tag-wrapper {
+        max-height: 100px;
+        max-width: 27em;
+        overflow-x: auto;
+        overflow-y: auto;
+        display:inline-block;
+        }
+
+    </style>
+@endsection
+
 @section('content')
     <div class="container">
         @if ($errors->any())
@@ -54,7 +81,7 @@
                             @endif
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom:-1.5em;">
                         <label for="priority" class="">Priorität (1-5 zunehmend wichtiger)</label>
                         <input type="range" class="form-range" id="priority" name="priority" min="1" max="5" step="1" value="1"
                             oninput="this.nextElementSibling.value = this.value" value="{{ old('priority') }}">
@@ -76,13 +103,17 @@
                         <input type="number" class="form-control" id="effort" name="effort" min="0"
                             value="{{ old('effort') }}" placeholder="3.5">
                     </div>
-                    <div class="form-group"></div>
-                    <div class="form-group"></div>
-                    <div class="form-group"></div>
+
+                        
+                    <div class="form-group tag-wrapper">
+                        <label for="links" class="form-label">Verlinkungen (mit Komma trennen)</label>
+                        <input class="form-control" type="text" data-role="tagsinput" id="links" name="links" value="{{old('links')}}">
+                    </div>
                     <div class="form-group">
                         <p>Die mit * markierten Felder sind Pflichteingaben</p>
                         <span id=speicher><a id=speichern onclick="this.closest('form').submit();return false;"></a></span>
                     </div>
+                    
                 </div>
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
                     <img class="createTaskpic" src="/sources/addTask.svg" alt="taskpicture">
@@ -97,8 +128,10 @@
 
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"></script>
+    
+@endsection
+@section('bottomscripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
 @endsection
 
-@section('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css">
-@endsection

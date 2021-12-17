@@ -93,7 +93,14 @@ class TaskController extends Controller
         $task->totalEffort=$data['effort2'];
         $task->visibility=$data['visibility'];
         $task->completed =false;
+
+        if($data['links']){
+            $links = explode(",", $data['links']);
+            $task->tag($links);
+        }
+
         $task->save();
+        
 
 
         //session()->flash('success', 'Änderungen erfolgreich übernommen');
@@ -245,8 +252,15 @@ class TaskController extends Controller
         $task->visibility=$data['visibility'];
         $task->completed =false;
 
+        if($data['links']){
+            $links = explode(",", $data['links']);
+            $task->tag($links);
+        }
 
         $task->save();
+
+        
+        
 
         DB::table('user_has_task')->insert(
             array(

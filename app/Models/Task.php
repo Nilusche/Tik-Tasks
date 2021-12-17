@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
+    
     use HasFactory;
+    use \Conner\Tagging\Taggable;
     protected $fillable = ['id', 'title', 'description', 
     'comment', 'priority', 'estimatedEffort', 
     'totalEffort','completed', 'visibility', 'created_at',

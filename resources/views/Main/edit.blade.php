@@ -1,5 +1,44 @@
 @extends('layouts.app')
 
+
+@section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
+    <style>
+        .bootstrap-tagsinput .tag {
+            margin-right: 2px;
+            color: #ffffff;
+            background: #e62755;
+            padding: 3px 7px;
+            border-radius: 3px;
+        }
+
+        .bootstrap-tagsinput {
+            width: 100%;
+        }
+        .tag-wrapper {
+            max-height: 100px;
+            max-width: 27em;
+            overflow-x: auto;
+            overflow-y: auto;
+            display:inline-block;
+        }
+        .links{
+            max-height: 100px;
+            max-width: 27em;
+            overflow-x: auto;
+            overflow-y: auto;
+            display:inline-block;
+        }
+
+        .btn-outline-danger:hover{
+            background-color:#e62755;
+        }
+        .btn{
+            background-color:white;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="container">
         @if ($errors->any())
@@ -52,8 +91,8 @@
                             @endif
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="priority" class="">Priorität (1-5 zunehmend wichtiger)</label>
+                    <div class="form-group" style="margin-bottom:-1.5em;">
+                        <label for="priority" class="" >Priorität (1-5 zunehmend wichtiger)</label>
                         <input type="range" class="form-range" id="priority" name="priority" min="1" max="5" step="1"
                             oninput="this.nextElementSibling.value = this.value" value="{{ old('effort') }}">
                         <output><b>{{ $task->priority }}</b></output>
@@ -110,16 +149,37 @@
                         <input type="number" class="form-control" id="effort2" name="effort2" min="0"
                             value="{{ $task->totalEffort }}" placeholder="3.5">
                     </div>
-                    <div class="form-group">
+
+                    <div class="form-group mb-5">
                         <p>Die mit * markierten Felder sind Pflichteingaben</p>
                         <span id=speicher><a id=speichern onclick="this.closest('form').submit();return false;"></a></span>
                     </div>
                 </div>
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
-                    <img class="createTaskpic" src="/sources/editTask.svg" alt="taskpicture">
+                    <div class="links">
+                        <div class="form-group">
+                            <label for="links" class="form-label">Vorhandene Links</label>
+                            <div class="form-item" id="links">
+                                @foreach($task->tags as $tag)
+                                    <a class=" btn btn-outline-danger"href="https://{{ $tag->name }}">{{ $tag->name }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div><br>
+                
+                    <div class="form-group tag-wrapper">
+                        <label for="links" class="form-label">Verlinkungen (mit Komma trennen)</label>
+                        <input class="form-control" type="text" data-role="tagsinput" id="links" name="links" value="{{old('links')}}">
+                    </div>
+                    <img class="createTaskpic" src="/sources/editTask.svg" alt="taskpicture" style="height:20em; width:auto;">
                 </div>
 
             </div>
         </form>
     </div>
+@endsection
+
+@section('bottomscripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
 @endsection
