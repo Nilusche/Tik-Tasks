@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     public function deleteUser(){
-        return view('Admins.AdminDeleteUser');
+        return view('Admins.AdminDeleteUser')->with('users', User::all());
     }
     public function deleteForm(Request $request){
         $first_email = $request->femail;

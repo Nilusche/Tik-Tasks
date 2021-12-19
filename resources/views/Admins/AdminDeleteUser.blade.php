@@ -19,16 +19,24 @@
                 -webkit-appearance: none;
                 border: 1px solid #08D9D6;
             }
-
+            .list{
+                overflow: scroll;;
+            }
         </style>
 
         <div class="grid_b">
-
+            
             <div>
                 <form class="form_a_d" action="/DeleteUser/action" method="POST">
                     @csrf
                     <h3 class="loginuber_b">Benutzer löschen</h3>
-
+                    <h5>Vorhandene Benutzer</h5>
+                    <ul class="list">
+                    @foreach($users as $user)
+                        <li style="margin-bottom:-2px">{{$user->email}}</li> 
+                    @endforeach
+                    </ul>
+                    
                     <label for="exampleInputEmail1" class="labelinput_b">Email Addresse</label>
                     <input class="input_b" type="email" class="form-control" name="femail" id="exampleInputEmail1"
                         placeholder="Email Adresse eingeben" aria-describedby="emailHelp" required>
@@ -50,8 +58,11 @@
                                         <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
                                     </div> -->
                 </form>
+
             </div>
-            <div>
+        <div>
+            
+                    
 
 
             </div>
