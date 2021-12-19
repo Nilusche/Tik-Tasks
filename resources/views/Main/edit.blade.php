@@ -214,8 +214,8 @@
                     <td width="3%">{{ $file->id }}</td>
                     <td>{{ $file->slug }}</td>
                     <td width="10%">{{ $file->type }}</td>
-                    <td width="5%"><a href="/files/{{$file->name}}" class="btn btn-outline-primary">Anzeigen</a></td>
-                    <td width="5%"><a href="/files/delete/{{$file->id}}" class="btn btn-outline-danger">Löschen</a></td>
+                    <td width="5%"><a href="/files/{{$file->name}}" class="btn btn-outline-primary" target="_blank" rel="noopener noreferrer">Anzeigen</a></td>
+                    <td width="5%"><a href="/files/delete/{{$file->id}}" class="btn btn-outline-danger" target="_blank" rel="noopener noreferrer">Löschen</a></td>
                 </tr>
                 @endforeach
             </tbody>
