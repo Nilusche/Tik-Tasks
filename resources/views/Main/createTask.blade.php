@@ -38,7 +38,7 @@
                 </ul>
             </div>
         @endif
-        <form action="/Save-tasks" method="POST">
+        <form action="/Save-tasks" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
@@ -110,8 +110,6 @@
                         <input class="form-control" type="text" data-role="tagsinput" id="links" name="links" value="{{old('links')}}">
                     </div>
                     <div class="form-group">
-                        <p>Die mit * markierten Felder sind Pflichteingaben</p>
-                        <span id=speicher><a id=speichern onclick="this.closest('form').submit();return false;"></a></span>
                     </div>
                     
                 </div>
@@ -120,6 +118,21 @@
                 </div>
 
             </div>
+            <div class="pt-5"></div>
+            <div class="pt-5"></div>
+            <div class="pt-5"></div>
+            <div class="pt-5"></div>
+            <div class="pt-5"></div>
+            <div class="pt-5"></div>
+            <div class="bg-light p-5 rounded">
+                <h1>Dateien zum Hochladen auswählen</h1>
+                <div class="form-group mt-4">
+                <input type="file" name="files[]" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip" multiple>
+            </div>
+
+            <p>Die mit * markierten Felder sind Pflichteingaben</p>
+            <span id=speicher><a id=speichern onclick="this.closest('form').submit();return false;"></a></span>     
+        </div>
         </form>
     </div>
 @endsection

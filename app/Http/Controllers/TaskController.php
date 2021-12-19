@@ -9,7 +9,7 @@ use DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use App\Models\User;
-
+use App\Models\File;
 
 class TaskController extends Controller
 {
@@ -179,7 +179,7 @@ class TaskController extends Controller
 
     }
 
-    public function save(){
+    public function save(Request $request){
         $data = request()->all();
         $deadlinecompare = Carbon::now();
 
@@ -249,7 +249,6 @@ class TaskController extends Controller
         }
 
 
-
         $task->title =$data['title'];
         $task->description =$data['description'];
         $task->comment =$data['comment'];
@@ -258,6 +257,28 @@ class TaskController extends Controller
         $task->visibility=$data['visibility'];
         $task->completed =false;
         $task->save();
+
+        
+        if($request->hasfile('files'))
+         {
+            foreach($request->file('files') as $file)
+            {
+                $fileName = $task->id. '_' .time() .$file->getClientOriginalName(). '.' . $file->extension();
+
+                $clientname = $file->getClientOriginalName();
+                $type = $file->extension();
+                $size = $file->getSize();
+        
+                $file->move(public_path('file'), $fileName);
+                File::create([
+                    'task_id' => $task->id,
+                    'slug' => $clientname,
+                    'name' => $fileName,
+                    'type' => $type,
+                    'size' => $size
+                ]);
+            }
+         }
 
         if($data['links']){
             $links = explode(",", $data['links']);
@@ -299,6 +320,13 @@ class TaskController extends Controller
 
                 DB::table('user_has_task')->where('tasks_id',$task->id)->delete();
 
+                $files = File::where('task_id', $task->id)->get();
+                foreach($files as $file){
+                    $path = 'file/'. $file->name;
+                    $file->delete();
+                    unlink(public_path($path));
+                }
+                
                 $links = $task->links;
                 foreach($links as $link){
                     $link->delete();
@@ -323,7 +351,8 @@ class TaskController extends Controller
                 return view('Main.editLimited')->with('task', $task);
             }
         }
-        return view('Main.edit')->with('task', $task);
+        $files = File::where('task_id', $task->id)->get();
+        return view('Main.edit')->with('task', $task)->with('files', $files);
     }
 
     public function complete(Task $task){
@@ -348,6 +377,14 @@ class TaskController extends Controller
                     if($task->id == $singleTask->tasks_id && auth()->user()->id==$singleTask->users_id && $singleTask->isOwner==1){
                         DB::table('tag_task')->where('task_id',$task->id)->delete();
                         DB::table('user_has_task')->delete($singleTask->id);
+
+                        $files = File::where('task_id', $task->id)->get();
+                        foreach($files as $file){
+                            $path = 'file/'. $file->name;
+                            $file->delete();
+                            unlink(public_path($path));
+                        }
+                        
                         $links = $task->links;
                         foreach($links as $link){
                             $link->delete();

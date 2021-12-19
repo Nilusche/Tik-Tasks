@@ -181,6 +181,9 @@ footer {
     background-color: #e62755;
     padding-bottom: 0;
 }
+.genericButton{
+    background-color: #e62755
+}
 
 .transition2 {
     position: absolute;

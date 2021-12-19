@@ -178,6 +178,50 @@
             </div>
         </form>
     </div>
+
+    <div class="pt-5"></div>
+    <div class="pt-5"></div>
+    <div class="pt-5"></div>
+    <div class="pt-5"></div>
+    <div class="pt-5"></div>
+    <div class="pt-5"></div>
+    <div class="container">
+         <div class="bg-light p-5 rounded">
+            <h1>Dateien</h1>
+            <form action="/files/add/{{$task->id}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group mt-4">
+                <input type="file" name="files[]" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip" multiple>
+                </div>
+
+                <button class="w-100 btn btn-lg btn-outline-danger mt-2 mb-5" type="submit">Weitere Dateien Hochladen</button>
+            </form>               
+            
+
+            <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Typ</th>
+                <th scope="col">Ansicht</th>
+                <th scope="col">Löschen</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($files as $file)
+                <tr>
+                    <td width="3%">{{ $file->id }}</td>
+                    <td>{{ $file->slug }}</td>
+                    <td width="10%">{{ $file->type }}</td>
+                    <td width="5%"><a href="/files/{{$file->name}}" class="btn btn-outline-primary">Anzeigen</a></td>
+                    <td width="5%"><a href="/files/delete/{{$file->id}}" class="btn btn-outline-danger">Löschen</a></td>
+                </tr>
+                @endforeach
+            </tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('bottomscripts')

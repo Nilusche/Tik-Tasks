@@ -11,6 +11,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UserChangePasswordController;
 use App\Http\Controllers\SortController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FilesController;
 use App\Models\Task;
 use App\Events\MessageNotification;
 /*
@@ -133,3 +134,11 @@ Route::get('event',function(){
     event(new MessageNotification('Neue Benachrichtigung erhalten',auth()->user()->id));
     redirect()->back();
 });
+
+
+//File Upload Routes
+Route::get('files', [FilesController::class, 'index'])->name('files.index')->middleware('auth');
+Route::get('files/add', [FilesController::class, 'create'])->name('files.create')->middleware('auth');
+Route::post('files/add/{taskid}', [FilesController::class, 'store'])->name('files.store')->middleware('auth');
+Route::get('files/{filename}', [FilesController::class, 'open'])->middleware('auth');
+Route::get('files/delete/{file}', [FilesController::class, 'destroy'])->middleware('auth');
