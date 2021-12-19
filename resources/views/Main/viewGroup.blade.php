@@ -104,104 +104,139 @@
         <!-- Aufgaben für den User, in der Gruppe -->
         @foreach ($tasks as $task)
             @if ($task->completed == false)
-                <div class="container" data-aos="zoom-in-down">
-                    <div class="blog-card">
-                        <div class="meta">
-                            <div class="photo" style="background-image: url(/sources/task.svg)"></div>
-                            <ul class="details">
-                                <li class="date">Erstellt am:
-                                    {{ $date = date('d-m-Y H:i', strtotime($task->created_at)) }}</li>
-                                <li><i class="fas fa-exclamation-triangle"></i> &nbsp;Priorität: {{ $task->priority }}
-                                </li>
-                                <li class="tags">
-                                    <ul>
-                                        @foreach ($allTasks as $task2)
-                                            <li>{{ $task2->name }}</li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                @if ($task->deadline)
-                                    <li><i class="far fa-calendar-alt"></i> &nbsp;<a href="{{ $task->calendarICS }}">ICS
-                                            Datei</a></li>
-                                    <li><i class="far fa-calendar-alt"></i> &nbsp;<a
-                                            href="{{ $task->calendarGoogle }}">Google Calendar</a></li>
-                                    <li><i class="far fa-calendar-alt"></i> &nbsp;<a
-                                            href="{{ $task->calendarWebOutlook }}">
-                                            WebOutlook Calendar</a></li>
-                                @endif
-                            </ul>
-                        </div>
-                        <div class="description">
-                            @if ($task->deadline)
-                                <h1 class="h1-color mb-4">
-                                    <div class="Deadline-title"><i class="far fa-calendar-alt"></i>&nbsp;DEADLINE:
-                                        {{ $task->deadline }}</div>
-                                </h1>
-                            @endif
-                            <h1 class="mb-4">AUFGABE: {{ $task->title }}</h1>
-                            <h2 class="mb-2">BESCHREIBUNG:</h2>
-                            @if ($task->priority == 1)
-                                <p class="priority1"> {!! $task->description !!} </p>
-                            @elseif($task->priority==2)
-                                <p class="priority2"> {!! $task->description !!}</p>
-                            @elseif($task->priority==3)
-                                <p class="priority3"> {!! $task->description !!}</p>
-                            @elseif($task->priority==4)
-                                <p class="priority4"> {!! $task->description !!}</p>
-                            @else
-                                <p class="priority5"> {!! $task->description !!}</p>
-                            @endif
-
-                            <p class="read-more">
-                                <a type="button" data-toggle="collapse" id="open"
-                                    data-target="#collapseExample{{ $task->tasks_id }}" aria-expanded="false"
-                                    aria-controls="collapseExample{{ $task->tasks_id }}">Mehr anzeigen</a>
-                            </p>
-
-                            <div class="collapse" id="collapseExample{{ $task->tasks_id }}">
-                                <h2 class="mt-4">Kommentar:</h2>
-                                @if ($task->priority == 1)
-                                    <p class="priority1"> {!! $task->comment !!}</p>
-                                @elseif($task->priority==2)
-                                    <p class="priority2"> {!! $task->comment !!}</p>
-                                @elseif($task->priority==3)
-                                    <p class="priority3"> {!! $task->comment !!}</p>
-                                @elseif($task->priority==4)
-                                    <p class="priority4"> {!! $task->comment !!}</p>
-                                @else
-                                    <p class="priority5"> {!! $task->comment !!}</p>
-                                @endif
-                                <h2 class="mt-3">Verbleibende Zeit: <span class="h1-color">
-                                        {{ $totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline) }}</span>
-                                </h2>
-
-
-                                <div class="mt-4">
-                                    <b class="mr-4">
-                                        <button class="btn btn-warning but " href="" data-bs-toggle="modal"
-                                            data-bs-target="#finish{{ $task->tasks_id }}"><i
-                                                class="fas fa-check-circle"></i>Beenden</button>
-                                    </b>
-                                    &nbsp;&nbsp;&nbsp;
-                                    @foreach ($taskOwner as $to)
-                                        @if ($to->tasks_id == $task->tasks_id)
-                                            <b>
-                                                <button class="btn btn-danger but" href="" data-bs-toggle="modal"
-                                                    data-bs-target="#deleteTask{{ $task->tasks_id }}"><i
-                                                        class="fas fa-trash-alt"></i>Löschen</button>
-                                            </b>
+            <div class="container" data-aos="zoom-in-down">
+                                <div class="blog-card">
+                                    <div class="meta">
+                                        <div class="photo" style="background-image: url(/sources/task.svg)"></div>
+                                        <ul class="details">
+                                            <li class="date">Erstellt am:
+                                                {{ $date = date('d-m-Y H:i', strtotime($task->created_at)) }}</li>
+                                            <li><i class="fas fa-exclamation-triangle"></i> &nbsp;Priorität:
+                                                {{ $task->priority }}
+                                                @if($task->priority==1)
+                                                <div class="input-color">
+                                                    <div class="color-box" style="background-color: #4e9f3d;"> <!-- Replace "#FF850A" to change the color -->
+                                                </div>
+                                                @elseif($task->priority==2)
+                                                <div class="input-color">
+                                                    <div class="color-box" style="background-color: #fee440;"> <!-- Replace "#FF850A" to change the color -->
+                                                </div>
+                                                @elseif($task->priority==3)
+                                                <div class="input-color">
+                                                    <div class="color-box" style="background-color: #ff9300;"> <!-- Replace "#FF850A" to change the color -->
+                                                </div>
+                                                @elseif($task->priority==4)
+                                                <div class="input-color">
+                                                    <div class="color-box" style="background-color: #e02401;"> <!-- Replace "#FF850A" to change the color -->
+                                                </div>
+                                                @elseif($task->priority==5)
+                                                <div class="input-color">
+                                                    <div class="color-box" style="background-color: #950101;"> <!-- Replace "#FF850A" to change the color -->
+                                                </div>
+                                                @endif
+                                            </li>
+     
+                                            @if(empty($allTasks))
+                                                <li class="tags">
+                                                    <ul>
+                                                        @foreach ($allTasks as $task2)
+                                                            <li>{{ $task2->name }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endif
+                                            @if($task->estimatedEffort)<li><i class="fas fa-hourglass-half"></i>&nbsp; Geschätzter Aufwand: {{$task->estimatedEffort}}</li>
+                                            @endif
+                                            @if($task->totalEffort)<li><i class="fas fa-hourglass-half"></i>&nbsp; Tatsächlicher Aufwand: {{$task->totalEffort}}</li>
+                                            @endif
+                                            @if ($task->deadline)
+                                                <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
+                                                        href="{{ $task->calendarICS }}">ICS Datei</a></li>
+                                                <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
+                                                        href="{{ $task->calendarGoogle }}">Google Calendar</a></li>
+                                                <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
+                                                        href="{{ $task->calendarWebOutlook }}"> WebOutlook Calendar</a>
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    </div>
+                                    <div class="description">
+                                        @if ($task->deadline)
+                                            <h1 class="h1-color mb-4">
+                                                <div class="Deadline-title"><i
+                                                        class="far fa-calendar-alt"></i>&nbsp;DEADLINE:
+                                                    {{ $date = date('d-m-Y H:i', strtotime($task->deadline)) }}</div>
+                                            </h1>
                                         @endif
-                                    @endforeach
+                                        @if ($task->isOwner == 0)
+                                            <h1 class="date text-danger mb-4">Zugewiesene Aufgabe</h1>
+                                        @endif
+                                        <h1 class="mb-4">AUFGABE: {{ $task->title }}</h1>
+                                        <h2 class="mb-2">BESCHREIBUNG:</h2>
+                                        @if ($task->priority == 1)
+                                            <p class="priority1"> {!! $task->description !!} </p>
+                                        @elseif($task->priority==2)
+                                            <p class="priority2"> {!! $task->description !!}</p>
+                                        @elseif($task->priority==3)
+                                            <p class="priority3"> {!! $task->description !!}</p>
+                                        @elseif($task->priority==4)
+                                            <p class="priority4"> {!! $task->description !!}</p>
+                                        @else
+                                            <p class="priority5"> {!! $task->description !!}</p>
+                                        @endif
+                                        <b class="mr-4 ">
+                                                    <button class="btn btn-warning but mt-2 " href="" data-bs-toggle="modal"
+                                                        data-bs-target="#finish{{ $task->tasks_id }}"><i
+                                                            class="fas fa-check-circle"></i>Beenden</button>
+                                        </b>
+                                        <p class="read-more">
+                                            <a type="button" data-toggle="collapse" id="open"
+                                                data-target="#collapseExample{{ $task->tasks_id }}" aria-expanded="false"
+                                                aria-controls="collapseExample{{ $task->tasks_id }}">auf-/zuklappen</a>
+                                        </p>
+
+                                        <div class="collapse" id="collapseExample{{ $task->tasks_id }}">
+                                            <h2 class="mt-4">Kommentar:</h2>
+                                            @if ($task->priority == 1)
+                                                <p class="priority1"> {!! $task->comment !!}</p>
+                                            @elseif($task->priority==2)
+                                                <p class="priority2"> {!! $task->comment !!}</p>
+                                            @elseif($task->priority==3)
+                                                <p class="priority3"> {!! $task->comment !!}</p>
+                                            @elseif($task->priority==4)
+                                                <p class="priority4"> {!! $task->comment !!}</p>
+                                            @else
+                                                <p class="priority5"> {!! $task->comment !!}</p>
+                                            @endif
+                                            <!-- Verbleibende Zeit wird nur angezeigt wenn keine Deadline vorhanden ist -->
+                                            @if ($task->deadline)
+                                                <h2 class="mt-3">Verbleibende Zeit: <span class="h1-color">
+                                                        {{ $totalDuration = Carbon\Carbon::now()->diffForHumans($task->deadline) }}</span>
+                                                </h2>
+                                            @endif
+
+
+                                            <div class="mt-4">
+                                                @foreach ($taskOwner as $to)
+                                                    @if ($to->tasks_id == $task->tasks_id)
+                                                        <b>
+                                                            <button class="btn btn-danger but" href=""
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#deleteTask{{ $task->tasks_id }}"><i
+                                                                    class="fas fa-trash-alt"></i>Löschen</button>
+                                                        </b>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                            <p class="read-more">
+                                                <a href="/Startseite/{{ $task->tasks_id }}/edit">Bearbeiten</a>
+                                            </p>
+
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <p class="read-more">
-                                    <a href="/Startseite/{{ $task->tasks_id }}/edit">Bearbeiten</a>
-                                </p>
-
                             </div>
-
-                        </div>
-                    </div>
-                </div>
                 <!-- Modal Delete Task-->
                 @foreach ($taskOwner as $to)
                     @if ($to->tasks_id == $task->tasks_id)

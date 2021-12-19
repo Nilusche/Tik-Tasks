@@ -100,23 +100,27 @@
             @foreach ($TaskUserPairs as $TaskUserPair)
                 @if ($TaskUserPair->users_id == auth()->user()->id)
                     @if ($task->completed == false && $task->id == $TaskUserPair->tasks_id)
+
                         <?php
                         $result = DB::select(
                             'select t.id, t.title, tag.name, tag.users_id
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            from tasks t
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            left join tag_task tt
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            on tt.task_id = t.id
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            left join tags tag
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            on tag.id = tt.tag_id
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            where users_id = :id
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            and t.id = :taskID',
+                            from tasks t
+                            left join tag_task tt
+                            on tt.task_id = t.id
+                            left join tags tag
+                            on tag.id = tt.tag_id
+                            where users_id = :id
+                            and t.id = :taskID',
                             ['id' => auth()->user()->id, 'taskID' => $task->id],
                         );
+                        /*@if ($result)
+                            Objekte die in einer Gruppierung sind, werden nicht angezeigt. 
+                        @else*/
+                            // Dieser code wurde entfernt sodass, alle aufgaben auf der startseite angezeigt werden
                         ?>
-                        @if ($result)
-                            <!-- Objekte die in einer Gruppierung sind, werden nicht angezeigt. -->
-                        @else
-
+                        <!--
+                        
+                        -->
 
 
                             <div class="container" data-aos="zoom-in-down">
@@ -127,14 +131,39 @@
                                             <li class="date">Erstellt am:
                                                 {{ $date = date('d-m-Y H:i', strtotime($task->created_at)) }}</li>
                                             <li><i class="fas fa-exclamation-triangle"></i> &nbsp;Priorität:
-                                                {{ $task->priority }}</li>
-                                            <li class="tags">
-                                                <ul>
-                                                    @foreach ($allTasks as $task2)
-                                                        <li>{{ $task2->name }}</li>
-                                                    @endforeach
-                                                </ul>
+                                                {{ $task->priority }}
+                                                @if($task->priority==1)
+                                                <div class="input-color">
+                                                    <div class="color-box" style="background-color: #4e9f3d;"> <!-- Replace "#FF850A" to change the color -->
+                                                </div>
+                                                @elseif($task->priority==2)
+                                                <div class="input-color">
+                                                    <div class="color-box" style="background-color: #fee440;"> <!-- Replace "#FF850A" to change the color -->
+                                                </div>
+                                                @elseif($task->priority==3)
+                                                <div class="input-color">
+                                                    <div class="color-box" style="background-color: #ff9300;"> <!-- Replace "#FF850A" to change the color -->
+                                                </div>
+                                                @elseif($task->priority==4)
+                                                <div class="input-color">
+                                                    <div class="color-box" style="background-color: #e02401;"> <!-- Replace "#FF850A" to change the color -->
+                                                </div>
+                                                @elseif($task->priority==5)
+                                                <div class="input-color">
+                                                    <div class="color-box" style="background-color: #950101;"> <!-- Replace "#FF850A" to change the color -->
+                                                </div>
+                                                @endif
                                             </li>
+     
+                                            @if(empty($allTasks))
+                                                <li class="tags">
+                                                    <ul>
+                                                        @foreach ($allTasks as $task2)
+                                                            <li>{{ $task2->name }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endif
                                             @if($task->estimatedEffort)<li><i class="fas fa-hourglass-half"></i>&nbsp; Geschätzter Aufwand: {{$task->estimatedEffort}}</li>
                                             @endif
                                             @if($task->totalEffort)<li><i class="fas fa-hourglass-half"></i>&nbsp; Tatsächlicher Aufwand: {{$task->totalEffort}}</li>
@@ -174,6 +203,11 @@
                                         @else
                                             <p class="priority5"> {!! $task->description !!}</p>
                                         @endif
+                                        <b class="mr-4 ">
+                                                    <button class="btn btn-warning but mt-2 " href="" data-bs-toggle="modal"
+                                                        data-bs-target="#finish{{ $task->id }}"><i
+                                                            class="fas fa-check-circle"></i>Beenden</button>
+                                        </b>
                                         <p class="read-more">
                                             <a type="button" data-toggle="collapse" id="open"
                                                 data-target="#collapseExample{{ $task->id }}" aria-expanded="false"
@@ -202,12 +236,6 @@
 
 
                                             <div class="mt-4">
-                                                <b class="mr-4">
-                                                    <button class="btn btn-warning but " href="" data-bs-toggle="modal"
-                                                        data-bs-target="#finish{{ $task->id }}"><i
-                                                            class="fas fa-check-circle"></i>Beenden</button>
-                                                </b>
-                                                &nbsp;&nbsp;&nbsp;
                                                 @foreach ($taskOwner as $to)
                                                     @if ($to->tasks_id == $task->id)
                                                         <b>
@@ -279,7 +307,7 @@
                             </div>
 
 
-                        @endif
+                        
                     @endif
                 @endif
             @endforeach

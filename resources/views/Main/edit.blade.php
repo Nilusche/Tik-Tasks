@@ -68,7 +68,7 @@
                     <div class="form-group">
                         <label for="description">Beschreibung</label>
                         <textarea class="form-control" name="description" id="description" cols="30"
-                            rows="9">{{ $task->description }}</textarea>
+                            rows="9" maxlength="500">{{ $task->description }}</textarea>
                     </div>
                     <div class="form-group"></div>
                     <div class="form-group">
@@ -94,7 +94,7 @@
                     <div class="form-group" style="margin-bottom:-1.5em;">
                         <label for="priority" class="" >Priorität (1-5 zunehmend wichtiger)</label>
                         <input type="range" class="form-range" id="priority" name="priority" min="1" max="5" step="1"
-                            oninput="this.nextElementSibling.value = this.value" value="{{ old('effort') }}">
+                            oninput="this.nextElementSibling.value = this.value" value="{{ $task->priority }}">
                         <output><b>{{ $task->priority }}</b></output>
                     </div>
                     <div class="form-group"></div>
@@ -142,12 +142,12 @@
                     </div>
                     <div class="form-group">
                         <label for="effort" class="form-label">Geschätzter aufwand (in Stunden)</label>
-                        <input type="number" class="form-control" id="effort" name="effort" min="0"
+                        <input type="text" class="form-control" id="effort" name="effort" min="0"
                             value="{{ $task->estimatedEffort }}" placeholder="3.5" >
                     </div>
                     <div class="form-group">
                         <label for="effort2" class="form-label">Tatsächlicher aufwand (in Stunden)</label>
-                        <input type="number" class="form-control" id="effort2" name="effort2" min="0"
+                        <input type="text" class="form-control" id="effort2" name="effort2" min="0"
                             value="{{ $task->totalEffort }}" placeholder="3.5">
                     </div>
 

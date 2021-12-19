@@ -22,7 +22,8 @@ class TaskController extends Controller
         if(empty($data['deadline'])){
             $this->validate(request(), [
                 'title'=>'required|max:50',
-                'estimatedEffort' =>'numeric',
+                'effort' =>'numeric|nullable',
+                'effort2' =>'numeric|nullable',
                 'visibility'=> 'required',
                 'description'=>'max:500',
             ]);
@@ -33,7 +34,8 @@ class TaskController extends Controller
             
             $this->validate(request(), [
                 'title'=>'required|max:50',
-                'estimatedEffort' =>'numeric',
+                'effort' =>'numeric|nullable',
+                'effort2' =>'numeric|nullable',
                 'deadline' => 'after_or_equal:today',
                 'visibility'=> 'required',
                 'description'=>'max:500',
@@ -120,7 +122,9 @@ class TaskController extends Controller
 
         $this->validate(request(),[
             'alarm' =>'required',
-            'description'=>'max:500'
+            'description'=>'max:500',
+            'effort' =>'numeric|nullable',
+            'effort2' =>'numeric|nullable',
         ]);
         if(!empty($data['alarm'])){
             $task->alarmdateInteger=$data['alarm'];
@@ -188,7 +192,7 @@ class TaskController extends Controller
             $task->deadline=null;
             $this->validate(request(), [
                 'title'=>'required|max:50',
-                'estimatedEffort' =>'numeric',
+                'effort' =>'numeric|nullable',
                 'visibility'=> 'required',
                 'description'=>'max:500'
             ]);
@@ -196,7 +200,7 @@ class TaskController extends Controller
             $task->deadline=$data['deadline'];
             $this->validate(request(), [
                 'title'=>'required|max:50',
-                'estimatedEffort' =>'numeric',
+                'effort' =>'numeric|nullable',
                 'deadline' => 'after_or_equal:today',
                 'visibility'=> 'required',
                 'description'=>'max:500'

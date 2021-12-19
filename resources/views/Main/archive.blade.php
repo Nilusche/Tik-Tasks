@@ -20,14 +20,23 @@
                                 <div class="meta">
                                     <div class="photo" style="background-image: url(sources/task.svg)"></div>
                                     <ul class="details">
-                                        <li class="date">Erstellt am:
-                                            {{ $date = date('d-m-Y H:i', strtotime($task->created_at)) }}</li>
-                                        <li><i class="fas fa-exclamation-triangle"></i> &nbsp;Priorität:
-                                            {{ $task->priority }}</li>
-                                        <li class="tags">
-                                            <ul>
-                                            </ul>
-                                        </li>
+                                            <li class="date">Erstellt am:
+                                                {{ $date = date('d-m-Y H:i', strtotime($task->created_at)) }}</li>
+                                            <li><i class="fas fa-exclamation-triangle"></i> &nbsp;Priorität:
+                                                {{ $task->priority }}</li>
+                                            @if($task->estimatedEffort)<li><i class="fas fa-hourglass-half"></i>&nbsp; Geschätzter Aufwand: {{$task->estimatedEffort}}</li>
+                                            @endif
+                                            @if($task->totalEffort)<li><i class="fas fa-hourglass-half"></i>&nbsp; Tatsächlicher Aufwand: {{$task->totalEffort}}</li>
+                                            @endif
+                                            @if ($task->deadline)
+                                                <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
+                                                        href="{{ $task->calendarICS }}">ICS Datei</a></li>
+                                                <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
+                                                        href="{{ $task->calendarGoogle }}">Google Calendar</a></li>
+                                                <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
+                                                        href="{{ $task->calendarWebOutlook }}"> WebOutlook Calendar</a>
+                                                </li>
+                                            @endif
                                     </ul>
                                 </div>
                                 <div class="description">
