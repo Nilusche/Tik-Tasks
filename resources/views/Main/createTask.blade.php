@@ -106,7 +106,7 @@
 
                         
                     <div class="form-group tag-wrapper">
-                        <label for="links" class="form-label">Verlinkungen (mit Komma trennen)</label>
+                        <label for="links" class="form-label">Verlinkungen (Domains, mit Komma trennen)</label>
                         <input class="form-control" type="text" data-role="tagsinput" id="links" name="links" value="{{old('links')}}">
                     </div>
                     <div class="form-group">
