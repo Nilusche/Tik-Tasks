@@ -43,23 +43,26 @@
     @if ($notifications)
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">Aufgaben name</div>
-                <div class="col-lg-6">Verbliebene Zeit</div>
+                <div class="col-lg-4 col-sm-4 col-md-4"><b>Aufgaben name</b></div>
+                <div class="col-lg-4 col-sm-4 col-md-4"><b>Verbliebene Zeit</b></div>
+
             </div>
 
             @foreach ($notifications as $notification)
                 @if ($notification['read_at'] == null)
                     <div class="row">
-                        <div class="col-lg-6 text-danger"> {{ $notification['taskname'] }}</div>
-                        <div class="col-lg-6 text-danger"> {{ $notification['diff'] }}</div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 text-danger"> {{ $notification['taskname'] }}</div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 text-danger"> {{ $notification['diff'] }}</div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 text-danger"> <a class="btn btn-outline-dark" href="Startseite/{{ $notification['taskid'] }}/edit">Ansehen</a></div>
                     </div>
                 @endif
             @endforeach
             @foreach ($notifications as $notification)
                 @if ($notification['read_at'] != null)
                     <div class="row">
-                        <div class="col-lg-6 text-success"> {{ $notification['taskname'] }}</div>
-                        <div class="col-lg-6 text-success"> {{ $notification['diff'] }}</div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 text-success"> {{ $notification['taskname'] }}</div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 text-success"> {{ $notification['diff'] }}</div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 text-danger"> <a class="btn btn-outline-success" href="Startseite/{{ $notification['taskid'] }}/edit">Ansehen</a></div>
                     </div>
                 @endif
             @endforeach
