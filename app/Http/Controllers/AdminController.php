@@ -153,10 +153,10 @@ class AdminController extends Controller
 
     public function findUser(Request $request){
         $this->validate(request(),[
-            'email' =>'required|email'
+            'Benutzer' =>'required'
         ]);
 
-        $user = User::where('email', '=', $request->email)->first();
+        $user = User::find($request->Benutzer);
 
         if($user!=null){
             if($user->id == auth()->user()->id){

@@ -13,6 +13,7 @@ use App\Http\Controllers\SortController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FilesController;
 use App\Models\Task;
+use App\Models\User;
 use App\Events\MessageNotification;
 /*
 |--------------------------------------------------------------------------
@@ -118,7 +119,7 @@ Route::get('AdminExportImport', function(){return view('Admins.AdminExportImport
 
 Route::get('DeleteUser', [AdminController::class, 'deleteUser'])->middleware('auth');
 Route::post('DeleteUser/action',[AdminController::class, 'deleteForm'])->middleware('auth');
-Route::get('EditUser',function(){return view('Admins.AdminEditUser');})->middleware('auth');
+Route::get('EditUser',function(){return view('Admins.AdminEditUser')->with('users',User::where('role', '!=','admin')->get());})->middleware('auth');
 Route::post('FindUser', [AdminController::class, 'findUser'])->middleware('auth');
 Route::get('User/{user}/edit',[AdminController::class, 'edit'])->middleware('auth');
 Route::post('User/{user}/update',[AdminController::class, 'updateUser'])->middleware('auth');

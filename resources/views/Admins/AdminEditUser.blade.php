@@ -5,15 +5,7 @@
     @if (auth()->user()->isAdmin())
         <div class="container">
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="list-group">
-                        @foreach ($errors->all() as $error)
-                            <li class="list-group-item">{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            
 
             <div class="grid_b">
 
@@ -25,13 +17,28 @@
 
                                 </div>
                             -->
+                        
                     <form class="form_b_b" action="/FindUser" method="POST">
-                        @csrf
+                        
                         <h3 class="loginuber_b">Benutzer bearbeiten</h3>
-
-                        <label class="labelinput_b" for="email">Usermail</label>
-                        <input class="input_b" type="text" name="email" id="email" placeholder="Email eingeben">
-
+                        @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul class="list-group">
+                                        @foreach ($errors->all() as $error)
+                                            <li class="list-group-item">{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                        @csrf
+                        <label class="labelinput_b" for="Benutzer">Benutzer auswählen</label>
+                        <select name="Benutzer" id="Benutzer">
+                            <option value="" selected>Auswählen</option>
+                            @foreach($users as $user)
+                                <option value="{{$user->id}}">{{$user->email}}</option>
+                            @endforeach
+                        </select>
+                        
 
                         <button type="submit" class="btn btn-warning" name="submit" id="passwort_button_b">Edit
                             User</button>
