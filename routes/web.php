@@ -137,8 +137,6 @@ Route::get('event',function(){
 
 
 //File Upload Routes
-Route::get('files', [FilesController::class, 'index'])->name('files.index')->middleware('auth');
-Route::get('files/add', [FilesController::class, 'create'])->name('files.create')->middleware('auth');
 Route::post('files/add/{taskid}', [FilesController::class, 'store'])->name('files.store')->middleware('auth');
 Route::get('files/{filename}', [FilesController::class, 'open'])->middleware('auth');
 Route::get('files/delete/{file}', [FilesController::class, 'destroy'])->middleware('auth');
