@@ -60,10 +60,13 @@
                             placeholder="Titel der Aufgabe">
                     </div>
                     <div class="form-group">
-                        <label for="deadline">Deadline (bisher:
-                            {{ Carbon\Carbon::parse($task->deadline)->format('d-m-Y H:i') }})</label>
+                        <label for="deadline">
+                            Deadline @if($task->deadline)(bisher:
+                            {{ Carbon\Carbon::parse($task->deadline)->format('d-m-Y H:i') }})
+                            @endif
+                        </label>
                         <input type="datetime-local" class="form-control datetimepicker" id="deadline" name="deadline"
-                            value="old('deadline')">
+                            value="{{$task->deadline}}">
                     </div>
                     <div class="form-group">
                         <label for="description">Beschreibung</label>
