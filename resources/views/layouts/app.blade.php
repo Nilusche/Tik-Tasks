@@ -70,23 +70,23 @@
                         </a>
                     </li>
                     @if (auth()->user()->isAdmin())
-                        <li class="nav-item grow {{ request()->is('Systempanel','EditUser','FindUser','DeleteUser','DeleteUser/action','AdminExportImport','register') ? 'active' : ''}}">
-                            <a class="nav-link" href="/Systempanel">Systemverwaltung</a>
+                        <li class="nav-item grow">
+                            <a class="nav-link {{ request()->is('Systempanel','EditUser','FindUser','DeleteUser','DeleteUser/action','AdminExportImport','register') ? 'active' : ''}}" href="/Systempanel">Systemverwaltung</a>
                         </li>
                     @endif
                     @if (auth()->user()->isManager())
-                            <li class="nav-item grow {{ request()->is('Assign') ? 'active' : ''}}">
-                                <a class="nav-link" href="/Assign">Zuweisen</a>
+                            <li class="nav-item grow ">
+                                <a class="nav-link {{ request()->is('Assign') ? 'active' : ''}}" href="/Assign">Zuweisen</a>
                             </li>
                     @endif
-                    <li class="nav-item {{ request()->is('Settings','Archive','NonAdminExportImport','UserNotifications') ? 'active' : ''}}">
-                        <a class="nav-link grow" href="/Settings">Einstellungen</a>
+                    <li class="nav-item">
+                        <a class="nav-link grow {{ request()->is('Settings','Archive','NonAdminExportImport','UserNotifications') ? 'active' : ''}}" href="/Settings">Einstellungen</a>
                     </li>
-                    <li class="nav-item grow {{ request()->is('Profile', 'Profile/edit','Profile/change-password') ? 'active' : ''}}">
-                        <a class="nav-link" href="/Profile">Profil</a>
+                    <li class="nav-item grow">
+                        <a class="nav-link {{ request()->is('Profile', 'Profile/edit','Profile/change-password') ? 'active' : ''}}" href="/Profile">Profil</a>
                     </li>
-                    <li class="nav-item grow {{ request()->is('logout') ? 'active' : ''}} ">
-                        <a class="nav-link" href="/logout">Ausloggen</a>
+                    <li class="nav-item grow">
+                        <a class="nav-link {{ request()->is('logout') ? 'active' : ''}} " href="/logout">Ausloggen</a>
                     </li>
                 </ul>
             </div>

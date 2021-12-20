@@ -40,7 +40,7 @@ nav {
     bottom: 15px;
 }
 .active{
-    box-shadow: 0 0 1em #6fc5cd;
+    transform:scale(1.1);
 }
 .nav-item {
     margin-left: 2em;
