@@ -7,7 +7,9 @@
                 <div class="col-lg-6">
                     <img class="logo" src="sources/logo.png" alt="logo">
                     <!-- Insert Corporate Text here -->
-                    <p class="introduction"></p>
+                    <p class="introduction">
+                    Tik Task kann verwendet werden, um individuelle To-do-Listen einzusehen, anzulegen und editieren zu können, die von dem Tool gespeichert, geladen, mit anderen Benutzern geteilt und exportiert werden können. Der Zweck von Tik Tasks ist daher der Einsatz im Arbeitsalltag der Firma und/oder bei Projekten.
+                    </p>
                     <span id="einloggen"><a href="/login"></a></span>
                 </div>
                 <div class="col-lg-6">
