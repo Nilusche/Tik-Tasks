@@ -1185,3 +1185,14 @@ span #importexport:after {
     left: 5px;
     top: 5px;
 }
+
+    
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited , .bg-primary{
+    background-color: #6FC5CD !important;
+    border-color: #6FC5CD;
+}
+
+.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    background-color: #E62755 !important;
+    border-color: #E62755;
+}
