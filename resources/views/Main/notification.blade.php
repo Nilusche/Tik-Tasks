@@ -46,7 +46,7 @@
   
     <div class="container mt-7">
     <a class="btn btn-primary mb-3" href="/readNotifications">Alle Benachrichtigungen als gelesen markieren</a>
-    <a class="btn btn-danger mb-3" href="/notification/delete">Alle Benachrichtigungen löschen</a>
+    <a class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#delete" href="">Alle Benachrichtigungen löschen</a>
       <div class="row">
         <div class="col">
           <div class="card shadow">
@@ -130,6 +130,7 @@
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" href="/notification/{{$notification['id']}}/read">Als gelesen markieren</a>
                           <a class="dropdown-item" href="Startseite/{{ $notification['taskid'] }}/edit">Aufgabe ansehen</a>
                           <a class="dropdown-item" href="/notification/{{$notification['id']}}/delete">Benachrichigung löschen</a>
                         </div>
@@ -144,4 +145,23 @@
           </div>
         </div>
       </div>
+
+      <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteLabel">Benachrichtigungen löschen</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Möchten sie alle Benachrichtigungen löschen?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Abbrechen</button>
+                        <a type="button" class="btn btn-danger"href="/notification/delete">Löschen</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 @endsection

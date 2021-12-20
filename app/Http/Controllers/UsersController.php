@@ -54,6 +54,12 @@ class UsersController extends Controller
         return view('Main.notification')->with('notifications', $authNotis);
     }
 
+    public function readSingleNotification($id){
+        auth()->user()->unreadNotifications->where('id', $id)->markAsRead();
+        return redirect('/UserNotifications');
+    }
+
+
     public function readNotifications(){
         auth()->user()->unreadNotifications->markAsRead();
         $notfications = DB::table('notifications')->orderBy('read_at','desc')->get();
