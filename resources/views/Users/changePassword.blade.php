@@ -5,10 +5,14 @@
 
 @section('content')
 <div class="container">
+        <div class="btn btn-secondary position-relative">
+            <h1>Passwort ändern</h1>
+        </div>
+    </div>
+<div class="container">
     <form method="POST" action="/Profile/update-password">
     @csrf                  
         <div class="card card-1">          
-                <h3>Passwort ändern</h3>
                 @foreach ($errors->all() as $error)
                 <p class="text-danger">{{ $error }}</p>
                 @endforeach 
