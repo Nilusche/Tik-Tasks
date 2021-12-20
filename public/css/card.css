@@ -164,6 +164,23 @@ h1.Deadlinetitle{
     bottom: 0;
     z-index: -1;
   }
+
+  .blog-card #desc {
+    flex-basis: 90%;
+    z-index: 0;
+  }
+  .blog-card #desc:before {
+    transform: skewX(-3deg);
+    content: "";
+    background: #fff;
+    width: 30px;
+    position: absolute;
+    left: -10px;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+  
   .blog-card.alt {
     flex-direction: row-reverse;
   }
@@ -176,3 +193,4 @@ h1.Deadlinetitle{
     padding-left: 25px;
   }
 }
+
