@@ -48,13 +48,13 @@
             <div class="row">
                 <div class="col-lg-11 col-md-11 col-sm-11">
                     <div class="form-group">
-                        <a href="/Startseite/{{ $tag->id }}/view">
+                        <a style="text-decoration:none" href="/Startseite/{{ $tag->id }}/view">
                             <div class="row task">
                                 <div class="badge bg-primary">
                                     <img src="sources/Ordner.png" alt=""
                                         style="max-height: 60px; float: left; padding-top: 9px; padding-left: 10px">
                                     <div class="card-body overflow-auto">
-                                        <h4>Gruppe: {{ $tag->name }}</h4>
+                                        <h3>Gruppe: {{ $tag->name }}</h3>
                                     </div>
                                 </div>
                             </div>
