@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('css')
+    <link rel="stylesheet" href="css/notification.css">
+@endsection
+
 @section('navbar')
     <div class="container-fluid navcontainer">
         <nav class="navbar navbar-expand-lg navbar-dark back">
@@ -35,44 +40,108 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="btn btn-secondary position-relative">
-            <h1>Benachrichtigungen</h1>
-        </div>
-    </div>
-    @if ($notifications)
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-sm-4 col-md-4"><b>Aufgaben name</b></div>
-                <div class="col-lg-4 col-sm-4 col-md-4"><b>Verbliebene Zeit</b></div>
-
+    
+    
+  <div class="main-content">
+  
+    <div class="container mt-7">
+    <a class="btn btn-primary mb-3" href="/readNotifications">Alle Benachrichtigungen als gelesen markieren</a>
+    <a class="btn btn-danger mb-3" href="/notification/delete">Alle Benachrichtigungen löschen</a>
+      <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <h3 class="mb-0">Benachrichtigungen</h3>
             </div>
-
-            @foreach ($notifications as $notification)
-                @if ($notification['read_at'] == null)
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-4 col-md-4 text-danger"> {{ $notification['taskname'] }}</div>
-                        <div class="col-lg-4 col-sm-4 col-md-4 text-danger"> {{ $notification['diff'] }}</div>
-                        <div class="col-lg-4 col-sm-4 col-md-4 text-danger"> <a class="btn btn-outline-dark" href="Startseite/{{ $notification['taskid'] }}/edit">Ansehen</a></div>
-                    </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Aufgabe</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Verbliebene Zeit</th>
+                    <th scope="col">Priorität</th>
+                    <th scope="col">Gelesen</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                @if ($notifications)
+                @foreach($notifications as $notification)
+                    <?php
+                        $noti = DB::table('notifications')->where('id', $notification['taskid'])->get();
+                        $task = App\Models\Task::find($notification['taskid']);
+                    ?>
+                  <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a class="avatar rounded-circle mr-3" disabled>
+                          <img alt="Image placeholder" src="sources/task.png">
+                        </a>
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{$notification['taskname']}}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                    {{ $date = date('d-m-Y H:i', strtotime($task->deadline)) }}
+                    </td>
+                    <td>
+                    {{ $notification['diff'] }}
+                    </td>
+                    <td>
+                        {{$task->priority}}
+                        @if($task->priority==1)
+                        <div class="input-color">
+                            <div class="color-box" style="background-color: #4e9f3d;"> 
+                        </div>
+                        @elseif($task->priority==2)
+                        <div class="input-color">
+                            <div class="color-box" style="background-color: #fee440;"> 
+                        </div>
+                        @elseif($task->priority==3)
+                        <div class="input-color">
+                            <div class="color-box" style="background-color: #ff9300;"> 
+                        </div>
+                        @elseif($task->priority==4)
+                        <div class="input-color">
+                            <div class="color-box" style="background-color: #e02401;"> 
+                        </div>
+                        @elseif($task->priority==5)
+                        <div class="input-color">
+                            <div class="color-box" style="background-color: #950101;"> 
+                        </div>
+                        @endif
+                    <td>
+                    @if ($notification['read_at'] == null)
+                        <span class="badge badge-dot mr-4 text-dark">
+                        <i class="bg-danger"></i> ungelesen
+                      </span>
+                    @else
+                        <span class="badge badge-dot mr-4 text-dark">
+                            <i class="bg-success"></i> gelesen
+                        </span>
+                    @endif
+                    </td>
+                    <td class="text-right">
+                      <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" href="Startseite/{{ $notification['taskid'] }}/edit">Aufgabe ansehen</a>
+                          <a class="dropdown-item" href="/notification/{{$notification['id']}}/delete">Benachrichigung löschen</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  @endforeach 
                 @endif
-            @endforeach
-            @foreach ($notifications as $notification)
-                @if ($notification['read_at'] != null)
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-4 col-md-4 text-success"> {{ $notification['taskname'] }}</div>
-                        <div class="col-lg-4 col-sm-4 col-md-4 text-success"> {{ $notification['diff'] }}</div>
-                        <div class="col-lg-4 col-sm-4 col-md-4 text-danger"> <a class="btn btn-outline-success" href="Startseite/{{ $notification['taskid'] }}/edit">Ansehen</a></div>
-                    </div>
-                @endif
-            @endforeach
-            <a class="btn btn-primary" href="/readNotifications">Mark as Read</a>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-    @else
-        <div class="container">
-            <h4 class="EmptyWebsite">Keine Benachrichtungen vorhanden</p>
-        </div>
-    @endif
-
-
+      </div>
 @endsection

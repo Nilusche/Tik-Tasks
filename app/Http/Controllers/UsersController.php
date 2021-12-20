@@ -44,7 +44,8 @@ class UsersController extends Controller
        foreach($notfications as $notfication){
             $data = json_decode($notfication->data);
             $readat=array('read_at'=>$notfication->read_at);
-            $data = array_merge((array)$data, $readat);
+            $id=array('id'=>$notfication->id);
+            $data = array_merge((array)$data, $readat,$id );
             if($data['userid'] ===auth()->user()->id){
                 array_push($authNotis,$data);
             }
@@ -60,7 +61,8 @@ class UsersController extends Controller
         foreach($notfications as $notfication){
             $data = json_decode($notfication->data);
             $readat=array('read_at'=>$notfication->read_at);
-            $data = array_merge((array)$data, $readat);
+            $id=array('id'=>$notfication->id);
+            $data = array_merge((array)$data, $readat,$id );
             if($data['userid'] ===auth()->user()->id){
                 array_push($authNotis,$data);
             }  
@@ -69,6 +71,27 @@ class UsersController extends Controller
     }
 
     public function deleteNotifications(){
-        
+        $notfications = DB::table('notifications')->orderBy('read_at','desc')->get();
+        $authNotis=[];
+        foreach($notfications as $notfication){
+            $data = json_decode($notfication->data);
+            $readat=array('read_at'=>$notfication->read_at);
+            $id=array('id'=>$notfication->id);
+            $data = array_merge((array)$data, $readat,$id );
+            if($data['userid'] ===auth()->user()->id){
+                array_push($authNotis,$data);
+            }  
+        }
+
+        foreach($authNotis as $notis){
+            DB::table('notifications')->where('id',$notis['id'])->delete();
+        }
+        return redirect('/UserNotifications');
+    }
+
+    public function deleteSingleNotification($id){
+     DB::table('notifications')->where('id',$id)->delete();
+
+       return redirect('/UserNotifications');
     }
 }

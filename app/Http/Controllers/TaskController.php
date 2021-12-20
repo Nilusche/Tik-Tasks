@@ -324,13 +324,35 @@ class TaskController extends Controller
 
                 DB::table('user_has_task')->where('tasks_id',$task->id)->delete();
 
+                //Dateien löschen
                 $files = File::where('task_id', $task->id)->get();
                 foreach($files as $file){
                     $path = 'file/'. $file->name;
                     $file->delete();
                     unlink(public_path($path));
                 }
-                
+
+                //Benachrichtigungen löschen
+                $notfications = DB::table('notifications')->orderBy('read_at','desc')->get();
+                $authNotis=[];
+                foreach($notfications as $notfication){
+                    $data = json_decode($notfication->data);
+                    $readat=array('read_at'=>$notfication->read_at);
+                    $id=array('id'=>$notfication->id);
+                    $data = array_merge((array)$data, $readat,$id );
+                    if($data['userid'] ===auth()->user()->id){
+                        array_push($authNotis,$data);
+                    }  
+                }
+
+                foreach($authNotis as $noti){
+                    if($noti['taskid']==$task->id){
+                        DB::table('notifications')->where('id',$id)->delete();
+                    }
+                }
+
+
+                //links löschen
                 $links = $task->links;
                 foreach($links as $link){
                     $link->delete();
@@ -382,13 +404,34 @@ class TaskController extends Controller
                         DB::table('tag_task')->where('task_id',$task->id)->delete();
                         DB::table('user_has_task')->delete($singleTask->id);
 
+                        //Dateien löschen
                         $files = File::where('task_id', $task->id)->get();
                         foreach($files as $file){
                             $path = 'file/'. $file->name;
                             $file->delete();
                             unlink(public_path($path));
                         }
+
+                        //Benachrichtigungen löschen
+                        $notfications = DB::table('notifications')->orderBy('read_at','desc')->get();
+                        $authNotis=[];
+                        foreach($notfications as $notfication){
+                            $data = json_decode($notfication->data);
+                            $readat=array('read_at'=>$notfication->read_at);
+                            $id=array('id'=>$notfication->id);
+                            $data = array_merge((array)$data, $readat,$id );
+                            if($data['userid'] ===auth()->user()->id){
+                                array_push($authNotis,$data);
+                            }  
+                        }
+
+                        foreach($authNotis as $noti){
+                            if($noti['taskid']==$task->id){
+                                DB::table('notifications')->where('id',$id)->delete();
+                            }
+                        }
                         
+                        //links löschen
                         $links = $task->links;
                         foreach($links as $link){
                             $link->delete();
