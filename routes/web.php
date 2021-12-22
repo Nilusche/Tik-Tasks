@@ -144,5 +144,3 @@ Route::post('files/add/{taskid}', [FilesController::class, 'store'])->name('file
 Route::get('files/{filename}', [FilesController::class, 'open'])->middleware('auth');
 Route::get('files/delete/{file}', [FilesController::class, 'destroy'])->middleware('auth');
 
-
-Route::get('test', function(){return view('auth.register2');});
