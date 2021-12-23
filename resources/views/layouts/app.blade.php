@@ -55,6 +55,9 @@
             <div class="collapse navbar-collapse" id="navbarToggler">
                 <ul class="navbar-nav ms-auto">
                     <!-- Notifaction Bell -->
+                    <li class="nav-item">
+                        <a href="/refresh" class="nav-item"><i class="fas fa-sync-alt"></i></a>
+                    </li>
                     <li class="nav-item ">
                         <a class="nav-item" href="/UserNotifications" data-toggle="tooltip" data-placement="top"
                             title="Benachrichtigungen">

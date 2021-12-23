@@ -101,4 +101,8 @@ class HomeController extends Controller
     public function NonAdminExportImport(){
         return view('Main.NonAdminExportImport');
     }
+
+    public function refresh(){
+        return redirect()->back();
+    }
 }

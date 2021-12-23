@@ -146,3 +146,4 @@ Route::get('files/{filename}', [FilesController::class, 'open'])->middleware('au
 Route::get('files/delete/{file}', [FilesController::class, 'destroy'])->middleware('auth');
 
 Route::get('/lang/{language}', [LanguageController::class, 'switch_language']);
+Route::get('/refresh', [HomeController::class, 'refresh']);
