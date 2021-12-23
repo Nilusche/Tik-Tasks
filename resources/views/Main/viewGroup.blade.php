@@ -56,7 +56,7 @@
                 <button class="btn btn-outline-primary my-2 my-sm-0 groupbutton" type="submit"><i
                         class="fas fa-folder-plus"></i></button>
                 <input type="hidden" name="userid" value="{{ auth()->user()->id }}">
-                <input type="hidden" name="parent_id" value="{{ $parent_id }}">
+                <input type="hidden" name="parent_id" value="">
             </form>
         @else
             <form class="form-inline groupfield" method="get" action="/storeTags">
