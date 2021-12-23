@@ -53,7 +53,7 @@ return [
     'toggle' => 'Auf-/Zuklappen',
     'assigned' => 'Zugewiesene Aufgabe',
     'deltaskmodal' => 'Möchten sie die Aufgabe wirklich löschen?',
-    'finishtaskmodal' => 'Möchten sie die Aufgabe wirklich beenden?'
+    'finishtaskmodal' => 'Möchten sie die Aufgabe wirklich beenden?',
     'export' => 'Aufgaben exportieren/importieren',
     'createnew' => 'Neu erstellen',
 ];
