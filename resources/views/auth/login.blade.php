@@ -8,17 +8,17 @@
         </div>
         <form class="loginform" method="POST" action="{{ route('login') }}">
         @csrf
-            <h3 class="loginuber">{{ __('Login') }}</h3>
+            <h3 class="loginuber">{{ __('menu.login') }}</h3>
 
-            <label for="email" class="labelinput">{{ __('E-Mail Address') }}</label>
+            <label for="email" class="labelinput">{{ __('menu.emailaddress') }}</label>
             <input type="text" placeholder="name@example.net" id="email" class="loginput @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
             
-            <label for="password" class="labelinput">{{ __('Password') }}</label>
+            <label for="password" class="labelinput">{{ __('menu.password') }}</label>
             <input type="password" placeholder="Passwort" id="password" class="loginput @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
             
             <input class="check" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-            <label class="check" for="remember">  {{ __('Remember Me') }} </label>
+            <label class="check" for="remember">  {{ __('menu.Remember_Me') }} </label>
             
             <div id="loginfail">
                 @error('email')
@@ -32,7 +32,7 @@
                     </span>
                 @enderror
             </div>
-            <button type="submit" id="loginbutton"> {{ __('Login') }}</button>
+            <button type="submit" id="loginbutton"> {{ __('menu.login') }}</button>
         </form>
     </div>
     <div class="logo">

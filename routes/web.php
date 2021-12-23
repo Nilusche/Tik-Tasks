@@ -12,6 +12,7 @@ use App\Http\Controllers\UserChangePasswordController;
 use App\Http\Controllers\SortController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FilesController;
+use App\Http\Controllers\LanguageController;
 use App\Models\Task;
 use App\Models\User;
 use App\Events\MessageNotification;
@@ -144,3 +145,4 @@ Route::post('files/add/{taskid}', [FilesController::class, 'store'])->name('file
 Route::get('files/{filename}', [FilesController::class, 'open'])->middleware('auth');
 Route::get('files/delete/{file}', [FilesController::class, 'destroy'])->middleware('auth');
 
+Route::get('/lang/{language}', [LanguageController::class, 'switch_language']);

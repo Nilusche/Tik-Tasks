@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="btn btn-secondary position-relative">
-            <h1>Export und Import</h1>
+            <h1>{{__('menu.export')}}</h1>
         </div>
     </div>
     <div class="container">

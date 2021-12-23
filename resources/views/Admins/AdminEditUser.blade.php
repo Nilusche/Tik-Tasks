@@ -20,7 +20,7 @@
                         
                     <form class="form_b_b" action="/FindUser" method="POST">
                         
-                        <h3 class="loginuber_b">Benutzer bearbeiten</h3>
+                        <h3 class="loginuber_b">{{__('admin.edituser')}}</h3>
                         @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul class="list-group">
@@ -31,17 +31,16 @@
                                 </div>
                             @endif
                         @csrf
-                        <label class="labelinput_b" for="Benutzer">Benutzer auswählen</label>
+                        <label class="labelinput_b" for="Benutzer">{{__('admin.selectuser')}}</label>
                         <select name="Benutzer" id="Benutzer">
-                            <option value="" selected>Auswählen</option>
+                            <option value="" selected></option>
                             @foreach($users as $user)
                                 <option value="{{$user->id}}">{{$user->email}}</option>
                             @endforeach
                         </select>
                         
 
-                        <button type="submit" class="btn btn-warning" name="submit" id="passwort_button_b">Edit
-                            User</button>
+                        <button type="submit" class="btn btn-warning" name="submit" id="passwort_button_b">{{__('admin.edituser')}}</button>
                         <!-- <div class="social">
                                         <div class="go"><i class="fab fa-google"></i>  Google</div>
                                         <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>

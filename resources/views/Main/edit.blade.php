@@ -55,9 +55,9 @@
             <div class="row">
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
                     <div class="form-group">
-                        <label for="title">Titel *</label>
+                        <label for="title">{{__('crud.title')}} *</label>
                         <input type="text" class="form-control" id="title" name="title" value="{{ $task->title }}"
-                            placeholder="Titel der Aufgabe">
+                            placeholder="{{__('crud.title_placeholder')}}">
                     </div>
                     <div class="form-group">
                         <label for="deadline">
@@ -69,100 +69,104 @@
                             value="{{$task->deadline}}">
                     </div>
                     <div class="form-group">
-                        <label for="description">Beschreibung</label>
+                        <label for="description">{{__('crud.description')}}</label>
                         <textarea class="form-control" name="description" id="description" cols="30"
                             rows="9" maxlength="500">{{ $task->description }}</textarea>
                     </div>
                     <div class="form-group"></div>
                     <div class="form-group">
-                        <label for="comment">Kommentar</label>
+                        <label for="comment">{{__('crud.comment')}}</label>
                         <input type="text" class="form-control" id="comment" name="comment" value="{{ $task->comment }}"
-                            placeholder="Kommentar">
+                            placeholder="{{__('crud.comment')}}">
                     </div>
                 </div>
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
                     <div class="form-group">
-                        <label for="visibility" class="">Sichtbarkeit</label>
+                        <label for="visibility" class="">{{__('crud.visibility')}}</label>
                         <select class="form-select" id="visibility" name="visibility" value="{{ $task->visibility }}"
                             aria-label="Default select example">
                             @if ($task->visibility == 1)
-                                <option value="0">privat</option>
-                                <option value="1" selected>öffentlich</option>
+                                <option value="0">{{__('crud.private')}}</option>
+                                <option value="1" selected>{{__('crud.public')}}</option>
                             @else
-                                <option value="0" selected>privat</option>
-                                <option value="1">öffentlich</option>
+                                <option value="0" selected>{{__('crud.private')}}</option>
+                                <option value="1">{{__('crud.public')}}</option>
                             @endif
                         </select>
                     </div>
                     <div class="form-group" style="margin-bottom:-1.5em;">
-                        <label for="priority" class="" >Priorität (1-5 zunehmend wichtiger)</label>
+                        <label for="priority" class="" >{{__('crud.priority')}}</label>
                         <input type="range" class="form-range" id="priority" name="priority" min="1" max="5" step="1"
                             oninput="this.nextElementSibling.value = this.value" value="{{ $task->priority }}">
                         <output><b>{{ $task->priority }}</b></output>
                     </div>
                     <div class="form-group"></div>
                     <div class="form-group">
-                        <label for="alarm" class="">Erinnerungsalarm</label>
+                        <label for="alarm" class="">{{__('crud.alarm')}}</label>
                         <select class="form-select" id="alarm" name="alarm" aria-label="Default select example" required>
                             @if ($task->alarmdateInteger == 0)
-                                <option value="0" selected>Wenn abgelaufen</option>
-                                <option value="1">1 Stunde vorher</option>
-                                <option value="2">1 Tag vorher</option>
-                                <option value="3">Deadline minus aufwand</option>
-                                <option value="4">Niemals</option>
+                                <option value="0" selected>{{__('crud.due')}}</option>
+                                <option value="1">{{__('crud.1hr')}}</option>
+                                <option value="2">{{__('crud.1d')}}</option>
+                                <option value="3">{{__('crud.deadline-effort')}}</option>
+                                <option value="4">{{__('crud.never')}}</option>
                             @elseif($task->alarmdateInteger==1)
-                                <option value="0">Wenn abgelaufen</option>
-                                <option value="1" selected>1 Stunde vorher</option>
-                                <option value="2">1 Tag vorher</option>
-                                <option value="3">Deadline minus aufwand</option>
-                                <option value="4">Niemals</option>
+                                <option value="0" >{{__('crud.due')}}</option>
+                                <option value="1" selected>{{__('crud.1hr')}}</option>
+                                <option value="2">{{__('crud.1d')}}</option>
+                                <option value="3">{{__('crud.deadline-effort')}}</option>
+                                <option value="4">{{__('crud.never')}}</option>
                             @elseif($task->alarmdateInteger==2)
-                                <option value="0">Wenn abgelaufen</option>
-                                <option value="1">1 Stunde vorher</option>
-                                <option value="2" selected>1 Tag vorher</option>
-                                <option value="3">Deadline minus aufwand</option>
-                                <option value="4">Niemals</option>
+                                <option value="0">{{__('crud.due')}}</option>
+                                <option value="1">{{__('crud.1hr')}}</option>
+                                <option value="2" selected>{{__('crud.1d')}}</option>
+                                <option value="3">{{__('crud.deadline-effort')}}</option>
+                                <option value="4">{{__('crud.never')}}</option>
                             @elseif($task->alarmdateInteger==3)
-                                <option value="0">Wenn abgelaufen</option>
-                                <option value="1">1 Stunde vorher</option>
-                                <option value="2">1 Tag vorher</option>
-                                <option value="3" selected>Deadline minus aufwand</option>
-                                <option value="4">Niemals</option>
+                                <option value="0">{{__('crud.due')}}</option>
+                                <option value="1">{{__('crud.1hr')}}</option>
+                                <option value="2">{{__('crud.1d')}}</option>
+                                <option value="3"selected>{{__('crud.deadline-effort')}}</option>
+                                <option value="4">{{__('crud.never')}}</option>
                             @elseif($task->alarmdateInteger==4)
-                                <option value="0">Wenn abgelaufen</option>
-                                <option value="1">1 Stunde vorher</option>
-                                <option value="2">1 Tag vorher</option>
-                                <option value="3">Deadline minus aufwand</option>
-                                <option value="4" selected>Niemals</option>
+                                <option value="0">{{__('crud.due')}}</option>
+                                <option value="1">{{__('crud.1hr')}}</option>
+                                <option value="2">{{__('crud.1d')}}</option>
+                                <option value="3">{{__('crud.deadline-effort')}}</option>
+                                <option value="4" selected>{{__('crud.never')}}</option>
                             @else
-                                <option value="0">Wenn abgelaufen</option>
-                                <option value="1">1 Stunde vorher</option>
-                                <option value="2">1 Tag vorher</option>
-                                <option value="3">Deadline minus aufwand</option>
-                                <option value="4">Niemals</option>
+                                <option value="0">{{__('crud.due')}}</option>
+                                <option value="1">{{__('crud.1hr')}}</option>
+                                <option value="2">{{__('crud.1d')}}</option>
+                                <option value="3">{{__('crud.deadline-effort')}}</option>
+                                <option value="4" selected>{{__('crud.never')}}</option>
                             @endif
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="effort" class="form-label">Geschätzter aufwand (in Stunden)</label>
+                        <label for="effort" class="form-label">{{__('crud.estimated_effort')}}</label>
                         <input type="text" class="form-control" id="effort" name="effort" min="0"
                             value="{{ $task->estimatedEffort }}" placeholder="3.5" >
                     </div>
                     <div class="form-group">
-                        <label for="effort2" class="form-label">Tatsächlicher aufwand (in Stunden)</label>
+                        <label for="effort2" class="form-label">{{__('crud.total_effort')}}</label>
                         <input type="text" class="form-control" id="effort2" name="effort2" min="0"
                             value="{{ $task->totalEffort }}" placeholder="3.5">
                     </div>
 
                     <div class="form-group mb-5">
-                        <p>Die mit * markierten Felder sind Pflichteingaben</p>
-                        <span id=speicher><a id=speichern onclick="this.closest('form').submit();return false;"></a></span>
+                        <p>{{__('crud.requiredfields')}}</p>
+                        @if(App::currentLocale()=='de')  
+                        <span id=speicher><a id=speichern onclick="this.closest('form').submit();return false;"></a></span>  
+                        @else
+                        <span id=speicher><a id=speichernEN onclick="this.closest('form').submit();return false;"></a></span>  
+                        @endif
                     </div>
                 </div>
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
                     <div class="links">
                         <div class="form-group">
-                            <label for="links" class="form-label">Vorhandene Links</label>
+                            <label for="links" class="form-label">{{__('crud.avaLinks')}}</label>
                             <div class="form-item" id="links">
                                 @foreach($task->links as $link)
                                     <a class=" btn btn-outline-danger"href="https://{{ $link->name }}">{{ $link->name }}</a>
@@ -172,7 +176,7 @@
                     </div><br>
                 
                     <div class="form-group tag-wrapper">
-                        <label for="links" class="form-label">Verlinkungen (Domains, mit Komma trennen)</label>
+                        <label for="links" class="form-label">{{__('crud.links')}}</label>
                         <input class="form-control" type="text" data-role="tagsinput" id="links" name="links" value="{{old('links')}}">
                     </div>
                     <img class="createTaskpic" src="/sources/editTask.svg" alt="taskpicture" style="height:20em; width:auto;">
@@ -190,14 +194,14 @@
     <div class="pt-5"></div>
     <div class="container">
          <div class="bg-light p-5 rounded">
-            <h1>Dateien</h1>
+            <h1>{{__('crud.files')}}</h1>
             <form action="/files/add/{{$task->id}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group mt-4">
                 <input type="file" name="files[]" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip" multiple>
                 </div>
 
-                <button class="w-100 btn btn-lg btn-outline-danger mt-2 mb-5" type="submit">Weitere Dateien Hochladen</button>
+                <button class="w-100 btn btn-lg btn-outline-danger mt-2 mb-5" type="submit">{{__('crud.uploadadd')}}</button>
             </form>               
             
 
@@ -206,9 +210,9 @@
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Typ</th>
-                <th scope="col">Ansicht</th>
-                <th scope="col">Löschen</th>
+                <th scope="col">{{__('crud.type')}}</th>
+                <th scope="col">{{__('crud.view')}}</th>
+                <th scope="col">{{__('Menu.delete')}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -217,8 +221,8 @@
                     <td width="3%">{{ $file->id }}</td>
                     <td>{{ $file->slug }}</td>
                     <td width="10%">{{ $file->type }}</td>
-                    <td width="5%"><a href="/files/{{$file->name}}" class="btn btn-outline-primary" target="_blank" rel="noopener noreferrer">Anzeigen</a></td>
-                    <td width="5%"><a href="/files/delete/{{$file->id}}" class="btn btn-outline-danger" target="_blank" rel="noopener noreferrer">Löschen</a></td>
+                    <td width="5%"><a href="/files/{{$file->name}}" class="btn btn-outline-primary" target="_blank" rel="noopener noreferrer">{{__('crud.show')}}</a></td>
+                    <td width="5%"><a href="/files/delete/{{$file->id}}" class="btn btn-outline-danger" target="_blank" rel="noopener noreferrer">{{__('Menu.delete')}}</a></td>
                 </tr>
                 @endforeach
             </tbody>

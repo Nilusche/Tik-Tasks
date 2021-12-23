@@ -448,7 +448,7 @@ class TaskController extends Controller
     //Aufrufen der Assign Seite
     //Es werden alle Aufgaben die zugewiesen werden können angezeigt werden können
     public function showtasksAssign(){
-        return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',Tag::all());
+        return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('tags',Tag::all())->with('users', User::all());
     }
     //Verarbeitung der Daten
     public function assignTasks(Request $request){
@@ -459,13 +459,13 @@ class TaskController extends Controller
         if(!$operator){
             //session()->flash('error','Keinen Mitarbeiter ausgewählt');
             Alert::error('Fehler', 'Keinen Mitarbeiter ausgewählt');
-            return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
+            return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('users', User::all());
         }
 
         if(!$tasks){
             //session()->flash('error','Keinen Mitarbeiter ausgewählt');
             Alert::error('Fehler', 'Keine Aufgabe ausgewählt');
-            return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
+            return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('users', User::all());
         }
 
         //Kontrolle ob $operator gültig ist
@@ -473,13 +473,13 @@ class TaskController extends Controller
         if(!$operatorID){
             //session()->flash('error','Ungültige Email-Adresse');
             Alert::error('Fehler', 'Es wurde kein Mitarbeiter mit passender E-Mail gefunden');
-            return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
+            return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('users', User::all());
         }
 
         if($operatorID->id == auth()->User()->id){
             //session()->flash('error','Sie können keine Aufgaben an sich selber verteilen');
             Alert::error('Fehler', 'Sie können keine Aufgaben an sich selber verteilen');
-            return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get());
+            return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('users', User::all());
         }
 
 

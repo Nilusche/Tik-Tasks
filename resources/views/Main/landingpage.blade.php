@@ -8,9 +8,18 @@
                     <img class="logo" src="sources/logo.png" alt="logo">
                     <!-- Insert Corporate Text here -->
                     <p class="introduction">
-                    Tik Task kann verwendet werden, um individuelle To-do-Listen einzusehen, anzulegen und editieren zu können, die von dem Tool gespeichert, geladen, mit anderen Benutzern geteilt und exportiert werden können. Der Zweck von Tik Tasks ist daher der Einsatz im Arbeitsalltag der Firma und/oder bei Projekten.
+                        <select class="form-select mb-2" onChange="window.location.href=this.value">
+                            <option value="" selected>{{__('menu.select_language')}}</option>
+                            <option value="/lang/en">{{__('menu.english')}}</option>
+                            <option value="/lang/de">{{__('menu.german')}}</option>
+                        </select>
+                        {{__('menu.coporatetext')}}
                     </p>
-                    <span id="einloggen"><a href="/login"></a></span>
+                    @if(App::currentLocale()=='de')
+                        <span id="einloggen"><a href="/login"></a></span>
+                    @else
+                        <span id="login"><a href="/login"></a></span>
+                    @endif
                 </div>
                 <div class="col-lg-6">
                     <img class="workpicture" src="sources/LandingPageIllustrationsScaledDown.jpg" alt="work">
@@ -21,7 +30,7 @@
     <div class="transition1"></div>
     <footer class="text-center text-lg-start">
         <div class="text-center p-3 foot">
-        Tik Tasks 2021: This is a simple To-do-list Tool and designed for educational purposes only
+        {{__('menu.disclaimer')}}
         </div>
     </footer>
 

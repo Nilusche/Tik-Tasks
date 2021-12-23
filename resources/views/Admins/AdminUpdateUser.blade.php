@@ -17,7 +17,7 @@
                         <form class="form_a_u" action="/User/{{ $user->id }}/update" method="POST">
                             @csrf
                             <div>
-                                <h3 class="loginuber_b">Benutzerdaten ändern</h3>
+                                <h3 class="loginuber_b">{{__('admin.update')}}</h3>
                             </div>
 
                             @if ($errors->any())
@@ -34,39 +34,39 @@
                                     <input class="input_b" type="text" class="form-control" name="name" id="name"
                                         value="" placeholder="{{$user->name}}" readonly onfocus="this.removeAttribute('readonly');">
 
-                                    <label class="labelinput_b" for="email">E-mail: </label>
+                                    <label class="labelinput_b" for="email">{{__('profile.email')}}: </label>
                                     <input class="input_b" class="form-control" name="email" id="email" value=""
                                         placeholder="{{$user->email}}" readonly onfocus="this.removeAttribute('readonly');">
                                 </div>
                                 <div>
-                                    <label class="labelinput_b" for="password">Neues Passwort</label>
+                                    <label class="labelinput_b" for="password">{{__('profile.newpwd')}}</label>
                                     <input class="input_b" type="password" class="form-control" name="password"
                                         id="password" value="" placeholder="Neues Passwort" readonly onfocus="this.removeAttribute('readonly');">
 
-                                    <label class="labelinput_b" for="confirmpassword">Passwort bestätigen</label>
+                                    <label class="labelinput_b" for="confirmpassword">{{__('profile.confirmpwd')}}</label>
                                     <input class="input_b" type="password" class="form-control"
                                         name="confirmpassword" id="confirmpassword" value=""
                                         placeholder="Neues Paswort wiederholen" readonly onfocus="this.removeAttribute('readonly');">
                                 </div>
                                 <div>
-                                    <label class="labelinput_b" for="role">Rolle auswählen</label>
+                                    <label class="labelinput_b" for="role">{{__('admin.roleselect')}}</label>
                                     <select name="role" id="role">
                                         @if($user->role == 'worker')
-                                            <option value="worker" selected>Arbeiter</option>
-                                            <option value="manager">Vorgesetzter</option>
-                                            <option value="admin">Administrator</option>
+                                            <option value="worker" selected>{{__('admin.worker')}}</option>
+                                            <option value="manager">{{__('admin.manager')}}</option>
+                                            <option value="admin">{{__('admin.admin')}}</option>
                                         @elseif($user->role=='admin')
-                                            <option value="worker">Arbeiter</option>
-                                            <option value="manager">Vorgesetzter</option>
-                                            <option value="admin" selected>Administrator</option>
+                                            <option value="worker">{{__('admin.worker')}}</option>
+                                            <option value="manager">{{__('admin.manager')}}</option>
+                                            <option value="admin" selected>{{__('admin.admin')}}</option>
                                         @elseif($user->role=='manager')
-                                            <option value="worker">Arbeiter</option>
-                                            <option value="manager" selected>Vorgesetzter</option>
-                                            <option value="admin">Administrator</option>
+                                            <option value="worker">{{__('admin.worker')}}</option>
+                                            <option value="manager" selected>{{__('admin.manager')}}</option>
+                                            <option value="admin">{{__('admin.admin')}}</option>
                                         @else
-                                            <option value="worker">Arbeiter</option>
-                                            <option value="manager">Vorgesetzter</option>
-                                            <option value="admin">Administrator</option>
+                                            <option value="worker">{{__('admin.worker')}}</option>
+                                            <option value="manager">{{__('admin.manager')}}</option>
+                                            <option value="admin">{{__('admin.admin')}}</option>
                                         @endif
                                     </select>
                                 </div>

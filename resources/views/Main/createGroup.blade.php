@@ -19,7 +19,7 @@
             @csrf
             <div class="form-group">
                 <input type="text" name="tag" class="form-control" placeholder="Neuer Gruppenname">
-                <button type="submit" class="btn btn-dark form-control">Neu erstellen</button>
+                <button type="submit" class="btn btn-dark form-control">{{__('menu.createnew')}}</button>
             </div>
             <input type="hidden" name="userid" value="{{ auth()->user()->id }}">
         </form>

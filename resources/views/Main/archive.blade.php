@@ -5,12 +5,15 @@
 @section('content')
     <div class="container">
         <div class="btn btn-secondary position-relative">
-            <h1>Aufgabenarchiv</h1>
+            <h1>{{__('settings.archive')}}</h1>
         </div>
     </div>
     <div class="container">
-
+    @if(App::currentLocale()=='de')  
         <span id=leere><a id=leeren data-bs-toggle="modal" data-bs-target="#delarchive" href=""></a></span>
+    @else
+        <span id=leere><a id=leerenEN data-bs-toggle="modal" data-bs-target="#delarchive" href=""></a></span>
+    @endif
         @foreach ($TaskUserPairs as $TaskUserPair)
             @if ($TaskUserPair->users_id == auth()->user()->id)
                 @foreach ($tasks as $task)
@@ -20,17 +23,17 @@
                                 <div class="meta">
                                     <div class="photo" style="background-image: url(sources/task.svg)"></div>
                                     <ul class="details">
-                                            <li class="date">Erstellt am:
+                                            <li class="date">{{__('menu.created_at')}}:
                                                 {{ $date = date('d-m-Y H:i', strtotime($task->created_at)) }}</li>
-                                            <li><i class="fas fa-exclamation-triangle"></i> &nbsp;Priorität:
+                                            <li><i class="fas fa-exclamation-triangle"></i> &nbsp;{{__('menu.priority')}}:
                                                 {{ $task->priority }}</li>
-                                            @if($task->estimatedEffort)<li><i class="fas fa-hourglass-half"></i>&nbsp; Geschätzter Aufwand: {{$task->estimatedEffort}}</li>
+                                            @if($task->estimatedEffort)<li><i class="fas fa-hourglass-half"></i>&nbsp; {{__('menu.estimated_effort')}}: {{$task->estimatedEffort}}</li>
                                             @endif
-                                            @if($task->totalEffort)<li><i class="fas fa-hourglass-half"></i>&nbsp; Tatsächlicher Aufwand: {{$task->totalEffort}}</li>
+                                            @if($task->totalEffort)<li><i class="fas fa-hourglass-half"></i>&nbsp; {{__('menu.total_effort')}} Aufwand: {{$task->totalEffort}}</li>
                                             @endif
                                             @if ($task->deadline)
                                                 <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
-                                                        href="{{ $task->calendarICS }}">ICS Datei</a></li>
+                                                        href="{{ $task->calendarICS }}">ICS</a></li>
                                                 <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
                                                         href="{{ $task->calendarGoogle }}">Google Calendar</a></li>
                                                 <li><i class="far fa-calendar-alt"></i> &nbsp;<a id=link
@@ -46,8 +49,8 @@
                                                 {{ $task->deadline }}</div>
                                         </h1>
                                     @endif
-                                    <h1 class="mb-4">AUFGABE: {{ $task->title }}</h1>
-                                    <h2 class="mb-2">BESCHREIBUNG:</h2>
+                                    <h1 class="mb-4">{{__('menu.task')}}: {{ $task->title }}</h1>
+                                    <h2 class="mb-2">{{__('menu.description')}}:</h2>
                                     @if ($task->priority == 1)
                                         <p class="priority1"> {!! $task->description !!} </p>
                                     @elseif($task->priority==2)
@@ -63,11 +66,11 @@
                                     <p class="read-more">
                                         <a type="button" data-toggle="collapse" id="open"
                                             data-target="#collapseExample{{ $task->id }}" aria-expanded="false"
-                                            aria-controls="collapseExample{{ $task->id }}">auf-/zuklappen</a>
+                                            aria-controls="collapseExample{{ $task->id }}">{{__('menu.toggle')}}</a>
                                     </p>
 
                                     <div class="collapse" id="collapseExample{{ $task->id }}">
-                                        <h2 class="mt-4">Kommentar:</h2>
+                                        <h2 class="mt-4">{{__('menu.comment')}}:</h2>
                                         @if ($task->priority == 1)
                                             <p class="priority1"> {!! $task->comment !!}</p>
                                         @elseif($task->priority==2)
@@ -93,15 +96,15 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="deleteLabel">Archiv löschen</h5>
+                        <h5 class="modal-title" id="deleteLabel">{{__('settings.deletearchive')}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Möchten sie alle Aufgaben aus dem Archiv löschen?
+                    {{__('settings.delarchivemodal')}}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Abbrechen</button>
-                        <a type="button" class="btn btn-danger"href="/deleteArchive">Löschen</a>
+                        <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">{{__('menu.cancel')}}</button>
+                        <a type="button" class="btn btn-danger"href="/deleteArchive">{{__('menu.confirm')}}</a>
                     </div>
                 </div>
             </div>

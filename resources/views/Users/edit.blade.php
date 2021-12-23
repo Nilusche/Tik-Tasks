@@ -6,7 +6,7 @@
 @section('content')
     <div class="container">
         <div class="btn btn-secondary position-relative">
-            <h1>Profil bearbeiten</h1>
+            <h1>{{__('profile.editprofile')}}</h1>
         </div>
     </div>
     <div class="container">
@@ -26,7 +26,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6 mt-3">
-                        <label for="email">E-mail</label>
+                        <label for="email">{{__('profile.email')}}</label>
                         <input type="text" class="form-control" name="email" id="email" value="{{ $user->email }}" @if (!auth()->user()->isAdmin())
                         readonly
                         @endif
@@ -35,13 +35,13 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6 mt-3">
-                        <label for="about">About Me</label>
+                        <label for="about">{{__('profile.aboutme')}}</label>
                         <textarea name="about" id="about" cols="5" rows="5" class="form-control">{{ $user->about }}</textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 mt-5">
-                        <button type="submit" class="btn btn-primary">Profil aktualisieren </button>
+                        <button type="submit" class="btn btn-primary">{{__('profile.update-profile')}} </button>
                     </div>
                 </div>
             </div>

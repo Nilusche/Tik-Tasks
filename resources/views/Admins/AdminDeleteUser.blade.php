@@ -27,30 +27,30 @@
                 </style>
                 <form class="form_a_d" action="/DeleteUser/action" method="POST">
                     @csrf
-                    <h3 class="loginuber_b">Benutzer löschen</h3>
-                    <h5>Vorhandene Benutzer</h5>
+                    <h3 class="loginuber_b">{{__('admin.delUser')}}</h3>
+                    <h5>{{__('admin.avaiUser')}}</h5>
                     <ul class="list">
                         @foreach($users as $user)
                             <li style="margin-bottom:-2px">{{$user->email}}</li>
                         @endforeach
                     </ul>
 
-                    <label for="exampleInputEmail1" class="labelinput_b">Email Addresse</label>
+                    <label for="exampleInputEmail1" class="labelinput_b">{{__('profile.email')}}</label>
                     <input class="input_b" type="email" class="form-control" name="femail" id="exampleInputEmail1"
                            placeholder="Email Adresse eingeben" aria-describedby="emailHelp" required>
-                    <label for="exampleInputEmail2" class="labelinput_b">Email Addresse</label>
+                    <label for="exampleInputEmail2" class="labelinput_b">{{__('profile.email')}}</label>
                     <input class="input_b" type="email" class="form-control" name="semail" id="exampleInputEmail2"
                            placeholder="Email Adresse wiederholen" aria-describedby="emailHelp" required>
 
                     <div class="labelinput_b">
                         <input id="confirmCheckbox" name="checkbox" value="true" class="form-check-input" type="checkbox"
                                required>
-                        <label class="form-check-label" for="confirmCheckbox">Eingabe bestätigen</label>
+                        <label class="form-check-label" for="confirmCheckbox">{{__('admin.confirm')}}</label>
                     </div>
 
 
                     <button type="submit" class="btn btn-success" name="submit" class="btn btn-success"
-                            id="passwort_button_b">User löschen</button>
+                            id="passwort_button_b">{{__('admin.delUser')}}</button>
                 </form>
         @endif
     </div>

@@ -164,7 +164,6 @@ footer {
     outline-style: none;
     width: 30em;
     height: auto;
-    padding-bottom: 5em;
     animation: slideIn 1.5s ease-in-out forwards;
 }
 .h1-color {
@@ -249,6 +248,27 @@ footer {
     padding-left: 3em;
     animation: slideIn 1.9s ease-in-out forwards;
 }
+#login {
+    display: inline-flex;
+    height: 55px;
+    width: 180px;
+    perspective: 1000px;
+    padding-left: 3em;
+    animation: slideIn 1.9s ease-in-out forwards;
+}
+#login a:before,
+#login a:after {
+    position: absolute;
+    content: "LOGIN";
+    height: 55px;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
 
 span a {
     font-size: 19px;
@@ -322,6 +342,34 @@ span #profilpasswortändern:after {
     border-radius: 5px;
 }
 
+span #profilbearbeitenEN:before,
+span #profilbearbeitenEN:after {
+    position: absolute;
+    content: "EDIT PROFILE";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #profilpasswortändernEN:before,
+span #profilpasswortändernEN:after {
+    position: absolute;
+    content: "CHANGE PASSWORD";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
 span #usernotification:before,
 span #usernotification:after {
     position: absolute;
@@ -336,10 +384,37 @@ span #usernotification:after {
     border-radius: 5px;
 }
 
+span #usernotificationEN:before,
+span #usernotificationEN:after {
+    position: absolute;
+    content: "NOTFICATIONS";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
 span #aufgabenexportierenundimportieren:before,
 span #aufgabenexportierenundimportieren:after {
     position: absolute;
     content: "EXPORT UND IMPORT";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+span #aufgabenexportierenundimportierenEN:before,
+span #aufgabenexportierenundimportierenEN:after {
+    position: absolute;
+    content: "EXPORT AND IMPORT";
     height: 55px;
     width: 520px;
     display: flex;
@@ -364,10 +439,38 @@ span #archiv:after {
     border-radius: 5px;
 }
 
+span #archivEN:before,
+span #archivEN:after {
+    position: absolute;
+    content: "ARCHIVE";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
 span #erstellen:before,
 span #erstellen:after {
     position: absolute;
     content: "ERSTELLEN";
+    height: 55px;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #erstellenEN:before,
+span #erstellenEN:after {
+    position: absolute;
+    content: "CREATE";
     height: 55px;
     width: 180px;
     display: flex;
@@ -401,6 +504,20 @@ span #speichern:after {
     border-radius: 5px;
 }
 
+span #speichernEN:before,
+span #speichernEN:after {
+    position: absolute;
+    content: "SAVE";
+    height: 55px;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
 #leere {
     display: inline-flex;
     height: 55px;
@@ -424,6 +541,20 @@ span #leeren:after {
     border-radius: 5px;
 }
 
+span #leerenEN:before,
+span #leerenEN:after {
+    position: absolute;
+    content: "CLEAN ARCHIVE";
+    height: 55px;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
 #gruppe {
     display: inline-flex;
     height: 55px;
@@ -437,6 +568,20 @@ span #gruppieren:before,
 span #gruppieren:after {
     position: absolute;
     content: "GRUPPIEREN";
+    height: 55px;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #gruppierenEN:before,
+span #gruppierenEN:after {
+    position: absolute;
+    content: "GROUP";
     height: 55px;
     width: 180px;
     display: flex;
@@ -531,13 +676,15 @@ trix-editor {
     background-color: #393e46;
     color: white;
     margin-top: 0;
+    width:10.2em;
+    margin-right: 10px;
 }
 .Sortbtn:hover {
     color: #eeeeee;
 }
 
 .filter {
-    margin-left: 2em;
+    margin-left: 3em;
     width: 15em;
     position: relative;
     bottom: 4.9em;
@@ -555,7 +702,7 @@ trix-editor {
 }
 
 .groupfield {
-    margin-left: 2em;
+    margin-left: 3em;
     width: 15em;
     position: relative;
     bottom: 11.8em;
@@ -734,6 +881,62 @@ span #importexport:before,
 span #importexport:after {
     position: absolute;
     content: "SÄMTLICHE AUFGABEN EXPORTIEREN/IMPORTIEREN";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #edituserEN:before,
+span #edituserEN:after {
+    position: absolute;
+    content: "EDIT USER";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #registuserEN:before,
+span #registuserEN:after {
+    position: absolute;
+    content: "REGISTER USER";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #deleteuserEN:before,
+span #deleteuserEN:after {
+    position: absolute;
+    content: "DELETE USER";
+    height: 55px;
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #393e46;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+span #importexportEN:before,
+span #importexportEN:after {
+    position: absolute;
+    content: "EXPORT/IMPORT BACKUP OF TASKS";
     height: 55px;
     width: 520px;
     display: flex;

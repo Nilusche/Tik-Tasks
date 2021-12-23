@@ -71,22 +71,22 @@
                     </li>
                     @if (auth()->user()->isAdmin())
                         <li class="nav-item grow">
-                            <a class="nav-link {{ request()->is('Systempanel','EditUser','FindUser','DeleteUser','DeleteUser/action','AdminExportImport','register') ? 'active' : ''}}" href="/Systempanel">Systemverwaltung</a>
+                            <a class="nav-link {{ request()->is('Systempanel','EditUser','FindUser','DeleteUser','DeleteUser/action','AdminExportImport','register') ? 'active' : ''}}" href="/Systempanel">{{__('menu.systempanel')}}</a>
                         </li>
                     @endif
                     @if (auth()->user()->isManager())
                             <li class="nav-item grow ">
-                                <a class="nav-link {{ request()->is('Assign') ? 'active' : ''}}" href="/Assign">Zuweisen</a>
+                                <a class="nav-link {{ request()->is('Assign') ? 'active' : ''}}" href="/Assign">{{__('menu.assign')}}</a>
                             </li>
                     @endif
                     <li class="nav-item">
-                        <a class="nav-link grow {{ request()->is('Settings','Archive','NonAdminExportImport','UserNotifications') ? 'active' : ''}}" href="/Settings">Einstellungen</a>
+                        <a class="nav-link grow {{ request()->is('Settings','Archive','NonAdminExportImport','UserNotifications') ? 'active' : ''}}" href="/Settings">{{__('menu.settings')}}</a>
                     </li>
                     <li class="nav-item grow">
-                        <a class="nav-link {{ request()->is('Profile', 'Profile/edit','Profile/change-password') ? 'active' : ''}}" href="/Profile">Profil</a>
+                        <a class="nav-link {{ request()->is('Profile', 'Profile/edit','Profile/change-password') ? 'active' : ''}}" href="/Profile">{{__('menu.profile')}}</a>
                     </li>
                     <li class="nav-item grow">
-                        <a class="nav-link {{ request()->is('logout') ? 'active' : ''}} " href="/logout">Ausloggen</a>
+                        <a class="nav-link {{ request()->is('logout') ? 'active' : ''}} " href="/logout">{{__('menu.logout')}}</a>
                     </li>
                 </ul>
             </div>
@@ -105,7 +105,7 @@
     @yield('content')
     <footer class="text-center text-lg-start">
         <div class="text-center p-3 foot">
-            Tik Tasks 2021: This is a simple To-do-list Tool and designed for educational purposes only
+           {{__('menu.disclaimer')}}
         </div>
     </footer>
 

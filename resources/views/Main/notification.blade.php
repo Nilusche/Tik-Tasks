@@ -4,64 +4,29 @@
     <link rel="stylesheet" href="css/notification.css">
 @endsection
 
-@section('navbar')
-    <div class="container-fluid navcontainer">
-        <nav class="navbar navbar-expand-lg navbar-dark back">
-            <a class="navbar-brand" href="/Startseite">Tiktasks</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
-                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarToggler">
-                <ul class="navbar-nav ms-auto">
-                    @if (auth()->user()->isAdmin())
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Systempanel">Systemverwaltung</a>
-                        </li>
-                    @endif
-                    @if (auth()->user()->isManager())
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Startseite">Zuweisen</a>
-                        </li>
-                    @endif
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Settings">Einstellungen</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Startseite">Profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Ausloggen</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-@endsection
-
 @section('content')
     
     
   <div class="main-content">
   
     <div class="container mt-7">
-    <a class="btn btn-primary mb-3" href="/readNotifications">Alle Benachrichtigungen als gelesen markieren</a>
-    <a class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#delete" href="">Alle Benachrichtigungen löschen</a>
+    <a class="btn btn-primary mb-3" href="/readNotifications">{{__('menu.read_notification')}}</a>
+    <a class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#delete" href="">{{__('menu.delete_notification')}}</a>
       <div class="row">
         <div class="col">
           <div class="card shadow">
             <div class="card-header border-0">
-              <h3 class="mb-0">Benachrichtigungen</h3>
+              <h3 class="mb-0">{{__('menu.notifications')}}</h3>
             </div>
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">Aufgabe</th>
-                    <th scope="col">Deadline</th>
-                    <th scope="col">Verbliebene Zeit</th>
-                    <th scope="col">Priorität</th>
-                    <th scope="col">Gelesen</th>
+                    <th scope="col">{{__('menu.task')}}</th>
+                    <th scope="col">{{__('menu.deadline')}}</th>
+                    <th scope="col">{{__('menu.remainingtime')}}</th>
+                    <th scope="col">{{__('menu.priority')}}</th>
+                    <th scope="col">{{__('menu.read')}}</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -116,11 +81,12 @@
                     <td>
                     @if ($notification['read_at'] == null)
                         <span class="badge badge-dot mr-4 text-dark">
-                        <i class="bg-danger"></i> ungelesen
+                        <i class="bg-danger"></i> {{__('menu.unread')}}
                       </span>
                     @else
                         <span class="badge badge-dot mr-4 text-dark">
-                            <i class="bg-success"></i> gelesen
+                            <i class="bg-success"></i> {{__('menu.read')}}
+                      </span>
                         </span>
                     @endif
                     </td>
@@ -130,9 +96,9 @@
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="/notification/{{$notification['id']}}/read">Als gelesen markieren</a>
-                          <a class="dropdown-item" href="Startseite/{{ $notification['taskid'] }}/edit">Aufgabe ansehen</a>
-                          <a class="dropdown-item" href="/notification/{{$notification['id']}}/delete">Benachrichigung löschen</a>
+                          <a class="dropdown-item" href="/notification/{{$notification['id']}}/read">{{__('menu.read_single_notification')}}</a>
+                          <a class="dropdown-item" href="Startseite/{{ $notification['taskid'] }}/edit">{{__('menu.showtask')}}</a>
+                          <a class="dropdown-item" href="/notification/{{$notification['id']}}/delete">{{__('menu.delete_single_notification')}}</a>
                         </div>
                       </div>
                     </td>
@@ -150,15 +116,15 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="deleteLabel">Benachrichtigungen löschen</h5>
+                        <h5 class="modal-title" id="deleteLabel">{{__('menu.delete_notification')}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Möchten sie alle Benachrichtigungen löschen?
+                    {{__('menu.delete_noti_modal')}}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Abbrechen</button>
-                        <a type="button" class="btn btn-danger"href="/notification/delete">Löschen</a>
+                        <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">{{__('menu.cancel')}}</button>
+                        <a type="button" class="btn btn-danger"href="/notification/delete">{{__('menu.confirm')}}</a>
                     </div>
                 </div>
             </div>

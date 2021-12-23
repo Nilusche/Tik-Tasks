@@ -30,13 +30,13 @@
                                         value="{{ $task->id }}" aria-label="...">
                                     <div class="row">
                                         <div class="col-lg-4">
-                                            <h5>Titel: </h5>{{ $task->title }}
+                                            <h5>{{__('crud.title')}}: </h5>{{ $task->title }}
                                         </div>
                                         <div class="col-lg-4">
                                             <h5>Deadline: </h5>{{ $task->deadline }}
                                         </div>
                                         <div class="col-lg-4">
-                                            <h5>Gruppen: </h5>
+                                            <h5>{{__('menu.group')}}: </h5>
                                             @foreach ($tags as $tag)
                                                 @if ($tag->users_id == auth()->user()->id)
                                                     @if ($task->hasTag($tag->id))
@@ -52,7 +52,7 @@
                     @endif
                 @endforeach
             </ul>
-            <button type="submit" class="btn btn-primary">Gruppieren</button>
+            <button type="submit" class="btn btn-primary">{{__('menu.group')}}</button>
         </form>
     </div>
 

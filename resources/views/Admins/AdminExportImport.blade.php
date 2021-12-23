@@ -4,7 +4,7 @@
     @if (auth()->user()->isAdmin())
         <div class="container">
             <div class="btn btn-secondary position-relative">
-                <h1>Datenbank Export und Import</h1>
+                <h1>{{__('admin.export')}}</h1>
             </div>
         </div>
         <div class="container">
