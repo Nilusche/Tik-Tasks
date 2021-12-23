@@ -5,7 +5,7 @@ return [
     'selectuser' => 'Benutzer auswählen',
     'update' => 'Benutzerdaten ändern',
     'roleselect' => 'Rolle auswählen',
-    'worker' => 'Worker',
+    'worker' => 'Mitarbeiter',
     'admin' => 'Administrator',
     'manager' => 'Vorgesetzter',
     'register' => 'Benutzer registrieren',
