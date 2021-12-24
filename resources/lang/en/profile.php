@@ -7,6 +7,6 @@ return [
     'update-profile' => 'Update Profile',
     'changepwd' => 'Change password',
     'oldpwd'=> 'Old password',
-    'newpwd'=> 'New password',
+    'newpwd'=> 'New password (min: 8 characters)',
     'confirmpwd' => 'Confirm new password',
 ];

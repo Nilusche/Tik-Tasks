@@ -24,7 +24,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <label for="new_password" class=" col-lg-4 col-form-label pl-0">{{__('profile.newpwd')}}</label>
+                        <label for="new_password" class=" col-lg-4 col-form-label pl-0 w-100">{{__('profile.newpwd')}}</label>
                         <input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password">
                     </div>
                 </div>
