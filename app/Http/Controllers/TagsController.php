@@ -56,7 +56,12 @@ class TagsController extends Controller
         //Löschen von tag_task
         $tag = Tag::find($tagid);
         if(Tag::where('parent_id', $tagid)->get()->count()>0){
-            Alert::error('Fehler', 'Gruppe hat Teilgruppen');
+            if(App::currentLocale()=='de')
+                Alert::error('Fehler', 'Gruppe hat Teilgruppen');
+            else
+                Alert::error('Error', 'Group is nested and has subgroups');
+                
+
             return redirect('/Startseite');
         }
         //Delete all where tag_id = $tag_id
