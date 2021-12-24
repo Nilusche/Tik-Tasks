@@ -10,7 +10,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\File;
-
+use Illuminate\Support\Facades\App;
 class TaskController extends Controller
 {
     public function create(){
@@ -112,7 +112,10 @@ class TaskController extends Controller
         }
 
         //session()->flash('success', 'Änderungen erfolgreich übernommen');
-        Alert::success('Erfolg', 'Aufgabe wurde erfolgreich bearbeitet');
+        if(App::currentLocale()=='de')
+            Alert::success('Erfolg', 'Aufgabe wurde erfolgreich bearbeitet');
+        else
+            Alert::success('Success', 'Task edited successfully');
         return redirect('/Startseite');
 
     }
@@ -178,7 +181,10 @@ class TaskController extends Controller
 
 
         //session()->flash('success', 'Änderungen erfolgreich übernommen');
-        Alert::success('Erfolg', 'Aufgabe wurde erfolgreich bearbeitet');
+        if(App::currentLocale()=='de')
+            Alert::success('Erfolg', 'Aufgabe wurde erfolgreich bearbeitet');
+        else
+            Alert::success('Success', 'Task edited successfully');
         return redirect('/Startseite');
 
     }
@@ -311,7 +317,10 @@ class TaskController extends Controller
         );
 
         //session()->flash('success', 'Aufgabe erfolgreich erstellt');
-        Alert::success('Fertig', 'Aufgabe wurde erfolgreich erstellt');
+        if(App::currentLocale()=='de')
+            Alert::success('Fertig', 'Aufgabe wurde erfolgreich erstellt');
+        else
+            Alert::success('Success', 'Task has been created successfully');
 
         return redirect('/Startseite');
     }
@@ -365,7 +374,10 @@ class TaskController extends Controller
             }
         }
         //session()->flash('error', 'Aufgabe kann nicht gelöscht werden da sie nicht selbst erstellt wurde');
-        Alert::error('Fehler', 'Aufgabe kann nicht gelöscht werden da sie nicht selbst erstellt wurde');
+        if(App::currentLocale()=='de')
+            Alert::error('Fehler', 'Aufgabe kann nicht gelöscht werden da sie nicht selbst erstellt wurde');
+        else
+            Alert::error('Error', 'Error only the owner of the task can delete it');
         return redirect('/Startseite');
     }
 
@@ -385,7 +397,10 @@ class TaskController extends Controller
         $task->completed=true;
         $task->save();
         //session()->flash('success', 'Aufgabe abgeschlossen');
-        Alert::success('Erfolg', 'Aufgabe abgeschlossen');
+        if(App::currentLocale()=='de')
+            Alert::success('Erfolg', 'Aufgabe abgeschlossen');
+        else
+            Alert::success('Success', 'Task finished');
         return redirect('/Startseite');
     }
 
@@ -458,13 +473,19 @@ class TaskController extends Controller
         //Zeige Fehlermeldung, wenn kein Operator angegeben wurde
         if(!$operator){
             //session()->flash('error','Keinen Mitarbeiter ausgewählt');
-            Alert::error('Fehler', 'Keinen Mitarbeiter ausgewählt');
+            if(App::currentLocale()=='de')
+                Alert::error('Fehler', 'Keinen Mitarbeiter ausgewählt');
+            else
+                Alert::error('Error', 'No user to assign tasks chosen');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('users', User::all());
         }
 
         if(!$tasks){
             //session()->flash('error','Keinen Mitarbeiter ausgewählt');
-            Alert::error('Fehler', 'Keine Aufgabe ausgewählt');
+            if(App::currentLocale()=='de')
+                Alert::error('Fehler', 'Keine Aufgabe ausgewählt');
+            else
+                Alert::error('Error', 'No Tasks to assign selected');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('users', User::all());
         }
 
@@ -472,13 +493,19 @@ class TaskController extends Controller
         $operatorID = User::where('email', $operator)->first();
         if(!$operatorID){
             //session()->flash('error','Ungültige Email-Adresse');
-            Alert::error('Fehler', 'Es wurde kein Mitarbeiter mit passender E-Mail gefunden');
+            if(App::currentLocale()=='de')
+                Alert::error('Fehler', 'Es wurde kein Mitarbeiter mit passender E-Mail gefunden');
+            else
+                Alert::error('Error', 'A user with this email has not been found');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('users', User::all());
         }
 
         if($operatorID->id == auth()->User()->id){
             //session()->flash('error','Sie können keine Aufgaben an sich selber verteilen');
-            Alert::error('Fehler', 'Sie können keine Aufgaben an sich selber verteilen');
+            if(App::currentLocale()=='de')
+                Alert::error('Fehler', 'Sie können keine Aufgaben an sich selber verteilen');
+            else
+                Alert::error('Error', 'You can not assign task to yourself');
             return view('Main.assign')->with('tasks', Task::all())->with('TaskUserPairs',DB::table('user_has_task')->get())->with('users', User::all());
         }
 
@@ -495,11 +522,17 @@ class TaskController extends Controller
                 );
             }
             else{
-                Alert::warning('Erfolg aber ...', '... Mindestens eine der Aufgaben wurde dem Benutzer bereits zugewiesen');
+                if(App::currentLocale()=='de')
+                    Alert::warning('Erfolg aber ...', '... Mindestens eine der Aufgaben wurde dem Benutzer bereits zugewiesen');
+                else
+                    Alert::warning('Success but ...', '... At least on of the tasks have been assigned to this user already');
                 return redirect ('/Startseite');
             }
         }
-        Alert::success('Erfolg', 'Aufgaben erfolgreich zugewiesen');
+        if(App::currentLocale()=='de')
+            Alert::success('Erfolg', 'Aufgaben erfolgreich zugewiesen');
+        else
+            Alert::success('Success', 'Tasks assigned successfully');
         return redirect ('/Startseite');
     }
 
@@ -514,12 +547,18 @@ class TaskController extends Controller
         $tags = $request->tags;
         if(!$tasks){
             //session()->flash('error', 'Zu gruppierenden Aufgaben nicht ausgewählt');
-            Alert::error('Fehler', 'Zu gruppierenden Aufgaben nicht ausgewählt');
+            if(App::currentLocale()=='de')
+                Alert::error('Fehler', 'Zu gruppierenden Aufgaben nicht ausgewählt');
+            else
+                Alert::error('Error', 'Tasks to group not chosen');
             return redirect('/Group');
         }
         if(!$tags){
             //session()->flash('error', 'Keine Gruppe ausgewählt');
-            Alert::error('Fehler', 'Keine Gruppe ausgewählt');
+            if(App::currentLocale()=='de')
+                Alert::error('Fehler', 'Keine Gruppe ausgewählt');
+            else
+                Alert::error('Error', 'No groups chosen');
             return redirect('/Group');
         }
         $already_grouped=false;
@@ -535,10 +574,16 @@ class TaskController extends Controller
         }
         if($already_grouped){
             //session()->flash('success', 'Einige der bereits gruppierten Aufgaben wurden nicht erneut hinzugefügt');
-            Alert::warning('Erfolg aber ...', '... Einige der bereits gruppierten Aufgaben wurden nicht erneut hinzugefügt');
+            if(App::currentLocale()=='de')
+                Alert::warning('Erfolg aber ...', '... Einige der bereits gruppierten Aufgaben wurden nicht erneut hinzugefügt');
+            else
+                Alert::warning('Success but ...', '... Some of the already group tasks have not been added again');
         }else{
             //session()->flash('success', 'Aufgaben erfolgreich gruppiert');
-            Alert::success('Erfolg', 'Aufgaben erfolgreich gruppiert');
+            if(App::currentLocale()=='de')
+                Alert::success('Erfolg', 'Aufgaben erfolgreich gruppiert');
+            else
+                Alert::success('Erfolg', 'Tasks grouped successfully');
         }
 
         return redirect('/Startseite');

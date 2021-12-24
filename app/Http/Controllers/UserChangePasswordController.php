@@ -7,7 +7,7 @@ use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Illuminate\Support\Facades\App;
 class UserChangePasswordController extends Controller
 {
     public function __construct()
@@ -29,8 +29,10 @@ class UserChangePasswordController extends Controller
         ]);
    
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-   
-        Alert::success('Erfolg', 'Das Passwort wurde geändert.');
+        if(App::currentLocale()=='de')
+            Alert::success('Erfolg', 'Das Passwort wurde geändert.');
+        else
+            Alert::success('Success', 'The passwort has been changed.');
         return redirect('Profile');
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Users\UpdateProfileRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 use DB;
+use Illuminate\Support\Facades\App;
 class UsersController extends Controller
 {
     public function index(){
@@ -32,8 +33,10 @@ class UsersController extends Controller
                 'email'=>$request->email
             ]);
         }
-        
-        Alert::info('Erfolg','Änderungen erfolgreich übernommen');
+        if(App::currentLocale()=='de')
+            Alert::info('Erfolg','Änderungen erfolgreich übernommen');
+        else
+            Alert::info('Success','Changes have been applied successfully');
         return redirect()->back();
 
     }

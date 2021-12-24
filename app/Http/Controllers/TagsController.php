@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Task;
 use DB;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Illuminate\Support\Facades\App;
 class TagsController extends Controller
 {
     public function store(Request $request){
@@ -23,7 +23,10 @@ class TagsController extends Controller
         $tag->parent_id = $request->parent_id;
         $tag->save();
 
-        Alert::success('Erfolg', 'Neue Gruppe erfolgreich erstellt');
+        if(App::currentLocale()=='de')
+            Alert::success('Erfolg', 'Neue Gruppe erfolgreich erstellt');
+        else
+            Alert::success('Success', 'New Group created successfully');
         return redirect()->back();
     }
 
@@ -61,7 +64,10 @@ class TagsController extends Controller
         //Löschen von Tag eintrag
         DB::table('tags')->where('id','=',$tagid)->delete();
         
-        Alert::success('Erfolg', 'Gruppe wurde erfolgreich gelöscht');
+        if(App::currentLocale()=='de')
+            Alert::success('Erfolg', 'Gruppe wurde erfolgreich gelöscht');
+        else
+            Alert::success('Success', 'Group has been deleted successfully');
         return redirect()->back();
     }
 }
