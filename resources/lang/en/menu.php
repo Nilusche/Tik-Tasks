@@ -54,7 +54,7 @@ return [
     'toggle' => 'Toggle',
     'assigned' => 'Assigned Task',
     'deltaskmodal' => 'Are you sure you want to delete this task?',
-    'finishtaskmodal' => 'Are you sure you want to complete this task',
+    'finishtaskmodal' => 'Are you sure you want to complete this task?',
     'export' => 'Export/Import Tasks',
     'createnew' => 'Create new',
 ];
