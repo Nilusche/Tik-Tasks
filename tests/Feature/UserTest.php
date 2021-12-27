@@ -13,10 +13,6 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function test_user_routes(){
-        $response = $this->get('/login');
-        $response->assertStatus(200);
-    }
 
 
     public function test_model(){
@@ -42,6 +38,7 @@ class UserTest extends TestCase
         $this->assertDatabaseMissing('users', [
             'email' => 'nilusche@mail.com',
         ]);
+        $user->delete();
 
     }
 
@@ -51,11 +48,11 @@ class UserTest extends TestCase
             'name' => 'nilusche',
             'email' => 'nilusche@mail.com'
         ]);
-        $this->assertNotFalse()
         $this->assertDatabaseHas('users', [
             'email' => 'nilusche@mail.com',
         ]);
 
+        $user->delete();
 
     }
 

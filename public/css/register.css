@@ -1,0 +1,122 @@
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.input{
+    font-family: 'Chakra Petch', sans-serif;
+    color: #000000;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+
+#loginform {
+    height: 600px;
+    width: 800px;
+    background-color: rgba(205,205,205,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(90,90,90,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 35px 25px;
+}
+#loginform *{
+    font-family: 'Chakra Petch', sans-serif;
+    color: #000000;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+#loginform h4{
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 22px;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.loginlabel{
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.loginput {
+    display: block;
+    height: 50px;
+    width: 90%;
+    background-color: rgba(0,0,0,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    transition: 0.3s;
+}
+
+.loginput:hover {
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.3);
+}
+
+.loginput placeholder{
+    color: #727272;
+}
+
+#registerbutton{
+    width: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#fehlermeldung {
+    height: 170px;
+}
+#registerwindow {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+    margin-top: 20px;
+}
+#registerbutton:hover {
+    background-color: rgba(0, 0, 0, 0.07);
+    color: black;
+
+}
+
+.auswahlrolle {
+    display: block;
+    height: 50px;
+    width: 90%;
+    background-color: rgba(0,0,0,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    transition: 0.3s;
+}
+
+.auswahlrolle:hover {
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.3);
+}
+
+.registerform{
+    border: 2px solid rgba(90,90,90,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding:5em;
+    border-radius: 10px;
+}

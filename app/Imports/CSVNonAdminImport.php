@@ -14,7 +14,7 @@ class CSVNonAdminImport implements ToModel
         if($row[0]==null){
             session()->flash('error', 'Datei leer oder invalide (z.B. Titel nicht gesetzt)');
         }
-        
+
         $statement = DB::select("SHOW TABLE STATUS LIKE 'tasks'");
         $nextId = $statement[0]->Auto_increment;
         $task= new Task([
@@ -25,20 +25,22 @@ class CSVNonAdminImport implements ToModel
             'priority' =>$row[4] ??null,
             'estimatedEffort'=>$row[5] ??null,
             'totalEffort' =>$row[6] ??null,
-            'completed' =>false,
-            'visibility' => false,
+            'completed' =>$row[7]=="false"? false:true,
+            'visibility' => $row[8]=="false"? false:true,
             'deadline' =>$row[11] ??null,
             'alarmdate' =>$row[12] ??null,
-            'calendarICS'=>$row[13] ??null,
-            'calendarGoogle' =>$row[14] ??null, 
-            'calendarWebOutlook' =>$row[15] ??null
+            'alarmdateInteger' =>$row[13] ??null,
+            'calendarICS'=>$row[14] ??null,
+            'calendarGoogle' =>$row[15] ??null, 
+            'calendarWebOutlook' =>$row[16] ??null
         ]);
         
         DB::table('user_has_task')->insert(
             array(
-                'users_id'=> $row[17],
+                'users_id'=> $row[18],
                 'tasks_id'=>$nextId,
-                'isOwner'=>$row[18]
+                'isOwner'=>$row[19]=="false"? false:true,
+                'notified_manager'=>$row[20]=="false"? false:true,
             )
         );  
 

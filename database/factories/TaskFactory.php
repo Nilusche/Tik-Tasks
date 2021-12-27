@@ -23,7 +23,6 @@ class TaskFactory extends Factory
             'totalEffort' =>$this->faker->numberBetween(1,100),
             'completed' => false,
             'visibility'=>$this->faker->boolean(),
-            'users_id' => 0,
             
         ];
     }

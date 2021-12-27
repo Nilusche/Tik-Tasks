@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Users\UpdateProfileRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 use DB;
+use Illuminate\Support\Facades\App;
 class UsersController extends Controller
 {
     public function index(){
@@ -32,8 +33,10 @@ class UsersController extends Controller
                 'email'=>$request->email
             ]);
         }
-        
-        Alert::info('Erfolg','Änderungen erfolgreich übernommen');
+        if(App::currentLocale()=='de')
+            Alert::info('Erfolg','Änderungen erfolgreich übernommen');
+        else
+            Alert::info('Success','Changes have been applied successfully');
         return redirect()->back();
 
     }
@@ -44,7 +47,8 @@ class UsersController extends Controller
        foreach($notfications as $notfication){
             $data = json_decode($notfication->data);
             $readat=array('read_at'=>$notfication->read_at);
-            $data = array_merge((array)$data, $readat);
+            $id=array('id'=>$notfication->id);
+            $data = array_merge((array)$data, $readat,$id );
             if($data['userid'] ===auth()->user()->id){
                 array_push($authNotis,$data);
             }
@@ -53,6 +57,12 @@ class UsersController extends Controller
         return view('Main.notification')->with('notifications', $authNotis);
     }
 
+    public function readSingleNotification($id){
+        auth()->user()->unreadNotifications->where('id', $id)->markAsRead();
+        return redirect('/UserNotifications');
+    }
+
+
     public function readNotifications(){
         auth()->user()->unreadNotifications->markAsRead();
         $notfications = DB::table('notifications')->orderBy('read_at','desc')->get();
@@ -60,7 +70,8 @@ class UsersController extends Controller
         foreach($notfications as $notfication){
             $data = json_decode($notfication->data);
             $readat=array('read_at'=>$notfication->read_at);
-            $data = array_merge((array)$data, $readat);
+            $id=array('id'=>$notfication->id);
+            $data = array_merge((array)$data, $readat,$id );
             if($data['userid'] ===auth()->user()->id){
                 array_push($authNotis,$data);
             }  
@@ -69,6 +80,27 @@ class UsersController extends Controller
     }
 
     public function deleteNotifications(){
-        
+        $notfications = DB::table('notifications')->orderBy('read_at','desc')->get();
+        $authNotis=[];
+        foreach($notfications as $notfication){
+            $data = json_decode($notfication->data);
+            $readat=array('read_at'=>$notfication->read_at);
+            $id=array('id'=>$notfication->id);
+            $data = array_merge((array)$data, $readat,$id );
+            if($data['userid'] ===auth()->user()->id){
+                array_push($authNotis,$data);
+            }  
+        }
+
+        foreach($authNotis as $notis){
+            DB::table('notifications')->where('id',$notis['id'])->delete();
+        }
+        return redirect('/UserNotifications');
+    }
+
+    public function deleteSingleNotification($id){
+     DB::table('notifications')->where('id',$id)->delete();
+
+       return redirect('/UserNotifications');
     }
 }

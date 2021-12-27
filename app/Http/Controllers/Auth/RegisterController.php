@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\App;
 class RegisterController extends Controller
 {
     /*
@@ -91,8 +92,10 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-
-        Alert::success('Erfolg', 'Benutzer erfolgreich registriert');
+        if(App::currentLocale()=='de')
+            Alert::success('Erfolg', 'Benutzer erfolgreich registriert');
+        else
+            Alert::success('Success', 'User registered successfully');
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
     }
