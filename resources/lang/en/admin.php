@@ -15,5 +15,5 @@ return [
     'delUser' => 'Delete User',
     'avaiUser' => 'Available Users',
     'confirm' => 'Confirm entry',
-    'export' => 'Export/Import all Tasks'
+    'export' => 'Export/Import Backup of all Tasks'
 ];

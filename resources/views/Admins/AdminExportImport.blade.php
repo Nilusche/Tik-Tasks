@@ -2,15 +2,15 @@
 
  @section('content')
  @if(auth()->user()->isAdmin())
- <div class="container"  style="margin-left: 100px;">
+ <div class="container mb-4">
         <div class="btn btn-secondary position-relative">
-                <h1>Export und Import</h1>
+                <h1>{{__('admin.export')}}</h1>
         </div>
-    </div>
+</div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <img style="width:60%;"src="sources/import_animation.gif" alt="Settings_Picture">
+                <img style="float:right;width:60%; margin-right:150px"src="sources/import_animation.gif" alt="Settings_Picture">
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 @if ($errors->any())

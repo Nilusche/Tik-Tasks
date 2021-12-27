@@ -163,6 +163,7 @@
         });
     </script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    @if(App::currentLocale()=='de')
     <script>
         (function() {
 
@@ -187,6 +188,32 @@
 
         })();
     </script>
+    @else
+    <script>
+        (function() {
+
+            var originallog = console.log;
+
+            console.log = function(txt) {
+                // Do really interesting stuff
+                //alert("Neue Benachrichtigung, Aufgabe abgelaufen");
+                alertify
+                    .alert(
+                        "You just received a notification",
+                        function() {
+                            alertify.message('OK');
+                            window.location.reload();
+                        }).set({
+                        title: "Notification"
+                    });
+
+                originallog.apply(console, arguments);
+
+            }
+
+        })();
+    </script>
+    @endif
     <script>
         $(document).ready(function() {
             $( ".ms-auto .grow" ).bind( "click", function(event) {
