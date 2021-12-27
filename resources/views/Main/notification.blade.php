@@ -38,6 +38,7 @@
                         $noti = DB::table('notifications')->where('id', $notification['taskid'])->get();
                         $task = App\Models\Task::find($notification['taskid']);
                     ?>
+                  @if($task)
                   <tr>
                     <th scope="row">
                       <div class="media align-items-center">
@@ -103,6 +104,7 @@
                       </div>
                     </td>
                   </tr>
+                  @endif
                   @endforeach 
                 @endif
                 </tbody>
