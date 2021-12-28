@@ -7,6 +7,6 @@ return [
     'update-profile' => 'Profile aktualisieren',
     'changepwd' => 'Passwort ändern',
     'oldpwd'=> 'Altes Passwort',
-    'newpwd'=> 'Neues Passwor (min: 8 Zeichen)',
+    'newpwd'=> 'Neues Passwort (min: 8 Zeichen)',
     'confirmpwd' => 'Neues Passwort bestätigen',
 ];

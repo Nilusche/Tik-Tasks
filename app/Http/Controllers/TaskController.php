@@ -338,7 +338,12 @@ class TaskController extends Controller
                 foreach($files as $file){
                     $path = 'file/'. $file->name;
                     $file->delete();
-                    unlink(public_path($path));
+                    try{
+                        unlink(public_path($path));
+                    }catch(Exception $e){
+                        
+                    }
+                    
                 }
 
                 //Benachrichtigungen löschen

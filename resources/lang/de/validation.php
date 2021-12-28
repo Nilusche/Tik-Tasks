@@ -121,4 +121,14 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
+
+    'attributes' => [
+        'title' => 'Titel',
+        'effort' => 'Geschätzter Aufwand',
+        'effort2' => 'Tatsächlicher Aufwand',
+        'Benutzer' => 'Benutzer auswählen',
+        'password' => 'Neues Passwort',
+        'confirmpassword' => 'Bestätigungspasswort',
+        'email'=> 'E-Mail',
+    ],
 ];

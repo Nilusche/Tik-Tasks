@@ -153,7 +153,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'title' => 'Title',
+        'effort' => 'Estimated Effort',
+        'effort2' => 'Total Effort'
+    ],
 
 ];
 
