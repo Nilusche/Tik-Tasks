@@ -71,7 +71,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div><button type="submit" class="btn btn-success" id="passwort_button_b">Update User</button>
+                            <div><button type="submit" class="btn btn-success" id="passwort_button_b">{{__('admin.update')}}</button>
                             </div>
                         </form>
                     </div>
