@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label for="comment">{{__('crud.comment')}}</label>
                         <input type="text" class="form-control" id="comment" name="comment" value="{{ $task->comment }}"
-                            placeholder="{{__('crud.comment')}}">
+                            placeholder="{{__('crud.comment')}}" maxlength="300">
                     </div>
                 </div>
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
@@ -78,7 +78,7 @@
                     <div class="form-group">
                         <label for="effort" class="form-label">{{__('crud.estimated_effort')}}</label>
                         <input type="number" class="form-control" id="effort" name="effort" min="0"
-                            value="{{ $task->estimatedEffort }}" placeholder="3.5" readonly>
+                            value="{{ $task->estimatedEffort }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="effort2" class="form-label">{{__('crud.total_effort')}}</label>
