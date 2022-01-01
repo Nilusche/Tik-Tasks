@@ -100,16 +100,45 @@ class TaskController extends Controller
         
         $task->save();
         
-        if($data['links']){
-            $links = explode(",", $data['links']);
-            
-            foreach($links as $link){
-                $Linktag = new \App\Models\Link();
-                $Linktag->name = $link;
-                $Linktag->save();
-                $task->links()->attach($Linktag);
+        if(!$data['overridelinks']){
+            if($data['links']){
+                $links = explode(",", $data['links']);
+                
+                foreach($links as $link){
+                    if(preg_match('/^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/i', $link)){
+                        $Linktag = new \App\Models\Link();
+                        $Linktag->name = $link;
+                        $Linktag->save();
+                        $task->links()->attach($Linktag);
+                    }else{
+                        if(App::currentLocale()=='de')
+                            Alert::error('Error', 'Bitte geben sie domains ein');
+                        else
+                            Alert::error('Error', 'Pls provide valid domains');
+                        return redirect()->back();
+                    }
+                }
             }
+        }else{
+                $links = explode(",", $data['overridelinks']);
+                $array =[];
+                foreach($links as $link){
+                    if(preg_match('/^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/i', $link)){
+                        $Linktag = new \App\Models\Link();
+                        $Linktag->name = $link;
+                        $Linktag->save();
+                        array_push($array, $Linktag->id);
+                    }else{
+                        if(App::currentLocale()=='de')
+                            Alert::error('Error', 'Bitte geben sie domains ein');
+                        else
+                            Alert::error('Error', 'Pls provide valid domains');
+                        return redirect()->back();
+                    }
+                }
+                $task->links()->sync($array);
         }
+        
 
         //session()->flash('success', 'Änderungen erfolgreich übernommen');
         if(App::currentLocale()=='de')
@@ -176,8 +205,30 @@ class TaskController extends Controller
 
         $task->description =$data['description'];
         $task->comment =$data['comment'];
-        $task->estimatedEffort=$data['effort'];
+        $task->totalEffort=$data['effort2'];
         $task->save();
+
+
+        if($data['links']){
+            $links = explode(",", $data['links']);
+            
+            foreach($links as $link){
+                if(preg_match('/^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/i', $link)){
+                    $Linktag = new \App\Models\Link();
+                    $Linktag->name = $link;
+                    $Linktag->save();
+                    $task->links()->attach($Linktag);
+                }else{
+                    if(App::currentLocale()=='de')
+                        Alert::error('Error', 'Bitte geben sie domains ein');
+                    else
+                        Alert::error('Error', 'Pls provide valid domains');
+                    return redirect()->back();
+                }
+                
+            }
+        }
+        
 
 
         //session()->flash('success', 'Änderungen erfolgreich übernommen');
@@ -294,10 +345,19 @@ class TaskController extends Controller
             $links = explode(",", $data['links']);
             
             foreach($links as $link){
-                $Linktag = new \App\Models\Link();
-                $Linktag->name = $link;
-                $Linktag->save();
-                $task->links()->attach($Linktag);
+                if(preg_match('/^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/i', $link)){
+                    $Linktag = new \App\Models\Link();
+                    $Linktag->name = $link;
+                    $Linktag->save();
+                    $task->links()->attach($Linktag);
+                }else{
+                    if(App::currentLocale()=='de')
+                        Alert::error('Error', 'Bitte geben sie domains ein');
+                    else
+                        Alert::error('Error', 'Pls provide valid domains');
+                    return redirect()->back();
+                }
+                
             }
         }
 

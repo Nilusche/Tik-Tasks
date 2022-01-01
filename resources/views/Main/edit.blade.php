@@ -179,6 +179,11 @@
                         <label for="links" class="form-label">{{__('crud.links')}}</label>
                         <input class="form-control" type="text" data-role="tagsinput" id="links" name="links" value="{{old('links')}}">
                     </div>
+                    <br>
+                    <div class="form-group tag-wrapper">
+                        <label for="overridelinks" class="form-label">{{__('crud.overridelinks')}}</label>
+                        <input class="form-control" type="text" data-role="tagsinput" id="overridelinks" name="overridelinks" value="{{old('overridelinks')}}">
+                    </div>
                     <img class="createTaskpic" src="/sources/editTask.svg" alt="taskpicture" style="height:20em; width:auto;">
                 </div>
 

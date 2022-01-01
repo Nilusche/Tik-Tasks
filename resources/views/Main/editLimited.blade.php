@@ -1,5 +1,42 @@
 @extends('layouts.app')
 
+@section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
+    <style>
+        .bootstrap-tagsinput .tag {
+            margin-right: 2px;
+            color: #ffffff;
+            background: #e62755;
+            padding: 3px 7px;
+            border-radius: 3px;
+        }
+
+        .bootstrap-tagsinput {
+            width: 100%;
+        }
+        .tag-wrapper {
+            max-height: 100px;
+            max-width: 27em;
+            overflow-x: auto;
+            overflow-y: auto;
+            display:inline-block;
+        }
+        .links{
+            max-height: 100px;
+            max-width: 27em;
+            overflow-x: auto;
+            overflow-y: auto;
+            display:inline-block;
+        }
+
+        .btn-outline-danger:hover{
+            background-color:#e62755;
+        }
+        .btn{
+            background-color:white;
+        }
+    </style>
+@endsection
 @section('content')
     <div class="container">
         @if ($errors->any())
@@ -28,7 +65,7 @@
                     <div class="form-group">
                         <label for="comment">{{__('crud.comment')}}</label>
                         <input type="text" class="form-control" id="comment" name="comment" value="{{ $task->comment }}"
-                            placeholder="{{__('crud.comment')}}" maxlength="300">
+                            placeholder="{{__('crud.comment')}}" >
                     </div>
                 </div>
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
@@ -94,10 +131,31 @@
                     </div>
                 </div>
                 <div class="createform col-lg-4 col-md-4 col-sm-4">
-                    <img class="createTaskpic" src="/sources/editTask.svg" alt="taskpicture">
+                    <div class="links">
+                        <div class="form-group">
+                            <label for="links" class="form-label">{{__('crud.avaLinks')}}</label>
+                            <div class="form-item" id="links">
+                                @foreach($task->links as $link)
+                                    <a class=" btn btn-outline-danger"href="https://{{ $link->name }}">{{ $link->name }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div><br>
+                
+                    <div class="form-group tag-wrapper">
+                        <label for="links" class="form-label">{{__('crud.links')}}</label>
+                        <input class="form-control" type="text" data-role="tagsinput" id="links" name="links" value="{{old('links')}}">
+                    </div>
+                    <br>
+                    <img class="createTaskpic" src="/sources/editTask.svg" alt="taskpicture" style="height:20em; width:auto;">
                 </div>
 
             </div>
         </form>
     </div>
+@endsection
+
+@section('bottomscripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
 @endsection
