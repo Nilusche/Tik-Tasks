@@ -17,6 +17,19 @@ class TaskController extends Controller
         return view('Main.createTask');
     }
     
+    public function urlexists($string){
+        $file = 'http://'. $string;
+        $file_headers = @get_headers($file);
+        $exists=false;
+        if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+            $exists = false;
+        }
+        else {
+            $exists = true;
+        }
+        return $exists;
+    }
+
     public function update(Task $task){
         $data = request()->all();
         if(empty($data['deadline'])){
@@ -105,7 +118,7 @@ class TaskController extends Controller
                 $links = explode(",", $data['links']);
                 
                 foreach($links as $link){
-                    if(preg_match('/^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/i', $link)){
+                    if($this->urlexists($link)){
                         $Linktag = new \App\Models\Link();
                         $Linktag->name = $link;
                         $Linktag->save();
@@ -123,7 +136,7 @@ class TaskController extends Controller
                 $links = explode(",", $data['overridelinks']);
                 $array =[];
                 foreach($links as $link){
-                    if(preg_match('/^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/i', $link)){
+                    if($this->urlexists($link)){
                         $Linktag = new \App\Models\Link();
                         $Linktag->name = $link;
                         $Linktag->save();
@@ -213,7 +226,7 @@ class TaskController extends Controller
             $links = explode(",", $data['links']);
             
             foreach($links as $link){
-                if(preg_match('/^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/i', $link)){
+                if($this->urlexists($link)){
                     $Linktag = new \App\Models\Link();
                     $Linktag->name = $link;
                     $Linktag->save();
@@ -345,7 +358,7 @@ class TaskController extends Controller
             $links = explode(",", $data['links']);
             
             foreach($links as $link){
-                if(preg_match('/^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/i', $link)){
+                if($this->urlexists($link)){
                     $Linktag = new \App\Models\Link();
                     $Linktag->name = $link;
                     $Linktag->save();
