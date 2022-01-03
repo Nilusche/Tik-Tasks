@@ -4,7 +4,7 @@ return [
     'editprofile' => 'Profil bearbeiten',
     'email' => 'E-Mail',
     'aboutme' => 'About me',
-    'update-profile' => 'Profile aktualisieren',
+    'update-profile' => 'Profil aktualisieren',
     'changepwd' => 'Passwort ändern',
     'oldpwd'=> 'Altes Passwort',
     'newpwd'=> 'Neues Passwort (min: 8 Zeichen)',
