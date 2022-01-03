@@ -9,9 +9,13 @@
                     <!-- Insert Corporate Text here -->
                     <p class="introduction">
                         <select class="form-select mb-2" onChange="window.location.href=this.value">
-                            <option value="" selected>{{__('menu.select_language')}}</option>
-                            <option value="/lang/en">{{__('menu.english')}}</option>
-                            <option value="/lang/de">{{__('menu.german')}}</option>
+                            @if(App::currentLocale()=='de')
+                            <option value="/lang/en" >{{__('menu.english')}}</option>
+                            <option value="/lang/de" selected>{{__('menu.german')}}</option>
+                            @else
+                            <option value="/lang/en" selected>{{__('menu.english')}}</option>
+                            <option value="/lang/de" >{{__('menu.german')}}</option>
+                            @endif
                         </select>
                         {{__('menu.coporatetext')}}
                     </p>
