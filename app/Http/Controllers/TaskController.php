@@ -159,12 +159,6 @@ class TaskController extends Controller
                         $Linktag->name = $link;
                         $Linktag->save();
                         array_push($array, $Linktag->id);
-                    }else{
-                        if(App::currentLocale()=='de')
-                            Alert::error('Error', 'Bitte geben sie domains ein');
-                        else
-                            Alert::error('Error', 'Pls provide valid domains');
-                        return redirect()->back();
                     }
                 }
                 $task->links()->sync($array);
@@ -249,12 +243,6 @@ class TaskController extends Controller
                     $Linktag->name = $link;
                     $Linktag->save();
                     $task->links()->attach($Linktag);
-                }else{
-                    if(App::currentLocale()=='de')
-                        Alert::error('Error', 'Bitte geben sie domains ein');
-                    else
-                        Alert::error('Error', 'Pls provide valid domains');
-                    return redirect()->back();
                 }
                 
             }
@@ -381,12 +369,6 @@ class TaskController extends Controller
                     $Linktag->name = $link;
                     $Linktag->save();
                     $task->links()->attach($Linktag);
-                }else{
-                    if(App::currentLocale()=='de')
-                        Alert::error('Error', 'Bitte geben sie domains ein');
-                    else
-                        Alert::error('Error', 'Pls provide valid domains');
-                    return redirect()->back();
                 }
                 
             }
