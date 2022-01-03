@@ -18,16 +18,34 @@ class TaskController extends Controller
     }
     
     public function urlexists($string){
-        $file = 'http://'. $string;
-        $file_headers = @get_headers($file);
-        $exists=false;
-        if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
-            $exists = false;
+        $url = 'https://'. $string;
+          
+        // Use curl_init() function to initialize a cURL session
+        $curl = curl_init($url);
+        
+        // Use curl_setopt() to set an option for cURL transfer
+        curl_setopt($curl, CURLOPT_NOBODY, true);
+        
+        // Use curl_exec() to perform cURL session
+        $result = curl_exec($curl);
+        $ret = false;
+        if ($result !== false) {
+            
+            // Use curl_getinfo() to get information
+            // regarding a specific transfer
+            $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
+            
+            if ($statusCode == 404) {
+                $ret = false;
+            }
+            else {
+                $ret = true;
+            }
         }
         else {
-            $exists = true;
+            $ret = false;
         }
-        return $exists;
+        return $ret;
     }
 
     public function update(Task $task){
