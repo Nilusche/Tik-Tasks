@@ -4,7 +4,7 @@ namespace App\Providers;
 use View;
 use DB;
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Support\Facades\Schema;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         View::composer('layouts.app', function( $view )
 {
             $notfications = DB::table('notifications')->orderBy('read_at','desc')->get();
