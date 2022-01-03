@@ -39,6 +39,7 @@ class CSVController extends Controller
             'file' => 'required'
         ]);
         try{
+            /*
             $tasks = Task::all();
             $allTasks = DB::table('user_has_task')->get();
             foreach($tasks as $task){
@@ -49,7 +50,7 @@ class CSVController extends Controller
                         $task->delete();
                     }
                 }
-            }
+            }*/
 
             Excel::import(new CSVNonAdminImport, request()->file('file'));
             session()->flash('success', 'Aufgaben erfolgreich importiert');
