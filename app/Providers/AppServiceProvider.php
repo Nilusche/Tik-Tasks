@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         View::composer('layouts.app', function( $view )
 {
             $notfications = DB::table('notifications')->orderBy('read_at','desc')->get();
