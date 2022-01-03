@@ -30,9 +30,9 @@ class CreateTasks extends Migration
             $table->integer('alarmdateInteger')->nullable();
             
 
-            $table->text('calendarICS')->default('#')->nullable();
-            $table->text('calendarGoogle')->default('#')->nullable();
-            $table->text('calendarWebOutlook')->default('#')->nullable();
+            $table->text('calendarICS')->nullable();
+            $table->text('calendarGoogle')->nullable();
+            $table->text('calendarWebOutlook')->nullable();
 
         });
     } 
