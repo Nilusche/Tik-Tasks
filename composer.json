@@ -15,7 +15,6 @@
         "maatwebsite/excel": "^3.1",
         "pusher/pusher-php-server": "^7.0",
         "realrashid/sweet-alert": "^4.1",
-        "rtconner/laravel-tagging": "^4.1",
         "spatie/calendar-links": "^1.6",
         "uxweb/sweet-alert": "^2.0"
     },
