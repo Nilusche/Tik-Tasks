@@ -4,6 +4,7 @@
 ## Disclaimer
 The product Tik Tasks exists as a web application for educational purposes only and has no affiliations
 with similar brands nor is intended for commercial usage.
+Any Brands or companies that have been mentioned in the manual are purely fictional.
 While we assure to deliver high quality products, we can not
 guarantee any absence of bugs or defects in the product.
 Under no circumstance is Tik Tasks liable for any direct, indirect, specific or
