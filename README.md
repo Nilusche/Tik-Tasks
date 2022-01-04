@@ -1,5 +1,5 @@
 <p align="center"><a href="http://phplaravel-702697-2360337.cloudwaysapps.com/" target="_blank"><img src="public/sources/logo_white.png" width="400"></a></p>
-
+<a href="http://phplaravel-702697-2360337.cloudwaysapps.com/" target="_blank">Go to Website</a>
 ## Disclaimer
 The product Tik Tasks exists as a web application for educational purposes and has no affiliations
 with similar brands nor is intended for commercial usage.
