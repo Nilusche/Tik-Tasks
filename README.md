@@ -33,5 +33,5 @@ can see any public tasks created by other users and assign tasks to them.
 
 ## Manuals
 <a style="text-decoration:none" href="Tik_Task_Software_Manual___EN.pdf" target="_blank">English Manual</a> <br>
-<a style="text-decoration:none" href="Tik_Task_Software_Manual__DE.pdf" target="_blank">German Manual</a>
+<a style="text-decoration:none" href="Tik_Tasks_Software_Manual__DE.pdf" target="_blank">German Manual</a>
 
