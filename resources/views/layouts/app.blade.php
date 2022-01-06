@@ -163,7 +163,9 @@
         });
     </script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="{{asset('assets/js/push.min.js')}}"></script>
     @if(App::currentLocale()=='de')
+    
     <script>
         (function() {
 
@@ -172,7 +174,8 @@
             console.log = function(txt) {
                 // Do really interesting stuff
                 //alert("Neue Benachrichtigung, Aufgabe abgelaufen");
-                alertify
+                /*
+                alertify       
                     .alert(
                         "Sie haben gerade eine neue Benachrichtigung erhalten.",
                         function() {
@@ -180,8 +183,13 @@
                             window.location.reload();
                         }).set({
                         title: "Benachrichtigung"
-                    });
-
+                    });*/
+                Push.create('Neue Benachrichtigung',{
+                    body:"Eine Aufgabe nähert sich der Deadline", 
+                    timeout: 5000,
+                    icon:"https://img.icons8.com/dusk/64/000000/task.png"
+                });
+                window.location.reload();
                 originallog.apply(console, arguments);
 
             }

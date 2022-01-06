@@ -15,3 +15,5 @@ mix.js('resources/js/app.js', 'public/js')
     .vue()
     .sass('resources/sass/select.scss', 'public/css')
     .sass('resources/sass/app.scss', 'public/css');
+mix.copy('node_modules/push.js/bin/push.min.js',
+    'public/assets/js/push.min.js' );

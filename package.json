@@ -28,6 +28,7 @@
     "dependencies": {
         "alertifyjs": "^1.13.1",
         "laravel-echo": "^1.11.3",
+        "push.js": "^1.0.12",
         "pusher-js": "^7.0.3",
         "select2": "^4.1.0-rc.0",
         "tata-js": "^0.1.5"
