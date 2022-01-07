@@ -21,14 +21,14 @@
         <div class="row">
             <div class="col-lg-6 col-sm-6 col-md-6">
                 <label for="registerusername" class="loginlabel">{{__('admin.username')}}</label>
-                <input type="text" name="name" placeholder="Max Musterman" id="registerusername"  class="loginput @error('name') is-invalid @enderror input"  required autocomplete="name" autofocus>
+                <input type="text" name="name" placeholder="Max Musterman" id="registerusername"  class="loginput @error('name') is-invalid @enderror input"  required autocomplete="name" autofocus value="{{old('name')}}">
                 <label for="registeremail"  class="loginlabel">{{__('profile.email')}}</label>
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong style="color:red;">{{ $message }}</strong>
                     </span>
                 @enderror
-                <input type="text" placeholder="name@example.net" id="registeremail" name="email" class="loginput @error('email') is-invalid @enderror input" required autocomplete="email">
+                <input type="text" placeholder="name@example.net" id="registeremail" name="email" class="loginput @error('email') is-invalid @enderror input" required autocomplete="email" value="{{old('email')}}">
                 <div id="fehlermeldung">
 
                 </div>
