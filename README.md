@@ -3,7 +3,7 @@
 
 ## Updates
 New Feature: Dektop Notifications (Choose Preference under Settings).
-Not available in prduction, only locally.
+Not available in prduction, only locally since HTTPS is not supported.
 
 
 ## Disclaimer
