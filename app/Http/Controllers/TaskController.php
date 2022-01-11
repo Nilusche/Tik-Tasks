@@ -446,7 +446,10 @@ class TaskController extends Controller
                 }
                 $task->delete();
                 //session()->flash('success', 'Aufgabe erfolgreich gelöscht');
-                Alert::success('Erfolg', 'Aufgabe erfolgreich gelöscht');
+                if(App::currentLocale()=='de')
+                    Alert::success('Erfolg', 'Aufgabe erfolgreich gelöscht');
+                else
+                    Alert::success('Success', 'Task deleted successfully');
                 return redirect('/Startseite');
 
             }
