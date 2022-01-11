@@ -147,3 +147,5 @@ Route::get('files/delete/{file}', [FilesController::class, 'destroy'])->middlewa
 
 Route::get('/lang/{language}', [LanguageController::class, 'switch_language']);
 Route::get('/refresh', [HomeController::class, 'refresh']);
+
+Route::get('/noti/{status}', [HomeController::class, 'preferences']);

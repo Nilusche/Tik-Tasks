@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use DB;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\App;
 class HomeController extends Controller
 {
     /**
@@ -103,6 +105,15 @@ class HomeController extends Controller
     }
 
     public function refresh(){
+        return redirect()->back();
+    }
+
+    public function preferences($status){
+        session(['noti' => $status]);
+        if(App::currentLocale()=='de')
+            Alert::success('Erfolg', 'Präferenzen wurden übernommen');
+        else
+            Alert::success('Success', 'Preferences changed');
         return redirect()->back();
     }
 }

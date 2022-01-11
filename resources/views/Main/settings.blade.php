@@ -37,6 +37,11 @@
                         <option value="/lang/en">{{__('menu.english')}}</option>
                         <option value="/lang/de">{{__('menu.german')}}</option>
                     </select>
+                    <select class="form-select mb-2 w-50" onChange="window.location.href=this.value">
+                        <option value="" selected>Notifications Preferences</option>
+                        <option value="/noti/enable">Enable Desktopnotifications</option>
+                        <option value="/noti/disable">Disable Desktopnotifications</option>
+                    </select>
                 </span>
             </div>
             

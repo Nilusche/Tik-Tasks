@@ -175,21 +175,28 @@
                 // Do really interesting stuff
                 //alert("Neue Benachrichtigung, Aufgabe abgelaufen");
                 
-                alertify       
-                    .alert(
-                        "Sie haben gerade eine neue Benachrichtigung erhalten.",
-                        function() {
-                            alertify.message('OK');
-                            window.location.reload();
-                        }).set({
-                        title: "Benachrichtigung"
+                @if(session()->has('noti') && session()->get('noti') == 'enable')
+                    Push.create('Neue Benachrichtigung',{
+                        body:"Eine Aufgabe nähert sich der Deadline", 
+                        timeout: 5000,
+                        icon:"https://img.icons8.com/dusk/64/000000/task.png",
+                        onClick: function () {
+                            window.location.href = "/UserNotifications";
+                            this.close();
+                        }
                     });
-                /*Push.create('Neue Benachrichtigung',{
-                    body:"Eine Aufgabe nähert sich der Deadline", 
-                    timeout: 5000,
-                    icon:"https://img.icons8.com/dusk/64/000000/task.png"
-                });
-                window.location.reload();*/
+                @else
+                    alertify       
+                        .alert(
+                            "Sie haben gerade eine neue Benachrichtigung erhalten.",
+                            function() {
+                                alertify.message('OK');
+                                window.location.reload();
+                            }).set({
+                            title: "Benachrichtigung"
+                    });
+                @endif
+                window.location.reload();
                 originallog.apply(console, arguments);
 
             }
@@ -197,6 +204,7 @@
         })();
     </script>
     @else
+
     <script>
         (function() {
 
@@ -205,7 +213,18 @@
             console.log = function(txt) {
                 // Do really interesting stuff
                 //alert("Neue Benachrichtigung, Aufgabe abgelaufen");
-                alertify
+                @if(session()->has('noti') && session()->get('noti') == 'enable')
+                    Push.create('New Notification',{
+                        body:"A Task approaches the Deadline", 
+                        timeout: 5000,
+                        icon:"https://img.icons8.com/dusk/64/000000/task.png",
+                        onClick: function () {
+                            window.location.href = "/UserNotifications";
+                            this.close();
+                        }
+                    }); 
+                @else
+                    alertify
                     .alert(
                         "You just received a notification",
                         function() {
@@ -214,6 +233,8 @@
                         }).set({
                         title: "Notification"
                     });
+                @endif
+                  
 
                 originallog.apply(console, arguments);
 
