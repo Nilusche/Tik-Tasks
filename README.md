@@ -43,5 +43,17 @@ can see any public tasks created by other users and assign tasks to them.
 <a style="text-decoration:none" href="Tik_Tasks_Software_Manual__DE.pdf" target="_blank">German Manual</a>
 
 ## Contributing
-Pull Requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. <br>
+Any contributions you make are <b> greatly appreciated. </b> <br>
+
+If you have a suggestion that would make this project better, please fork the repo and create a pull request. You can simply open a issue with the
+tag "enhancement". <br> Don't forget to give the project a star! Thanks again!
+
+<ol>
+    <li> Fork the Project </li>
+    <li> Create your Feature Branch </li>
+    <li> Commit your Changes </li>
+    <li> Push to the Branch </li>
+    <li> Open a Pull Request </li>
+</ol>
 
