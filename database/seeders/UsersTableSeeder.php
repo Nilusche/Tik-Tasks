@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use\App\Models\User;
+use \App\Models\User;
 use Illuminate\Support\Facades\Hash;
 class UsersTableSeeder extends Seeder
 {
@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
         $user1= User::where('email', 'manager@gmail.com')->first(); 
         $user2 = User::where('email', 'worker@gmail.com')->first();
         /*
+        Test-Accountdaten
         $user3 = User::where('email', 'worker2@gmail.com')->first();
         $user4 = User::where('email', 'worker3@gmail.com')->first();
         $user5 = User::where('email', 'worker4@gmail.com')->first();

@@ -62,13 +62,11 @@
                         <a class="nav-item" href="/UserNotifications" data-toggle="tooltip" data-placement="top"
                             title="Benachrichtigungen">
                             <i class="fas fa-bell icon">
-                                <!-- Nur wenn Notifications vorhanden sind -->
                                 @if ($data > 0)
                                     <span class="notifactionBadge ">
                                         {{ $data }}
                                     </span>
                                 @endif
-                                <!-- Wenn keine Notifications vorhanden sind, nichts anzeigen -->
                             </i>
                         </a>
                     </li>

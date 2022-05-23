@@ -140,16 +140,7 @@
                             and t.id = :taskID',
                             ['id' => auth()->user()->id, 'taskID' => $task->id],
                         );
-                        /*@if ($result)
-                            Objekte die in einer Gruppierung sind, werden nicht angezeigt. 
-                        @else*/
-                            // Dieser code wurde entfernt sodass, alle aufgaben auf der startseite angezeigt werden
                         ?>
-                        <!--
-                        
-                        -->
-
-
                             <div class="container" data-aos="zoom-in-down">
                                 <div class="blog-card">
                                     <div class="meta">
